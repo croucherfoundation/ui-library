@@ -1,0 +1,207 @@
+@mixin navbar($logo-h: 110px, $mb: 66px, $mobile-nav: false) {
+  nav {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    height: max-content;
+    margin-bottom: 3rem;
+    .navbar-logo {
+      height: $logo-h;
+      width: auto;
+    }
+
+    .navbar-r {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      height: $logo-h;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 16px;
+      a {
+        color: $croucher-red;
+        text-decoration: none;
+      }
+      .navbar-rt,
+      .navbar-rb {
+        list-style: none;
+        display: flex;
+      }
+      .navbar-rt {
+        gap: 25px;
+      }
+      .navbar-rb {
+        gap: 25px;
+
+        margin-bottom: 0;
+      }
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+
+    @if $mobile-nav {
+      .navbar-r {
+        display: none;
+      }
+      .mobile-nav {
+        display: block;
+        .burger-menu {
+          background-color: transparent;
+          border: none;
+          img {
+            width: 20px;
+            height: 16.07;
+          }
+          .mobile-menu-container {
+            position: fixed;
+            z-index: 50;
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            transition: all 1s ease;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            margin-top: -100vh;
+            .mobile-menu-modal {
+              background-color: white;
+              height: max-content;
+              padding-top: 0.7rem;
+              margin-top: 0;
+              width: 100%;
+              .close-button {
+                display: flex;
+                justify-content: end;
+                padding-block: 1rem;
+                padding-inline: 3rem;
+                padding-top: 1.8rem;
+                img {
+                  width: 18.12px;
+                }
+              }
+              .mobile-menu-links {
+                list-style: none;
+                margin: 0;
+                padding-block: 0;
+                padding-inline: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                li {
+                  border-top: 1px solid black;
+                  width: 100%;
+                  text-align: left;
+                  padding-block: 0.7rem !important;
+                  padding-inline: 1.5rem !important;
+                  line-height: 1.2rem;
+                  a {
+                    text-decoration: none;
+                    font-weight: bold;
+                    color: black;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .navbar-brand {
+    display: block;
+    font-weight: normal;
+    font-size: 46px;
+    padding-bottom: 0;
+    line-height: 0;
+  }
+  .navbar-brand-mobile {
+    display: none;
+  }
+
+  @if $mobile-nav {
+    .navbar-brand {
+      display: none;
+    }
+    .navbar-brand-mobile {
+      display: block;
+      h3 {
+        font-weight: normal;
+        font-size: 46px;
+        padding-bottom: 0;
+        line-height: 0;
+        &.croucher {
+          font-weight: bold;
+          margin-bottom: 1rem;
+        }
+      }
+      .mobile-nav-line-break {
+        line-break: anywhere;
+      }
+    }
+  }
+  .navbar-margin {
+    margin-bottom: $mb;
+  }
+}
+
+// /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  @include navbar($logo-h: 101px, $mb: 52px, $mobile-nav: true);
+}
+
+// /* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  @include navbar();
+}
+
+// /* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  @include navbar();
+}
+
+// /* Common devices (large tablets & small laptops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  @include navbar();
+}
+
+// /* Large devices ( laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1219px) {
+  @include navbar();
+}
+
+// .mobile-menu-container{
+    // position: fixed;
+    // background-color: white;
+    // transition: all 1s ease;
+// }
+
+// .mobile-menu-modal{
+    // padding-top: 0.7rem;
+    // margin-top: 0;
+    // width: 100%;
+// }
+
+// .close-button{
+//     padding-top: 1.8rem;
+//     padding-inline: 3rem;
+// }
+
+
+// .mobile-menu-links{
+//     padding-inline: 1.5rem;
+//     li {
+        // border-top: 1px solid black;
+        // width: 100%;
+        // text-align: left;
+        // padding-block: 0.7rem !important;
+        // padding-inline: 1.5rem !important;
+        // line-height: 1.2rem;
+//         a {
+//             color: black !important;
+//         }
+//     }
+// }
