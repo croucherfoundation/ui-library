@@ -1,4 +1,4 @@
-@import "../definitions.scss";
+@import "./definitions.scss";
 
 @mixin navbar($logo-h: 110px, $mb: 66px, $mobile-nav: false) {
   nav {
