@@ -169,7 +169,9 @@
 
 // /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  @include navbar();
+  .csc {
+    @include navbar($mobile-nav: true); 
+  }
 }
 
 // /* Common devices (large tablets & small laptops, 992px and up) */
