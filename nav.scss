@@ -167,8 +167,8 @@
   @include navbar();
 }
 
-// /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+// /* Medium devices (landscape tablets, 768px to 991px) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   .csc {
     @include navbar($mobile-nav: true); 
   }
