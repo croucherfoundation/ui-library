@@ -5,6 +5,7 @@ import type { Response } from "../types/api";
 type Props = Omit<HTMLProps<HTMLFormElement>, "children"> & {
   children: ReactNode | ((arg: UseFormReturn & { values: any }) => ReactNode);
   defaults?: object;
+  customForm: UseFormReturn<object, any>;
   handleSubmit: (data: any) => Promise<void>;
 };
 
@@ -12,13 +13,16 @@ const Form = ({
   defaults,
   children,
   onError,
+  customForm,
   handleSubmit,
   ...rest
 }: Props) => {
-  const form = useForm({
+  const defaultForm = useForm({
     defaultValues: defaults,
     mode: "onChange",
   });
+
+  const form = customForm ? customForm : defaultForm;
 
   return (
     <FormProvider {...form}>
