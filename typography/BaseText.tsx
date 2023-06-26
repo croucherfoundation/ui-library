@@ -4,7 +4,6 @@ import { BaseTextContainer, BaseTextType } from "./types";
 import {
   BaseContainer,
   mapTextAlignClass,
-  marrSans,
   toggleTextColor,
 } from "./common";
 

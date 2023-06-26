@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { BaseTextContainer, TextColor, textAlignment } from "./types";
-import localFont from "next/font/local";
+import { useContext } from "react";
+import { FontContext } from "../providers/FontProvider";
 
 export const mapTextAlignClass = (direction: textAlignment) => {
   switch (direction) {
@@ -30,40 +31,9 @@ export function toggleTextColor(color: TextColor) {
   }
 }
 
-export const marrSans = localFont({
-  src: [
-    {
-      path: "../fonts/MarrSans-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../fonts/MarrSans-Semibold.otf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../fonts/MarrSans-Semibold.otf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../fonts/MarrSans-RegularItalic.otf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "../fonts/MarrSans-SemiboldItalic.otf",
-      weight: "600",
-      style: "italic",
-    },
-    {
-      path: "../fonts/MarrSans-BoldItalic.otf",
-      weight: "700",
-      style: "italic",
-    },
-  ],
-});
+
+
+
 
 export const BaseContainer: React.FC<BaseTextContainer> = ({
   children,
@@ -71,11 +41,12 @@ export const BaseContainer: React.FC<BaseTextContainer> = ({
   color = "black",
   ...props
 }) => {
+
   return (
     <div
       className={clsx(
         `break-words font-normal  w-full`,
-        marrSans.className,
+        // marrSans.className,
         mapTextAlignClass(textAlign),
         toggleTextColor(color)
       )}

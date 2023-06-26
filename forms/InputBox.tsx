@@ -1,4 +1,4 @@
-import { getErrorByName } from "@/utils/helpers";
+import { getErrorByName } from "../utils/form";
 import clsx from "clsx";
 import { ReactNode } from "react";
 import { UseFormRegisterReturn, useFormContext } from "react-hook-form";
@@ -7,6 +7,7 @@ interface InputBoxProps {
   label: string | ReactNode | ReactNode[];
   name: string;
   defaultValue?: string;
+  required?: boolean;
 }
 
 const defaultInputStyles =
@@ -16,6 +17,7 @@ const InputBox: React.FC<InputBoxProps> = ({
   label,
   name,
   defaultValue,
+  required
 }) => {
 
   const {
@@ -23,7 +25,7 @@ const InputBox: React.FC<InputBoxProps> = ({
   } = useFormContext();
   const inputRegister = register(name, {
     required: {
-      value: true,
+      value: required ? required : false,
       message: "hello"
     }
   })

@@ -22,7 +22,7 @@ const Title: React.FC<TitleProps> = ({
         } as React.CSSProperties
       }
       className={clsx(
-        "relative flex items-center before:absolute before:content-['*'] before:text-transparent before:w-[11px] before:bg-sym-public-red before:top-[--before-top] before:left-0 before:h-[--before-height]"
+        "relative flex items-center before:absolute before:content-['*'] before:text-transparent before:w-[11px] before:bg-csw-public-red before:top-[--before-top] before:left-0 before:h-[--before-height]"
       )}
     >
       <div className={clsx("ml-[25px]")}>{children}</div>

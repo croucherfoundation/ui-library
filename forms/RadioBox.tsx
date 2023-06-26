@@ -96,7 +96,7 @@ const RadioBox: React.FC<RadioBoxProps> = ({
             >
               <div
                 className={[
-                  "card-rounded overflow-hidden cursor-pointer aspect-square flex justify-center items-center w-[40px]",
+                  "rounded-[8px] overflow-hidden cursor-pointer aspect-square flex justify-center items-center w-[40px]",
                   value.includes(option.value) ? "bg-gray-500" : "bg-white",
                 ].join(" ")}
               >

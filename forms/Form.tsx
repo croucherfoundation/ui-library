@@ -5,14 +5,13 @@ import type { Response } from "../types/api";
 type Props = Omit<HTMLProps<HTMLFormElement>, "children"> & {
   children: ReactNode | ((arg: UseFormReturn & { values: any }) => ReactNode);
   defaults?: object;
-  customForm: UseFormReturn<object, any>;
+  customForm?: UseFormReturn<object, any>;
   handleSubmit: (data: any) => Promise<void>;
 };
 
 const Form = ({
   defaults,
   children,
-  onError,
   customForm,
   handleSubmit,
   ...rest

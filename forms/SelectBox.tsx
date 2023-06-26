@@ -1,5 +1,5 @@
-import useDisplay from "@/hooks/useDisplay";
-import { truncate as truncateValue } from "@/utils/helpers";
+import useDisplay from "../hooks/useDisplay";
+import { truncate as truncateValue } from "../utils/helpers";
 import { MouseEventHandler, ReactNode, useEffect, useState } from "react";
 import {
   useFormContext,
