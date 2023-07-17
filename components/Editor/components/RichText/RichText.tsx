@@ -11,7 +11,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import HeaderPlugin from "./components/HeaderPlugin/HeaderPlugin";
 import useContainer from "./useContainer";
 
-import "./../../styles/index.css";
+import "./richText.css";
 
 interface Props {
   containerId: string;

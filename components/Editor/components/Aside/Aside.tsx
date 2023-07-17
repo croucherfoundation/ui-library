@@ -11,7 +11,11 @@ import CroucherSixSixIcon from "./components/CroucherIcons/CroucherSixSixIcon";
 import Element from "./components/Element";
 import SelectedItem from "./components/SelectedItem";
 
-const Aside = () => {
+interface Props {
+  publishOrSave?: React.ReactNode;
+}
+
+const Aside = ({ publishOrSave }: Props) => {
   const [marginLeft, setMarginLeft] = useState<number>(0);
   const handleCloseSideBar = () => {
     setMarginLeft((prev) => (prev === 0 ? 350 : 0));
@@ -87,6 +91,8 @@ const Aside = () => {
           <span className="ml-2">Preview</span>
         </button>
       </div>
+
+      {publishOrSave}
     </aside>
   );
 };

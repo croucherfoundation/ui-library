@@ -6,14 +6,18 @@ import Section from "./components/Section/Section";
 import DeviceFrame from "./components/DeviceFrame/DeviceFrame";
 import PreviewController from "./components/PreviewController/PreviewController";
 
-const Editor = () => {
+interface Props {
+  publishOrSave?: React.ReactNode;
+}
+
+const Editor = ({ publishOrSave }: Props) => {
   const [editorConfig] = useEditorConfigStore((state) => [state.config]);
 
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <section className="flex">
-          <Aside />
+          <Aside publishOrSave={publishOrSave} />
 
           {!editorConfig.previewMode ? (
             <Section />
