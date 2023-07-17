@@ -1,0 +1,17 @@
+const Col4_4_4 = () => {
+  return (
+    <svg
+      width="150"
+      height="30"
+      viewBox="0 0 150 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="42" height="30" rx="5" fill="#A8B3B7" />
+      <rect x="48" width="50" height="30" rx="5" fill="#A8B3B7" />
+      <rect x="104" width="46" height="30" rx="5" fill="#A8B3B7" />
+    </svg>
+  );
+};
+
+export default Col4_4_4;
