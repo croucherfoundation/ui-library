@@ -54,6 +54,29 @@ const useContainer = ({ sectionId, containerId, elementId }: Props) => {
     handleSetHeading(heading);
   }, [heading, handleSetHeading]);
 
+  useEffect(() => {
+    const clonedSections = cloneDeep(sections);
+    const {
+      currentElement,
+    } = sectionValueUpdater({
+      sections: clonedSections,
+      sectionId: sectionId,
+      containerId: containerId,
+      elementId: elementId,
+    });
+
+    if (currentElement?.content.heading) {
+      // console.log(currentElement?.content.body[bodyKey]);
+      const value = currentElement?.content.heading;
+      if (value) {
+        setHeading(value);
+      }
+    }
+
+  }, [])
+
+  
+
   return {
     heading,
     setHeading,

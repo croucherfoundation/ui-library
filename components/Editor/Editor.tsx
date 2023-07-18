@@ -4,7 +4,7 @@ import Aside from "./components/Aside/Aside";
 import useEditorConfigStore from "./store/editorConfig.store";
 import Section from "./components/Section/Section";
 import DeviceFrame from "./components/DeviceFrame/DeviceFrame";
-import PreviewController from "./components/PreviewController/PreviewController";
+import { useEffect, useState } from "react";
 
 interface Props {
   publishOrSave?: React.ReactNode;
@@ -12,6 +12,13 @@ interface Props {
 
 const Editor = ({ publishOrSave }: Props) => {
   const [editorConfig] = useEditorConfigStore((state) => [state.config]);
+  const [hideSection, setHideSection] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setHideSection(editorConfig.previewMode);
+    }, 5);
+  }, [editorConfig.previewMode]);
 
   return (
     <>
@@ -19,15 +26,17 @@ const Editor = ({ publishOrSave }: Props) => {
         <section className="flex">
           <Aside publishOrSave={publishOrSave} />
 
-          {!editorConfig.previewMode ? (
+          <div className={`w-full overflow-y-auto ${hideSection ? 'hidden' : ''}`} id="editor_section_node">
             <Section />
-          ) : (
+          </div>
+
+          {editorConfig.previewMode && (
             <DeviceFrame>
               <Section />
             </DeviceFrame>
           )}
         </section>
-        <PreviewController />
+
         <div id="image-cropper-portal"></div>
       </DndProvider>
     </>

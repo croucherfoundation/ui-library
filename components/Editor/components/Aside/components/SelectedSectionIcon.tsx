@@ -32,7 +32,7 @@ function SelectedSectionIcon({
 
   return (
     <div
-      className={`absolute cursor-pointer w-5 h-5 -top-2 flex items-center justify-center text-xs font-medium rounded-lg toggle-full-view hover:text-blue-700 text-white hover:text-white bg-${
+      className={` cursor-pointer w-5 h-5 -top-2 flex items-center justify-center text-xs font-medium rounded-lg toggle-full-view hover:text-blue-700 text-white hover:text-white bg-${
         isSelected ? "indigo" : "gray"
       }-700 hover:bg-${isSelected ? "indigo" : "gray"}-600`}
       onClick={handleEdit}

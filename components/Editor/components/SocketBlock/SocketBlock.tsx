@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties } from "react";
 import { type Container } from "../../types/container.t";
 import { type Element } from "../../types/element.t";
 import {
@@ -11,19 +11,8 @@ import Image from "../Image/Image";
 import RichText from "./../../components/RichText/RichText";
 import useContainer from "./useContainer";
 
-import {
-  FloatingFocusManager,
-  autoUpdate,
-  flip,
-  offset,
-  shift,
-  useClick,
-  useDismiss,
-  useFloating,
-  useId,
-  useInteractions,
-  useRole,
-} from "@floating-ui/react";
+import { FiTrash } from "react-icons/fi";
+import If from "../If";
 
 interface Props {
   style: CSSProperties;
@@ -40,36 +29,10 @@ const SocketBlock = ({
   container,
   gridColClass,
 }: Props) => {
-  const { isActive, dropRef, removeChildElements } = useContainer({
+  const { isActive, dropRef, removeChildElements, previewMode } = useContainer({
     containerId,
     sectionId,
   });
-  const [isShowContextMenu, setIsShowContextMenu] = useState<boolean>(false);
-  const { refs, floatingStyles, context, x, y } = useFloating({
-    open: isShowContextMenu,
-    onOpenChange: setIsShowContextMenu,
-    middleware: [
-      offset(10),
-      flip({ fallbackAxisSideDirection: "end" }),
-      shift(),
-    ],
-    whileElementsMounted: autoUpdate,
-    // transform: false,
-  });
-
-  const click = useClick(context);
-  const dismiss = useDismiss(context);
-  const role = useRole(context);
-
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
-    role,
-  ]);
-
-  const headingId = useId();
-
-  console.log({ floatingStyles, x, y });
 
   return (
     <div
@@ -78,79 +41,50 @@ const SocketBlock = ({
       className={`w-full ${
         isActive ? "!bg-slate-300" : ""
       } relative ${gridColClass} min-h-[200px]`}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsShowContextMenu(true);
-      }}
     >
-      <div
-        ref={refs.setReference}
-        {...getReferenceProps()}
-        className="w-full relative"
-      >
-        {isShowContextMenu && (
-          <FloatingFocusManager context={context} modal={false}>
-            <div
-              className="bg-white/50 drop-shadow-md shadow-md rounded-md"
-              ref={refs.setFloating}
-              style={floatingStyles}
-              aria-labelledby={headingId}
-              {...getFloatingProps()}
-            >
-              <h1 id={headingId} className="text-xl px-3 py-2">
-                Layout settings
-              </h1>
-              <div className="">
-                <div
-                  onClick={() => {
-                    removeChildElements();
-                    setIsShowContextMenu(false);
-                  }}
-                  className="w-full cursor-pointer hover:bg-red-300 hover:text-red-500 px-3 py-2"
-                >
-                  Delete element
-                </div>
-                <div className="w-full cursor-pointer hover:bg-red-300 hover:text-red-500 px-3 py-2">
-                  Delete section
-                </div>
-              </div>
-            </div>
-          </FloatingFocusManager>
-        )}
+      <If isTrue={!previewMode}>
+        <div className="flex gap-3">
+          <button
+            onClick={removeChildElements}
+            className="bg-gray-700 rounded-md p-1"
+          >
+            <FiTrash className="stroke-white w-3 h-3" />
+          </button>
+        </div>
+      </If>
 
-        {container?.children?.map((element: Element) => (
-          <React.Fragment key={element.id}>
-            {element?.type === RICH_TEXT && (
-              <RichText
+      {container?.children?.map((element: Element) => (
+        <React.Fragment key={element.id}>
+          {element?.type === RICH_TEXT && (
+            <RichText
+              containerId={containerId}
+              sectionId={sectionId}
+              elementId={element.id}
+              bodyKey="body1"
+            />
+          )}
+          {element?.type === IMAGE_BLOCK && (
+            <>
+              <Image
+                element={element}
                 containerId={containerId}
                 sectionId={sectionId}
                 elementId={element.id}
               />
-            )}
-            {element?.type === IMAGE_BLOCK && (
-              <>
-                <Image
-                  element={element}
-                  containerId={containerId}
-                  sectionId={sectionId}
-                  elementId={element.id}
-                />
-              </>
-            )}
-            {element?.type === CROUCHER_6_6 && (
-              <>
-                <Croucher_6_6
-                  element={element}
-                  containerId={containerId}
-                  sectionId={sectionId}
-                  elementId={element.id}
-                />
-              </>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
+            </>
+          )}
+          {element?.type === CROUCHER_6_6 && (
+            <>
+              <Croucher_6_6
+                element={element}
+                containerId={containerId}
+                sectionId={sectionId}
+                elementId={element.id}
+              />
+            </>
+          )}
+        </React.Fragment>
+      ))}
     </div>
   );
 };

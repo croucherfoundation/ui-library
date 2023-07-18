@@ -1,10 +1,12 @@
+import { Element } from "./element.t";
+
 export interface Container {
   id: string;
   type: string;
   option: Option;
   style: Style;
   advancedStyle: any;
-  children: any[];
+  children: Element[];
 }
 
 export interface Option {

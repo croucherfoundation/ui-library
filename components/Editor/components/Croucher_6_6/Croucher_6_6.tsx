@@ -1,7 +1,11 @@
-import Image from "../Image/Image";
+import { useWindowWidth } from "@react-hook/window-size";
+import clsx from "clsx";
+import { useState } from "react";
 import { type Element } from "../../types/element.t";
-import RichText from "./../RichText/RichText";
 import CroucherHeading from "../CroucherHeading/CroucherHeading";
+import Image from "../Image/Image";
+import RichText from "./../RichText/RichText";
+import If from "../If";
 
 interface Props {
   element: Element;
@@ -16,6 +20,8 @@ const Croucher_6_6 = ({
   sectionId,
   elementId,
 }: Props) => {
+  const onlyWidth = useWindowWidth();
+  const [isReadMore, setIsReadMore] = useState<boolean>(false);
   return (
     <>
       <div className="flex flex-col-reverse md:flex-row">
@@ -30,7 +36,25 @@ const Croucher_6_6 = ({
             containerId={containerId}
             sectionId={sectionId}
             elementId={element.id}
+            bodyKey="body1"
           />
+          <div className={isReadMore ? "" : "hidden md:block"}>
+            <RichText
+              containerId={containerId}
+              sectionId={sectionId}
+              elementId={element.id}
+              bodyKey="body2"
+            />
+          </div>
+
+          <div className="justify-end flex sm:hidden">
+            <button
+              onClick={() => setIsReadMore((prev) => !prev)}
+              className="border px-4 rounded-full py-1 border-gray-700"
+            >
+              Read {isReadMore ? "less" : "more"}
+            </button>
+          </div>
         </div>
 
         {/* ----- right ----- */}

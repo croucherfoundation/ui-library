@@ -8,10 +8,10 @@ import Col6_6 from "../Icons/Col6_6";
 
 import SocketBlock from "../SocketBlock/SocketBlock";
 
+import useEditorConfigStore from "../../store/editorConfig.store";
+import useSectionStore from "../../store/section.store";
 import useContainer from "../../useContainer";
 import SelectedSectionIcon from "../Aside/components/SelectedSectionIcon";
-import useSectionStore from "../../store/section.store";
-import useEditorConfigStore from "../../store/editorConfig.store";
 
 const Section = () => {
   const { handleCreateSection, sections, getGenerateGridCol } = useContainer();
@@ -24,14 +24,20 @@ const Section = () => {
       <div className="">
         {sections.map((section) => (
           <React.Fragment key={section.id}>
+            {!editorConfig.previewMode && (
+              <SelectedSectionIcon
+                id={section.id}
+                layoutStyle={section.layoutStyle}
+                isSelected={section.id === selectedItem?.id}
+              />
+            )}
             <div
               style={{
                 minHeight: section.option.minHeight,
                 backgroundColor: section.style.background.normal.bgColor,
               }}
-              className={`grid grid-cols-12 gap-${
-                section.option.gap
-              } my-2.5 relative ${
+              // gap-${section.option.gap}
+              className={`grid grid-cols-12 my-2.5 relative ${
                 section.id === selectedItem?.id && !editorConfig.previewMode
                   ? "border-2 border-indigo-400 border-dashed"
                   : ""
@@ -55,13 +61,6 @@ const Section = () => {
                   />
                 </React.Fragment>
               ))}
-              {!editorConfig.previewMode && (
-                <SelectedSectionIcon
-                  id={section.id}
-                  layoutStyle={section.layoutStyle}
-                  isSelected={section.id === selectedItem?.id}
-                />
-              )}
             </div>
           </React.Fragment>
         ))}

@@ -3,7 +3,6 @@ import { type Container } from "./container.t";
 export interface Section {
   section: SectionState[];
   selectedItem: SelectedEditorItem | null;
-  previewMode: boolean;
   updateSection: (payload: SectionState[]) => void;
   updateSelectedItem: (payload: SelectedEditorItem | null) => void;
 }
@@ -68,7 +67,7 @@ export interface Radius {
 export interface LayoutState {
   lg: string;
   md: string;
-  sm: string
+  sm: string;
 }
 
 export interface SelectedEditorItem {

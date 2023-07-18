@@ -11,12 +11,14 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import HeaderPlugin from "./components/HeaderPlugin/HeaderPlugin";
 import useContainer from "./useContainer";
 
-import "./richText.css";
+import "./../../styles/index.css";
+import If from "../If";
 
 interface Props {
   containerId: string;
   sectionId: string;
   elementId: string;
+  bodyKey?: "body1" | "body2" | "body3";
 }
 
 function MyCustomAutoFocusPlugin() {
@@ -29,21 +31,29 @@ function MyCustomAutoFocusPlugin() {
   return null;
 }
 
-const Editor = ({ containerId, sectionId, elementId }: Props) => {
-  const { initialConfig, handleOnChange } = useContainer({
+const Editor = ({
+  containerId,
+  sectionId,
+  elementId,
+  bodyKey = "body1",
+}: Props) => {
+  const { initialConfig, handleOnChange, previewMode } = useContainer({
     containerId,
     sectionId,
     elementId,
+    bodyKey,
   });
 
   return (
     <>
       <div className="relative">
         <LexicalComposer initialConfig={initialConfig}>
-          <HeaderPlugin />
+          <If isTrue={!previewMode}>
+            <HeaderPlugin />
+          </If>
           <RichTextPlugin
             contentEditable={
-              <div className="h-32">
+              <div className="min-h-[32px]">
                 <ContentEditable />
               </div>
             }

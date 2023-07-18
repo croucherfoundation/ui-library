@@ -1,10 +1,16 @@
 import { create } from "zustand";
-import { EditorConfigStore, EditorConfig } from "../types/editorConfig.t";
+import {
+  type EditorConfigStore,
+  type EditorConfig,
+} from "../types/editorConfig.t";
 
 const useEditorConfigStore = create<EditorConfigStore>()((set) => ({
   config: {
     previewMode: false,
+    previewLoading: false,
     previewBreakpoints: "auto",
+    imageFetch: false,
+    imageFetchUrl: "",
   },
   updateEditorConfig: (payload: EditorConfig) =>
     set({

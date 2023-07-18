@@ -4,6 +4,7 @@ import { useDrop } from "react-dnd";
 import { sectionValueUpdater } from "../../helpers";
 import useSectionStore from "../../store/section.store";
 import createChilds from "../../utils/createChilds";
+import useEditorConfigStore from "../../store/editorConfig.store";
 
 interface Props {
   containerId: string;
@@ -14,6 +15,9 @@ const useContainer = ({ containerId, sectionId }: Props) => {
   const [sections, updateSection] = useSectionStore((state) => [
     state.section,
     state.updateSection,
+  ]);
+  const [previewMode] = useEditorConfigStore((state) => [
+    state.config.previewMode,
   ]);
 
   const [{ isActive }, dropRef] = useDrop(
@@ -81,6 +85,7 @@ const useContainer = ({ containerId, sectionId }: Props) => {
   return {
     isActive,
     dropRef,
+    previewMode,
     removeChildElements,
   };
 };

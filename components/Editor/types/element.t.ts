@@ -1,11 +1,17 @@
+export interface ElementChild {
+  heading: string;
+  body: {
+    body1?: string;
+    body2?: string;
+    body3?: string;
+  };
+  image: string;
+}
+
 export interface Element {
   id: string;
   type: string;
-  content: {
-    heading?: string;
-    body?: string;
-    image?: string;
-  };
+  content: ElementChild;
   option: unknown;
   style: unknown;
 }

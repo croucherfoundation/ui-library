@@ -41,7 +41,7 @@ const Aside = ({ publishOrSave }: Props) => {
   return (
     <aside
       className={clsx(
-        `w-[350px] h-screen bg-slate-200 sticky top-0`,
+        `w-[350px] h-screen bg-slate-200 sticky top-0 z-50`,
         editorConfig.previewMode && "hidden"
       )}
       style={{
