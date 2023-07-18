@@ -10,7 +10,7 @@ import SocketBlock from "../SocketBlock/SocketBlock";
 
 import useEditorConfigStore from "../../store/editorConfig.store";
 import useSectionStore from "../../store/section.store";
-import useContainer from "../../useContainer";
+import useContainer from "./useContainer";
 import SelectedSectionIcon from "../Aside/components/SelectedSectionIcon";
 
 const Section = () => {
@@ -29,6 +29,7 @@ const Section = () => {
                 id={section.id}
                 layoutStyle={section.layoutStyle}
                 isSelected={section.id === selectedItem?.id}
+                section={section}
               />
             )}
             <div
@@ -36,8 +37,9 @@ const Section = () => {
                 minHeight: section.option.minHeight,
                 backgroundColor: section.style.background.normal.bgColor,
               }}
-              // gap-${section.option.gap}
-              className={`grid grid-cols-12 my-2.5 relative ${
+              className={`grid grid-cols-12 my-2.5 relative gap-${
+                section.option.gap
+              } ${
                 section.id === selectedItem?.id && !editorConfig.previewMode
                   ? "border-2 border-indigo-400 border-dashed"
                   : ""

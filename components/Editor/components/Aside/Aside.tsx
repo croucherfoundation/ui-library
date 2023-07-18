@@ -9,7 +9,7 @@ import {
 } from "../../utils/dragComponentTypes";
 import CroucherSixSixIcon from "./components/CroucherIcons/CroucherSixSixIcon";
 import Element from "./components/Element";
-import SelectedItem from "./components/SelectedItem";
+import SelectedItem from "./components/SelectedItem/SelectedItem";
 
 interface Props {
   publishOrSave?: React.ReactNode;
@@ -82,6 +82,7 @@ const Aside = ({ publishOrSave }: Props) => {
 
       <SelectedItem />
 
+      {/* ----- preview ----- */}
       <div className="border-t border-gray-300 p-4">
         <button
           className="relative flex flex-row justify-center items-center w-full cursor-pointer rounded-lg bg-white py-2 px-3 sm:text-sm"

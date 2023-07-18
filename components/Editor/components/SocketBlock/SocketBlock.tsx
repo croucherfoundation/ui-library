@@ -40,7 +40,9 @@ const SocketBlock = ({
       style={style}
       className={`w-full ${
         isActive ? "!bg-slate-300" : ""
-      } relative ${gridColClass} min-h-[200px]`}
+      } relative ${gridColClass} min-h-[200px]
+      ${previewMode ? "" : "border border-dashed"}
+      `}
     >
       <If isTrue={!previewMode}>
         <div className="flex gap-3">

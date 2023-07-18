@@ -3,8 +3,10 @@ import { type Container } from "./container.t";
 export interface Section {
   section: SectionState[];
   selectedItem: SelectedEditorItem | null;
+  selectedSection: SectionState | null;
   updateSection: (payload: SectionState[]) => void;
   updateSelectedItem: (payload: SelectedEditorItem | null) => void;
+  updateSelectedSection: (payload: SectionState | null) => void;
 }
 
 export interface SectionState {

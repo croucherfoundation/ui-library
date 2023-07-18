@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import useSectionStore from "./store/section.store";
-import { type LayoutState } from "./types/section.t";
-import generatedLayoutInfo from "./utils/generateLayoutInfo";
+import useSectionStore from "../../store/section.store";
+import { type LayoutState } from "../../types/section.t";
+import generatedLayoutInfo from "../../utils/generateLayoutInfo";
 
 const useContainer = () => {
   const [sections, updateSection] = useSectionStore((state) => [
@@ -43,7 +43,7 @@ const useContainer = () => {
           background: {
             normal: {
               type: "",
-              bgColor: "#f1f5f9",
+              bgColor: "",
             },
             hover: {
               type: "",
@@ -90,7 +90,7 @@ const useContainer = () => {
         direction: "",
         justifyContent: "",
         alignContent: "",
-        gap: 3,
+        gap: 0,
         screen: {},
       },
       style: {

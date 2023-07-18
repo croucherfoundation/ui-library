@@ -7,6 +7,7 @@ const useSectionStore = create<Section>()(
     (set) => ({
       section: [],
       selectedItem: null,
+      selectedSection: null,
       updateSection: (payload: SectionState[]) =>
         set({
           section: payload,
@@ -14,6 +15,10 @@ const useSectionStore = create<Section>()(
       updateSelectedItem: (payload: SelectedEditorItem | null) =>
         set({
           selectedItem: payload,
+        }),
+      updateSelectedSection: (payload: SectionState | null) =>
+        set({
+          selectedSection: payload,
         }),
     }),
     {

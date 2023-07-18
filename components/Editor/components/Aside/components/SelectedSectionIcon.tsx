@@ -1,22 +1,24 @@
 import { useCallback } from "react";
 import { AiFillCloseSquare, AiTwotoneEdit } from "react-icons/ai";
 import useSectionStore from "../../../store/section.store";
-import { LayoutState } from "../../../types/section.t";
+import { type LayoutState, type SectionState } from "../../../types/section.t";
 
 interface SelectedSectionIconProps {
   id: string;
   layoutStyle: LayoutState;
   isSelected: boolean;
+  section: SectionState;
 }
 
 function SelectedSectionIcon({
   id,
   layoutStyle,
   isSelected,
+  section,
 }: SelectedSectionIconProps) {
-  const [updateSelectedItem] = useSectionStore((state) => [
-    state.updateSelectedItem,
-  ]);
+  const [updateSelectedItem, updateSelectedSection] = useSectionStore(
+    (state) => [state.updateSelectedItem, state.updateSelectedSection]
+  );
 
   const handleEdit = useCallback(() => {
     updateSelectedItem(
@@ -28,7 +30,15 @@ function SelectedSectionIcon({
             layoutStyle,
           }
     );
-  }, [id, layoutStyle, isSelected, updateSelectedItem]);
+    updateSelectedSection(isSelected ? null : section);
+  }, [
+    id,
+    layoutStyle,
+    isSelected,
+    updateSelectedItem,
+    section,
+    updateSelectedSection,
+  ]);
 
   return (
     <div

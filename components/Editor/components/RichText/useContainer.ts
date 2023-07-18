@@ -62,8 +62,6 @@ const useContainer = ({
     fill(currentSection.children, currentContainer, currentContainerIdx, 1);
     fill(clonedSections, currentSection, currentSectionIdx, 1);
 
-    console.log(currentElement);
-
     updateSection(clonedSections);
   };
 
