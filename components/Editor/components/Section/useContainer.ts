@@ -1,5 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
+import useEditorConfigStore from "../../store/editorConfig.store";
 import useSectionStore from "../../store/section.store";
 import { type LayoutState } from "../../types/section.t";
 import generatedLayoutInfo from "../../utils/generateLayoutInfo";
@@ -9,7 +10,7 @@ const useContainer = () => {
     state.section,
     state.updateSection,
   ]);
-  const [isEditMode] = useState<boolean>(true);
+  const [isEditMode] = useEditorConfigStore((state) => [state.isEditMode]);
 
   const getGenerateGridCol = useCallback(
     (layout: LayoutState, index: number) => {
@@ -118,6 +119,46 @@ const useContainer = () => {
           },
           hover: {
             borderType: "", // none, solid, doubld, dashed, dotted, wavy
+          },
+        },
+        padding: {
+          sm: {
+            paddingTop: 0,
+            paddingLeft: 0,
+            paddingBottom: 0,
+            paddingRight: 0,
+          },
+          md: {
+            paddingTop: 0,
+            paddingLeft: 0,
+            paddingBottom: 0,
+            paddingRight: 0,
+          },
+          lg: {
+            paddingTop: 0,
+            paddingLeft: 0,
+            paddingBottom: 0,
+            paddingRight: 0,
+          },
+        },
+        margin: {
+          sm: {
+            marginTop: 0,
+            marginLeft: 0,
+            marginBottom: 0,
+            marginRight: 0,
+          },
+          md: {
+            marginTop: 0,
+            marginLeft: 0,
+            marginBottom: 0,
+            marginRight: 0,
+          },
+          lg: {
+            marginTop: 0,
+            marginLeft: 0,
+            marginBottom: 0,
+            marginRight: 0,
           },
         },
       },

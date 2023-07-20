@@ -3,6 +3,7 @@ import fill from "lodash/fill";
 import { useCallback, useEffect, useState } from "react";
 import { sectionValueUpdater } from "../../helpers";
 import useSectionStore from "../../store/section.store";
+import useEditorConfigStore from "../../store/editorConfig.store";
 
 interface Props {
   containerId: string;
@@ -15,6 +16,7 @@ const useContainer = ({ sectionId, containerId, elementId }: Props) => {
     state.section,
     state.updateSection,
   ]);
+  const [isEditMode] = useEditorConfigStore((state) => [state.isEditMode]);
   const [heading, setHeading] = useState<string>("");
 
   const handleSetHeading = useCallback(
@@ -56,9 +58,7 @@ const useContainer = ({ sectionId, containerId, elementId }: Props) => {
 
   useEffect(() => {
     const clonedSections = cloneDeep(sections);
-    const {
-      currentElement,
-    } = sectionValueUpdater({
+    const { currentElement } = sectionValueUpdater({
       sections: clonedSections,
       sectionId: sectionId,
       containerId: containerId,
@@ -72,14 +72,12 @@ const useContainer = ({ sectionId, containerId, elementId }: Props) => {
         setHeading(value);
       }
     }
-
-  }, [])
-
-  
+  }, []);
 
   return {
     heading,
     setHeading,
+    isEditMode,
   };
 };
 

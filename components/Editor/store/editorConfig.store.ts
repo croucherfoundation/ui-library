@@ -12,9 +12,14 @@ const useEditorConfigStore = create<EditorConfigStore>()((set) => ({
     imageFetch: false,
     imageFetchUrl: "",
   },
+  isEditMode: true,
   updateEditorConfig: (payload: EditorConfig) =>
     set({
       config: payload,
+    }),
+  handleIsEditMode: (payload: boolean) =>
+    set({
+      isEditMode: payload,
     }),
 }));
 

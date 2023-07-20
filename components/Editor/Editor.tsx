@@ -8,10 +8,14 @@ import { useEffect, useState } from "react";
 
 interface Props {
   publishOrSave?: React.ReactNode;
+  isEditMode?: boolean;
 }
 
-const Editor = ({ publishOrSave }: Props) => {
-  const [editorConfig] = useEditorConfigStore((state) => [state.config]);
+const Editor = ({ publishOrSave, isEditMode = true }: Props) => {
+  const [editorConfig, handleIsEditMode] = useEditorConfigStore((state) => [
+    state.config,
+    state.handleIsEditMode,
+  ]);
   const [hideSection, setHideSection] = useState(false);
 
   useEffect(() => {
@@ -20,13 +24,20 @@ const Editor = ({ publishOrSave }: Props) => {
     }, 5);
   }, [editorConfig.previewMode]);
 
+  useEffect(() => {
+    handleIsEditMode(isEditMode);
+  }, [isEditMode, handleIsEditMode]);
+
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <section className="flex">
           <Aside publishOrSave={publishOrSave} />
 
-          <div className={`w-full overflow-y-auto ${hideSection ? 'hidden' : ''}`} id="editor_section_node">
+          <div
+            className={`w-full overflow-y-auto ${hideSection ? "hidden" : ""}`}
+            id="editor_section_node"
+          >
             <Section />
           </div>
 

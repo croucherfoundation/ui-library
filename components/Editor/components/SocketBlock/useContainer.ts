@@ -16,8 +16,9 @@ const useContainer = ({ containerId, sectionId }: Props) => {
     state.section,
     state.updateSection,
   ]);
-  const [previewMode] = useEditorConfigStore((state) => [
+  const [previewMode, isEditMode] = useEditorConfigStore((state) => [
     state.config.previewMode,
+    state.isEditMode,
   ]);
 
   const [{ isActive }, dropRef] = useDrop(
@@ -87,6 +88,7 @@ const useContainer = ({ containerId, sectionId }: Props) => {
     dropRef,
     previewMode,
     removeChildElements,
+    isEditMode,
   };
 };
 

@@ -13,6 +13,7 @@ import useContainer from "./useContainer";
 
 import "./../../styles/index.css";
 import If from "../If";
+import useEditorConfigStore from "../../store/editorConfig.store";
 
 interface Props {
   containerId: string;
@@ -30,6 +31,16 @@ function MyCustomAutoFocusPlugin() {
 
   return null;
 }
+function IsEditable() {
+  const [editor] = useLexicalComposerContext();
+  const [isEditMode] = useEditorConfigStore((state) => [state.isEditMode]);
+
+  useEffect(() => {
+    editor.setEditable(isEditMode);
+  }, [editor, isEditMode]);
+
+  return null;
+}
 
 const Editor = ({
   containerId,
@@ -37,19 +48,22 @@ const Editor = ({
   elementId,
   bodyKey = "body1",
 }: Props) => {
-  const { initialConfig, handleOnChange, previewMode } = useContainer({
-    containerId,
-    sectionId,
-    elementId,
-    bodyKey,
-  });
+  const { initialConfig, handleOnChange, previewMode, isEditMode } =
+    useContainer({
+      containerId,
+      sectionId,
+      elementId,
+      bodyKey,
+    });
 
   return (
     <>
       <div className="relative">
         <LexicalComposer initialConfig={initialConfig}>
-          <If isTrue={!previewMode}>
-            <HeaderPlugin />
+          <If isTrue={isEditMode}>
+            <If isTrue={!previewMode}>
+              <HeaderPlugin />
+            </If>
           </If>
           <RichTextPlugin
             contentEditable={
@@ -67,6 +81,7 @@ const Editor = ({
           <OnChangePlugin onChange={handleOnChange} />
           <HistoryPlugin />
           <MyCustomAutoFocusPlugin />
+          <IsEditable />
         </LexicalComposer>
       </div>
     </>

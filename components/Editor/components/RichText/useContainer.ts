@@ -35,8 +35,9 @@ const useContainer = ({
     state.section,
     state.updateSection,
   ]);
-  const [previewMode] = useEditorConfigStore((state) => [
+  const [previewMode, isEditMode] = useEditorConfigStore((state) => [
     state.config.previewMode,
+    state.isEditMode,
   ]);
 
   const handleOnChange = (editorState: unknown) => {
@@ -74,12 +75,11 @@ const useContainer = ({
       elementId: elementId,
     });
 
-    // console.log("currentElement'", );
-
     const initialEditorState = {
       namespace: containerId,
       nodes: EDITOR_NODES,
-      editorState: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}',
+      editorState:
+        '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}',
       theme: {
         root: "focus:outline-none focus-visible:border-black p-3",
         link: "cursor-pointer",
@@ -118,7 +118,7 @@ const useContainer = ({
       onError: (error: unknown) => {
         console.log(error);
       },
-    }
+    };
 
     if (currentElement?.content.body[bodyKey]) {
       // console.log(currentElement?.content.body[bodyKey]);
@@ -129,12 +129,13 @@ const useContainer = ({
     }
 
     return initialEditorState;
-  }, [sectionId]);
+  }, [sectionId, bodyKey, containerId, elementId, sections]);
 
   return {
     initialConfig,
     handleOnChange,
     previewMode,
+    isEditMode,
   };
 };
 

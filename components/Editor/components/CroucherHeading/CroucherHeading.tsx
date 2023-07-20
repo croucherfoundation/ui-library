@@ -7,7 +7,7 @@ interface Props {
 }
 
 const CroucherHeading = ({ containerId, sectionId, elementId }: Props) => {
-  const { heading, setHeading } = useContainer({
+  const { heading, setHeading, isEditMode } = useContainer({
     containerId,
     sectionId,
     elementId,
@@ -21,6 +21,7 @@ const CroucherHeading = ({ containerId, sectionId, elementId }: Props) => {
         onChange={(e) => setHeading(e.target.value)}
         type="text"
         className="bg-transparent text-2xl font-bold focus:outline-none croucher-heading ml-5"
+        disabled={!isEditMode}
       />
     </div>
   );

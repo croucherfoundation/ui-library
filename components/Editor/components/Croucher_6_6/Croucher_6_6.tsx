@@ -1,11 +1,8 @@
-import { useWindowWidth } from "@react-hook/window-size";
-import clsx from "clsx";
 import { useState } from "react";
 import { type Element } from "../../types/element.t";
 import CroucherHeading from "../CroucherHeading/CroucherHeading";
 import Image from "../Image/Image";
 import RichText from "./../RichText/RichText";
-import If from "../If";
 
 interface Props {
   element: Element;
@@ -20,7 +17,6 @@ const Croucher_6_6 = ({
   sectionId,
   elementId,
 }: Props) => {
-  const onlyWidth = useWindowWidth();
   const [isReadMore, setIsReadMore] = useState<boolean>(false);
   return (
     <>

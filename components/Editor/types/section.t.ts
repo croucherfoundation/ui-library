@@ -4,10 +4,14 @@ export interface Section {
   section: SectionState[];
   selectedItem: SelectedEditorItem | null;
   selectedSection: SectionState | null;
+  breakpoint: Breakpoint;
   updateSection: (payload: SectionState[]) => void;
   updateSelectedItem: (payload: SelectedEditorItem | null) => void;
   updateSelectedSection: (payload: SectionState | null) => void;
+  setBreakpoint: (payload: Breakpoint) => void;
 }
+
+export type Breakpoint = "lg" | "md" | "sm";
 
 export interface SectionState {
   id: string;
@@ -31,6 +35,7 @@ export interface Option {
 export interface Style {
   background: Background;
   border: Border;
+  padding: Padding;
 }
 
 export interface Background {
@@ -46,6 +51,27 @@ export interface NormalClass {
 export interface Border {
   normal: Normal;
   hover: BorderHover;
+}
+
+export interface Padding {
+  sm: {
+    paddingTop: number;
+    paddingLeft: number;
+    paddingBottom: number;
+    paddingRight: number;
+  };
+  md: {
+    paddingTop: number;
+    paddingLeft: number;
+    paddingBottom: number;
+    paddingRight: number;
+  };
+  lg: {
+    paddingTop: number;
+    paddingLeft: number;
+    paddingBottom: number;
+    paddingRight: number;
+  };
 }
 
 export interface BorderHover {

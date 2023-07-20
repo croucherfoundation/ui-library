@@ -1,5 +1,5 @@
 // predefined tailwind classes
-export type TColSpan =
+export type predefinedTailwindClasses =
   | "col-span-1"
   | "col-span-2"
   | "col-span-3"
@@ -63,4 +63,11 @@ export type TColSpan =
   | "hover:bg-red-400"
   | "hover:bg-red-500"
   | "hover:bg-red-600"
-  | "hover:bg-red-700";
+  | "hover:bg-red-700"
+  | "bg-[#ee3a43]"
+  | "bg-[#FFFFFF]"
+  | "bg-[#F3F3F0]"
+  | "lg:p-t-"
+  | "lg:p-r-"
+  | "lg:p-b-"
+  | "lg:p-l-";

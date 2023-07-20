@@ -1,13 +1,15 @@
 export interface EditorConfigStore {
-  config: EditorConfig,
-  updateEditorConfig: (payload: EditorConfig) => void,
+  config: EditorConfig;
+  isEditMode: boolean;
+  updateEditorConfig: (payload: EditorConfig) => void;
+  handleIsEditMode: (payload: boolean) => void;
 }
 
 export interface EditorConfig {
   previewMode: boolean;
   previewLoading: boolean;
   previewBreakpoints: PreviewBreakpoints;
-  imageFetch: boolean,
+  imageFetch: boolean;
   imageFetchUrl: string;
 }
 

@@ -1,13 +1,19 @@
 import { create } from "zustand";
-import { SelectedEditorItem, Section, SectionState } from "../types/section.t";
+import {
+  type SelectedEditorItem,
+  type Section,
+  type SectionState,
+  type Breakpoint,
+} from "../types/section.t";
 import { persist } from "zustand/middleware";
 
-const useSectionStore = create<Section>()(
+const useSectionStore = create<Section & SectionActions>()(
   persist(
     (set) => ({
       section: [],
       selectedItem: null,
       selectedSection: null,
+      breakpoint: "lg",
       updateSection: (payload: SectionState[]) =>
         set({
           section: payload,
@@ -19,6 +25,10 @@ const useSectionStore = create<Section>()(
       updateSelectedSection: (payload: SectionState | null) =>
         set({
           selectedSection: payload,
+        }),
+      setBreakpoint: (payload: Breakpoint) =>
+        set({
+          breakpoint: payload,
         }),
     }),
     {
