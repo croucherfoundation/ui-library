@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import cloneDeep from "lodash/cloneDeep";
 import filter from "lodash/filter";
 import findIndex from "lodash/findIndex";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import useSectionStore from "../../../../store/section.store";
@@ -149,14 +149,17 @@ const useContainer = () => {
     );
 
     if (clonedSelectedSection) {
-      clonedSelectedSection.style.padding[breakpoint].paddingTop =
-        data.paddingTop;
-      clonedSelectedSection.style.padding[breakpoint].paddingLeft =
-        data.paddingLeft;
-      clonedSelectedSection.style.padding[breakpoint].paddingBottom =
-        data.paddingBottom;
-      clonedSelectedSection.style.padding[breakpoint].paddingRight =
-        data.paddingRight;
+      const bkPoint = clonedSelectedSection?.style?.padding[breakpoint];
+      if (bkPoint) {
+        clonedSelectedSection.style.padding[breakpoint].paddingTop =
+          data.paddingTop;
+        clonedSelectedSection.style.padding[breakpoint].paddingLeft =
+          data.paddingLeft;
+        clonedSelectedSection.style.padding[breakpoint].paddingBottom =
+          data.paddingBottom;
+        clonedSelectedSection.style.padding[breakpoint].paddingRight =
+          data.paddingRight;
+      }
 
       clonedSections.splice(currentSectionIdx, 1, clonedSelectedSection);
 
