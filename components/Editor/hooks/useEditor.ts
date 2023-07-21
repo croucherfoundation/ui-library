@@ -4,9 +4,19 @@ import { SectionState } from "../types/section.t";
 import useEditorConfigStore from "../store/editorConfig.store";
 
 const useEditor = () => {
-  const [sections, updateSection, updateSelectedItem] = useSectionStore(
-    (state) => [state.section, state.updateSection, state.updateSelectedItem]
-  );
+  const [
+    sections,
+    updateSection,
+    updateSelectedItem,
+    updateSelectedSection,
+    updateSelectedContainer,
+  ] = useSectionStore((state) => [
+    state.section,
+    state.updateSection,
+    state.updateSelectedItem,
+    state.updateSelectedSection,
+    state.updateSelectedContainer,
+  ]);
   const [handleIsEditMode] = useEditorConfigStore((state) => [
     state.handleIsEditMode,
   ]);
@@ -15,7 +25,15 @@ const useEditor = () => {
     handleIsEditMode(true);
     updateSection([]);
     updateSelectedItem(null);
-  }, [handleIsEditMode, updateSection, updateSelectedItem]);
+    updateSelectedSection(null);
+    updateSelectedContainer(null);
+  }, [
+    handleIsEditMode,
+    updateSection,
+    updateSelectedContainer,
+    updateSelectedItem,
+    updateSelectedSection,
+  ]);
 
   const updateEditor = useCallback(
     (data: string) => {
@@ -35,12 +53,9 @@ const useEditor = () => {
     return sections;
   }, [sections]);
 
-  const makeViewMode = useCallback(
-    () => {
-      handleIsEditMode(false);
-    },
-    [handleIsEditMode]
-  );
+  const makeViewMode = useCallback(() => {
+    handleIsEditMode(false);
+  }, [handleIsEditMode]);
 
   return { clearEditor, updateEditor, getEditorData, makeViewMode };
 };

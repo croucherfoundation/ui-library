@@ -16,7 +16,11 @@ function createChilds(type: string) {
         body2: "",
         body3: "",
       },
-      image: "",
+      image: DEFAULT_IMAGE,
+      link: {
+        linkText: "",
+        linkUrl: "",
+      },
     },
     option: {},
     style: {},
@@ -34,6 +38,10 @@ function createChilds(type: string) {
             body3: "",
           },
           image: DEFAULT_IMAGE,
+          link: {
+            linkText: "",
+            linkUrl: "",
+          },
         },
       };
     case CROUCHER_6_6:
@@ -47,6 +55,10 @@ function createChilds(type: string) {
             body3: "",
           },
           image: DEFAULT_IMAGE,
+          link: {
+            linkText: "",
+            linkUrl: "",
+          },
         },
       };
 

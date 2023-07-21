@@ -6,6 +6,10 @@ export interface ElementChild {
     body3?: string;
   };
   image: string;
+  link: {
+    linkText: string;
+    linkUrl: string;
+  };
 }
 
 export interface Element {

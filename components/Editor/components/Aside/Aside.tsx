@@ -1,12 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import {
-  FiAlertCircle,
-  FiAlignRight,
-  FiEye,
-  FiImage,
-  FiMenu,
-} from "react-icons/fi";
+import { FiAlignRight, FiEye, FiImage, FiMenu } from "react-icons/fi";
 import useEditorConfigStore from "../../store/editorConfig.store";
 import {
   CROUCHER_3_3_3_TEXT,
@@ -14,11 +8,13 @@ import {
   IMAGE_BLOCK,
   RICH_TEXT,
 } from "../../utils/dragComponentTypes";
+import Croucher_3_3_6_Icon from "../Icons/Croucher_3_3_6_Icon";
 import If from "../If";
+import CroucherFourFourFourTextIcon from "./components/CroucherIcons/CroucherFourFourFourTextIcon";
 import CroucherSixSixIcon from "./components/CroucherIcons/CroucherSixSixIcon";
 import Element from "./components/Element";
-import SelectedItem from "./components/SelectedItem/SelectedItem";
 import useContainer from "./useContainer";
+import SelectedItem from "./components/SelectedItem/SelectedItem";
 
 interface Props {
   publishOrSave?: React.ReactNode;
@@ -90,8 +86,13 @@ const Aside = ({ publishOrSave }: Props) => {
                 data={{ type: CROUCHER_6_6 }}
               />
               <Element
-                title="4*4*4 Text"
-                icon={<FiAlertCircle className="w-7 h-7 mx-auto" />}
+                title=""
+                icon={<CroucherFourFourFourTextIcon />}
+                data={{ type: CROUCHER_3_3_3_TEXT }}
+              />
+              <Element
+                title=""
+                icon={<Croucher_3_3_6_Icon />}
                 data={{ type: CROUCHER_3_3_3_TEXT }}
               />
             </div>

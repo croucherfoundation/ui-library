@@ -5,6 +5,8 @@ import { sectionValueUpdater } from "../../helpers";
 import useSectionStore from "../../store/section.store";
 import createChilds from "../../utils/createChilds";
 import useEditorConfigStore from "../../store/editorConfig.store";
+import { Container } from "../../types/container.t";
+import { useMemo } from "react";
 
 interface Props {
   containerId: string;
@@ -20,6 +22,12 @@ const useContainer = ({ containerId, sectionId }: Props) => {
     state.config.previewMode,
     state.isEditMode,
   ]);
+  const [selectedItem, updateSelectedItem, updateSelectedContainer] =
+    useSectionStore((state) => [
+      state.selectedItem,
+      state.updateSelectedItem,
+      state.updateSelectedContainer,
+    ]);
 
   const [{ isActive }, dropRef] = useDrop(
     () => ({
@@ -83,12 +91,41 @@ const useContainer = ({ containerId, sectionId }: Props) => {
     updateSection(clonedSections);
   };
 
+  const onSelectedContainer = (container: Container, sectionId: string) => {
+    const isAlreadySelected =
+      containerId === selectedItem?.id &&
+      selectedItem?.elementType === "container";
+
+    if (isAlreadySelected) {
+      updateSelectedContainer(null);
+      updateSelectedItem(null);
+      return;
+    }
+
+    updateSelectedItem({
+      id: container.id,
+      elementType: "container",
+      sectionId: sectionId,
+    });
+
+    updateSelectedContainer(container);
+  };
+
+  const isSelectedContainer = useMemo<boolean>(() => {
+    return (
+      containerId === selectedItem?.id &&
+      selectedItem?.elementType === "container"
+    );
+  }, [containerId, selectedItem?.elementType, selectedItem?.id]);
+
   return {
     isActive,
     dropRef,
     previewMode,
     removeChildElements,
+    onSelectedContainer,
     isEditMode,
+    isSelectedContainer,
   };
 };
 

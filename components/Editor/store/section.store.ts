@@ -6,6 +6,7 @@ import {
   type Breakpoint,
 } from "../types/section.t";
 import { persist } from "zustand/middleware";
+import { Container } from "../types/container.t";
 
 const useSectionStore = create<Section>()(
   persist(
@@ -13,6 +14,7 @@ const useSectionStore = create<Section>()(
       section: [],
       selectedItem: null,
       selectedSection: null,
+      selectedContainer: null,
       breakpoint: "lg",
       updateSection: (payload: SectionState[]) =>
         set({
@@ -25,6 +27,10 @@ const useSectionStore = create<Section>()(
       updateSelectedSection: (payload: SectionState | null) =>
         set({
           selectedSection: payload,
+        }),
+      updateSelectedContainer: (payload: Container | null) =>
+        set({
+          selectedContainer: payload,
         }),
       setBreakpoint: (payload: Breakpoint) =>
         set({

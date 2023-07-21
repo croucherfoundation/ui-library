@@ -3,6 +3,7 @@ import { type Container } from "../../types/container.t";
 import { type Element } from "../../types/element.t";
 import {
   CROUCHER_3_3_3_TEXT,
+  CROUCHER_3_3_6,
   CROUCHER_6_6,
   IMAGE_BLOCK,
   RICH_TEXT,
@@ -13,8 +14,10 @@ import Image from "../Image/Image";
 import RichText from "./../../components/RichText/RichText";
 import useContainer from "./useContainer";
 
-import { FiTrash } from "react-icons/fi";
+import { FiEdit2, FiTrash, FiXCircle } from "react-icons/fi";
 import If from "../If";
+import Croucher_3_3_6 from "../Croucher_3_3_6/Croucher_3_3_6";
+import IfElse from "../IfElse";
 
 interface Props {
   style: CSSProperties;
@@ -31,11 +34,18 @@ const SocketBlock = ({
   container,
   gridColClass,
 }: Props) => {
-  const { isActive, dropRef, removeChildElements, previewMode, isEditMode } =
-    useContainer({
-      containerId,
-      sectionId,
-    });
+  const {
+    isActive,
+    dropRef,
+    removeChildElements,
+    previewMode,
+    isEditMode,
+    onSelectedContainer,
+    isSelectedContainer,
+  } = useContainer({
+    containerId,
+    sectionId,
+  });
 
   return (
     <div
@@ -50,6 +60,18 @@ const SocketBlock = ({
       <If isTrue={isEditMode}>
         <If isTrue={!previewMode}>
           <div className="flex gap-3">
+            <button
+              onClick={() => onSelectedContainer(container, sectionId)}
+              className={`${
+                isSelectedContainer ? "bg-indigo-500" : "bg-gray-700"
+              } rounded-md p-1`}
+            >
+              <IfElse
+                isTrue={isSelectedContainer}
+                ifBlock={<FiXCircle className="stroke-white w-3 h-3" />}
+                elseBlock={<FiEdit2 className="stroke-white w-3 h-3" />}
+              />
+            </button>
             <button
               onClick={removeChildElements}
               className="bg-gray-700 rounded-md p-1"
@@ -93,6 +115,16 @@ const SocketBlock = ({
           {element?.type === CROUCHER_3_3_3_TEXT && (
             <>
               <Croucher_3_3_3_Text
+                containerId={containerId}
+                sectionId={sectionId}
+                elementId={element.id}
+              />
+            </>
+          )}
+          {element?.type === CROUCHER_3_3_6 && (
+            <>
+              <Croucher_3_3_6
+                element={element}
                 containerId={containerId}
                 sectionId={sectionId}
                 elementId={element.id}

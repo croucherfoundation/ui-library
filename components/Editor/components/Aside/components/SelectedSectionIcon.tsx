@@ -16,9 +16,12 @@ function SelectedSectionIcon({
   isSelected,
   section,
 }: SelectedSectionIconProps) {
-  const [updateSelectedItem, updateSelectedSection] = useSectionStore(
-    (state) => [state.updateSelectedItem, state.updateSelectedSection]
-  );
+  const [updateSelectedItem, updateSelectedSection, updateSelectedContainer] =
+    useSectionStore((state) => [
+      state.updateSelectedItem,
+      state.updateSelectedSection,
+      state.updateSelectedContainer,
+    ]);
 
   const handleEdit = useCallback(() => {
     updateSelectedItem(
@@ -31,6 +34,7 @@ function SelectedSectionIcon({
           }
     );
     updateSelectedSection(isSelected ? null : section);
+    updateSelectedContainer(null);
   }, [
     id,
     layoutStyle,
@@ -38,6 +42,7 @@ function SelectedSectionIcon({
     updateSelectedItem,
     section,
     updateSelectedSection,
+    updateSelectedContainer,
   ]);
 
   return (

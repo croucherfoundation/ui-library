@@ -5,23 +5,9 @@ import findIndex from "lodash/findIndex";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import useSectionStore from "../../../../store/section.store";
-import { SectionState } from "../../../../types/section.t";
-
-const bgColors = [
-  {
-    id: "#F3F3F0",
-    value: "#F3F3F0",
-  },
-  {
-    id: "#FFFFFF",
-    value: "#FFFFFF",
-  },
-  {
-    id: "#ee3a43",
-    value: "#ee3a43",
-  },
-];
+import useSectionStore from "../../../../../store/section.store";
+import { SectionState } from "../../../../../types/section.t";
+import bgColors from "../../../../../utils/bgColors";
 
 interface PaddingFormValues {
   paddingTop: number;
@@ -190,7 +176,7 @@ const useContainer = () => {
   }, [selectedSection, paddingSetValue, breakpoint]);
 
   return {
-    bgColors,
+    bgColors: bgColors,
     handleOnChangeSectionBackgroundColor,
     defaultBreakPointStyle,
     breakpoint,

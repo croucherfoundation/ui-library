@@ -4,10 +4,12 @@ export interface Section {
   section: SectionState[];
   selectedItem: SelectedEditorItem | null;
   selectedSection: SectionState | null;
+  selectedContainer: Container | null;
   breakpoint: Breakpoint;
   updateSection: (payload: SectionState[]) => void;
   updateSelectedItem: (payload: SelectedEditorItem | null) => void;
   updateSelectedSection: (payload: SectionState | null) => void;
+  updateSelectedContainer: (payload: Container | null) => void;
   setBreakpoint: (payload: Breakpoint) => void;
 }
 
@@ -99,7 +101,8 @@ export interface LayoutState {
 }
 
 export interface SelectedEditorItem {
-  elementType: string;
+  elementType: "section" | "container" | "image";
   id: string;
   layoutStyle?: LayoutState;
+  sectionId?: string;
 }

@@ -13,14 +13,14 @@ const CroucherHeading = ({ containerId, sectionId, elementId }: Props) => {
     elementId,
   });
   return (
-    <div className="mb-3 relative">
-      <div className="absolute top-0 left-0 h-full w-3 bg-[#EE3A43]"></div>
+    <div className="relative">
+      <div className="absolute top-[3px] left-[13px] min-h-[20px] w-[7px] md:w-[11px] bg-[#EE3A43]"></div>
       <input
         placeholder="Type heading here..."
         value={heading}
         onChange={(e) => handleSetHeading(e.target.value)}
         type="text"
-        className="bg-transparent text-2xl font-bold focus:outline-none croucher-heading ml-5"
+        className="bg-transparent text-2xl font-bold focus:outline-none croucher-heading ml-[30px] md:ml-[40px]"
         disabled={!isEditMode}
       />
     </div>

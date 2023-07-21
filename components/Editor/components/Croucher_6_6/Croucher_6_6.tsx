@@ -22,7 +22,7 @@ const Croucher_6_6 = ({
     <>
       <div className="flex flex-col-reverse md:flex-row">
         {/* ----- left ----- */}
-        <div className="md:w-6/12 w-full p-3">
+        <div className="md:w-6/12 w-full py-[16px] md:py-[40px] px-[21px] md:px-[26px]">
           <CroucherHeading
             containerId={containerId}
             sectionId={sectionId}
