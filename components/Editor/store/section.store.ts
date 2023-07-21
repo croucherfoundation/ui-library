@@ -7,7 +7,7 @@ import {
 } from "../types/section.t";
 import { persist } from "zustand/middleware";
 
-const useSectionStore = create<Section & SectionActions>()(
+const useSectionStore = create<Section>()(
   persist(
     (set) => ({
       section: [],

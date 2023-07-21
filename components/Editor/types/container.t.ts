@@ -5,7 +5,7 @@ export interface Container {
   type: string;
   option: Option;
   style: Style;
-  advancedStyle: any;
+  advancedStyle: unknown;
   children: Element[];
 }
 
@@ -46,7 +46,7 @@ export interface BorderHover {
 export interface Normal {
   borderType: string;
   radius: Radius;
-  boxShadow: any;
+  boxShadow: unknown;
 }
 
 export interface Radius {

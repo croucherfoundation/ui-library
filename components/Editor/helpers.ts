@@ -43,7 +43,7 @@ export const sectionValueUpdater = ({
   const currentElementIdx = elementId
     ? findIndex(
         currentContainer.children,
-        (container: Container) => container.id === containerId
+        (container: Element) => container.id === containerId
       )
     : null;
 

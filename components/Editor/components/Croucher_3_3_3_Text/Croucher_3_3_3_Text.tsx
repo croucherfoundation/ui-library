@@ -1,20 +1,13 @@
 import { useState } from "react";
-import { type Element } from "../../types/element.t";
 import Editor from "../RichText/RichText";
 
 interface Props {
-  element: Element;
   containerId: string;
   sectionId: string;
   elementId: string;
 }
 
-const Croucher_3_3_3_Text = ({
-  element,
-  containerId,
-  sectionId,
-  elementId,
-}: Props) => {
+const Croucher_3_3_3_Text = ({ containerId, sectionId, elementId }: Props) => {
   const [isReadMore, setIsReadMore] = useState<boolean>(false);
 
   return (

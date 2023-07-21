@@ -41,7 +41,7 @@ const HeaderPlugin = () => {
       },
       COMMAND_PRIORITY_LOW
     );
-  }, []);
+  }, [editor]);
 
   useEffect(() => {
     return editor.registerCommand(

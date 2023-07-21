@@ -1,9 +1,9 @@
 import cloneDeep from "lodash/cloneDeep";
 import fill from "lodash/fill";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { sectionValueUpdater } from "../../helpers";
-import useSectionStore from "../../store/section.store";
 import useEditorConfigStore from "../../store/editorConfig.store";
+import useSectionStore from "../../store/section.store";
 
 interface Props {
   containerId: string;
@@ -19,42 +19,31 @@ const useContainer = ({ sectionId, containerId, elementId }: Props) => {
   const [isEditMode] = useEditorConfigStore((state) => [state.isEditMode]);
   const [heading, setHeading] = useState<string>("");
 
-  const handleSetHeading = useCallback(
-    (text: string) => {
-      const clonedSections = cloneDeep(sections);
-      const {
-        currentSectionIdx,
-        currentContainerIdx,
-        currentElementIdx,
-        currentSection,
-        currentContainer,
-        currentElement,
-      } = sectionValueUpdater({
-        sections: clonedSections,
-        sectionId: sectionId,
-        containerId: containerId,
-        elementId: elementId,
-      });
+  const handleSetHeading = (text: string) => {
+    const clonedSections = cloneDeep(sections);
+    const {
+      currentSectionIdx,
+      currentContainerIdx,
+      currentElementIdx,
+      currentSection,
+      currentContainer,
+      currentElement,
+    } = sectionValueUpdater({
+      sections: clonedSections,
+      sectionId: sectionId,
+      containerId: containerId,
+      elementId: elementId,
+    });
 
-      if (currentElement !== null) currentElement.content.heading = text;
+    if (currentElement !== null) currentElement.content.heading = text;
+    setHeading(text);
 
-      fill(
-        currentContainer.children,
-        currentElement,
-        currentElementIdx ?? 0,
-        1
-      );
-      fill(currentSection.children, currentContainer, currentContainerIdx, 1);
-      fill(clonedSections, currentSection, currentSectionIdx, 1);
+    fill(currentContainer.children, currentElement, currentElementIdx ?? 0, 1);
+    fill(currentSection.children, currentContainer, currentContainerIdx, 1);
+    fill(clonedSections, currentSection, currentSectionIdx, 1);
 
-      updateSection(clonedSections);
-    },
-    [heading]
-  );
-
-  useEffect(() => {
-    handleSetHeading(heading);
-  }, [heading, handleSetHeading]);
+    updateSection(clonedSections);
+  };
 
   useEffect(() => {
     const clonedSections = cloneDeep(sections);
@@ -66,18 +55,17 @@ const useContainer = ({ sectionId, containerId, elementId }: Props) => {
     });
 
     if (currentElement?.content.heading) {
-      // console.log(currentElement?.content.body[bodyKey]);
       const value = currentElement?.content.heading;
       if (value) {
         setHeading(value);
       }
     }
-  }, []);
+  }, [sectionId, containerId, elementId, sections, setHeading]);
 
   return {
     heading,
-    setHeading,
     isEditMode,
+    handleSetHeading,
   };
 };
 

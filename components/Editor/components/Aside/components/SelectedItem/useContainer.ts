@@ -57,7 +57,6 @@ const useContainer = () => {
   ]);
   const {
     register: paddingRegister,
-    watch: paddingWatch,
     formState: { errors: paddingErrors },
     handleSubmit: paddingHandleSubmit,
     control: paddingControl,

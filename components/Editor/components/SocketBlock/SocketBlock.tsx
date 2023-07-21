@@ -93,7 +93,6 @@ const SocketBlock = ({
           {element?.type === CROUCHER_3_3_3_TEXT && (
             <>
               <Croucher_3_3_3_Text
-                element={element}
                 containerId={containerId}
                 sectionId={sectionId}
                 elementId={element.id}

@@ -40,7 +40,7 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({ children }) => {
     if (editorConfig.previewMode) {
       createMount();
     }
-  }, [section, editorConfig.previewMode]);
+  }, [section, editorConfig.previewMode, createMount]);
 
   const style = useMemo<React.CSSProperties>(() => {
     switch (editorConfig.previewBreakpoints) {

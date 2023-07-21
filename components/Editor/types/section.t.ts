@@ -81,7 +81,7 @@ export interface BorderHover {
 export interface Normal {
   borderType: string;
   radius: Radius;
-  boxShadow: any;
+  boxShadow: unknown;
 }
 
 export interface Radius {

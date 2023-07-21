@@ -70,7 +70,10 @@ const Section = () => {
               }`}
             >
             </div> */}
-            <StyledSection style={section.style}>
+            <StyledSection
+              style={section.style}
+              className={`grid grid-cols-12 relative gap-${section.option.gap}`}
+            >
               {/* ----- containers aka socketblocks ----- */}
               {section.children.map((container, index) => (
                 <React.Fragment key={container.id}>

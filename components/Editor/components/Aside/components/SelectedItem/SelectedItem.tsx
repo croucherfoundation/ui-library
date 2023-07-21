@@ -1,5 +1,5 @@
 import { Listbox } from "@headlessui/react";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Controller } from "react-hook-form";
 import {
   FaArrowsUpDown,
@@ -10,7 +10,6 @@ import {
 import useSectionStore from "../../../../store/section.store";
 import generateGridColInfo from "../../../../utils/generateGridColInfo";
 import BreakpointIcon from "../BreakpointIcon/BreakpointIcon";
-import useSelectedItem from "../hooks/useSelectedItem";
 import useContainer from "./useContainer";
 
 function SelectedItem() {
@@ -24,7 +23,6 @@ function SelectedItem() {
     updateSelectedItemBreakpoints,
     deleteSelectedSection,
     paddingControl,
-    paddingRegister,
     paddingHandleSubmit,
     handlePaddingFormSubmit,
     paddingErrors,
@@ -253,7 +251,7 @@ function SelectedItem() {
             }
             className="mt-3 relative w-full cursor-pointer rounded-lg bg-red-500 hover:bg-red-400 text-white py-2 text-center focus:outline-none text-xs"
           >
-            Delete Section
+            Delete section
           </button>
         </div>
       </div>
