@@ -1,13 +1,25 @@
 import { type Container } from "./container.t";
+import { selectedCroucherElementType } from "./croucher.t";
+import { type Element, imageObjectFitType } from "./element.t";
 
+interface SectionStateAll {
+  en: SectionState[],
+  hk: SectionState[]
+}
 export interface Section {
-  section: SectionState[];
+  section: SectionStateAll;
   selectedItem: SelectedEditorItem | null;
   selectedSection: SectionState | null;
+  selectedContainer: Container | null;
   breakpoint: Breakpoint;
-  updateSection: (payload: SectionState[]) => void;
+  selectedElement: Element | null;
+  updateAllSection: (payload: SectionStateAll) => void;
+  updateEnSection: (payload: SectionState[]) => void;
+  updateHkSection: (payload: SectionState[]) => void;
   updateSelectedItem: (payload: SelectedEditorItem | null) => void;
   updateSelectedSection: (payload: SectionState | null) => void;
+  updateSelectedContainer: (payload: Container | null) => void;
+  updateSelectedElement: (payload: Element | null) => void;
   setBreakpoint: (payload: Breakpoint) => void;
 }
 
@@ -24,15 +36,31 @@ export interface SectionState {
 
 export interface Option {
   contentWidth: string;
-  minWidth: string;
+  maxWidth: {
+    sm: number;
+    md: number;
+    lg: number;
+  };
   minHeight: string;
   direction: string;
   justifyContent: string;
   alignContent: string;
   gap: number;
+  unit: {
+    sm: string;
+    md: string;
+    lg: string;
+  };
 }
 
 export interface Style {
+  background: Background;
+  border: Border;
+  padding: Padding;
+  margin: Margin;
+}
+
+export interface SocketStyle {
   background: Background;
   border: Border;
   padding: Padding;
@@ -73,6 +101,26 @@ export interface Padding {
     paddingRight: number;
   };
 }
+export interface Margin {
+  sm: {
+    marginTop: number;
+    marginLeft: number;
+    marginBottom: number;
+    marginRight: number;
+  };
+  md: {
+    marginTop: number;
+    marginLeft: number;
+    marginBottom: number;
+    marginRight: number;
+  };
+  lg: {
+    marginTop: number;
+    marginLeft: number;
+    marginBottom: number;
+    marginRight: number;
+  };
+}
 
 export interface BorderHover {
   borderType: string;
@@ -98,8 +146,13 @@ export interface LayoutState {
   sm: string;
 }
 
+export type selectedElementType = "section" | "container" | "imageBlock";
+
 export interface SelectedEditorItem {
-  elementType: string;
   id: string;
+  elementType: selectedElementType | selectedCroucherElementType;
   layoutStyle?: LayoutState;
+  sectionId?: string;
+  containerId?: string;
+  style?: { objectFit: imageObjectFitType };
 }

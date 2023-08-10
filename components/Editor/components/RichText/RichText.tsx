@@ -6,14 +6,15 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import HeaderPlugin from "./components/HeaderPlugin/HeaderPlugin";
 import useContainer from "./useContainer";
 
-import "./../../styles/index.css";
-import If from "../If";
 import useEditorConfigStore from "../../store/editorConfig.store";
+import "./../../styles/index.css";
+import FloatingMenu from "./components/FloatingMenu/FloatingMenu";
+import If from "../If";
 
 interface Props {
   containerId: string;
@@ -62,18 +63,16 @@ const Editor = ({
         <LexicalComposer initialConfig={initialConfig}>
           <If isTrue={isEditMode}>
             <If isTrue={!previewMode}>
-              <HeaderPlugin />
+              <FloatingMenu />
             </If>
           </If>
           <RichTextPlugin
             contentEditable={
-              <div className="min-h-[32px]">
-                <ContentEditable />
-              </div>
+              <ContentEditable className="min-h-[100px]" spellCheck={false} />
             }
             ErrorBoundary={LexicalErrorBoundary}
             placeholder={
-              <div className="opacity-50 top-[50px] absolute left-[12px]">
+              <div className="opacity-50 top-[0px] absolute left-[0px] select-none pointer-events-none">
                 Start writing
               </div>
             }
@@ -81,6 +80,7 @@ const Editor = ({
           <OnChangePlugin onChange={handleOnChange} />
           <HistoryPlugin />
           <MyCustomAutoFocusPlugin />
+          <ListPlugin />
           <IsEditable />
         </LexicalComposer>
       </div>

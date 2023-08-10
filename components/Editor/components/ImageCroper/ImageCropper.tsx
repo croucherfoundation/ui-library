@@ -11,11 +11,14 @@ import {
   Redo,
 } from "./components/CropIcons/CropIcons";
 import useCropper from "./useCropper";
+import IfElse from "../IfElse";
+import useImageConfigStore from "../../store/imageConfig.store";
 
 interface ImageCropperProps {
   image: string;
   title?: string;
   showModal: boolean;
+  fileType: string;
   defaultAspectRatio?: number;
   onSaveCrop: (str: string) => void;
   onCancelCrop: () => void;
@@ -27,8 +30,12 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
   image,
   onSaveCrop,
   onCancelCrop,
+  fileType,
 }) => {
-  const { getCroppedImg } = useCropper();
+  const { getCroppedImg } = useCropper({ fileType });
+  const [isImageLoading] = useImageConfigStore((state) => [
+    state.isImageLoading,
+  ]);
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState<number>(1);
   const [aspectRatio, setAspectRatio] = useState<number>(1);
@@ -66,6 +73,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        if (isImageLoading) return;
         event.preventDefault();
         onCancelCrop?.();
       }
@@ -75,7 +83,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, [onCancelCrop]);
+  }, [onCancelCrop, isImageLoading]);
 
   const cropperParentDom = document.getElementById("image-cropper-portal");
 
@@ -87,7 +95,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
 
   const iconClasses = useMemo<string>(() => {
     return "flex items-center justify-center w-9 h-9 text-xs font-medium text-gray-700 bg-white border border-gray-200 rounded-lg toggle-full-view hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-800 focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700";
-  }, [])
+  }, []);
 
   return (
     <>
@@ -161,6 +169,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
                       <button
                         className="flex items-center bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
+                        disabled={isImageLoading}
                         onClick={() => {
                           void onCancelCrop();
                         }}
@@ -170,12 +179,38 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
                       <button
                         className="flex items-center bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
+                        disabled={isImageLoading}
                         onClick={() => {
                           void saveCropImage();
                         }}
                       >
-                        <BiCrop className="w-6 h-6 mr-2 " />
-                        Save Crop
+                        <IfElse
+                          isTrue={isImageLoading}
+                          ifBlock={
+                            <svg
+                              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
+                            </svg>
+                          }
+                          elseBlock={<BiCrop className="w-6 h-6 mr-2 " />}
+                        />
+                        Save crop
                       </button>
                     </div>
                   </div>

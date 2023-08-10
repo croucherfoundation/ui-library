@@ -1,48 +1,91 @@
 import { useCallback } from "react";
+import useEditorConfigStore from "../store/editorConfig.store";
+import useImageConfigStore from "../store/imageConfig.store";
 import useSectionStore from "../store/section.store";
 import { SectionState } from "../types/section.t";
-import useEditorConfigStore from "../store/editorConfig.store";
+
+interface updateEditorProps {
+  en: string;
+  hk: string;
+}
 
 const useEditor = () => {
-  const [sections, updateSection, updateSelectedItem] = useSectionStore(
-    (state) => [state.section, state.updateSection, state.updateSelectedItem]
-  );
-  const [handleIsEditMode] = useEditorConfigStore((state) => [
+  const [
+    sections,
+    updateAllSection,
+    updateEnSection,
+    updateHkSection,
+    updateSelectedItem,
+    updateSelectedSection,
+    updateSelectedContainer,
+  ] = useSectionStore((state) => [
+    state.section,
+    state.updateAllSection,
+    state.updateEnSection,
+    state.updateHkSection,
+    state.updateSelectedItem,
+    state.updateSelectedSection,
+    state.updateSelectedContainer,
+  ]);
+
+  const [lan, handleIsEditMode, updateLanguage] = useEditorConfigStore((state) => [
+    state.lan,
     state.handleIsEditMode,
+    state.updateLan,
+  ]);
+
+  const [updateImageLoading] = useImageConfigStore((state) => [
+    state.updateImageLoading,
   ]);
 
   const clearEditor = useCallback(() => {
     handleIsEditMode(true);
-    updateSection([]);
+    updateEnSection([]);
+    updateHkSection([]);
     updateSelectedItem(null);
-  }, [handleIsEditMode, updateSection, updateSelectedItem]);
+    updateSelectedSection(null);
+    updateSelectedContainer(null);
+  }, [
+    handleIsEditMode,
+    updateEnSection,
+    updateHkSection,
+    updateSelectedContainer,
+    updateSelectedItem,
+    updateSelectedSection,
+  ]);
 
   const updateEditor = useCallback(
-    (data: string) => {
+    ({ en, hk }: updateEditorProps) => {
       try {
-        const updateData = JSON.parse(data) as SectionState[];
-        if (updateData) {
-          updateSection(updateData);
+        const enUpdateData = JSON.parse(en) as SectionState[];
+        const hkUpdateData = JSON.parse(hk) as SectionState[];
+        if (enUpdateData && hkUpdateData) {
+          updateAllSection({ en: enUpdateData, hk: hkUpdateData });
         }
       } catch (e) {
         console.log(e);
       }
     },
-    [updateSection]
+    [updateAllSection]
   );
 
   const getEditorData = useCallback(() => {
     return sections;
   }, [sections]);
 
-  const makeViewMode = useCallback(
-    () => {
-      handleIsEditMode(false);
-    },
-    [handleIsEditMode]
-  );
+  const makeViewMode = useCallback(() => {
+    handleIsEditMode(false);
+  }, [handleIsEditMode]);
 
-  return { clearEditor, updateEditor, getEditorData, makeViewMode };
+  return {
+    lan,
+    clearEditor,
+    updateEditor,
+    getEditorData,
+    makeViewMode,
+    updateImageLoading,
+    updateLanguage,
+  };
 };
 
 export default useEditor;

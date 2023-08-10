@@ -1,21 +1,20 @@
+import { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Aside from "./components/Aside/Aside";
-import useEditorConfigStore from "./store/editorConfig.store";
-import Section from "./components/Section/Section";
 import DeviceFrame from "./components/DeviceFrame/DeviceFrame";
-import { useEffect, useState } from "react";
-
+import Section from "./components/Section/Section";
+import useEditorConfigStore from "./store/editorConfig.store";
 interface Props {
   publishOrSave?: React.ReactNode;
   isEditMode?: boolean;
+  url?: string;
 }
 
-const Editor = ({ publishOrSave, isEditMode = true }: Props) => {
-  const [editorConfig, handleIsEditMode] = useEditorConfigStore((state) => [
-    state.config,
-    state.handleIsEditMode,
-  ]);
+const Editor = ({ publishOrSave, isEditMode = true, url }: Props) => {
+  const [editorConfig, handleIsEditMode, handleTabName] = useEditorConfigStore(
+    (state) => [state.config, state.handleIsEditMode, state.handleTabName]
+  );
   const [hideSection, setHideSection] = useState(false);
 
   useEffect(() => {
@@ -27,6 +26,13 @@ const Editor = ({ publishOrSave, isEditMode = true }: Props) => {
   useEffect(() => {
     handleIsEditMode(isEditMode);
   }, [isEditMode, handleIsEditMode]);
+
+  useEffect(() => {
+    return () => {
+      handleTabName("editor");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -41,11 +47,7 @@ const Editor = ({ publishOrSave, isEditMode = true }: Props) => {
             <Section />
           </div>
 
-          {editorConfig.previewMode && (
-            <DeviceFrame>
-              <Section />
-            </DeviceFrame>
-          )}
+          {editorConfig.previewMode && <DeviceFrame url={url} />}
         </section>
 
         <div id="image-cropper-portal"></div>

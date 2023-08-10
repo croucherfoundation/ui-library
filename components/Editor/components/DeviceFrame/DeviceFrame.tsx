@@ -8,9 +8,10 @@ type DeviceFrameProps = {
   width?: number;
   height?: number;
   children?: React.ReactNode;
+  url?: string;
 };
 
-const DeviceFrame: React.FC<DeviceFrameProps> = ({ children }) => {
+const DeviceFrame: React.FC<DeviceFrameProps> = ({ children, url = ""}) => {
   const iframeRef = createRef<HTMLIFrameElement>();
   const [mountNode, setMountNode] = useState<HTMLElement | undefined>();
   const [editorConfig] = useEditorConfigStore((state) => [state.config]);
@@ -37,16 +38,20 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({ children }) => {
   }, [iframeRef]);
 
   useEffect(() => {
-    if (editorConfig.previewMode) {
+    if (editorConfig.previewMode && !mountNode) {
       createMount();
     }
-  }, [section, editorConfig.previewMode, createMount]);
+
+    // return () => {
+    //   setMountNode(undefined);
+    // }
+  }, [section, editorConfig.previewMode, createMount, mountNode]);
 
   const style = useMemo<React.CSSProperties>(() => {
     switch (editorConfig.previewBreakpoints) {
       case "sm":
         return {
-          maxWidth: "352px",
+          maxWidth: "392px",
         };
       case "md":
         return {
@@ -67,12 +72,13 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({ children }) => {
   return (
     <>
       <iframe
-        className="w-full min-h-screen mx-auto"
+        className="w-full min-h-screen mx-auto border border-dashed pb-20"
         id="device-frame-portal"
         ref={iframeRef}
         style={style}
+        src={url}
       >
-        {mountNode && createPortal(children, mountNode)}
+        {!url && mountNode && createPortal(children, mountNode)}
       </iframe>
 
       <PreviewController />

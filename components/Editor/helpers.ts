@@ -1,4 +1,4 @@
-import { findIndex } from "lodash";
+import findIndex from "lodash/findIndex";
 import find from "lodash/find";
 import { type Container } from "./types/container.t";
 import { type Element } from "./types/element.t";
@@ -43,10 +43,9 @@ export const sectionValueUpdater = ({
   const currentElementIdx = elementId
     ? findIndex(
         currentContainer.children,
-        (container: Element) => container.id === containerId
+        (ele: Element) => ele.id === elementId
       )
-    : null;
-
+    : -1;
   return {
     currentSectionIdx,
     currentContainerIdx,

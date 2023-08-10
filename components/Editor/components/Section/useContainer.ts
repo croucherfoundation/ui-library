@@ -6,11 +6,14 @@ import { type LayoutState } from "../../types/section.t";
 import generatedLayoutInfo from "../../utils/generateLayoutInfo";
 
 const useContainer = () => {
-  const [sections, updateSection] = useSectionStore((state) => [
-    state.section,
-    state.updateSection,
+  const [sections, updateEnSection, updateHkSection] = useSectionStore(
+    (state) => [state.section, state.updateEnSection, state.updateHkSection]
+  );
+  const [lan, isEditMode, previewMode] = useEditorConfigStore((state) => [
+    state.lan,
+    state.isEditMode,
+    state.config.previewMode,
   ]);
-  const [isEditMode] = useEditorConfigStore((state) => [state.isEditMode]);
 
   const getGenerateGridCol = useCallback(
     (layout: LayoutState, index: number) => {
@@ -51,6 +54,26 @@ const useContainer = () => {
               bgColor: "",
             },
           },
+          padding: {
+            sm: {
+              paddingTop: 0,
+              paddingLeft: 0,
+              paddingBottom: 0,
+              paddingRight: 0,
+            },
+            md: {
+              paddingTop: 0,
+              paddingLeft: 0,
+              paddingBottom: 0,
+              paddingRight: 0,
+            },
+            lg: {
+              paddingTop: 0,
+              paddingLeft: 0,
+              paddingBottom: 0,
+              paddingRight: 0,
+            },
+          },
           border: {
             normal: {
               borderType: "",
@@ -75,7 +98,8 @@ const useContainer = () => {
   };
 
   const handleCreateSection = (containerType: string) => {
-    const sectionArray = [...sections];
+    const sectionArray = [...sections["en"]];
+    const sectionHkArray = [...sections["hk"]];
     const sectionObj = {
       id: uuidv4(),
       type: "section",
@@ -86,13 +110,22 @@ const useContainer = () => {
       },
       option: {
         contentWidth: "",
-        minWidth: "",
+        maxWidth: {
+          sm: 358,
+          md: 1218,
+          lg: 1218,
+        },
         minHeight: "100px",
         direction: "",
         justifyContent: "",
         alignContent: "",
         gap: 0,
         screen: {},
+        unit: {
+          sm: "px",
+          md: "px",
+          lg: "px",
+        },
       },
       style: {
         background: {
@@ -167,14 +200,18 @@ const useContainer = () => {
     // @ts-ignore
     sectionObj.children = handleCreateContainer(containerType);
     sectionArray.push(sectionObj);
-    updateSection(sectionArray);
+    sectionHkArray.push(sectionObj);
+    updateEnSection(sectionArray);
+    updateHkSection(sectionHkArray);
   };
 
   return {
     sections,
     handleCreateSection,
     isEditMode,
+    previewMode,
     getGenerateGridCol,
+    lan,
   };
 };
 

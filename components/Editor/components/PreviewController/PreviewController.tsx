@@ -1,13 +1,9 @@
-import {
-  FaMobileButton,
-  FaTabletScreenButton,
-  FaLaptop,
-  FaEyeSlash,
-} from "react-icons/fa6";
+import { FiEyeOff, FiTablet, FiSmartphone, FiMonitor } from "react-icons/fi";
 
 import useEditorConfigStore from "../../store/editorConfig.store";
 import { PreviewBreakpoints } from "../../types/editorConfig.t";
 import { useCallback } from "react";
+import { EditorTooltip } from "../EditorTooltip/EditorTooltip";
 
 const PreviewController = () => {
   const defaultBreakPointStyle =
@@ -41,38 +37,68 @@ const PreviewController = () => {
 
   return (
     <div className="w-full fixed py-3 bottom-0 bg-white bg-opacity-80 items-center justify-center col-span-1 space-x-2 flex mt-2">
-      <button
-        onClick={() => setBreakpoint("sm")}
-        className={`${defaultBreakPointStyle} ${
-          editorConfig.previewBreakpoints === "sm"
-            ? "bg-indigo-600 text-white"
-            : "bg-white"
-        }`}
+      <EditorTooltip
+        renderOpener={(props) => (
+          <div {...props}>
+            <button
+              onClick={() => setBreakpoint("sm")}
+              className={`${defaultBreakPointStyle} ${
+                editorConfig.previewBreakpoints === "sm"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white"
+              }`}
+            >
+              <FiSmartphone />
+            </button>
+          </div>
+        )}
       >
-        <FaMobileButton />
-      </button>
+        <>
+          <div className="text-xs">Mobiles</div>
+        </>
+      </EditorTooltip>
 
-      <button
-        onClick={() => setBreakpoint("md")}
-        className={`${defaultBreakPointStyle} ${
-          editorConfig.previewBreakpoints === "md"
-            ? "bg-indigo-600 text-white"
-            : "bg-white"
-        }`}
+      <EditorTooltip
+        renderOpener={(props) => (
+          <div {...props}>
+            <button
+              onClick={() => setBreakpoint("md")}
+              className={`${defaultBreakPointStyle} ${
+                editorConfig.previewBreakpoints === "md"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white"
+              }`}
+            >
+              <FiTablet />
+            </button>
+          </div>
+        )}
       >
-        <FaTabletScreenButton />
-      </button>
+        <>
+          <div className="text-xs">Tablets</div>
+        </>
+      </EditorTooltip>
 
-      <button
-        onClick={() => setBreakpoint("lg")}
-        className={`${defaultBreakPointStyle} ${
-          editorConfig.previewBreakpoints === "lg"
-            ? "bg-indigo-600 text-white"
-            : "bg-white"
-        }`}
+      <EditorTooltip
+        renderOpener={(props) => (
+          <div {...props}>
+            <button
+              onClick={() => setBreakpoint("lg")}
+              className={`${defaultBreakPointStyle} ${
+                editorConfig.previewBreakpoints === "lg"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white"
+              }`}
+            >
+              <FiMonitor />
+            </button>
+          </div>
+        )}
       >
-        <FaLaptop />
-      </button>
+        <>
+          <div className="text-xs">Desktops</div>
+        </>
+      </EditorTooltip>
 
       {/* <button
         onClick={() => setBreakpoint("auto")}
@@ -85,12 +111,22 @@ const PreviewController = () => {
         <FaCircleNotch />
       </button> */}
 
-      <button
-        onClick={offPreviewMode}
-        className={`${defaultBreakPointStyle} bg-white`}
+      <EditorTooltip
+        renderOpener={(props) => (
+          <div {...props}>
+            <button
+              onClick={offPreviewMode}
+              className={`${defaultBreakPointStyle} bg-white`}
+            >
+              <FiEyeOff />
+            </button>
+          </div>
+        )}
       >
-        <FaEyeSlash />
-      </button>
+        <>
+          <div className="text-xs">Exit preview mode</div>
+        </>
+      </EditorTooltip>
     </div>
   );
 };

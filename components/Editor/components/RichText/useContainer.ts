@@ -4,11 +4,10 @@ import { ListItemNode, ListNode } from "@lexical/list";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import cloneDeep from "lodash/cloneDeep";
 import fill from "lodash/fill";
-import { sectionValueUpdater } from "../../helpers";
-import useSectionStore from "../../store/section.store";
-import useEditorConfigStore from "../../store/editorConfig.store";
 import { useMemo } from "react";
-
+import { sectionValueUpdater } from "../../helpers";
+import useEditorConfigStore from "../../store/editorConfig.store";
+import useSectionStore from "../../store/section.store";
 interface Props {
   containerId: string;
   sectionId: string;
@@ -25,49 +24,89 @@ const EDITOR_NODES = [
   QuoteNode,
 ];
 
+const DEFAULT_EDITOR_TEXT = `{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}`;
+
 const useContainer = ({
   containerId,
   sectionId,
   elementId,
   bodyKey,
 }: Props) => {
-  const [sections, updateSection] = useSectionStore((state) => [
-    state.section,
-    state.updateSection,
-  ]);
-  const [previewMode, isEditMode] = useEditorConfigStore((state) => [
+  const [sections, updateEnSection, updateHkSection] = useSectionStore(
+    (state) => [state.section, state.updateEnSection, state.updateHkSection]
+  );
+  const [lan, previewMode, isEditMode] = useEditorConfigStore((state) => [
+    state.lan,
     state.config.previewMode,
     state.isEditMode,
   ]);
 
   const handleOnChange = (editorState: unknown) => {
-    const clonedSections = cloneDeep(sections);
-    const {
-      currentSectionIdx,
-      currentContainerIdx,
-      currentElementIdx,
-      currentSection,
-      currentContainer,
-      currentElement,
-    } = sectionValueUpdater({
-      sections: clonedSections,
-      sectionId: sectionId,
-      containerId: containerId,
-      elementId: elementId,
-    });
+    if (lan === "en") {
+      const clonedSections = cloneDeep(sections["en"]);
+      const {
+        currentSectionIdx,
+        currentContainerIdx,
+        currentElementIdx,
+        currentSection,
+        currentContainer,
+        currentElement,
+      } = sectionValueUpdater({
+        sections: clonedSections,
+        sectionId: sectionId,
+        containerId: containerId,
+        elementId: elementId,
+      });
 
-    if (currentElement !== null)
-      currentElement.content.body[bodyKey] = JSON.stringify(editorState);
+      if (currentElement !== null)
+        currentElement.content.body[bodyKey] = JSON.stringify(editorState);
 
-    fill(currentContainer.children, currentElement, currentElementIdx ?? 0, 1);
-    fill(currentSection.children, currentContainer, currentContainerIdx, 1);
-    fill(clonedSections, currentSection, currentSectionIdx, 1);
+      fill(
+        currentContainer.children,
+        currentElement,
+        currentElementIdx ?? 0,
+        1
+      );
+      fill(currentSection.children, currentContainer, currentContainerIdx, 1);
+      fill(clonedSections, currentSection, currentSectionIdx, 1);
 
-    updateSection(clonedSections);
+      updateEnSection(clonedSections);
+      return;
+    } else if (lan === "hk") {
+      const clonedSections = cloneDeep(sections["hk"]);
+      const {
+        currentSectionIdx,
+        currentContainerIdx,
+        currentElementIdx,
+        currentSection,
+        currentContainer,
+        currentElement,
+      } = sectionValueUpdater({
+        sections: clonedSections,
+        sectionId: sectionId,
+        containerId: containerId,
+        elementId: elementId,
+      });
+
+      if (currentElement !== null)
+        currentElement.content.body[bodyKey] = JSON.stringify(editorState);
+
+      fill(
+        currentContainer.children,
+        currentElement,
+        currentElementIdx ?? 0,
+        1
+      );
+      fill(currentSection.children, currentContainer, currentContainerIdx, 1);
+      fill(clonedSections, currentSection, currentSectionIdx, 1);
+
+      updateHkSection(clonedSections);
+      return;
+    }
   };
 
   const initialConfig = useMemo(() => {
-    const clonedSections = cloneDeep(sections);
+    const clonedSections = cloneDeep(sections[lan]);
     const { currentElement } = sectionValueUpdater({
       sections: clonedSections,
       sectionId: sectionId,
@@ -77,11 +116,10 @@ const useContainer = ({
 
     const initialEditorState = {
       namespace: containerId,
-      nodes: EDITOR_NODES,
-      editorState:
-        '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}',
+      nodes: [...EDITOR_NODES],
+      editorState: DEFAULT_EDITOR_TEXT,
       theme: {
-        root: "focus:outline-none focus-visible:border-black p-3",
+        root: "focus:outline-none focus-visible:border-black",
         link: "cursor-pointer",
         text: {
           bold: "font-semibold",
@@ -91,20 +129,14 @@ const useContainer = ({
           underlineStrikethrough: "underlined-line-through",
         },
         list: {
-          listitem: "PlaygroundEditorTheme__listItem",
-          listitemChecked: "PlaygroundEditorTheme__listItemChecked",
-          listitemUnchecked: "PlaygroundEditorTheme__listItemUnchecked",
+          listitem: "listItem",
+          listitemChecked: "listItemChecked",
+          listitemUnchecked: "listItemUnchecked",
           nested: {
-            listitem: "PlaygroundEditorTheme__nestedListItem",
+            listitem: "nestedListItem",
           },
-          olDepth: [
-            "PlaygroundEditorTheme__ol1",
-            "PlaygroundEditorTheme__ol2",
-            "PlaygroundEditorTheme__ol3",
-            "PlaygroundEditorTheme__ol4",
-            "PlaygroundEditorTheme__ol5",
-          ],
-          ul: "PlaygroundEditorTheme__ul",
+          olDepth: ["ol1", "ol2", "ol3", "ol4", "ol5"],
+          ul: "ul",
         },
         heading: {
           h1: "h1",
@@ -114,6 +146,7 @@ const useContainer = ({
           h5: "h5",
           h6: "h6",
         },
+        paragraph: "paragraph",
       },
       onError: (error: unknown) => {
         console.log(error);
@@ -121,7 +154,6 @@ const useContainer = ({
     };
 
     if (currentElement?.content.body[bodyKey]) {
-      // console.log(currentElement?.content.body[bodyKey]);
       const value = currentElement?.content.body[bodyKey];
       if (value) {
         initialEditorState.editorState = value;
@@ -129,7 +161,7 @@ const useContainer = ({
     }
 
     return initialEditorState;
-  }, [sectionId, bodyKey, containerId, elementId, sections]);
+  }, [sectionId, bodyKey, containerId, elementId, sections, lan]);
 
   return {
     initialConfig,

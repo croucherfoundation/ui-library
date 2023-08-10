@@ -25,7 +25,7 @@ const Element = ({ icon, title, data }: Props) => {
     <div
       ref={dragRef}
       style={{ opacity }}
-      className="w-full rounded bg-slate-100 text-center py-5 cursor-move"
+      className="w-full rounded bg-gray-50 text-center py-5 cursor-move hover:bg-white hover:shadow-md"
     >
       {icon}
       <p>{title}</p>

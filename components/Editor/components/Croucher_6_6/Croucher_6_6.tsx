@@ -3,6 +3,8 @@ import { type Element } from "../../types/element.t";
 import CroucherHeading from "../CroucherHeading/CroucherHeading";
 import Image from "../Image/Image";
 import RichText from "./../RichText/RichText";
+import { LeftContainer } from "./LeftContainer.style";
+import ContainerWrapper from "./Croucher_6_6.style";
 
 interface Props {
   element: Element;
@@ -20,13 +22,14 @@ const Croucher_6_6 = ({
   const [isReadMore, setIsReadMore] = useState<boolean>(false);
   return (
     <>
-      <div className="flex flex-col-reverse md:flex-row">
+      <ContainerWrapper className="flex flex-col-reverse md:flex-row">
         {/* ----- left ----- */}
-        <div className="md:w-6/12 w-full p-3">
+        <LeftContainer className="md:w-6/12 w-full">
           <CroucherHeading
             containerId={containerId}
             sectionId={sectionId}
             elementId={element.id}
+            element={element}
           />
           <RichText
             containerId={containerId}
@@ -34,7 +37,7 @@ const Croucher_6_6 = ({
             elementId={element.id}
             bodyKey="body1"
           />
-          <div className={isReadMore ? "" : "hidden md:block"}>
+          <div className={`${isReadMore ? "" : "hidden md:block"} mt-[20px] `}>
             <RichText
               containerId={containerId}
               sectionId={sectionId}
@@ -43,26 +46,28 @@ const Croucher_6_6 = ({
             />
           </div>
 
-          <div className="justify-end flex sm:hidden">
+          <div className="justify-end flex sm:hidden mt-[14px]">
             <button
               onClick={() => setIsReadMore((prev) => !prev)}
-              className="border px-4 rounded-full py-1 border-gray-700"
+              className="readmore-btn"
             >
               Read {isReadMore ? "less" : "more"}
             </button>
           </div>
-        </div>
+        </LeftContainer>
 
         {/* ----- right ----- */}
         <div className="md:w-6/12 w-full">
-          <Image
-            element={element}
-            containerId={containerId}
-            sectionId={sectionId}
-            elementId={elementId}
-          />
+          <div className="max-h-[389px] overflow-hidden">
+            <Image
+              element={element}
+              containerId={containerId}
+              sectionId={sectionId}
+              elementId={elementId}
+            />
+          </div>
         </div>
-      </div>
+      </ContainerWrapper>
     </>
   );
 };

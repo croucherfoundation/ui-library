@@ -1,4 +1,5 @@
 import { Element } from "./element.t";
+import { Padding } from "./section.t";
 
 export interface Container {
   id: string;
@@ -6,7 +7,7 @@ export interface Container {
   option: Option;
   style: Style;
   advancedStyle: unknown;
-  children: Element[];
+  children: Element[] | Element<unknown>[];
 }
 
 export interface Option {
@@ -22,6 +23,7 @@ export interface Option {
 export interface Style {
   background: Background;
   border: Border;
+  padding: Padding;
 }
 
 export interface Background {

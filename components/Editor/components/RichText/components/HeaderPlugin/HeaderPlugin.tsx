@@ -73,6 +73,7 @@ const HeaderPlugin = () => {
       }
     });
   };
+
   const handleFormatParagraph = () => {
     editor.update(() => {
       const selection = $getSelection();

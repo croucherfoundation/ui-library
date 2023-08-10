@@ -1,4 +1,4 @@
-const useCropper = () => {
+const useCropper = ({ fileType }: { fileType: string }) => {
   const createImage = (url: string) =>
     new Promise((resolve, reject) => {
       const image = new Image();
@@ -58,7 +58,7 @@ const useCropper = () => {
     }
 
     // As Base64 string
-    return canvas.toDataURL("image/jpeg");
+    return canvas.toDataURL(fileType);
 
     // As a blob
     // return new Promise((resolve) => {

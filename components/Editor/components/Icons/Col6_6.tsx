@@ -1,14 +1,17 @@
-const Col6_6 = () => {
+import { ColProps } from "../../types/croucher.t";
+
+const Col6_6 = (props: ColProps) => {
   return (
     <svg
+      className={props?.className || ""}
       width="150"
-      height="30"
-      viewBox="0 0 150 30"
+      height="39"
+      viewBox="0 0 150 39"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="68" height="30" rx="5" fill="#A8B3B7" />
-      <rect x="75" width="75" height="30" rx="5" fill="#A8B3B7" />
+      <rect y="0.683655" width="70" height="38.2653" rx="2" />
+      <rect x="80" y="0.683655" width="70" height="38.2653" rx="2" />
     </svg>
   );
 };

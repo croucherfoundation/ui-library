@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Editor from "../RichText/RichText";
+import ContainerWrapper from "./ContainerWrapper.style";
 
 interface Props {
   containerId: string;
@@ -13,35 +14,37 @@ const Croucher_3_3_3_Text = ({ containerId, sectionId, elementId }: Props) => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
-        <div>
+        <ContainerWrapper>
           <Editor
             sectionId={sectionId}
             containerId={containerId}
             elementId={elementId}
             bodyKey="body1"
           />
-        </div>
-        <div className={`${isReadMore ? "" : "hidden md:block"}`}>
+        </ContainerWrapper>
+        <ContainerWrapper
+          className={`${isReadMore ? "" : "hidden md:block"} my-[20px] md:my-0`}
+        >
           <Editor
             sectionId={sectionId}
             containerId={containerId}
             elementId={elementId}
             bodyKey="body2"
           />
-        </div>
-        <div className={`${isReadMore ? "" : "hidden md:block"}`}>
+        </ContainerWrapper>
+        <ContainerWrapper className={`${isReadMore ? "" : "hidden md:block"}`}>
           <Editor
             sectionId={sectionId}
             containerId={containerId}
             elementId={elementId}
             bodyKey="body3"
           />
-        </div>
+        </ContainerWrapper>
       </div>
-      <div className="flex justify-end md:hidden">
+      <div className="flex justify-end md:hidden mt-[8px]">
         <button
           onClick={() => setIsReadMore((prev) => !prev)}
-          className="border px-3 py-1 rounded-full border-black"
+          className="readmore-btn"
         >
           Read {isReadMore ? "less" : "more"}
         </button>
