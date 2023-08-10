@@ -216,7 +216,6 @@ const useContainer = () => {
         (section) => section.id === selectedSection?.id
       );
       if (clonedSelectedSection) {
-
         clonedSelectedSection.style.background.normal.bgColor = bgColor;
 
         clonedSections.splice(currentSectionIdx, 1, clonedSelectedSection);

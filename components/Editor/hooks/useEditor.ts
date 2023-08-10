@@ -28,11 +28,9 @@ const useEditor = () => {
     state.updateSelectedContainer,
   ]);
 
-  const [lan, handleIsEditMode, updateLanguage] = useEditorConfigStore((state) => [
-    state.lan,
-    state.handleIsEditMode,
-    state.updateLan,
-  ]);
+  const [lan, handleIsEditMode, updateLanguage] = useEditorConfigStore(
+    (state) => [state.lan, state.handleIsEditMode, state.updateLan]
+  );
 
   const [updateImageLoading] = useImageConfigStore((state) => [
     state.updateImageLoading,
@@ -73,6 +71,9 @@ const useEditor = () => {
     return sections;
   }, [sections]);
 
+  const makeViewMode = useCallback(() => {
+    handleIsEditMode(false);
+  }, [handleIsEditMode]);
   const makeViewMode = useCallback(() => {
     handleIsEditMode(false);
   }, [handleIsEditMode]);

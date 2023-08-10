@@ -3,13 +3,14 @@ import { selectedCroucherElementType } from "./croucher.t";
 import { type Element, imageObjectFitType } from "./element.t";
 
 interface SectionStateAll {
-  en: SectionState[],
-  hk: SectionState[]
+  en: SectionState[];
+  hk: SectionState[];
 }
 export interface Section {
   section: SectionStateAll;
   selectedItem: SelectedEditorItem | null;
   selectedSection: SectionState | null;
+  selectedContainer: Container | null;
   selectedContainer: Container | null;
   breakpoint: Breakpoint;
   selectedElement: Element | null;
@@ -99,26 +100,6 @@ export interface Padding {
     paddingLeft: number;
     paddingBottom: number;
     paddingRight: number;
-  };
-}
-export interface Margin {
-  sm: {
-    marginTop: number;
-    marginLeft: number;
-    marginBottom: number;
-    marginRight: number;
-  };
-  md: {
-    marginTop: number;
-    marginLeft: number;
-    marginBottom: number;
-    marginRight: number;
-  };
-  lg: {
-    marginTop: number;
-    marginLeft: number;
-    marginBottom: number;
-    marginRight: number;
   };
 }
 

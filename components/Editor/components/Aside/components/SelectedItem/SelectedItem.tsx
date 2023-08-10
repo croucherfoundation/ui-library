@@ -26,8 +26,8 @@ function SelectedItem() {
       <If isTrue={selectedItem?.elementType === IMAGE_BLOCK}>
         <SelectedElementItem />
       </If>
-       
-       <SelectedCroucherItem />
+
+      <SelectedCroucherItem />
     </>
   );
 }

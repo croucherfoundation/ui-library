@@ -62,12 +62,12 @@ const Croucher_3_3_6 = ({
           </LeftContainer>
           {/* ----- image ----- */}
           <div className="md:w-6/12 w-full">
-              <Image
-                element={element}
-                containerId={containerId}
-                sectionId={sectionId}
-                elementId={elementId}
-              />
+            <Image
+              element={element}
+              containerId={containerId}
+              sectionId={sectionId}
+              elementId={elementId}
+            />
           </div>
         </div>
       </div>
