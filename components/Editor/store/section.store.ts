@@ -45,7 +45,6 @@ const useSectionStore = create<Section>()(
       selectedItem: null,
       selectedSection: null,
       selectedContainer: null,
-      selectedContainer: null,
       breakpoint: "lg",
       selectedElement: null,
       updateAllSection: (payload) => set(() => ({ section: payload })),
@@ -70,10 +69,6 @@ const useSectionStore = create<Section>()(
       updateSelectedSection: (payload: SectionState | null) =>
         set({
           selectedSection: payload,
-        }),
-      updateSelectedContainer: (payload: Container | null) =>
-        set({
-          selectedContainer: payload,
         }),
       updateSelectedContainer: (payload: Container | null) =>
         set({

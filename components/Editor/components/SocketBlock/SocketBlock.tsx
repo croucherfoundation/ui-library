@@ -4,7 +4,6 @@ import { ElementWithDynamicType, type Element } from "../../types/element.t";
 import {
   CROUCHER_3_3_3_TEXT,
   CROUCHER_3_3_6,
-  CROUCHER_3_3_6,
   CROUCHER_6_6,
   CROUCHER_HEADING_TEXT,
   CROUCHER_IMG_CARD_CAROUSEL,

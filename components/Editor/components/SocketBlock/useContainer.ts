@@ -181,9 +181,7 @@ const useContainer = ({ containerId, sectionId }: Props) => {
     previewMode,
     removeChildElements,
     onSelectedContainer,
-    onSelectedContainer,
     isEditMode,
-    isSelectedContainer,
     isSelectedContainer,
   };
 };

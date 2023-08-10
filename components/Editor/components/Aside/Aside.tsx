@@ -20,13 +20,10 @@ import {
   RICH_TEXT,
 } from "../../utils/dragComponentTypes";
 import Croucher_3_3_6_Icon from "../Icons/Croucher_3_3_6_Icon";
-import Croucher_3_3_6_Icon from "../Icons/Croucher_3_3_6_Icon";
 import If from "../If";
-import CroucherFourFourFourTextIcon from "./components/CroucherIcons/CroucherFourFourFourTextIcon";
 import CroucherFourFourFourTextIcon from "./components/CroucherIcons/CroucherFourFourFourTextIcon";
 import CroucherSixSixIcon from "./components/CroucherIcons/CroucherSixSixIcon";
 import Element from "./components/Element";
-import useContainer from "./useContainer";
 import SelectedItem from "./components/SelectedItem/SelectedItem";
 import useContainer from "./useContainer";
 import IfElse from "../IfElse";

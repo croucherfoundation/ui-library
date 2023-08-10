@@ -156,10 +156,10 @@ const useContainer = () => {
         },
         padding: {
           sm: {
-            paddingTop: 38,
-            paddingLeft: 16,
-            paddingBottom: 38,
-            paddingRight: 16,
+            paddingTop: 0,
+            paddingLeft: 0,
+            paddingBottom: 0,
+            paddingRight: 0,
           },
           md: {
             paddingTop: 0,
@@ -168,10 +168,10 @@ const useContainer = () => {
             paddingRight: 0,
           },
           lg: {
-            paddingTop: 60,
-            paddingLeft: 152,
-            paddingBottom: 60,
-            paddingRight: 152,
+            paddingTop: 0,
+            paddingLeft: 0,
+            paddingBottom: 0,
+            paddingRight: 0,
           },
         },
         margin: {
