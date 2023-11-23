@@ -1,0 +1,7 @@
+%reset-button {
+  border: none;
+  background-color: unset;
+  &:focus {
+    outline: none;
+  }
+}

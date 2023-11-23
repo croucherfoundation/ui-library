@@ -1,0 +1,206 @@
+.nav_wrapper {
+  padding-top: 25px;
+  .nav_container {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .menu {
+      @extend %reset-button;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      right: 13px;
+      top: 68px;
+    }
+
+    .logo_container {
+      width: 57px;
+      height: 110px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .links_container {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background: white;
+      padding: 0px 24px;
+      ul {
+        gap: 30px;
+        margin-top: 76px;
+        li {
+          list-style: none;
+          padding: 12px 24px;
+          border-bottom: 1px solid $black;
+          &:first-child {
+            border-top: 1px solid $black;
+          }
+          a {
+            text-decoration: none;
+            color: $black;
+            letter-spacing: 0.01em;
+            font-weight: 700;
+            font-size: 22px;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+        li.search_button,
+        li.language_translate {
+          display: none;
+        }
+        .search_button {
+          button {
+            @extend %reset-button;
+          }
+        }
+      }
+      .close_icon {
+        @extend %reset-button;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        display: none;
+      }
+      .close_icon--open {
+        display: block;
+      }
+      .menu--open {
+        display: block;
+      }
+    }
+    .links_container--open {
+      display: block;
+    }
+  }
+}
+
+@include lg {
+  .nav_wrapper {
+    padding-top: 25px;
+    .nav_container {
+      max-width: $container-max-width-lg;
+      padding: unset;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .menu {
+        display: none;
+      }
+
+      .logo_container {
+        width: 57px;
+        height: 110px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .links_container {
+        display: block;
+        position: static;
+        width: unset;
+        height: unset;
+        padding: unset;
+        ul {
+          display: flex;
+          gap: 30px;
+          margin-top: unset;
+          li {
+            list-style: none;
+            border: none;
+            padding: unset;
+            &:first-child {
+              border-top: none;
+            }
+            a {
+              text-decoration: none;
+              color: $croucher-red;
+              letter-spacing: 0.01em;
+              font-weight: 700;
+              font-size: 16px;
+              &:hover {
+                color: $black;
+              }
+              &:focus {
+                outline: none;
+              }
+            }
+            a.active {
+              color: $black;
+            }
+          }
+          li.search_button,
+          li.language_translate {
+            display: block;
+          }
+          .search_button {
+            position: relative;
+            .search_form_tooltip {
+              position: absolute;
+              display: none;
+              width: 160px;
+              height: 42px;
+              background: $white;
+              right: 0%;
+              top: 50%;
+              transform: translate(0px, -50%);
+              .search_form {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                .search_input {
+                  width: 100%;
+                  height: 100%;
+                  border: none;
+                  border-bottom: 1px dotted $black;
+                  &:focus {
+                    outline: none;
+                  }
+                }
+                .submit_btn {
+                  // @extend %reset-button;
+                  width: 42px;
+                  height: 42px;
+                  display: flex;
+                  align-items: center;
+                  margin-top: -5px;
+                  svg {
+                    fill: grey;
+                  }
+                }
+              }
+            }
+            .search_form_tooltip--open {
+              display: block;
+            }
+            button {
+              display: flex;
+              padding-top: 5px;
+              svg {
+                fill: $black;
+              }
+            }
+          }
+        }
+        .close_icon,
+        .menu {
+          display: none;
+        }
+      }
+    }
+  }
+}
