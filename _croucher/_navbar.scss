@@ -186,6 +186,7 @@
             }
             .search_form_tooltip--open {
               display: block;
+              z-index: 100;
             }
             button {
               display: flex;
