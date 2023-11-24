@@ -81,6 +81,7 @@
     }
     .links_container--open {
       display: block;
+      z-index: 999;
     }
   }
 }
