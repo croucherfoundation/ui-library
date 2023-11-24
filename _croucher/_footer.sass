@@ -1,0 +1,122 @@
+.croucher-footer
+  background-color: $croucher-red
+  min-height: 200px
+  .container
+    padding-top: 37px
+    padding-bottom: 34px
+    padding-left: 20px
+    padding-right: 20px
+    margin-left: auto
+    margin-right: auto
+    @include md
+      max-width: 768px
+      padding-top: 60px
+      padding-left: 0
+      padding-right: 0
+    @include lg
+      max-width: 1218px
+    .grid-container
+      display: grid
+      gap: 30px
+      grid-template-columns: repeat(1,minmax(0,1fr))
+      @include md
+        grid-template-columns: repeat(4,minmax(0,1fr))
+      .link-container
+        display: flex
+        flex-direction: column
+        gap: 10px
+        .link
+          font-family: "MarrSans"
+          font-variation-settings: normal
+          font-feature-settings: normal
+          -webkit-font-smoothing: antialiased
+          font-weight: normal
+          text-decoration: none
+          font-size: 16px
+          color: white
+          letter-spacing: 0.01em
+          line-height 24px
+        .link-header
+          margin-bottom: 25px
+          font-weight: 700
+        .no-margin
+          margin: 0
+    .horizontal-line
+      height: 1px
+      width: 100%
+      background-color: white
+      margin-top: 53px
+      margin-bottom: 34px
+    .footer-link-container
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      .sitemap-and-social
+        display: flex
+        gap: 30px
+        align-items: center
+        width: fit-content
+        flex-direction: row
+        &.for-small
+          flex-direction: column
+          width: 100%
+          gap: 20px
+          margin-top: 20px
+          @include md
+            margin-top: 0
+          & .site-maps
+            gap: 10px
+            width: 100%
+            justify-content: space-between
+          & .socials
+            width: 100%
+            justify-content: start
+        .site-maps
+          align-items: center
+          gap: 30px
+          display: flex
+          padding-top: 9px
+          a
+            color: white
+            font-family: "MarrSans"
+            font-variation-settings: normal
+            font-feature-settings: normal
+            -webkit-font-smoothing: antialiased
+            text-decoration: none
+            font-size: 16px
+        .socials
+          align-items: center
+          gap: 30px
+          display: flex
+          padding-top: 9px
+          a
+            color: white
+            font-family: "MarrSans"
+            font-variation-settings: normal
+            font-feature-settings: normal
+            -webkit-font-smoothing: antialiased
+            text-decoration: none
+            font-size: 14px
+          .fill-red
+            fill: rgb(238, 58, 67)
+      .back-to-top
+        display: flex
+        align-items: center
+        button
+          font-size: 16px
+          border: none
+          background: transparent
+          color: white
+          cursor: pointer
+
+  .croucher-footer-logo
+    width: 145px
+    fill: white
+.footer-hide
+  display: none !important
+  @include md
+    display: flex !important
+.footer-hide-reverse
+  display: flex !important
+  @include md
+    display: none !important
