@@ -7,10 +7,13 @@
   margin: auto;
   padding: 25px;
   border-radius: $rounded-5;
+  flex-direction: column;
+  gap: 20px;
   .left-text {
     font-weight: 600;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 24px;
+    max-width: 100%;
   }
   &:hover .left-text {
     color: white;
@@ -28,6 +31,18 @@
   }
   &:hover {
     background-color: $croucher-red;
+  }
+}
+
+@include lg {
+  .subscribe-box {
+    flex-direction: row;
+    .left-text {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 28px;
+      max-width: 430px;
+    }
   }
 }
 
