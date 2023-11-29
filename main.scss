@@ -12,9 +12,20 @@
 @import "./_croucher/_subscriber_box";
 @import "./_croucher/buttons/buttons";
 @import "./_croucher/containers/containers";
+@import "./_croucher/containers/containers";
+@import "./_croucher/cards/cards";
 
 * {
   box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
 body {
