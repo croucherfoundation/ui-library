@@ -3,6 +3,7 @@
   margin-left: auto;
   margin-right: auto;
   padding: 0px 16px;
+  min-height: 60vh;
   @include sm {
     padding: 0px 40px;
   }
