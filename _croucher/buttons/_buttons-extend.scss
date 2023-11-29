@@ -1,0 +1,20 @@
+%base_btn{
+  cursor: pointer;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-family: "MarrSans" !important;
+  height: 40px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  border-radius: 30px;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3px;
+  &:hover{
+    border: 1px solid $croucher-red;
+    color: white;
+  }
+}
