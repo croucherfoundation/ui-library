@@ -1,25 +1,25 @@
 @use "./buttons-extend";
 
-.croucher-standard-btn{
+.croucher-standard-btn {
   @extend %base_btn;
   color: $black;
-  &:hover{
+  &:hover {
     background: $croucher-red;
   }
 }
 
-.modal-btn{
-  background: $csw-grey-2
+.modal-btn {
+  background: $light-gray;
 }
-.view-all-btn{
+.view-all-btn {
   background: white;
-  &:hover{
+  &:hover {
     background: $croucher-red;
   }
-} 
+}
 
-@media only screen and (max-width: 600px){
-  .croucher-standard-btn.view-all-btn{
+@media only screen and (max-width: 600px) {
+  .croucher-standard-btn.view-all-btn {
     height: auto;
   }
 }

@@ -23,3 +23,34 @@
   font-style: italic;
   src: url("../../fonts/MarrSans-BoldItalic.otf") format("opentype");
 }
+
+$typo: (
+  title: (
+    fontsize: 46px,
+    fontweight: 600,
+    lineheight: 54px,
+  ),
+  standfirst: (
+    fontsize: 26px,
+    fontweight: 400,
+    lineheight: 34,
+  ),
+  subtitle: (
+    fontsize: 36,
+    fontweight: 600,
+    lineheight: 40,
+  ),
+  body: (
+    fontsize: 36,
+    fontweight: 600,
+    lineheight: 40,
+  ),
+);
+
+@each $name in $typo {
+  .text-#{$name} {
+    font-size: map-get($name, fontsize);
+    line-height: map-get($name, lineheight);
+    font-weight: map-get($name, fontweight);
+  }
+}
