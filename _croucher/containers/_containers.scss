@@ -3,3 +3,7 @@
 .croucher_container {
   @extend %base-container;
 }
+
+.card_container {
+  @extend %base-card-container;
+}
