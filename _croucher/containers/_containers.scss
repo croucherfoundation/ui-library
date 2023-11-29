@@ -1,0 +1,5 @@
+@use "./containers-extend";
+
+.croucher_container {
+  @extend %base-container!optional;
+}

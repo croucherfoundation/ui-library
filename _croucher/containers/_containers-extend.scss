@@ -1,0 +1,9 @@
+%base-container {
+  max-width: 1218px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 16px;
+  @include sm {
+    padding: 0px 40px;
+  }
+}

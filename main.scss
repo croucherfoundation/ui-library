@@ -11,3 +11,12 @@
 @import "./_croucher/_footer";
 @import "./_croucher/_subscriber_box";
 @import "./_croucher/buttons/buttons";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "MarrSans";
+  margin: 0;
+}
