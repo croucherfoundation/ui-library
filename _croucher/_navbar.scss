@@ -1,7 +1,6 @@
 .nav_wrapper {
   padding-top: 25px;
   .nav_container {
-    padding: 0 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -88,8 +87,6 @@
   .nav_wrapper {
     padding-top: 25px;
     .nav_container {
-      max-width: $container-max-width-lg;
-      padding: unset;
       margin: auto;
       display: flex;
       align-items: center;
