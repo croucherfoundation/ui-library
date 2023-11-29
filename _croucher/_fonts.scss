@@ -54,3 +54,41 @@ $typo: (
     font-weight: map-get($style, fontweight);
   }
 }
+
+.text-standfirst{
+  max-width: 794px;
+}
+
+.text-subtitle {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: $croucher-red;
+  }
+
+  @media (min-width: 0px) {
+    padding-left: 18px;
+
+    &::before {
+      width: 7px;
+      height: calc(100% - 10px);
+      left: 0;
+      top: 3px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding-left: 4px;
+    margin-left: 23px;
+
+    &::before {
+      left: -23px;
+      height: calc(100% - 13px);
+      width: 11px;
+      top: 4px;
+    }
+  }
+}
+
