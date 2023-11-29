@@ -1,7 +1,7 @@
 @use "./buttons-extend";
 
 .croucher-standard-btn {
-  @extend %base_btn;
+  @extend %base_btn!optional;
   color: $black;
   &:hover {
     background: $croucher-red;

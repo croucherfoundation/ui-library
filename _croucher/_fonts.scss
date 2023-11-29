@@ -47,10 +47,10 @@ $typo: (
   ),
 );
 
-@each $name in $typo {
+@each $name, $style in $typo {
   .text-#{$name} {
-    font-size: map-get($name, fontsize);
-    line-height: map-get($name, lineheight);
-    font-weight: map-get($name, fontweight);
+    font-size: map-get($style, fontsize);
+    line-height: map-get($style, lineheight);
+    font-weight: map-get($style, fontweight);
   }
 }
