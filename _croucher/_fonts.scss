@@ -52,10 +52,28 @@ $typo: (
     font-size: map-get($style, fontsize);
     line-height: map-get($style, lineheight);
     font-weight: map-get($style, fontweight);
+
+    // Mobile styles
+    @media (max-width: 767px) {
+      @if $name == title {
+        font-size: 32px;
+        line-height: 36px;
+      } @else if $name == standfirst {
+        font-size: 26px;
+        line-height: 34px;
+      } @else if $name == subtitle {
+        font-size: 24px;
+        line-height: 28px;
+      } @else {
+        // Use the same values for body in mobile view
+        font-size: map-get($style, fontsize);
+        line-height: map-get($style, lineheight);
+      }
+    }
   }
 }
 
-.text-standfirst{
+.text-standfirst {
   max-width: 794px;
 }
 
@@ -91,4 +109,3 @@ $typo: (
     }
   }
 }
-

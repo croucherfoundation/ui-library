@@ -1,33 +1,47 @@
-@mixin padding-generator($direction, $value) {
+@mixin padding-generator($direction, $values) {
   @if $direction == "t" {
-    padding-top: $value;
+    padding-top: map-get($values, padding-top);
   } @else if $direction == "b" {
-    padding-bottom: $value;
+    padding-bottom: map-get($values, padding-bottom);
   }
 }
 
-@mixin margin-generator($direction, $value) {
+@mixin margin-generator($direction, $values) {
   @if $direction == "t" {
-    margin-top: $value !important;
+    margin-top: map-get($values, margin-top) !important;
   } @else if $direction == "b" {
-    margin-bottom: $value !important;
+    margin-bottom: map-get($values, margin-bottom) !important;
   }
 }
 
 @mixin element-type-padding-generator($list, $type) {
-  @each $name, $style in $list {
+  @each $name, $styles in $list {
+    $desktop_values: map-get($styles, desktop);
+    $mobile_values: map-get($styles, mobile);
+
     .p#{$name}_#{$type} {
-      @include padding-generator($name, map-get($style, padding-top));
-      @include padding-generator($name, map-get($style, padding-bottom));
+      @include padding-generator($name, $desktop_values);
+
+      // Mobile styles
+      @media (max-width: $screen-sm-max) {
+        @include padding-generator($name, $mobile_values);
+      }
     }
   }
 }
 
 @mixin element-type-margin-generator($list, $type) {
-  @each $name, $style in $list {
+  @each $name, $styles in $list {
+    $desktop_values: map-get($styles, desktop);
+    $mobile_values: map-get($styles, mobile);
+
     .m#{$name}_#{$type} {
-      @include margin-generator($name, map-get($style, margin-top));
-      @include margin-generator($name, map-get($style, margin-bottom));
+      @include margin-generator($name, $desktop_values);
+
+      // Mobile styles
+      @media (max-width: $screen-sm-max) {
+        @include margin-generator($name, $mobile_values);
+      }
     }
   }
 }

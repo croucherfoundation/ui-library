@@ -1,37 +1,48 @@
+$screen-sm-max: 767px;
+
 $title-spacers: (
   t: (
-    padding-top: 53px,
+    desktop: (padding-top: 53px),
+    mobile: (padding-top: 56px),
   ),
   b: (
-    padding-bottom: 41px,
+    desktop: (padding-bottom: 41px),
+    mobile: (padding-bottom: 46px),
   ),
 );
 
 $standfirst-spacers: (
   b: (
-    padding-bottom: 46px,
+    desktop: (padding-bottom: 46px),
+    mobile: (padding-bottom: 50px),
   ),
 );
 
 $subtitle-spacers: (
   b: (
-    margin-bottom: 15px,
+    desktop: (margin-bottom: 15px),
+    mobile: (margin-bottom: 18px),
   ),
 );
 
 $subbox-spacers: (
   t: (
-    margin-top: 60px,
+    desktop: (margin-top: 60px),
+    mobile: (margin-top: 60px),
   ),
   b: (
-    margin-bottom: 60px,
+    desktop: (margin-bottom: 60px),
+    mobile: (margin-bottom: 60px),
   ),
 );
+
 $viewall-btn-spacers: (
   t: (
-    margin-top: 25px,
+    desktop: (margin-top: 25px),
+    mobile: (margin-top: 25px),
   ),
   b: (
-    margin-bottom: 60px,
+    desktop: (margin-bottom: 60px),
+    mobile: (margin-bottom: 60px),
   ),
 );
