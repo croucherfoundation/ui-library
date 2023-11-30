@@ -7,6 +7,14 @@
     background: $croucher-red;
   }
 }
+.viewall_btn {
+  @extend %base_btn!optional;
+  padding-right: 18px;
+  color: $black;
+  &:hover {
+    background: $croucher-red;
+  }
+}
 
 .modal-btn {
   background: $light-gray;
