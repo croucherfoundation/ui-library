@@ -8,9 +8,9 @@
 
 @mixin margin-generator($direction, $value) {
   @if $direction == "t" {
-    margin-top: $value;
+    margin-top: $value !important;
   } @else if $direction == "b" {
-    margin-bottom: $value;
+    margin-bottom: $value !important;
   }
 }
 
