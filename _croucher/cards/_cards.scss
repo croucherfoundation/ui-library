@@ -21,6 +21,9 @@
       font-size: 16px;
       font-weight: 600;
       line-height: 19px;
+      &.csw_badge{
+        background-color: $csw-teal;
+      }
     }
   }
   .body_container {
@@ -40,8 +43,19 @@
     }
   }
   &:hover {
+    .csw_card_body{
+      background: $csw-public-red;
+      .play_icon, .time_icon, .location_icon, .past_icon{
+        filter: brightness(0) invert(1)
+      }
+    }
     .card_title {
-      text-decoration: underline;
+      &:not(.csw_title){
+        text-decoration: underline;
+      }
+      &.csw_title{
+        color: white;
+      }
     }
   }
 }
@@ -73,8 +87,19 @@
       }
     }
     &:hover {
+      .csw_card_body{
+        background: $csw-public-red;
+        .play_icon, .time_icon, .location_icon, .past_icon{
+          filter: brightness(0) invert(1)
+        }
+      }
       .card_title {
-        text-decoration: underline;
+        &:not(.csw_title){
+          text-decoration: underline;
+        }
+        &.csw_title{
+          color: white;
+        }
       }
     }
   }
