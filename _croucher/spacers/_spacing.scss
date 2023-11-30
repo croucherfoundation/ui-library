@@ -3,5 +3,10 @@
 
 @include element-type-padding-generator($title-spacers, "title");
 @include element-type-padding-generator($standfirst-spacers, "standfirst");
+
 @include element-type-margin-generator($subtitle-spacers, "subtitle");
 @include element-type-margin-generator($subbox-spacers, "subbox");
+@include element-type-margin-generator(
+  $viewall-btn-spacers,
+  "viewall_btn_wrapper"
+);
