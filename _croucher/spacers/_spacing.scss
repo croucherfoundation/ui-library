@@ -1,0 +1,6 @@
+@import "./spacers-list";
+@import "./mixins";
+
+@include element-type-padding-generator($title-spacers, "title");
+@include element-type-padding-generator($standfirst-spacers, "standfirst");
+@include element-type-margin-generator($subtitle-spacers, "subtitle");

@@ -1,0 +1,33 @@
+@mixin padding-generator($direction, $value) {
+  @if $direction == "t" {
+    padding-top: $value;
+  } @else if $direction == "b" {
+    padding-bottom: $value;
+  }
+}
+
+@mixin margin-generator($direction, $value) {
+  @if $direction == "t" {
+    margin-top: $value;
+  } @else if $direction == "b" {
+    margin-bottom: $value;
+  }
+}
+
+@mixin element-type-padding-generator($list, $type) {
+  @each $name, $style in $list {
+    .p#{$name}_#{$type} {
+      @include padding-generator($name, map-get($style, padding-top));
+      @include padding-generator($name, map-get($style, padding-bottom));
+    }
+  }
+}
+
+@mixin element-type-margin-generator($list, $type) {
+  @each $name, $style in $list {
+    .m#{$name}_#{$type} {
+      @include margin-generator($name, map-get($style, margin-top));
+      @include margin-generator($name, map-get($style, margin-bottom));
+    }
+  }
+}
