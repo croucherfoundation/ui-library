@@ -7,3 +7,7 @@
 .card_container {
   @extend %base-card-container;
 }
+
+.detail_page_container {
+  @extend %detail-page-container;
+}

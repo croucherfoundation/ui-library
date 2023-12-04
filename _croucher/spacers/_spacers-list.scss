@@ -11,6 +11,17 @@ $title-spacers: (
   ),
 );
 
+$banner-image-spacers: (
+  t: (
+    desktop: (padding-top: 60px),
+    mobile: (padding-top: 60px),
+  ),
+  b: (
+    desktop: (padding-bottom: 60px),
+    mobile: (padding-bottom: 60px),
+  ),
+);
+
 $standfirst-spacers: (
   b: (
     desktop: (padding-bottom: 46px),

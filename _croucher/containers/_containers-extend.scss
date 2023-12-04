@@ -24,3 +24,13 @@
     max-width: unset;
   }
 }
+
+%detail-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  @include lg {
+    flex-direction: unset;
+    gap: 70px;
+  }
+}
