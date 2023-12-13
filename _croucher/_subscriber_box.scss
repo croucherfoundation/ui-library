@@ -21,6 +21,7 @@
   }
   .subscribe-button {
     .subscribe-btn {
+      background: $light-gray;
       &:hover {
         background-color: $white !important;
       }
