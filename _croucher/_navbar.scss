@@ -57,7 +57,16 @@
         // }
         .search_button {
           button {
+            display: none;
             @extend %reset-button;
+          }
+          .search_input {
+            border-radius: 30px;
+            border: 1px solid #cecece;
+            padding: 10px;
+            width: 100%;
+            max-width: 229px;
+            outline: none;
           }
         }
       }
@@ -165,8 +174,11 @@
                   border: none;
                   border-bottom: 1px dotted $black;
                   font-size: 19.2px;
+                  border-radius: 0px !important;
+
                   &:focus {
                     outline: none;
+                    box-shadow: none !important;
                   }
                 }
                 .submit_btn {
