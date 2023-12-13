@@ -51,10 +51,10 @@
             }
           }
         }
-        li.search_button,
-        li.language_translate {
-          display: none;
-        }
+        // li.search_button,
+        // li.language_translate {
+        //   display: none;
+        // }
         .search_button {
           button {
             @extend %reset-button;
