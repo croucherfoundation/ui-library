@@ -7,6 +7,15 @@
 .card_container {
   @extend %base-card-container;
 }
+.card_container--trustees {
+  @extend %base-card-container;
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include xl {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
 .detail_page_container {
   @extend %detail-page-container;
