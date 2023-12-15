@@ -2,8 +2,9 @@
 
 This is the main css library for croucher org websites. It supports the whole styles and standard styling guide for croucher org website. In this project **scss** is the main preprocessing tools for styling. Here are the lists of classes currently avaliable.
 
-## Spacing
-
+<details>
+  <summary>Spacing</summary>
+  
 | No. | Class names            | Css values | Places to use |
 | :-- | :--------------------- | :--------- | :------------ |
 | 1.  | mt_viewall_btn_wrapper |            |               |
@@ -14,27 +15,33 @@ This is the main css library for croucher org websites. It supports the whole st
 | 6.  | mb_subtitle            |            |               |
 | 7.  | mt_subbox              |            |               |
 | 8.  | mb_subbox              |            |               |
+</details>
 
 ---
 
-## Container & layouts
+<details>
+  <summary>Container & layouts</summary>
 
 | No. | Class names              | Places to use                                                     |
 | :-- | :----------------------- | :---------------------------------------------------------------- |
 | 1.  | card_container           | cards column layout container ......\[3:lg,2:md,1:sm] grid layout |
 | 2.  | card_container--trustees | cards column layout container ......\[4:lg,2:md,1:sm] grid layout |
 
+</details>
+
 ---
 
-## Cards
-
+<details>
+  <summary>Cards</summary>
+  
 | No. | Class names  | Places to use                                  |
 | :-- | :----------- | :--------------------------------------------- |
 | 1.  | default_card | default croucher card with image and body text |
 |     |              |                                                |
 
-### Default card sample html structure
-
+<details>
+  <summary>Default card sample html structure</summary>
+  
 ```html
 <a href="#" class="default_card">
   <div class="img_container">
@@ -56,5 +63,8 @@ This is the main css library for croucher org websites. It supports the whole st
   </div>
 </a>
 ```
+</details>
+
+</details>
 
 ---
