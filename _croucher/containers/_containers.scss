@@ -12,7 +12,7 @@
   @include sm {
     grid-template-columns: repeat(2, 1fr);
   }
-  @include xl {
+  @include lg {
     grid-template-columns: repeat(4, 1fr);
   }
 }
