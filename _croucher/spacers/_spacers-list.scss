@@ -2,11 +2,11 @@ $screen-sm-max: 767px;
 
 $title-spacers: (
   t: (
-    desktop: (padding-top: 53px),
+    desktop: (padding-top: 63px),
     mobile: (padding-top: 56px),
   ),
   b: (
-    desktop: (padding-bottom: 41px),
+    desktop: (padding-bottom: 52px),
     mobile: (padding-bottom: 46px),
   ),
 );
@@ -17,8 +17,8 @@ $banner-image-spacers: (
     mobile: (padding-top: 60px),
   ),
   b: (
-    desktop: (padding-bottom: 60px),
-    mobile: (padding-bottom: 60px),
+    desktop: (padding-bottom: 72px),
+    mobile: (padding-bottom: 72px),
   ),
 );
 
@@ -53,7 +53,7 @@ $viewall-btn-spacers: (
     mobile: (margin-top: 25px),
   ),
   b: (
-    desktop: (margin-bottom: 60px),
-    mobile: (margin-bottom: 60px),
+    desktop: (margin-bottom: 55px),
+    mobile: (margin-bottom: 55px),
   ),
 );
