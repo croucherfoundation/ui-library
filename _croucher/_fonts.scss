@@ -2,12 +2,14 @@
   font-family: "MarrSans";
   font-weight: normal;
   src: url("./ui-library/fonts/MarrSans-Regular.otf") format("opentype");
+  font-display: block;
 }
 
 @font-face {
   font-family: "MarrSans";
   font-weight: 600;
   src: url("./ui-library/fonts/MarrSans-Semibold.otf") format("opentype");
+  font-display: block;
 }
 
 @font-face {
@@ -15,6 +17,7 @@
   font-weight: 400;
   font-style: italic;
   src: url("./ui-library/fonts/MarrSans-RegularItalic.otf") format("opentype");
+  font-display: block;
 }
 
 @font-face {
@@ -22,6 +25,7 @@
   font-weight: 800;
   font-style: italic;
   src: url("./ui-library/fonts/MarrSans-BoldItalic.otf") format("opentype");
+  font-display: block;
 }
 
 $typo: (
