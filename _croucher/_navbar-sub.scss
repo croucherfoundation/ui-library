@@ -1,0 +1,29 @@
+.navbar_sub_container {
+  display: none;
+  background-color: #f8f8f5;
+
+  .container {
+    @extend %base-container;
+    height: 54px;
+    margin-top: 69px;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    column-gap: 40px;
+    a {
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover { 
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@include lg {
+  .navbar_sub_container {
+    display: block;
+
+  }
+}

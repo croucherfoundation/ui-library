@@ -49,10 +49,16 @@ $typo: (
     fontweight: 400,
     lineheight: 30px,
   ),
+  sub-nav-title: (
+    fontsize: 18px,
+    fontweight: 400,
+    lineheight: 21.6px,
+  )
 );
 
 @each $name, $style in $typo {
   .text-#{$name} {
+    color: $font-black;
     font-size: map-get($style, fontsize);
     line-height: map-get($style, lineheight);
     font-weight: map-get($style, fontweight);
