@@ -14,7 +14,11 @@
       text-decoration: none;
       cursor: pointer;
 
-      &:hover { 
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.active {
         text-decoration: underline;
       }
     }
@@ -24,6 +28,5 @@
 @include lg {
   .navbar_sub_container {
     display: block;
-
   }
 }
