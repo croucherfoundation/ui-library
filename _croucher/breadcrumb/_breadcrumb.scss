@@ -21,6 +21,10 @@
       text-decoration: underline;
     }
 
+    &.disabled {
+      cursor: default;
+    }
+    
     &.disabled:hover {
       text-decoration: none;
     }
