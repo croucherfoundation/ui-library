@@ -1,0 +1,22 @@
+#detail-page {
+  #banner {
+    margin: 0 -16px;
+    overflow: hidden;
+    @include md {
+      margin: unset;
+    }
+
+    .banner-image {
+      max-width: 100%;
+      
+      @include md {
+        border-radius: 5px;
+      }
+
+      @include lg {
+        border-radius: 5px;
+        max-width: 1218px;
+      }
+    }
+  }
+}
