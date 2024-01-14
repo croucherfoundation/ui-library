@@ -25,6 +25,30 @@
         background-color: $csw-teal;
       }
     }
+    .image-award-caption {
+      font-family: "Lettera Regular Web", sans-serif;
+      font-size: 14px;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: $white;
+      text-align: right;
+      padding: 10px;
+      opacity: 0;
+      transition: all 300ms ease-in-out;
+      -webkit-transition: all 300ms ease-in-out;
+      -moz-transition: all 300ms ease-in-out;
+      -o-transition: all 300ms ease-in-out;
+      -ms-transition: all 300ms ease-in-out;
+    }
+    &:hover {
+      .image-award-caption {
+        opacity: 1;
+      }
+    }
   }
   .body_container {
     padding: 18px 15px 9px;
@@ -121,6 +145,20 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    .card_badge {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 6px 5px 2px 5px;
+      background-color: $croucher-red;
+      color: $white;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 19px;
+      &.csw_badge {
+        background-color: $csw-teal;
+      }
     }
   }
   .body_container {
