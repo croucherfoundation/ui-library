@@ -19,6 +19,16 @@
     }
   }
 
+  .left {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+  }
+
   &.no-horizontal-padding {
     padding-left: 0;
     padding-right: 0;
