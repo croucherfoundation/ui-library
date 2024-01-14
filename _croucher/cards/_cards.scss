@@ -146,6 +146,20 @@
       height: 100%;
       object-fit: cover;
     }
+    .card_badge {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 6px 5px 2px 5px;
+      background-color: $croucher-red;
+      color: $white;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 19px;
+      &.csw_badge {
+        background-color: $csw-teal;
+      }
+    }
   }
   .body_container {
     padding: 18px 15px 18px;
