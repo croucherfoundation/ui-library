@@ -4,6 +4,7 @@
 @include element-type-padding-generator($title-spacers, "title");
 @include element-type-padding-generator($banner-image-spacers, "banner_image");
 @include element-type-padding-generator($standfirst-spacers, "standfirst");
+@include element-type-padding-generator($bodysubtitle-spacers, "bodysubtitle");
 
 @include element-type-margin-generator($subtitle-spacers, "subtitle");
 @include element-type-margin-generator($subbox-spacers, "subbox");
@@ -11,3 +12,8 @@
   $viewall-btn-spacers,
   "viewall_btn_wrapper"
 );
+
+.my-60 {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}

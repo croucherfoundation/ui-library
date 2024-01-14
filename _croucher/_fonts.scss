@@ -42,6 +42,11 @@ $typo: (
     fontweight: 400,
     lineheight: 34px,
   ),
+  bodysubtitle: (
+    fontsize: 26px,
+    fontweight: 400,
+    lineheight: 34px,
+  ),
   subtitle: (
     fontsize: 36px,
     fontweight: 600,
@@ -123,5 +128,17 @@ $typo: (
       width: 11px;
       top: 4px;
     }
+  }
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.standard-link {
+  color: $font-black;
+  
+  &:hover {
+    text-decoration: underline;
   }
 }

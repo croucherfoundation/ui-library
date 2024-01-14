@@ -4,6 +4,15 @@
   @extend %base-container;
 }
 
+.croucher_image_container {
+  @extend %base-image-container;
+}
+
+.croucher_center_container {
+  max-width: 878px;
+  margin: 0 auto;
+}
+
 .card_container {
   @extend %base-card-container;
 }
@@ -19,4 +28,10 @@
 
 .detail_page_container {
   @extend %detail-page-container;
+}
+
+.container-item-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

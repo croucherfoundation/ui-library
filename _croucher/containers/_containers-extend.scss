@@ -34,3 +34,19 @@
     gap: 70px;
   }
 }
+
+%base-image-container {
+  width: 100%;
+  padding: 0px 0px;
+
+  @include md {
+    max-width: 1298px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 40px;
+  }
+
+  &.pt {
+    padding-top: 60px;
+  }
+}

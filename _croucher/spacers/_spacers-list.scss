@@ -29,6 +29,13 @@ $standfirst-spacers: (
   ),
 );
 
+$bodysubtitle-spacers: (
+  b: (
+    desktop: (padding-bottom: 30px),
+    mobile: (padding-bottom: 30px),
+  ),
+);
+
 $subtitle-spacers: (
   b: (
     desktop: (margin-bottom: 15px),
