@@ -35,3 +35,22 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+.card_container--summercourse {
+  @extend %base-card-container;
+
+  
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &.four-cols {
+    @include lg {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
