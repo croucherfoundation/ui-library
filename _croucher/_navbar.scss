@@ -109,6 +109,19 @@
             outline: none;
           }
         }
+        .sign_in{
+          a{
+            color: $black;
+            font-weight: 400;
+            &:hover{
+              color: $croucher-red;
+            }
+            img{
+              vertical-align: top;
+              margin-top: 2px;
+            }
+          }
+        }
       }
       .close_icon {
         @extend %reset-button;
