@@ -5,6 +5,8 @@
 @include element-type-padding-generator($banner-image-spacers, "banner_image");
 @include element-type-padding-generator($standfirst-spacers, "standfirst");
 @include element-type-padding-generator($bodysubtitle-spacers, "bodysubtitle");
+@include element-type-padding-generator($paragraph-spacers, "paragraph");
+@include element-type-padding-generator($paragraph-header-spacers, "paragraph_header");
 
 @include element-type-margin-generator($subtitle-spacers, "subtitle");
 @include element-type-margin-generator($subbox-spacers, "subbox");

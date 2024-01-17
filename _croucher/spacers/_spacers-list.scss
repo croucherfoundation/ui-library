@@ -36,6 +36,20 @@ $bodysubtitle-spacers: (
   ),
 );
 
+$paragraph-spacers: (
+  b: (
+    desktop: (padding-bottom: 54px),
+    mobile: (padding-bottom: 54px),
+  ),
+);
+
+$paragraph-header-spacers: (
+  b: (
+    desktop: (padding-bottom: 23px),
+    mobile: (padding-bottom: 23px),
+  ),
+);
+
 $subtitle-spacers: (
   b: (
     desktop: (margin-bottom: 15px),

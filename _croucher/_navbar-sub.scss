@@ -1,7 +1,8 @@
 .navbar_sub_container {
-  display: none;
   background-color: #f8f8f5;
-
+  &:not(.mobile--show) {
+    display: none;
+  }
   .container {
     @extend %base-container;
     height: 54px;
