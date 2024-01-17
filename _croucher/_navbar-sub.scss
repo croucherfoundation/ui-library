@@ -25,6 +25,8 @@
 @include lg {
   .navbar_sub_container {
     display: block;
-
+    &:not(.mobile--show) {
+      display: block;
+    }
   }
 }
