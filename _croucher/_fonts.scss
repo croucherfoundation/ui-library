@@ -1,17 +1,14 @@
-$font-black: #020202;
-$croucher-red: #EE3A43;
-
 @font-face {
   font-family: "MarrSans";
   font-weight: normal;
-  src: url("#{$font-path}MarrSans-Regular.otf") format("opentype");
+  src: url("./ui-library/fonts/MarrSans-Regular.otf") format("opentype");
   font-display: block;
 }
 
 @font-face {
   font-family: "MarrSans";
   font-weight: 600;
-  src: url("#{$font-path}MarrSans-Semibold.otf") format("opentype");
+  src: url("./ui-library/fonts/MarrSans-Semibold.otf") format("opentype");
   font-display: block;
 }
 
@@ -19,7 +16,7 @@ $croucher-red: #EE3A43;
   font-family: "MarrSans";
   font-weight: 400;
   font-style: italic;
-  src: url("#{$font-path}MarrSans-RegularItalic.otf") format("opentype");
+  src: url("./ui-library/fonts/MarrSans-RegularItalic.otf") format("opentype");
   font-display: block;
 }
 
@@ -27,14 +24,14 @@ $croucher-red: #EE3A43;
   font-family: "MarrSans";
   font-weight: 800;
   font-style: italic;
-  src: url("#{$font-path}MarrSans-BoldItalic.otf") format("opentype");
+  src: url("./ui-library/fonts/MarrSans-BoldItalic.otf") format("opentype");
   font-display: block;
 }
 
 @font-face {
   font-family: "Lettera Regular Web";
   font-weight: normal;
-  src: url("#{$font-path}LetteraMonoLLWeb-Regular.woff") format("opentype");
+  src: url("./ui-library/fonts/LetteraMonoLLWeb-Regular.woff") format("opentype");
   font-display: block;
 }
 
