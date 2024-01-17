@@ -15,7 +15,7 @@
       text-decoration: none;
       cursor: pointer;
 
-      &:hover { 
+      &:hover {
         text-decoration: underline;
       }
     }
@@ -27,6 +27,34 @@
     display: block;
     &:not(.mobile--show) {
       display: block;
+    }
+  }
+}
+
+.inline-subnav-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 20px;
+
+  &.pb {
+    padding-bottom: 40px;
+  }
+
+  .inline-subnav-link {
+    color: $font-black;
+    min-height: 40px;
+    padding: 14px 14px 10px;
+    border: 1px solid $font-black;
+    margin-bottom: 20px;
+    text-decoration: none;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      color: $white;
+      background-color: $croucher-red;
+      border-color: $croucher-red;
     }
   }
 }
