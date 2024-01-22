@@ -42,8 +42,6 @@
     width: 380px;
     height: 430px;
     @include lg {
-      width: unset;
-      height: unset;
       order: 3;
     }
 
@@ -53,8 +51,6 @@
       object-fit: cover;
       border-radius: 5px;
       @include lg {
-        object-fit: unset;
-        height: auto;
         max-height: none;
       }
     }
