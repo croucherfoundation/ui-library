@@ -11,10 +11,11 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
-  gap: 30px;
+  row-gap: 30px;
 
   @include lg {
     grid-template-columns: repeat(12, 1fr);
+    column-gap: 30px;
     max-width: unset;
   }
 
@@ -39,9 +40,11 @@
   .profile-img-section {
     grid-column: span 4 / span 4;
     order: 1;
-    width: 386px;
-    height: 430px;
+    width: 100%;
+    height: 100%;
     @include lg {
+      width: 386px;
+      height: 430px;
       order: 3;
     }
 
