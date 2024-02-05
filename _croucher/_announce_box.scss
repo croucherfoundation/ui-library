@@ -1,0 +1,54 @@
+.announce-box {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  background-color: $croucher-red;
+  margin: auto;
+  padding: 25px;
+  padding-bottom: 30px;
+  border-radius: $rounded-5;
+  flex-direction: column;
+  gap: 20px;
+  .left-text {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    max-width: 100%;
+    align-self: flex-start;
+  }
+
+  p {
+    color: white;
+  }
+
+  .croucher-font-normal {
+    font-weight: 400;
+  }
+ 
+  .announce-button {
+    .announce-btn {
+      border: 1px solid white;
+      background: $croucher-red;
+      color: white;
+      &:hover {
+        background-color: $white !important;
+        color: $croucher-red;
+      }
+    }
+  }
+}
+
+@include md {
+  .announce-box {
+    flex-direction: row;
+    .left-text {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 28px;
+      align-self: auto;
+    }
+    .announce-button {
+      padding-bottom: 7px;
+    }
+  }
+}
