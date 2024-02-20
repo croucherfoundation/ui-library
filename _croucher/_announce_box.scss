@@ -13,7 +13,7 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 24px;
-    max-width: 100%;
+    max-width: 500px;
     align-self: flex-start;
   }
 
@@ -46,10 +46,17 @@
       font-size: 24px;
       line-height: 28px;
       align-self: auto;
-      max-width: 500px;
     }
     .announce-button {
       padding-bottom: 7px;
+    }
+  }
+}
+
+@include lg {
+  .announce-box {
+    .left-text {  
+      max-width: 100%;
     }
   }
 }
