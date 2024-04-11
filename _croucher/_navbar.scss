@@ -1,5 +1,12 @@
 .nav_wrapper {
   padding-top: 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all .54s;
+  z-index: 100;
+  background-color: #fff;
   .nav_container {
     display: flex;
     align-items: center;
@@ -17,6 +24,10 @@
       img {
         width: 100%;
         height: 100%;
+      }
+      &--small {
+        height: 93px;
+        transform: scale(0.65);
       }
     }
     .links_container {
@@ -145,6 +156,9 @@
       display: block;
       z-index: 999;
     }
+  }
+  &_spacer {
+    height: 135px;
   }
 }
 
