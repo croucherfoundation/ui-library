@@ -109,17 +109,34 @@
         //   display: none;
         // }
         .search_button {
-          padding: 12px 24px;
+          top: -1px;
+          position: relative;
+          padding: 40px 24px;
+          border: none;
+          background-color: #F8F8F5;
+
+          label {
+            font-family: "MarrSans";
+            display: block;
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 12px;
+          }
+
           button {
-            display: none;
+            position: absolute;
+            bottom: 47px;
+            right: 30px;
+            // display: none;
             @extend %reset-button;
           }
           .search_input {
-            border-radius: 30px;
-            border: 1px solid #cecece;
+            border-radius: 5px;
+            border: none;
             padding: 10px;
             width: 100%;
-            max-width: 229px;
             outline: none;
           }
         }
@@ -231,6 +248,13 @@
           .search_button {
             padding: 0;
             position: relative;
+
+            button {
+              position: relative;
+              bottom: 0px;
+              right: 0px;
+            }
+
             .search_form_tooltip {
               position: absolute;
               display: none;

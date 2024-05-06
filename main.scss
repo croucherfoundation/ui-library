@@ -2,6 +2,7 @@
 @import "./_croucher/_extends";
 
 // Essential Required Fonts And Breakpoints
+// $font-path: "../fonts/";
 // @import "./_croucher/_fonts";
 @import "./_croucher/_breakpoints";
 @import "./_croucher/spacers/spacing";
@@ -10,6 +11,7 @@
 @import "./_croucher/_navbar";
 @import "./_croucher/_navbar-admin";
 @import "./_croucher/_navbar-sub";
+@import "./_croucher/_search";
 @import "./_croucher/breadcrumb/_breadcrumb";
 @import "./_croucher/_footer";
 @import "./_croucher/_subscriber_box";

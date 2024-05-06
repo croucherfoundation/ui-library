@@ -4,6 +4,7 @@
    * Navbar Scroll Show Hide Start
    * ===========================
    */
+
   var navbar = document.querySelector(".nav_wrapper");
   var logoContainer = document.querySelector(".logo_container");
   var prevY = 0;
@@ -26,5 +27,39 @@
     });
   }
   /* ---- Navbar Scroll Finished ---- */
-  
+
+  /**
+   * ===========================
+   * Search Bar Toggle
+   * ===========================
+   */
+  var searchIcon = document.querySelector(".links_container .search_button");
+  var searchBar = document.querySelector(".croucher_search_container");
+  var searchCrossIcon = document.querySelector(
+    ".croucher_search_container .cross_icon"
+  );
+  if (searchIcon && searchBar && searchCrossIcon) {
+    var scrollToTopWithScroll = function (time = 350) {
+      setTimeout(function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, time);
+    };
+
+    searchIcon.addEventListener("click", function () {
+      var searchBarOpen = searchBar.classList.contains(
+        "croucher_search_container--open"
+      );
+      scrollToTopWithScroll(searchBarOpen ? 0 : 200);
+      if (searchBarOpen) return;
+      searchBar.classList.add("croucher_search_container--open");
+    });
+
+    searchCrossIcon.addEventListener("click", function () {
+      var searchBarOpen = searchBar.classList.contains(
+        "croucher_search_container--open"
+      );
+      if (!searchBarOpen) return;
+      searchBar.classList.remove("croucher_search_container--open");
+    });
+  }
 })();
