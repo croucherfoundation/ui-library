@@ -130,6 +130,7 @@
             bottom: 47px;
             right: 30px;
             // display: none;
+            cursor: pointer;
             @extend %reset-button;
           }
           .search_input {

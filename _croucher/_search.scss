@@ -1,10 +1,12 @@
 .croucher_search_container {
   height: 0px;
   overflow: hidden;
-  transition: all 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out, padding 0.35s ease-out;
 
   &--open {
-    height: 330px;
+    padding-top: 60px;
+    height: 390px;
+    transition: height 0.25s ease-in-out, padding 0.1s ease-out;
   }
 
   .croucher_search {
