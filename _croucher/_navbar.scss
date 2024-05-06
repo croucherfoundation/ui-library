@@ -129,9 +129,15 @@
             position: absolute;
             bottom: 53px;
             right: 30px;
-            // display: none;
             cursor: pointer;
-            @extend %reset-button;
+            width: 15px;
+            height: 15px;
+            border: none;
+            background: white;
+            padding: 0;
+            &:focus {
+              outline: none;
+            }
           }
           .search_input {
             border-radius: 5px;
@@ -139,6 +145,7 @@
             padding: 10px;
             width: 100%;
             outline: none;
+            font-size: 16px;
           }
         }
         .sign_in {
