@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  transition: all .52s;
+  transition: all 0.52s;
   z-index: 100;
   background-color: #fff;
   .nav_container {
@@ -21,7 +21,7 @@
     .logo_container {
       width: 57px;
       height: 110px;
-      transition: all .3s;
+      transition: all 0.3s;
       img {
         width: 100%;
         height: 100%;
@@ -50,7 +50,7 @@
           &:first-child {
             border-top: 1px solid $black;
           }
-          &:nth-last-child(2) a{
+          &:nth-last-child(2) a {
             color: $font-black;
             &:hover {
               color: $croucher-red;
@@ -113,7 +113,7 @@
           position: relative;
           padding: 40px 24px;
           border: none;
-          background-color: #F8F8F5;
+          background-color: #f8f8f5;
 
           label {
             font-family: "MarrSans";
@@ -127,7 +127,7 @@
 
           button {
             position: absolute;
-            bottom: 47px;
+            bottom: 53px;
             right: 30px;
             // display: none;
             cursor: pointer;
@@ -141,14 +141,14 @@
             outline: none;
           }
         }
-        .sign_in{
-          a{
+        .sign_in {
+          a {
             color: $black;
             font-weight: 400;
-            &:hover{
+            &:hover {
               color: $croucher-red;
             }
-            img{
+            img {
               vertical-align: top;
               margin-top: 2px;
             }

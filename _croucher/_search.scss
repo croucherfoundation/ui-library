@@ -37,17 +37,16 @@
           font-family: "MarrSans";
           outline: none;
         }
+      }
 
-        .search_btn {
-          position: absolute;
-          right: 0;
-          background-color: transparent;
-          border: none;
-          width: 38px;
-          height: 38px;
-          top: 12px;
-          right: 16px;
-        }
+      .search_btn {
+        position: absolute;
+        background-color: transparent;
+        border: none;
+        width: 24px;
+        height: 24px;
+        top: 18px;
+        right: 16px;
       }
     }
   }
