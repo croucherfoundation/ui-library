@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  transition: all 0.52s;
+  transition: all 1.2s ease;
   z-index: 100;
   background-color: #fff;
   .nav_container {
@@ -21,14 +21,14 @@
     .logo_container {
       width: 57px;
       height: 110px;
-      transition: all 0.3s;
+      transition: all 0.33s ease;
+      transform-origin: left;
       img {
         width: 100%;
         height: 100%;
       }
       &--small {
-        height: 93px;
-        transform: scale(0.65);
+        transform: scale(0.62);
       }
     }
     .links_container {
