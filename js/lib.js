@@ -62,4 +62,32 @@
       searchBar.classList.remove("croucher_search_container--open");
     });
   }
+
+  /**
+   * ===========================
+   * I-Format Photo Text
+   * ===========================
+   */
+  var iFormats = document.querySelectorAll(".i-format");
+  if (iFormats && iFormats.length > 0) {
+    iFormats.forEach(function (iIcon) {
+      iIcon.addEventListener("click", function () {
+        var textContainer = this.parentElement.querySelector(".i-format-text");
+        if (textContainer && !textContainer.classList.contains("__open")) {
+          textContainer.classList.add("__open");
+        }
+      });
+    });
+  }
+  var iCloseIcons = document.querySelectorAll(".i-format-text .close-icon");
+  if (iCloseIcons && iCloseIcons.length > 0) {
+    iCloseIcons.forEach(function (closeIcon) {
+      closeIcon.addEventListener("click", function () {
+        var textContainer = this.parentElement;
+        if (textContainer && textContainer.classList.contains("__open")) {
+          textContainer.classList.remove("__open");
+        }
+      });
+    });
+  }
 })();
