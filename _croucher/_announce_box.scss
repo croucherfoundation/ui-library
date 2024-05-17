@@ -35,6 +35,17 @@
         color: $croucher-red;
       }
     }
+
+    .advance-btn {
+      border: 1px solid black;
+      background: #dfdfdf;
+      color: black;
+      &:hover {
+        border: 1px solid $croucher-red;
+        background-color: $croucher-red !important;
+        color: white;
+      }
+    }
   }
 }
 
