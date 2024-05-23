@@ -87,6 +87,11 @@
         if (parent && parent.classList.contains('active')) {
           parent.classList.remove('active');
         }
+        
+        var grandParent = parent.parentElement;
+        if (grandParent && grandParent.classList.contains("active")) {
+          grandParent.classList.remove("active");
+        }
       });
     });
   }

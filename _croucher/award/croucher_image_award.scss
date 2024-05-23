@@ -111,6 +111,12 @@
   width: 100%;
   top: 0;
 
+  &.active {
+    .i-format-text  {
+      display: block;
+    }
+  }
+
   .i-format {
     position: absolute;
     top: 10px;
