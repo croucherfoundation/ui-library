@@ -31,7 +31,7 @@
     flex-direction: row-reverse;
     color: #fff;
     padding-inline: 1.5%;
-    padding-block: 0.35rem;
+    padding-block: 17px;
     align-items: flex-start;
 
     .active-icon {
@@ -44,12 +44,20 @@
       align-items: center;
       border-radius: 50%;
       cursor: pointer;
+      pointer-events: unset;
+      position: absolute;
+      right: 15px;
+      top: 15px;
     }
 
     .close-icon {
       display: none;
       padding: 0.3rem;
       cursor: pointer;
+      pointer-events: unset;
+      position: absolute;
+      right: 12px;
+      top: 15px;
     }
 
     .image-caption-text {
@@ -58,6 +66,7 @@
       font-family: "Lettera Regular Web", sans-serif;
       font-size: 14px;
       text-align: right;
+      padding-right: 48px;
     }
 
     &.active {
