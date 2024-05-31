@@ -13,15 +13,18 @@
     window.addEventListener('scroll', () => {
       var scrolledPixels = document.documentElement.scrollTop;
       if (scrolledPixels < prevY && scrolledPixels > startPixel) {
-        navbar.style.top = '0%';
+        // navbar.style.top = '0%';
         navbar.style.paddingTop = '0';
         logoContainer.classList.add('logo_container--small');
+        navbar.classList.remove("hide");
       } else if (scrolledPixels < prevY) {
-        navbar.style.top = '0%';
+        // navbar.style.top = '0%';
         navbar.style.paddingTop = '25px';
         logoContainer.classList.remove('logo_container--small');
+        navbar.classList.remove("hide");
       } else if (scrolledPixels > startPixel) {
-        navbar.style.top = '-100%';
+        // navbar.style.top = '-100%';
+        navbar.classList.add("hide");
       }
       prevY = scrolledPixels;
     });

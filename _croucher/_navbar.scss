@@ -4,9 +4,14 @@
   top: 0;
   left: 0;
   width: 100%;
-  transition: all 1.2s ease;
+  transition: all .8s;
   z-index: 100;
   background-color: #fff;
+  --nav-height: 135;
+  &.hide {
+    transition: all .8s ease-in-out;
+    top: calc(var(--nav-height) * -1px);
+  }
   .nav_container {
     display: flex;
     align-items: center;
