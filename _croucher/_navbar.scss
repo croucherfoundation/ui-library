@@ -1,17 +1,18 @@
 .nav_wrapper {
   padding-top: 25px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: all .8s;
-  z-index: 100;
+  padding-bottom: 60px;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // width: 100%;
+  // transition: all .8s;
+  // z-index: 100;
   background-color: #fff;
-  --nav-height: 135;
-  &.hide {
-    transition: all .25s ease-in-out;
-    top: calc(var(--nav-height) * -1px);
-  }
+  // --nav-height: 135;
+  // &.hide {
+  //   transition: all .25s ease-in-out;
+  //   top: calc(var(--nav-height) * -1px);
+  // }
   .nav_container {
     display: flex;
     align-items: center;
@@ -191,6 +192,25 @@
   &_spacer {
     height: 135px;
   }
+
+  &.no_padding {
+    padding: 0;
+    .nav_container {
+      .logo_container {
+        transition: transform .4s linear;
+        transform: scale(0.62);
+      }
+    }
+  }
+}
+
+.main_sub_navbar_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  transition: all .8s ease;
 }
 
 @include lg {

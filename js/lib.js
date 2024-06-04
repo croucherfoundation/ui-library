@@ -5,30 +5,30 @@
    * ===========================
    */
 
-  var navbar = document.querySelector('.nav_wrapper');
-  var logoContainer = document.querySelector('.logo_container');
-  var prevY = 0;
-  var startPixel = 30; // to start show and hide
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      var scrolledPixels = document.documentElement.scrollTop;
-      if (scrolledPixels < prevY && scrolledPixels > startPixel) {
-        // navbar.style.top = '0%';
-        navbar.style.paddingTop = '0';
-        logoContainer.classList.add('logo_container--small');
-        navbar.classList.remove("hide");
-      } else if (scrolledPixels < prevY) {
-        // navbar.style.top = '0%';
-        navbar.style.paddingTop = '25px';
-        logoContainer.classList.remove('logo_container--small');
-        navbar.classList.remove("hide");
-      } else if (scrolledPixels > startPixel) {
-        // navbar.style.top = '-100%';
-        navbar.classList.add("hide");
-      }
-      prevY = scrolledPixels;
-    });
-  }
+  // var navbar = document.querySelector('.nav_wrapper');
+  // var logoContainer = document.querySelector('.logo_container');
+  // var prevY = 0;
+  // var startPixel = 30; // to start show and hide
+  // if (navbar) {
+  //   window.addEventListener('scroll', () => {
+  //     var scrolledPixels = document.documentElement.scrollTop;
+  //     if (scrolledPixels < prevY && scrolledPixels > startPixel) {
+  //       // navbar.style.top = '0%';
+  //       navbar.style.paddingTop = '0';
+  //       logoContainer.classList.add('logo_container--small');
+  //       navbar.classList.remove("hide");
+  //     } else if (scrolledPixels < prevY) {
+  //       // navbar.style.top = '0%';
+  //       navbar.style.paddingTop = '25px';
+  //       logoContainer.classList.remove('logo_container--small');
+  //       navbar.classList.remove("hide");
+  //     } else if (scrolledPixels > startPixel) {
+  //       // navbar.style.top = '-100%';
+  //       navbar.classList.add("hide");
+  //     }
+  //     prevY = scrolledPixels;
+  //   });
+  // }
   /* ---- Navbar Scroll Finished ---- */
 
   /**
@@ -98,4 +98,37 @@
       });
     });
   }
+
+
+  /**
+   * ===========================
+   * Main and Sub Navbar Container
+   * ===========================
+   */
+
+  var navbar = document.querySelector(".main_sub_navbar_container");
+  var logoContainer = document.querySelector(".logo_container");
+  var mainNavContainer = document.querySelector(".nav_wrapper");
+  var prevY = 0;
+  var startPixel = 120; // to start show and hide
+  if (navbar) {
+    window.addEventListener("scroll", () => {
+      var scrolledPixels = document.documentElement.scrollTop;
+      var { height } = mainNavContainer.getBoundingClientRect();
+      var gap = 0;
+      if (scrolledPixels < prevY && scrolledPixels > startPixel) {
+        mainNavContainer.classList.add("no_padding");
+        navbar.style.transform = `translate(0, 0)`;
+      } else if(scrolledPixels < prevY) {
+        // scrolling up -> show
+        navbar.style.transform = `translate(0, 0)`;
+        mainNavContainer.classList.remove("no_padding");
+      } else {
+        // scrolling down -> hide
+        navbar.style.transform = `translate(0, -${gap + height}px)`;
+      }
+      prevY = scrolledPixels;
+    });
+  }
+  
 })();
