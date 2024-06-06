@@ -207,11 +207,12 @@
 .main_sub_navbar_container {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   width: 100%;
   z-index: 2000;
   transition: all .8s ease;
   background-color: #fff;
+  transform: translate(-50%,0);
 }
 
 @include lg {
