@@ -210,7 +210,7 @@
   left: 50%;
   width: 100%;
   z-index: 2000;
-  transition: all .8s ease;
+  transition: transform .8s ease;
   background-color: #fff;
   transform: translate(-50%,0);
 }
