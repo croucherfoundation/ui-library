@@ -118,14 +118,14 @@
       var gap = 0;
       if (scrolledPixels < prevY && scrolledPixels > startPixel) {
         mainNavContainer.classList.add("no_padding");
-        navbar.style.transform = `translate(0, 0)`;
+        navbar.style.transform = `translate(-50%, 0)`;
       } else if(scrolledPixels < prevY) {
         // scrolling up -> show
-        navbar.style.transform = `translate(0, 0)`;
+        navbar.style.transform = `translate(-50%, 0)`;
         mainNavContainer.classList.remove("no_padding");
       } else {
         // scrolling down -> hide
-        navbar.style.transform = `translate(0, -${gap + height}px)`;
+        navbar.style.transform = `translate(-50%, -${gap + height}px)`;
       }
       prevY = scrolledPixels;
     });
