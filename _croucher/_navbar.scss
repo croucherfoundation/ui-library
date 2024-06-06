@@ -213,6 +213,7 @@
   transition: transform .8s ease;
   background-color: #fff;
   transform: translate(-50%,0);
+  will-change: transform;
 }
 
 @include lg {
