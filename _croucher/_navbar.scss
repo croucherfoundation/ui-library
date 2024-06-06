@@ -1,18 +1,7 @@
 .nav_wrapper {
   padding-top: 25px;
   padding-bottom: 53px;
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
-  // transition: all .8s;
-  // z-index: 100;
   background-color: #fff;
-  // --nav-height: 135;
-  // &.hide {
-  //   transition: all .25s ease-in-out;
-  //   top: calc(var(--nav-height) * -1px);
-  // }
   .nav_container {
     display: flex;
     align-items: center;
@@ -210,10 +199,9 @@
   left: 50%;
   width: 100%;
   z-index: 2000;
-  transition: top .8s ease;
+  transition: all .8s ease;
   background-color: #fff;
   transform: translate3d(-50%,0,0);
-  will-change: top;
 }
 
 @include lg {
