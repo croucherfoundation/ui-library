@@ -212,7 +212,7 @@
   z-index: 2000;
   transition: transform .8s ease;
   background-color: #fff;
-  transform: translate(-50%,0);
+  transform: translate3d(-50%,0,0);
   will-change: transform;
 }
 
