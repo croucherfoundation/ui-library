@@ -181,6 +181,14 @@
   }
   &_spacer {
     height: 135px;
+
+    &--sub {
+      height: 172px;
+
+      @include md {
+        height: 242px;
+      }
+    }
   }
 
   &.no_padding {
