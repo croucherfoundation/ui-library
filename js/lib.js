@@ -76,8 +76,8 @@
 
   window.addEventListener("DOMContentLoaded", function () {
     function insertAfter(newNode, referenceNode) {
-      return
-      console.log(newNode, referenceNode)
+      // return
+      // console.log(newNode, referenceNode)
       if(!newNode || !referenceNode) return;
       referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
