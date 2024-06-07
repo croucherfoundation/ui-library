@@ -75,12 +75,16 @@
    */
 
   window.addEventListener("DOMContentLoaded", function () {
+    function insertAfter(newNode, referenceNode) {
+      if(!newNode || !referenceNode) return;
+      referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
     var navbar = document.querySelector(".main_sub_navbar_container");
-    // var spacer = document.createElement("div");
-    // var { height } = navbar.getBoundingClientRect();
-    // spacer.style.height = `${height}px`
-    // spacer.setAttribute("class", "spacer");
-    // navbar.parentElement.nextSibling.insertBefore(spacer, navbar.nextSibling);
+    var spacer = document.createElement("div");
+    var { height } = navbar.getBoundingClientRect();
+    spacer.style.height = `${height}px`
+    spacer.setAttribute("class", "spacer");
+    insertAfter(spacer, navbar);
     var mainNavContainer = document.querySelector(".nav_wrapper");
     var prevY = 0;
     var startPixel = 120; // to start show and hide
