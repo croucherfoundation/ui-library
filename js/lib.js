@@ -9,6 +9,9 @@
   var searchCrossIcon = document.querySelector(
     ".croucher_search_container .cross_icon"
   );
+  var navbarSubContainer = document.querySelector(".navbar_sub_container");
+  var breadcrumbContainer = document.querySelector(".breadcrumb-container");
+
   if (searchIcon && searchBar && searchCrossIcon) {
     var scrollToTopWithScroll = function (time = 350) {
       setTimeout(function () {
@@ -23,6 +26,8 @@
       scrollToTopWithScroll(searchBarOpen ? 0 : 200);
       if (searchBarOpen) return;
       searchBar.classList.add("croucher_search_container--open");
+      if(navbarSubContainer) navbarSubContainer.classList.add("mb");
+      if(breadcrumbContainer) breadcrumbContainer.classList.remove("pt");
     });
 
     searchCrossIcon.addEventListener("click", function () {
@@ -31,6 +36,8 @@
       );
       if (!searchBarOpen) return;
       searchBar.classList.remove("croucher_search_container--open");
+      if(navbarSubContainer) navbarSubContainer.classList.remove("mb");
+      if(breadcrumbContainer) breadcrumbContainer.classList.add("pt");
     });
   }
 

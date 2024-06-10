@@ -37,6 +37,10 @@
     scrollbar-width: none; 
     -ms-overflow-style: none; 
   }
+
+  &.mb {
+    margin-bottom: 20px;
+  }
 }
 
 @include lg {
