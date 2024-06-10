@@ -26,7 +26,7 @@
       scrollToTopWithScroll(searchBarOpen ? 0 : 200);
       if (searchBarOpen) return;
       searchBar.classList.add("croucher_search_container--open");
-      if(navbarSubContainer) navbarSubContainer.classList.add("mb");
+      if(navbarSubContainer) searchBarOpen.classList.add("mt");
       if(breadcrumbContainer) breadcrumbContainer.classList.remove("pt");
     });
 
@@ -36,7 +36,7 @@
       );
       if (!searchBarOpen) return;
       searchBar.classList.remove("croucher_search_container--open");
-      if(navbarSubContainer) navbarSubContainer.classList.remove("mb");
+      if(navbarSubContainer) searchBarOpen.classList.remove("mt");
       if(breadcrumbContainer) breadcrumbContainer.classList.add("pt");
     });
   }

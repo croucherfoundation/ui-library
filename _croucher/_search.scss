@@ -15,6 +15,10 @@
     transition: height 0.25s ease-in-out, padding 0.1s ease-out;
   }
 
+  &.mt {
+    margin-top: 20px;
+  }
+
   .croucher_search {
     background-color: #f8f8f5;
     min-height: 330px;
