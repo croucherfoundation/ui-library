@@ -3,6 +3,10 @@
   overflow: hidden;
   transition: height 0.2s ease-in-out, padding 0.35s ease-out;
 
+  &--p {
+    padding-top: 60px;
+  }
+
 
   &--open {
     // padding-top: 60px;
