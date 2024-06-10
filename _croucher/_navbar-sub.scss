@@ -20,6 +20,15 @@
       }
     }
   }
+  &.mobile--show {
+    .container {
+      overflow-x: auto;
+
+      a {
+        text-wrap: nowrap;
+      }
+    }
+  }
 }
 
 @include lg {
