@@ -11,24 +11,19 @@
     display: flex;
     align-items: center;
     column-gap: 40px;
+    overflow-x: auto;
     a {
       text-decoration: none;
       cursor: pointer;
+      text-wrap: nowrap;
+      display: block;
 
       &:hover {
         text-decoration: underline;
       }
     }
   }
-  &.mobile--show {
-    .container {
-      overflow-x: auto;
 
-      a {
-        text-wrap: nowrap;
-      }
-    }
-  }
 }
 
 @include lg {
