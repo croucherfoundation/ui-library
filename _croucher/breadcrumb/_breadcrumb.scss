@@ -48,8 +48,27 @@
     color: $font-black;
     position: relative;
     text-decoration: none;
+    display: none;
+
+    &:nth-child(2) {
+      display: initial;
+      &::after {
+        content: "";
+      }
+    }
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  @include sm {
+    a {
+      display: initial;
+      &:nth-child(2) {
+        &::after {
+          content: "|";
+        }
+      }
     }
   }
 
