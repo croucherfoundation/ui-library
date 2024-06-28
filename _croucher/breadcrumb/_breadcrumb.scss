@@ -45,10 +45,11 @@
   }
 
   a {
-    color: $font-black;
+    // color: $font-black;
     position: relative;
     text-decoration: none;
     display: none;
+    color: #b2b2b2;
 
     &:nth-child(2) {
       display: initial;
