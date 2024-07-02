@@ -4,6 +4,10 @@
   flex-wrap: wrap;
   column-gap: 20px;
 
+  &.p-0 {
+    padding: 0;
+  }
+
   .center {
     width: 100%;
     max-width: 799px;
@@ -60,6 +64,10 @@
     &:hover {
       text-decoration: underline;
     }
+
+    &.active {
+      color: $black;
+    }
   }
 
   @include sm {
@@ -83,8 +91,14 @@
     &::after {
       content: "|";
       position: absolute;
+      color: #b2b2b2;
       right: -12px;
       top: 1px;
+    }
+
+    // for ruby systems that do not use MarrSan fonts
+    &.step::after {
+      top: 0px;
     }
   }
 }
