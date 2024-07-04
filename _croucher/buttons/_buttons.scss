@@ -1,5 +1,8 @@
-@import "./buttons-extend";
+@import './buttons-extend';
 
+input.croucher-standard-btn[type='submit'],
+a.croucher-standard-btn,
+button.croucher-standard-btn,
 .croucher-standard-btn {
   @extend %base_btn!optional;
   color: $black;
@@ -7,6 +10,7 @@
     background: $croucher-red;
   }
 }
+
 .viewall_btn {
   @extend %base_btn!optional;
   padding-right: 18px;
