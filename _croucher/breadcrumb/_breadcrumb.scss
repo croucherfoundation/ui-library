@@ -95,10 +95,5 @@
       right: -12px;
       top: 1px;
     }
-
-    // for ruby systems that do not use MarrSan fonts
-    &.step::after {
-      top: 0px;
-    }
   }
 }

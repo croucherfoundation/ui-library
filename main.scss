@@ -44,8 +44,11 @@ ul {
 }
 
 body {
-  font-family: "MarrSans";
   margin: 0;
+}
+
+body, *{
+  font-family: "MarrSans" !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
