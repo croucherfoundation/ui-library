@@ -6,18 +6,39 @@ button.croucher-standard-btn,
 .croucher-standard-btn {
   @extend %base_btn!optional;
   color: $croucher-dark;
+
   &:hover {
     background: $croucher-red;
   }
+
+  &.inline {
+    display: inline-block;
+  }
+
+  &.disabled:hover {
+    color: $croucher-dark;
+    background: white;
+    border-color: $croucher-dark;
+    cursor: default;
+  }
 }
 
+input.viewall_btn,
 a.viewall_btn,
 .viewall_btn {
   @extend %base_btn!optional;
   padding-right: 18px;
   color: $croucher-dark;
+
   &:hover {
     background: $croucher-red;
+  }
+
+  &.disabled:hover {
+    color: $croucher-dark;
+    background: white;
+    border-color: $croucher-dark;
+    cursor: default;
   }
 }
 
