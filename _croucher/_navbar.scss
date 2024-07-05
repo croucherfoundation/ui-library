@@ -27,6 +27,15 @@
         transform: scale(0.62);
       }
     }
+    .institution_logo_container {
+      width: auto;
+      height: 110px;
+      transition: all 0.5s ease;
+      transform-origin: right;
+      img {
+        height: 100%;
+      }
+    }
     .links_container {
       display: none;
       position: fixed;
@@ -194,7 +203,7 @@
   &.no_padding {
     padding: 0;
     .nav_container {
-      .logo_container {
+      .logo_container, .institution_logo_container {
         transition: transform .4s linear;
         transform: scale(0.62);
       }
