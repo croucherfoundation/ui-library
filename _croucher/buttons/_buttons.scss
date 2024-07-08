@@ -15,10 +15,10 @@ button.croucher-standard-btn,
     display: inline-block;
   }
 
-  &.disabled:hover {
-    color: $croucher-dark;
+  &.disabled, &.disabled:hover, &.unavailable, &.unavailable:hover {
+    color: $light-gray1;
     background: white;
-    border-color: $croucher-dark;
+    border-color: $light-gray1;
     cursor: default;
   }
 }
@@ -34,10 +34,10 @@ a.viewall_btn,
     background: $croucher-red;
   }
 
-  &.disabled:hover {
-    color: $croucher-dark;
+  &.disabled, &.disabled:hover, &.unavailable, &.unavailable:hover {
+    color: $light-gray1;
     background: white;
-    border-color: $croucher-dark;
+    border-color: $light-gray1;
     cursor: default;
   }
 }
