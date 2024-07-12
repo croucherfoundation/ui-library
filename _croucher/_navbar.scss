@@ -217,8 +217,12 @@
     }
 
     a:last-child {
-      width: auto;
+      width: 180px;
       height: 100px;
+      img{
+        object-fit: contain;
+        object-position: left;
+      }
     }
 
     .vertical-line {
