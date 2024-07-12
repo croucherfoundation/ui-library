@@ -9,6 +9,15 @@
   }
 }
 
+%base-center-container {
+  @include sm {
+    max-width: 799px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+  }
+}
+
 %base-card-container {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

@@ -78,3 +78,14 @@ $viewall-btn-spacers: (
     mobile: (margin-bottom: 60px),
   ),
 );
+
+$section-spacers: (
+  t: (
+    desktop: (margin-top: 46px),
+    mobile: (margin-top: 46px),
+  ),
+  b: (
+    desktop: (margin-bottom: 46px),
+    mobile: (margin-bottom: 46px),
+  ),
+);

@@ -44,6 +44,11 @@ $typo: (
     fontweight: 600,
     lineheight: 54px,
   ),
+  pagetitle: (
+    fontsize: 42px,
+    fontweight: 600,
+    lineheight: 50px,
+  ),
   standfirst: (
     fontsize: 26px,
     fontweight: 400,
@@ -56,6 +61,11 @@ $typo: (
   ),
   subtitle: (
     fontsize: 36px,
+    fontweight: 600,
+    lineheight: 40px,
+  ),
+  smallsubtitle: (
+    fontsize: 32px,
     fontweight: 600,
     lineheight: 40px,
   ),
@@ -105,7 +115,7 @@ $typo: (
   }
 }
 
-.text-subtitle {
+.text-subtitle, .text-smallsubtitle {
   position: relative;
 
   &::before {

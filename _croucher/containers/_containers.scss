@@ -4,6 +4,10 @@
   @extend %base-container;
 }
 
+.croucher_container.centered {
+  @extend %base-center-container;
+}
+
 .croucher_image_container {
   @extend %base-image-container;
 }

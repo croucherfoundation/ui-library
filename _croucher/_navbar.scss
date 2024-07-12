@@ -2,7 +2,7 @@
   padding-top: 25px;
   padding-bottom: 53px;
   background-color: #fff;
-  transition: padding .25s ease;
+  transition: padding 0.25s ease;
   .nav_container {
     display: flex;
     align-items: center;
@@ -25,15 +25,6 @@
       }
       &--small {
         transform: scale(0.62);
-      }
-    }
-    .institution_logo_container {
-      width: auto;
-      height: 110px;
-      transition: all 0.5s ease;
-      transform-origin: right;
-      img {
-        height: 100%;
       }
     }
     .links_container {
@@ -62,7 +53,7 @@
             }
           }
           a {
-            font-family: "MarrSans";
+            font-family: 'MarrSans';
             display: block;
             padding: 12px 24px;
             text-decoration: none;
@@ -91,7 +82,7 @@
                 border-bottom: none;
               }
               a {
-                font-family: "MarrSans";
+                font-family: 'MarrSans';
                 display: block;
                 padding: 0px 30px;
                 text-decoration: none;
@@ -121,7 +112,7 @@
           // background-color: #f8f8f5;
 
           label {
-            font-family: "MarrSans";
+            font-family: 'MarrSans';
             display: block;
             text-decoration: none;
             letter-spacing: 0.01em;
@@ -203,10 +194,36 @@
   &.no_padding {
     padding: 0;
     .nav_container {
-      .logo_container, .institution_logo_container {
+      .logo_container {
         transition: transform .4s linear;
         transform: scale(0.62);
       }
+    }
+  }
+}
+
+// Especially for applications which has two logos in navbar
+.nav_wrapper.with-logos {
+  .logo_container {
+    width: unset;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    align-items: center;
+
+    a:first-child {
+      width: 57px;
+      height: 110px;
+    }
+
+    a:last-child {
+      width: auto;
+      height: 100px;
+    }
+
+    .vertical-line {
+      height: 110px;
+      border-right: 1px solid $black;
     }
   }
 }
@@ -217,9 +234,9 @@
   left: 50%;
   width: 100%;
   z-index: 2000;
-  transition: all .8s ease;
+  transition: all 0.8s ease;
   background-color: #fff;
-  transform: translate3d(-50%,0,0);
+  transform: translate3d(-50%, 0, 0);
 }
 
 @include lg {
@@ -261,7 +278,7 @@
               border-top: none;
             }
             a {
-              font-family: "MarrSans";
+              font-family: 'MarrSans';
               padding: 0;
               display: inline-block;
               text-decoration: none;
@@ -356,6 +373,14 @@
           display: none;
         }
       }
+    }
+  }
+}
+
+@include lg {
+  .nav_wrapper.with-logos {
+    .logo_container {
+      width: unset;
     }
   }
 }
