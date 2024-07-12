@@ -15,6 +15,9 @@
   align-items: center;
   background-color: transparent;
   box-shadow: unset;
+  &:visited{
+    color: #000;
+  }
   &:hover {
     border: 1px solid $croucher-red;
     color: white;
