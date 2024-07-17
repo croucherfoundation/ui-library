@@ -20,6 +20,7 @@ button.croucher-standard-btn,
     background: white;
     border-color: $light-gray1;
     cursor: default;
+    pointer-events: none;
   }
 }
 
@@ -39,6 +40,7 @@ a.viewall_btn,
     background: white;
     border-color: $light-gray1;
     cursor: default;
+    pointer-events: none;
   }
 }
 
