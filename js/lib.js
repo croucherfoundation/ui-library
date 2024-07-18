@@ -129,4 +129,24 @@
       });
     }
   });
+
+
+  /**
+   * Checke Height for footer
+   */
+  (function positionFooter() {
+    var bodyHeight = document.body.clientHeight;
+    var windownHeight = window.innerHeight;
+    var footer = document.querySelector(".croucher-footer");
+    var { height: footerHeight } = footer.getBoundingClientRect();
+    var contentHeight = windownHeight - footerHeight;
+    if(bodyHeight < contentHeight) {
+      footer.style.position = "fixed";
+      footer.style.left = "0";
+      footer.style.right = "0";
+
+    } else {
+      footer.style.position = "relative";
+    }
+  })()
 })();
