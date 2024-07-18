@@ -141,13 +141,9 @@
     var { height: footerHeight } = footer.getBoundingClientRect();
     var contentHeight = windownHeight - footerHeight;
     if(bodyHeight < contentHeight) {
-      footer.style.position = "fixed";
-      footer.style.left = "0";
-      footer.style.right = "0";
-      footer.style.bottom = "0";
-
+      footer.classList.add("fixed-position")
     } else {
-      footer.style.position = "relative";
+      footer.classList.remove("fixed-position")
     }
   })()
 })();
