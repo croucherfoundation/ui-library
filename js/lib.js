@@ -140,7 +140,7 @@
     var footer = document.querySelector(".croucher-footer");
     var { height: footerHeight } = footer.getBoundingClientRect();
     var contentHeight = windownHeight - footerHeight;
-    if(bodyHeight < contentHeight) {
+    if(footer && bodyHeight < contentHeight) {
       footer.classList.add("fixed-position")
     } else {
       footer.classList.remove("fixed-position")
