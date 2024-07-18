@@ -144,6 +144,7 @@
       footer.style.position = "fixed";
       footer.style.left = "0";
       footer.style.right = "0";
+      footer.style.bottom = "0";
 
     } else {
       footer.style.position = "relative";
