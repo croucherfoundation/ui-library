@@ -135,15 +135,18 @@
    * Checke Height for footer
    */
   (function positionFooter() {
-    var bodyHeight = document.body.clientHeight;
-    var windownHeight = window.innerHeight;
     var footer = document.querySelector(".croucher-footer");
-    var { height: footerHeight } = footer.getBoundingClientRect();
-    var contentHeight = windownHeight - footerHeight;
-    if(footer && bodyHeight < contentHeight) {
-      footer.classList.add("fixed-position")
+
+    if (footer) {
+      var bodyHeight = document.body.clientHeight;
+      var windownHeight = window.innerHeight;
+      var { height: footerHeight } = footer.getBoundingClientRect();
+      var contentHeight = windownHeight - footerHeight;
+      if (bodyHeight < contentHeight) {
+        footer.classList.add("fixed-position");
+      }
     } else {
-      footer.classList.remove("fixed-position")
+      footer.classList.remove("fixed-position");
     }
   })()
 })();
