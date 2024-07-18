@@ -144,9 +144,9 @@
       var contentHeight = windownHeight - footerHeight;
       if (bodyHeight < contentHeight) {
         footer.classList.add("fixed-position");
+      } else {
+        footer.classList.remove("fixed-position");
       }
-    } else {
-      footer.classList.remove("fixed-position");
     }
   })()
 })();
