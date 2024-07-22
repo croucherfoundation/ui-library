@@ -137,9 +137,10 @@
   function positionFooter() {
     var footer = document.querySelector(".croucher-footer");
     if (footer) {
+      var { height } = footer.getBoundingClientRect();
       var bodyHeight = document.body.offsetHeight;
       var windownHeight = window.innerHeight;
-      if (bodyHeight < windownHeight) {
+      if (bodyHeight + height < windownHeight) {
         footer.classList.add("fixed-position");
       } else {
         footer.classList.remove("fixed-position");
