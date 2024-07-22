@@ -134,7 +134,7 @@
   /**
    * Check Height for footer position
    */
-  (function positionFooter() {
+  function positionFooter() {
     var footer = document.querySelector(".croucher-footer");
     if (footer) {
       var bodyHeight = document.body.offsetHeight;
@@ -145,7 +145,7 @@
         footer.classList.remove("fixed-position");
       }
     }
-  })()
-
+  }
+  positionFooter();
   window.addEventListener("resize", positionFooter)
 })();
