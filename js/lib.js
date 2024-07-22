@@ -132,21 +132,20 @@
 
 
   /**
-   * Checke Height for footer
+   * Check Height for footer position
    */
   (function positionFooter() {
     var footer = document.querySelector(".croucher-footer");
-
     if (footer) {
-      var bodyHeight = document.body.clientHeight;
+      var bodyHeight = document.body.offsetHeight;
       var windownHeight = window.innerHeight;
-      var { height: footerHeight } = footer.getBoundingClientRect();
-      var contentHeight = windownHeight - footerHeight;
-      if (bodyHeight < contentHeight) {
+      if (bodyHeight < windownHeight) {
         footer.classList.add("fixed-position");
       } else {
         footer.classList.remove("fixed-position");
       }
     }
   })()
+
+  window.addEventListener("resize", positionFooter)
 })();
