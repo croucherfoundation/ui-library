@@ -27,6 +27,16 @@
         transform: scale(0.62);
       }
     }
+    .book_order_container{
+      display: flex;
+      cursor: pointer;
+      width: auto;
+      max-height: 110px;
+      transition: all 0.5s ease;
+      transform-origin: right;
+      align-items: center;
+      padding-top: 2px;
+    }
     .links_container {
       display: none;
       position: fixed;
@@ -194,7 +204,7 @@
   &.no_padding {
     padding: 0;
     .nav_container {
-      .logo_container {
+      .logo_container, .book_order_container {
         transition: transform .4s linear;
         transform: scale(0.62);
       }
