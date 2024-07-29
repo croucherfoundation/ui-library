@@ -1,0 +1,160 @@
+.auth_container {
+  height: 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out, padding 0.1s ease-out;
+
+  &_wrapper {
+    background-color: #f8f8f5;
+    width: 100%;
+    padding: 60px 0;
+    padding-top: 0;
+    padding-top: 30px;
+  }
+
+  .account {
+    &_title {
+      padding-bottom: 30px;
+      text-wrap: nowrap;
+    }
+
+    &_settings {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 100%;
+
+      button {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+        border: none;
+        background: none;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+
+    @include md {
+      display: flex;
+      gap: 180px;
+    }
+  }
+
+  opacity: 0;
+
+  &_open {
+    height: auto;
+    opacity: 1;
+    transition: all 0.25s ease-in-out, padding 0.1s ease-out;
+    margin-bottom: 55px;
+
+    &.mt_open {
+      margin-top: 20px;
+    }
+
+    @include md {
+      height: 330px;
+    }
+  }
+
+  .forgot_password {
+    margin-top: 1rem;
+    a,
+    p {
+      color: $black;
+      text-decoration: none;
+
+      &.pb-4 {
+        padding-bottom: 1rem;
+      }
+      &.pb-0 {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  & > div {
+    overflow: visible;
+  }
+
+  .cross_icon_container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      background-color: transparent;
+      background-image: none;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+
+  .sign_in_form {
+    // @apply flex flex-col md:flex-row mt-6 md:gap-[30px];
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+
+    @include md {
+      flex-direction: row;
+      gap: 30px;
+    }
+
+    .input_group {
+      //   @apply flex-1 flex flex-col md:max-w-[383px];
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      label {
+        color: rgb(2, 2, 2);
+      }
+
+      @include md {
+        max-width: 383px;
+      }
+      position: relative;
+      .eye {
+        position: absolute;
+        right: 10px;
+        top: 31px;
+        background: transparent;
+        border: none;
+        img {
+          width: 20px;
+        }
+      }
+
+      input {
+        border: none;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        margin-bottom: 0.25rem;
+        appearance: none;
+        background-color: #fff;
+        border-color: #6b7280;
+        border-width: 1px;
+        border-radius: $rounded-5;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+
+    .sign_in_btn {
+      margin-top: 22px;
+      @include md {
+        margin-left: 130px;
+      }
+      button {
+        min-width: 177px;
+      }
+    }
+  }
+}
