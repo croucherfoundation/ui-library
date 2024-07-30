@@ -1,3 +1,141 @@
+@mixin lgNav {
+  .nav_wrapper {
+    padding-top: 25px;
+    .nav_container {
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .menu {
+        display: none;
+      }
+
+      .logo_container {
+        width: 57px;
+        height: 110px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .links_container {
+        display: block;
+        position: static;
+        width: unset;
+        height: unset;
+        padding: unset;
+        > ul {
+          display: flex;
+          gap: 30px;
+          margin-top: unset;
+          li {
+            list-style: none;
+            border: none;
+            padding: unset;
+            &:first-child {
+              border-top: none;
+            }
+            a {
+              font-family: 'MarrSans';
+              padding: 0;
+              display: inline-block;
+              text-decoration: none;
+              color: $croucher-red;
+              letter-spacing: 0.01em;
+              font-weight: 700;
+              font-size: 16px;
+              &:hover {
+                color: $black;
+              }
+              &:focus {
+                outline: none;
+              }
+            }
+            a.active {
+              color: $black;
+            }
+            ul {
+              display: none;
+            }
+          }
+          li.search_button,
+          li.language_translate {
+            display: block;
+          }
+          .search_button {
+            padding: 0;
+            position: relative;
+
+            button {
+              position: relative;
+              bottom: 0px;
+              right: 0px;
+            }
+
+            .search_form_tooltip {
+              position: absolute;
+              display: none;
+              width: 160px;
+              height: 42px;
+              background: $white;
+              right: 0%;
+              top: 50%;
+              transform: translate(0px, -50%);
+              .search_form {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                .search_input {
+                  width: 100%;
+                  height: 72%;
+                  border: none;
+                  border-bottom: 1px dotted $black;
+                  font-size: 19.2px;
+                  border-radius: 0px !important;
+
+                  &:focus {
+                    outline: none;
+                    box-shadow: none !important;
+                  }
+                }
+                .submit_btn {
+                  // @extend %reset-button;
+                  width: 42px;
+                  height: 42px;
+                  display: flex;
+                  align-items: center;
+                  margin-top: -5px;
+                  svg {
+                    fill: grey;
+                    width: 100%;
+                  }
+                }
+              }
+            }
+            .search_form_tooltip--open {
+              display: block;
+              z-index: 100;
+            }
+            button {
+              display: flex;
+              padding-top: 5px;
+              svg {
+                fill: $black;
+              }
+            }
+          }
+        }
+        .close_icon,
+        .menu {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 .nav_wrapper {
   padding-top: 25px;
   padding-bottom: 53px;
@@ -253,142 +391,12 @@
   transform: translate3d(-50%, 0, 0);
 }
 
+.no_mobile {
+  @include lgNav;
+}
+
 @include lg {
-  .nav_wrapper {
-    padding-top: 25px;
-    .nav_container {
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      .menu {
-        display: none;
-      }
-
-      .logo_container {
-        width: 57px;
-        height: 110px;
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .links_container {
-        display: block;
-        position: static;
-        width: unset;
-        height: unset;
-        padding: unset;
-        > ul {
-          display: flex;
-          gap: 30px;
-          margin-top: unset;
-          li {
-            list-style: none;
-            border: none;
-            padding: unset;
-            &:first-child {
-              border-top: none;
-            }
-            a {
-              font-family: 'MarrSans';
-              padding: 0;
-              display: inline-block;
-              text-decoration: none;
-              color: $croucher-red;
-              letter-spacing: 0.01em;
-              font-weight: 700;
-              font-size: 16px;
-              &:hover {
-                color: $black;
-              }
-              &:focus {
-                outline: none;
-              }
-            }
-            a.active {
-              color: $black;
-            }
-            ul {
-              display: none;
-            }
-          }
-          li.search_button,
-          li.language_translate {
-            display: block;
-          }
-          .search_button {
-            padding: 0;
-            position: relative;
-
-            button {
-              position: relative;
-              bottom: 0px;
-              right: 0px;
-            }
-
-            .search_form_tooltip {
-              position: absolute;
-              display: none;
-              width: 160px;
-              height: 42px;
-              background: $white;
-              right: 0%;
-              top: 50%;
-              transform: translate(0px, -50%);
-              .search_form {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                .search_input {
-                  width: 100%;
-                  height: 72%;
-                  border: none;
-                  border-bottom: 1px dotted $black;
-                  font-size: 19.2px;
-                  border-radius: 0px !important;
-
-                  &:focus {
-                    outline: none;
-                    box-shadow: none !important;
-                  }
-                }
-                .submit_btn {
-                  // @extend %reset-button;
-                  width: 42px;
-                  height: 42px;
-                  display: flex;
-                  align-items: center;
-                  margin-top: -5px;
-                  svg {
-                    fill: grey;
-                    width: 100%;
-                  }
-                }
-              }
-            }
-            .search_form_tooltip--open {
-              display: block;
-              z-index: 100;
-            }
-            button {
-              display: flex;
-              padding-top: 5px;
-              svg {
-                fill: $black;
-              }
-            }
-          }
-        }
-        .close_icon,
-        .menu {
-          display: none;
-        }
-      }
-    }
-  }
+  @include lgNav;
 }
 
 @include lg {
