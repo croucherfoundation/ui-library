@@ -149,4 +149,307 @@
     }
     window.addEventListener("resize", positionFooter);
   });
+
+  /**
+   * --- HELPER functions
+   */
+
+  function callLater(cb, delay = 100) {
+    setTimeout(cb, delay);
+  }
+
+  function removeClassName(el, name) {
+    el.classList.remove(name);
+    return el;
+  }
+
+  function addClassName(el, name) {
+    el.classList.add(name);
+    return el;
+  }
+
+  function transformTimeZone(timezones) {
+    return timezones.map(([value, label]) => ({
+      value,
+      label,
+    }));
+  }
+
+  /**
+   * -----------------------------
+   * ---START: Modal Dialogs ----
+   * -----------------------------
+   */
+
+  function createModalBackdrop() {
+    var el = document.createElement("div");
+    el.className = "modal-backdrop fade";
+    document.body.appendChild(el);
+    return el;
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    var allModalDialogBtns = document.querySelectorAll("[data-toggle='modal']");
+
+    allModalDialogBtns.forEach((openBt) => {
+      openBt.addEventListener("click", () => {
+        // var modal = document.querySelector(".modal");
+        var targeModalId = openBt.getAttribute("data-target");
+        console.log("target modal id", targeModalId);
+        var modal = document.getElementById(targeModalId);
+        // return;
+        var backdrop = createModalBackdrop();
+        var closeBtn = modal.querySelector(".cancel");
+        var saveBtn = modal.querySelector(".save");
+
+        callLater(function () {
+          backdrop.classList.add("show");
+          modal.classList.add("modal-open");
+        });
+
+        closeBtn.addEventListener("click", function () {
+          closeModal();
+        });
+        saveBtn.addEventListener("click", function (e) {
+          closeModal();
+        });
+        backdrop.addEventListener("click", function () {
+          closeModal();
+        });
+
+        function closeModal() {
+          removeClassName(backdrop, "show");
+          removeClassName(modal, "modal-open");
+          callLater(() => backdrop.remove(), 100);
+        }
+      });
+    });
+  });
+
+  /**
+   * ---END: Modal Dialogs
+   */
+
+  /**
+   * -----------------------------
+   * ---START: Select---
+   * -----------------------------
+   */
+  class MySelect {
+    constructor(containerId, config) {
+      this.options = config.options;
+      this.searchable = document.getElementById(containerId);
+      this.searchableInput = this.searchable.querySelector(
+        ".searchable-input input"
+      );
+      this.toggleBtn = this.searchable.querySelector(".searchable-toggle");
+
+      if (!this.searchableInput) {
+        throw new Error(`
+        
+          MySelect: There is no element with searchable-input class with it's direct children input element.
+          It should be the following structure.
+          <div id="yourId">
+            <div class='searchable-input'>
+              <input type='text' />
+            </div>
+          </div>
+        
+        `);
+      }
+      this.listenToggleBtn();
+      this.listenInputFocus();
+    }
+
+    listenToggleBtn() {
+      this.toggleBtn.addEventListener("click", () => {
+        this.searchable.classList.toggle("searchable-visible");
+        var searchableList = this.searchable.querySelector(".searchable-list");
+
+        if (searchableList) {
+          searchableList.remove();
+        } else {
+          var list = document.createElement("div");
+          this.searchableList = list;
+          list.className = "searchable-list";
+          callLater(() => {
+            list.style.transform = "scaleY(1)";
+          }, 100);
+          this.searchable.appendChild(list);
+          this.renderAndListenInputChange();
+          console.log("created");
+        }
+      });
+    }
+
+    listenInputFocus() {
+      this.searchableInput.addEventListener("focus", () => {
+        var searchableList = this.searchable.querySelector(".searchable-list");
+
+        if (!searchableList) {
+          var list = document.createElement("div");
+          list.className = "searchable-list";
+          callLater(() => {
+            list.style.transform = "scaleY(1)";
+          }, 100);
+          this.searchable.appendChild(list);
+          this.renderAndListenInputChange();
+        }
+      });
+    }
+    createListItemElement(item) {
+      let li = document.createElement("li");
+      li.textContent = item.label;
+      li.setAttribute("value", item.value);
+      li.addEventListener("click", () => {
+        this.searchableInput.value = item.value;
+        let searchableList = this.searchable.querySelector(".searchable-list");
+        if (searchableList) searchableList.remove();
+      });
+      return li;
+    }
+
+    createList() {
+      let ul = document.createElement("ul");
+      return ul;
+    }
+
+    renderList(options) {
+      let searchableList = this.searchable.querySelector(".searchable-list");
+
+      searchableList.innerHTML = "";
+      let list = this.createList();
+
+      if (options.length == 0) {
+        list.innerHTML = `<li>No items found</li>`;
+        searchableList.appendChild(list);
+        return;
+      }
+      options.forEach((item) => {
+        let li = this.createListItemElement(item);
+        list.appendChild(li);
+      });
+      searchableList.appendChild(list);
+    }
+
+    renderAndListenInputChange() {
+      this.renderList(this.options);
+      this.searchableInput.addEventListener("input", (e) =>
+        this.onSearchChange(e)
+      );
+    }
+
+    onSearchChange(event) {
+      var value = event.target.value;
+      var filteredList = this.filterOptions(value.toLowerCase());
+      this.renderList(filteredList);
+    }
+
+    filterOptions(query) {
+      return this.options.filter(
+        (item) =>
+          query.trim() == "" ||
+          item.label.toLowerCase().includes(query) ||
+          item.value.toLowerCase().includes(query)
+      );
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    let options = [
+      {
+        value: "null",
+        label: "Select timezone",
+      },
+      {
+        value: "Pacific/Midway",
+        label: "Midway",
+      },
+      {
+        value: "Pacific/Niue",
+        label: "Niue",
+      },
+      {
+        value: "Pacific/Pago_Pago",
+        label: "Pago Pago",
+      },
+      {
+        value: "Pacific/Samoa,US/Samoa",
+        label: "Samoa",
+      },
+      {
+        value: "America/Adak",
+        label: "Adak",
+      },
+      {
+        value: "America/Atka",
+        label: "Atka",
+      },
+      {
+        value: "HST",
+        label: "HST",
+      },
+      {
+        value: "Pacific/Honolulu",
+        label: "Honolulu",
+      },
+      {
+        value: "Pacific/Johnston",
+        label: "Johnston",
+      },
+    ];
+    new MySelect("timezonesSelect", {
+      options,
+    });
+  });
+
+  /**
+   * -----------------------------
+   * ---END: Select---
+   * -----------------------------
+   */
+
+  /**
+   * ----------------------------
+   * ---START: Account Email Type Selector
+   * -----------------------------
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+    let emailTypeElements = document.querySelectorAll(".email .email-type");
+
+    emailTypeElements.forEach((emailType) => {
+      let selected = emailType.querySelector(".email-type-selected");
+      let selectedInput = emailType.querySelector(".email-type-selected input");
+      let typeLists = emailType.querySelector(".email-type-list");
+      let listBtns = typeLists.querySelectorAll("button");
+
+      selected.addEventListener("click", function () {
+        typeLists.classList.toggle("hidden-list");
+        callLater(() => {
+          if (typeLists.classList.contains("hidden-list")) {
+            typeLists.classList.remove("show-list");
+          } else {
+            typeLists.classList.add("show-list");
+            listBtns.forEach((btn) => {
+              let span = btn.querySelector("span");
+              if (span.textContent === selectedInput.value) {
+                btn.classList.add("active");
+              } else {
+                btn.classList.remove("active");
+              }
+              btn.addEventListener("click", () => {
+                selectedInput.value = span.textContent;
+                typeLists.classList.add("hidden-list");
+              });
+            });
+          }
+        }, 1);
+      });
+    });
+  });
+
+  /**
+   * -----------------------------
+   * ---END: Account Email Type Selector
+   * -----------------------------
+   */
 })();
