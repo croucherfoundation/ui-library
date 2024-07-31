@@ -177,6 +177,54 @@
 
   /**
    * -----------------------------
+   * ---START: Auth  ----
+   * -----------------------------
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+    let openSignInBtn = document.querySelector(".sign_in");
+    let signinBox = document.getElementById("signin-box");
+    let signinCrossBtn = signinBox.querySelector(
+      ".cross_icon_container button"
+    );
+    let openSingnOut = document.querySelector(".user_avatar");
+    let signoutBox = document.getElementById("signout-box");
+    let signoutCrossBtn = signoutBox.querySelector(
+      ".cross_icon_container button"
+    );
+
+    if (openSignInBtn) {
+      openSignInBtn.addEventListener("click", () => {
+        signinBox.classList.add("auth_container_open");
+      });
+    }
+
+    if (signinCrossBtn) {
+      signinCrossBtn.addEventListener("click", () => {
+        signinBox.classList.remove("auth_container_open");
+      });
+    }
+
+    if (signoutCrossBtn) {
+      signoutCrossBtn.addEventListener("click", () => {
+        signoutBox.classList.remove("auth_container_open");
+      });
+    }
+
+    if (openSingnOut) {
+      openSingnOut.addEventListener("click", () => {
+        signoutBox.classList.add("auth_container_open");
+      });
+    }
+  });
+
+  /**
+   * -----------------------------
+   * ---END: Auth  ----
+   * -----------------------------
+   */
+
+  /**
+   * -----------------------------
    * ---START: Modal Dialogs ----
    * -----------------------------
    */
