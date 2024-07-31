@@ -1,0 +1,62 @@
+.searchable {
+  position: relative;
+
+  &-input {
+    position: relative;
+
+    input,
+    input:active,
+    input:focus {
+      outline: none;
+      border: 1px solid #dfdfdf;
+      border-radius: $rounded-5;
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
+  &-list {
+    position: relative;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    transition: transform 0.15s linear;
+    ul {
+      position: absolute;
+      bottom: 46px;
+      left: 0;
+      background-color: white;
+      list-style: none;
+      padding: 0;
+      max-height: 200px;
+      min-height: 200px;
+      overflow-y: auto;
+      width: 100%;
+      border: 1px solid lightgray;
+      border-radius: $rounded-5;
+
+      li {
+        cursor: default;
+        padding: 0.5rem;
+
+        &:hover {
+          background-color: rgba(243, 244, 246, 0.5);
+        }
+      }
+    }
+  }
+
+  &-toggle {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 59%;
+    right: 2px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+  }
+
+  &-visible {
+  }
+}

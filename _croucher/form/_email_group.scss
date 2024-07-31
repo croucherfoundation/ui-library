@@ -1,0 +1,164 @@
+.email {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+
+  &-input {
+    flex: 3;
+    position: relative;
+
+    input,
+    input:active,
+    input:focus {
+      outline: none;
+      border: 1px solid #dfdfdf;
+      border-radius: $rounded-5;
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      font-size: 16px;
+    }
+  }
+
+  &-add {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: none;
+    background: none;
+    width: 20px; /* w-[20px] */
+    height: 20px; /* h-[20px] */
+    border-radius: 50%; /* rounded-full */
+    position: absolute; /* absolute */
+    right: -4px; /* right-[-4px] */
+    bottom: -10px; /* bottom-[6px] */
+    background-color: $croucher-red; /* bg-red */
+    color: white; /* text-white */
+    display: flex; /* flex */
+    justify-content: center; /* justify-center */
+    align-items: center; /* items-center */
+
+    span {
+      display: flex; /* flex */
+      justify-content: center; /* justify-center */
+      align-items: center;
+    }
+  }
+
+  &-remove {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-type {
+    flex: 1;
+    font-size: 16px;
+
+    &-selected {
+      cursor: pointer;
+      border: 1px solid lightgray;
+      border-radius: $rounded-5;
+      padding: 0.8rem;
+      position: relative;
+      width: 160px; /* w-[160px] */
+      position: relative; /* relative */
+      height: 42px; /* h-[42px] */
+      text-align: left; /* text-left */
+      border: 1px solid #dfdfdf; /* border border-[#dfdfdf] */
+      border-radius: 5px; /* rounded-b-5 (assuming 5px radius) */
+      display: flex; /* flex */
+      align-items: center; /* items-center */
+      padding-left: 14px; /* px-[14px] */
+      padding-right: 14px; /* px-[14px] */
+
+      & > input,
+      & > input:active,
+      & > input:focus {
+        border: none !important;
+        cursor: pointer;
+        padding: 0 !important;
+      }
+      span {
+        position: absolute;
+        right: 10px;
+        top: 12px;
+      }
+    }
+
+    &-list {
+      z-index: 30;
+      position: relative;
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.15s linear;
+
+      &.show-list {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+
+      &.hidden-list {
+        display: none;
+      }
+
+      & > div {
+        position: absolute;
+        list-style: none;
+        padding: 0;
+        z-index: 30;
+        border: 1px solid lightgray;
+        border-radius: $rounded-5;
+        background-color: #fff;
+        top: 6px;
+        width: 100%;
+        button {
+          background: none;
+          border: none;
+          outline: none;
+          display: flex; /* flex */
+          text-align: left; /* text-left */
+          width: 100%; /* w-full */
+          align-items: center; /* items-center */
+          padding-left: 12px; /* px-3 (3 * 4px = 12px) */
+          padding-right: 12px; /* px-3 */
+          padding-top: 8px; /* py-2 (2 * 4px = 8px) */
+          padding-bottom: 8px; /* py-2 */
+
+          & > span {
+            margin-left: 0.25rem;
+            font-size: 14px;
+          }
+          &:hover {
+            background-color: #f7fafc;
+          }
+
+          &.active {
+            display: initial;
+
+            svg.check {
+              display: initial;
+            }
+
+            svg.circle {
+              display: none;
+            }
+          }
+
+          & > svg.check {
+            color: $croucher-red;
+            display: none;
+            transform: scale(1.15);
+          }
+
+          & > svg.circle {
+            color: #aaa;
+            display: initial;
+            transform: scale(1.15);
+          }
+        }
+      }
+    }
+  }
+}
