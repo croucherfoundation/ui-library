@@ -1,0 +1,24 @@
+.croucher_input {
+  margin-bottom: 16px;
+  &_label {
+  }
+  &_group {
+    input,
+    input:active,
+    input:focus,
+    textarea,
+    textarea:active,
+    textarea:focus {
+      outline: none;
+      border: 1px solid #dfdfdf;
+      border-radius: $rounded-5;
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+    }
+  }
+}

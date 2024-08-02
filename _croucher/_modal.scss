@@ -95,7 +95,10 @@
 
     input,
     input:active,
-    input:focus {
+    input:focus,
+    textarea,
+    textarea:active,
+    textarea:focus {
       outline: none;
       border: 1px solid #dfdfdf;
       border-radius: $rounded-5;
@@ -103,6 +106,9 @@
       width: 100%;
       padding: 0.5rem 0.75rem;
       font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
     }
   }
 
@@ -122,6 +128,10 @@
   }
   .timezones {
     padding-bottom: 20px;
+  }
+  .emergency {
+    margin-top: 32px;
+    margin-bottom: 30px;
   }
 
   .actions {
