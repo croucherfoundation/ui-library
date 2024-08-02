@@ -466,6 +466,7 @@
 
     emailTypeElements.forEach((emailType) => {
       let selected = emailType.querySelector(".email-type-selected");
+      let selectedPreview = emailType.querySelector(".email-type-selected p");
       let selectedInput = emailType.querySelector(".email-type-selected input");
       let typeLists = emailType.querySelector(".email-type-list");
       let listBtns = typeLists.querySelectorAll("button");
@@ -479,13 +480,14 @@
             typeLists.classList.add("show-list");
             listBtns.forEach((btn) => {
               let span = btn.querySelector("span");
-              if (span.textContent === selectedInput.value) {
+              if (span.textContent === selectedPreview.textContent) {
                 btn.classList.add("active");
               } else {
                 btn.classList.remove("active");
               }
               btn.addEventListener("click", () => {
-                selectedInput.value = span.textContent;
+                selectedInput.value = btn.getAttribute('data-value');
+                selectedPreview.textContent = span.textContent;
                 typeLists.classList.add("hidden-list");
               });
             });
