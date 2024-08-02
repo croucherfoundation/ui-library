@@ -258,6 +258,12 @@
           closeModal();
         });
         saveBtn.addEventListener("click", function (e) {
+          // e.preventDefault();
+          // validation
+          // form password --->
+          // this parent form
+          // password --> 
+          // validation check ok form.submit()
           closeModal();
         });
         backdrop.addEventListener("click", function () {
@@ -290,22 +296,33 @@
         ".searchable-input input"
       );
       this.toggleBtn = this.searchable.querySelector(".searchable-toggle");
+      this.hiddenSelect = document.getElementById(config.hiddenSelectId);
 
       if (!this.searchableInput) {
         throw new Error(`
-        
-          MySelect: There is no element with searchable-input class with it's direct children input element.
-          It should be the following structure.
-          <div id="yourId">
-            <div class='searchable-input'>
-              <input type='text' />
-            </div>
-          </div>
-        
-        `);
+                MySelect: There is no element with searchable-input class with it's direct children input element.
+                It should be the following structure.
+                <div id="yourId">
+                  <div class='searchable-input'>
+                    <input type='text' />
+                  </div>
+                </div>
+            `);
       }
+      this.setInitialValue();
       this.listenToggleBtn();
       this.listenInputFocus();
+    }
+
+    setInitialValue() {
+      if (this.hiddenSelect && this.hiddenSelect.value) {
+        const selectedOption = this.options.find(
+          (option) => option.label === this.hiddenSelect.value
+        );
+        if (selectedOption) {
+          this.searchableInput.value = selectedOption.label;
+        }
+      }
     }
 
     listenToggleBtn() {
@@ -324,7 +341,6 @@
           }, 100);
           this.searchable.appendChild(list);
           this.renderAndListenInputChange();
-          console.log("created");
         }
       });
     }
@@ -344,12 +360,16 @@
         }
       });
     }
+
     createListItemElement(item) {
       let li = document.createElement("li");
       li.textContent = item.label;
       li.setAttribute("value", item.value);
       li.addEventListener("click", () => {
-        this.searchableInput.value = item.value;
+        this.searchableInput.value = item.label;
+        if (this.hiddenSelect) {
+          this.hiddenSelect.value = item.value;
+        }
         let searchableList = this.searchable.querySelector(".searchable-list");
         if (searchableList) searchableList.remove();
       });
@@ -403,50 +423,17 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    let options = [
-      {
-        value: "null",
-        label: "Select timezone",
-      },
-      {
-        value: "Pacific/Midway",
-        label: "Midway",
-      },
-      {
-        value: "Pacific/Niue",
-        label: "Niue",
-      },
-      {
-        value: "Pacific/Pago_Pago",
-        label: "Pago Pago",
-      },
-      {
-        value: "Pacific/Samoa,US/Samoa",
-        label: "Samoa",
-      },
-      {
-        value: "America/Adak",
-        label: "Adak",
-      },
-      {
-        value: "America/Atka",
-        label: "Atka",
-      },
-      {
-        value: "HST",
-        label: "HST",
-      },
-      {
-        value: "Pacific/Honolulu",
-        label: "Honolulu",
-      },
-      {
-        value: "Pacific/Johnston",
-        label: "Johnston",
-      },
-    ];
+    let timezonesContainer = document.getElementById("timezonesSelect");
+    let options = JSON.parse(timezonesContainer.dataset.options).map(
+      ([label, value]) => ({
+        value: value,
+        label: label,
+      })
+    );
+
     new MySelect("timezonesSelect", {
       options,
+      hiddenSelectId: "hidden_timezone_select",
     });
   });
 
@@ -486,7 +473,7 @@
                 btn.classList.remove("active");
               }
               btn.addEventListener("click", () => {
-                selectedInput.value = btn.getAttribute('data-value');
+                selectedInput.value = btn.getAttribute("data-value");
                 selectedPreview.textContent = span.textContent;
                 typeLists.classList.add("hidden-list");
               });
