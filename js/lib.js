@@ -262,7 +262,7 @@
           // validation
           // form password --->
           // this parent form
-          // password --> 
+          // password -->
           // validation check ok form.submit()
           closeModal();
         });
@@ -487,6 +487,55 @@
   /**
    * -----------------------------
    * ---END: Account Email Type Selector
+   * -----------------------------
+   */
+
+  /**
+   * -----------------------------
+   * ---START: Password Input Eye Show Hide
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+    // For Sign In
+    var signInInput = document.querySelector(".sign_in_form .input_group .sign_in_password")
+    var signInPassowrdEyeBtn = document.querySelector(".sign_in_form input_group .eye");
+    var signInPassowrdEyeImg = signInPassowrdEyeBtn.querySelector("img");
+    signInPassowrdEyeBtn.addEventListener("click", () => {
+      if(signInInput.type == "password"){
+        signInInput.type = "text"
+        signInPassowrdEyeImg.src =  "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
+        
+      } else {
+        signInInput.type = "password";
+        signInPassowrdEyeImg.src  =  "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
+      }
+    })
+
+
+    // For Account Settings
+    var passwordInputs = document.querySelectorAll(".passwords-input");
+    passwordInputs.forEach((passwordInput) => {
+      var span = passwordInput.querySelector("span");
+      span.addEventListener("click", () => {
+        passwordInputs.forEach((item) => {
+          var input = item.querySelector("input");
+          var eyeImage = item.querySelector("img");
+
+          if (input.type === "password") {
+            input.type = "text";
+            eyeImage.src =
+              "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
+          } else {
+            input.type = "password";
+            eyeImage.src =
+              "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
+          }
+        });
+      });
+    });
+  });
+  /**
+   * -----------------------------
+   * ---END: Password Input Eye Show Hide
    * -----------------------------
    */
 })();
