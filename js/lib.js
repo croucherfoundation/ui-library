@@ -262,7 +262,7 @@
           // validation
           // form password --->
           // this parent form
-          // password --> 
+          // password -->
           // validation check ok form.submit()
           closeModal();
         });
@@ -290,13 +290,13 @@
    */
   class MySelect {
     constructor(containerId, config) {
-      this.options = config.options;
       this.searchable = document.getElementById(containerId);
       this.searchableInput = this.searchable.querySelector(
         ".searchable-input input"
       );
       this.toggleBtn = this.searchable.querySelector(".searchable-toggle");
       this.hiddenSelect = document.getElementById(config.hiddenSelectId);
+      this.hiddenSelectInput = document.getElementById('input_user_timezone');
 
       if (!this.searchableInput) {
         throw new Error(`
@@ -309,15 +309,25 @@
                 </div>
             `);
       }
+
+      this.options = this.extractOptionsFromSelect(this.hiddenSelect);
       this.setInitialValue();
       this.listenToggleBtn();
       this.listenInputFocus();
     }
 
+    extractOptionsFromSelect(selectElement) {
+      const options = [];
+      for (const option of selectElement.options) {
+        options.push({ value: option.value, label: option.text });
+      }
+      return options;
+    }
+
     setInitialValue() {
-      if (this.hiddenSelect && this.hiddenSelect.value) {
+      if (this.hiddenSelect && this.hiddenSelectInput.value) {
         const selectedOption = this.options.find(
-          (option) => option.label === this.hiddenSelect.value
+          (option) => option.value === this.hiddenSelectInput.value
         );
         if (selectedOption) {
           this.searchableInput.value = selectedOption.label;
@@ -369,6 +379,7 @@
         this.searchableInput.value = item.label;
         if (this.hiddenSelect) {
           this.hiddenSelect.value = item.value;
+          this.hiddenSelectInput.value = item.value;
         }
         let searchableList = this.searchable.querySelector(".searchable-list");
         if (searchableList) searchableList.remove();
@@ -423,16 +434,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    let timezonesContainer = document.getElementById("timezonesSelect");
-    let options = JSON.parse(timezonesContainer.dataset.options).map(
-      ([label, value]) => ({
-        value: value,
-        label: label,
-      })
-    );
-
     new MySelect("timezonesSelect", {
-      options,
       hiddenSelectId: "hidden_timezone_select",
     });
   });
