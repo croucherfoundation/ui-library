@@ -264,6 +264,13 @@
           // this parent form
           // password -->
           // validation check ok form.submit()
+
+          /**
+           * TODO: Password validation if password fields
+           */
+
+          var form = this.closest("form");
+          form.submit();
           closeModal();
         });
         backdrop.addEventListener("click", function () {
@@ -296,7 +303,7 @@
       );
       this.toggleBtn = this.searchable.querySelector(".searchable-toggle");
       this.hiddenSelect = document.getElementById(config.hiddenSelectId);
-      this.hiddenSelectInput = document.getElementById('input_user_timezone');
+      this.hiddenSelectInput = document.getElementById("input_user_timezone");
 
       if (!this.searchableInput) {
         throw new Error(`
@@ -498,20 +505,24 @@
    */
   document.addEventListener("DOMContentLoaded", () => {
     // For Sign In
-    var signInInput = document.querySelector(".sign_in_form .input_group .sign_in_password")
-    var signInPassowrdEyeBtn = document.querySelector(".sign_in_form input_group .eye");
+    var signInInput = document.querySelector(
+      ".sign_in_form .input_group .sign_in_password"
+    );
+    var signInPassowrdEyeBtn = document.querySelector(
+      ".sign_in_form input_group .eye"
+    );
     var signInPassowrdEyeImg = signInPassowrdEyeBtn.querySelector("img");
     signInPassowrdEyeBtn.addEventListener("click", () => {
-      if(signInInput.type == "password"){
-        signInInput.type = "text"
-        signInPassowrdEyeImg.src =  "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
-        
+      if (signInInput.type == "password") {
+        signInInput.type = "text";
+        signInPassowrdEyeImg.src =
+          "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
       } else {
         signInInput.type = "password";
-        signInPassowrdEyeImg.src  =  "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
+        signInPassowrdEyeImg.src =
+          "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
       }
-    })
-
+    });
 
     // For Account Settings
     var passwordInputs = document.querySelectorAll(".passwords-input");
