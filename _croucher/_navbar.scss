@@ -258,6 +258,7 @@
           padding: 40px 24px;
           border: none;
           // background-color: #f8f8f5;
+          display: none;
 
           label {
             font-family: 'MarrSans';
@@ -290,18 +291,42 @@
             width: 100%;
             outline: none;
             font-size: 16px;
+
+          }
+
+          @include lg {
+            display: block;
           }
         }
         .sign_in {
-          a {
-            color: $black;
-            font-weight: 400;
+          padding-top: 12px; /* py-[12px] */
+          padding-bottom: 12px; /* py-[12px] */
+          padding-left: 24px; /* px-[24px] */
+          padding-right: 24px; /* px-[24px] */
+          border-bottom: 1px solid #000;
+          button {
+            line-height: inherit;
+            font-weight: inherit;
+            @extend %reset-button;
+            display: flex; /* flex */
+            gap: 3.5px; 
             &:hover {
               color: $croucher-red;
             }
-            img {
-              vertical-align: top;
-              margin-top: 2px;
+          }
+          span {
+            font-size: 22px;
+            letter-spacing: 0.01em;
+          }
+          @include lg {
+            padding-top: 0; /* lg:py-0 */
+            padding-bottom: 0; /* lg:py-0 */
+            padding-left: 0; /* lg:px-0 */
+            padding-right: 0;
+            border-bottom: none;
+
+            span {
+              font-size: 16px;
             }
           }
         }
@@ -324,6 +349,36 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+          }
+        }
+
+        .search_mobile {
+          padding: 16px 24px;
+          border: none;
+          form {
+            position: relative;
+            input {
+              letter-spacing: 0.01em;
+              outline: none;
+              width: 100%;
+              padding: .5rem .75rem;
+              padding-right: 20px; 
+              border: none;
+              background-color: #F3F3F0; 
+              border-radius: $rounded-5;
+              font-size: 1rem;
+              border-width: 1px;
+              line-height: 1.5rem;
+            }
+            button {
+              @extend %reset-button;
+              position: absolute;
+              top: 12px;
+              right: 10px;
+            }
+          }
+          @include lg {
+            display: none;
           }
         }
       }
