@@ -151,6 +151,9 @@
       height: 30px;
       right: 13px;
       top: 68px;
+      svg {
+        display: block;
+      }
     }
     .logo_container {
       width: 57px;
@@ -248,10 +251,6 @@
             }
           }
         }
-        // li.search_button,
-        // li.language_translate {
-        //   display: none;
-        // }
         .search_button {
           top: -1px;
           position: relative;
@@ -332,6 +331,7 @@
         }
 
         .user_avatar {
+          display: none;
           border: none;
           cursor: pointer;
           width: 49px;
@@ -350,8 +350,11 @@
             object-fit: cover;
             border-radius: 50%;
           }
+          @include lg {
+            display: block;
+          }
         }
-
+        
         .search_mobile {
           padding: 16px 24px;
           border: none;
@@ -402,6 +405,30 @@
       display: block;
       z-index: 999;
     }
+
+    .user_menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 20px; 
+      @include lg {
+        display: none;
+      }
+    }
+
+    .user_avatar_mobile {
+      @extend %reset-button;
+      width: 49px;
+      height: 49px;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
   }
   &_spacer {
     height: 135px;
