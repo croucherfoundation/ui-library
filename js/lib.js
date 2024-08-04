@@ -258,7 +258,7 @@
           closeModal();
         });
         saveBtn.addEventListener("click", function (e) {
-          // e.preventDefault();
+          e.preventDefault();
           // validation
           // form password --->
           // this parent form
