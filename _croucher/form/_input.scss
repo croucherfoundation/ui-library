@@ -1,5 +1,5 @@
 .croucher_input {
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
   &_label {
   }
   &_group {
@@ -20,5 +20,17 @@
     textarea {
       resize: vertical;
     }
+  }
+
+  .error_message {
+    font-size: 10px;
+    color: $croucher-red;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+  }
+
+  .croucher_input_invalid {
+    border: 1px solid $croucher-red !important;
   }
 }

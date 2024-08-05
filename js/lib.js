@@ -235,6 +235,13 @@
     document.body.appendChild(el);
     return el;
   }
+  function closeModal(modalId) {
+    var backdrop = document.querySelector(".modal-backdrop");
+    if (!backdrop) return;
+    removeClassName(backdrop, "show");
+    removeClassName(document.getElementById(modalId), "modal-open");
+    callLater(() => backdrop.remove(), 100);
+  }
   document.addEventListener("DOMContentLoaded", () => {
     var allModalDialogBtns = document.querySelectorAll("[data-toggle='modal']");
 
@@ -246,42 +253,10 @@
         var modal = document.getElementById(targeModalId);
         // return;
         var backdrop = createModalBackdrop();
-        var closeBtn = modal.querySelector(".cancel");
-        var saveBtn = modal.querySelector(".save");
-
         callLater(function () {
           backdrop.classList.add("show");
           modal.classList.add("modal-open");
         });
-
-        closeBtn.addEventListener("click", function () {
-          closeModal();
-        });
-        saveBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          // validation
-          // form password --->
-          // this parent form
-          // password -->
-          // validation check ok form.submit()
-
-          /**
-           * TODO: Password validation if password fields
-           */
-
-          var form = this.closest("form");
-          form.submit();
-          closeModal();
-        });
-        backdrop.addEventListener("click", function () {
-          closeModal();
-        });
-
-        function closeModal() {
-          removeClassName(backdrop, "show");
-          removeClassName(modal, "modal-open");
-          callLater(() => backdrop.remove(), 100);
-        }
       });
     });
   });
@@ -554,6 +529,117 @@
   /**
    * -----------------------------
    * ---END: Password Input Eye Show Hide
+   * -----------------------------
+   */
+
+  /**
+   * -------------------------------
+   * ---- START: Password validation for Account Settings
+   * -----------------------------
+   */
+  /**
+   * password validation
+   *  - Password must be at least 8 characters
+   *  - Password should not contain repeated characters like "aaa"
+   *  - Password should not contain sequences like abc, 6543, etc.
+   *
+   */
+
+  function validatePassword(password) {
+    var errorMessage = "";
+
+    if (password.trim() === "") {
+      errorMessage = "";
+    } else if (password.trim().length < 8) {
+      errorMessage = "Password must be at least 8 characters long.";
+    } else if (/(\w)\1\1/.test(password)) {
+      errorMessage =
+        'Password should not contain repeated characters like "aaa".';
+    }
+
+    var sequences = [
+      "0123456789",
+      "9876543210",
+      "abcdefghijklmnopqrstuvwxyz",
+      "zyxwvutsrqponmlkjihgfedcba",
+    ];
+
+    for (var i = 0; i < sequences.length; i++) {
+      for (var j = 0; j < sequences[i].length - 2; j++) {
+        var sequence = sequences[i].substring(j, j + 3);
+        if (password.includes(sequence)) {
+          errorMessage =
+            'Password should not contain sequences like "abc" or "6543".';
+          break;
+        }
+      }
+    }
+
+    return errorMessage;
+  }
+  var formSubmitted = false;
+  var passwordPrimary = document.querySelector(".passwords-input-primary");
+  var passwordConfirm = document.querySelector(".passwords-input-confirm");
+
+  var passwordPrimaryInput = passwordPrimary.querySelector("input");
+  var passwordConfirmInput = passwordConfirm.querySelector("input");
+
+  var yourAccountForm = document.getElementById("yourAccountForm");
+
+  if (yourAccountForm && passwordPrimaryInput) {
+    yourAccountForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      formSubmitted = true;
+      var errorMsg = validatePassword(passwordPrimaryInput.value);
+      var errorEl = passwordPrimary.querySelector(".error_message");
+      errorEl.textContent = errorMsg;
+      if (errorMsg) {
+        passwordPrimaryInput.classList.add("croucher_input_invalid");
+      } else {
+        passwordPrimaryInput.classList.remove("croucher_input_invalid");
+        console.log("submitting");
+        closeModal("modal1");
+      }
+    });
+  }
+
+  if (passwordPrimaryInput && passwordConfirmInput) {
+    passwordPrimaryInput.addEventListener("input", function (e) {
+      var value = this.value;
+
+      if (value === passwordConfirmInput.value) {
+        passwordConfirm.querySelector(".error_message").textContent = "";
+      }
+      if (!formSubmitted) return;
+      var errorMsg = validatePassword(value);
+      var errorEl = passwordPrimary.querySelector(".error_message");
+      errorEl.textContent = errorMsg;
+      if (errorMsg) {
+        passwordPrimaryInput.classList.add("croucher_input_invalid");
+      } else {
+        passwordPrimaryInput.classList.remove("croucher_input_invalid");
+      }
+    });
+
+    passwordConfirmInput.addEventListener("input", function (e) {
+      var value = this.value;
+      var errorMsg =
+        this.value !== passwordPrimaryInput.value
+          ? "Passwords do not match."
+          : "";
+      var errorEl = passwordConfirm.querySelector(".error_message");
+      errorEl.textContent = errorMsg;
+      if (errorMsg) {
+        passwordConfirmInput.classList.add("croucher_input_invalid");
+      } else {
+        passwordConfirmInput.classList.remove("croucher_input_invalid");
+      }
+    });
+  }
+
+  /**
+   * -------------------------------
+   * ---- END: Password validation for Account Settings
    * -----------------------------
    */
 })();
