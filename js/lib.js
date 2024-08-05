@@ -457,7 +457,7 @@
    * ---START: Account Email Type Selector
    * -----------------------------
    */
-  document.addEventListener("DOMContentLoaded", () => {
+  function initializeEmailTypeSelect() {
     let emailTypeElements = document.querySelectorAll(".email .email-type");
 
     emailTypeElements.forEach((emailType) => {
@@ -491,6 +491,9 @@
         }, 1);
       });
     });
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeEmailTypeSelect();
   });
 
   /**
@@ -511,18 +514,20 @@
     var signInPassowrdEyeBtn = document.querySelector(
       ".sign_in_form input_group .eye"
     );
-    var signInPassowrdEyeImg = signInPassowrdEyeBtn.querySelector("img");
-    signInPassowrdEyeBtn.addEventListener("click", () => {
-      if (signInInput.type == "password") {
-        signInInput.type = "text";
-        signInPassowrdEyeImg.src =
-          "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
-      } else {
-        signInInput.type = "password";
-        signInPassowrdEyeImg.src =
-          "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
-      }
-    });
+    if (signInPassowrdEyeBtn) {
+      var signInPassowrdEyeImg = signInPassowrdEyeBtn.querySelector("img");
+      signInPassowrdEyeBtn.addEventListener("click", () => {
+        if (signInInput.type == "password") {
+          signInInput.type = "text";
+          signInPassowrdEyeImg.src =
+            "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
+        } else {
+          signInInput.type = "password";
+          signInPassowrdEyeImg.src =
+            "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
+        }
+      });
+    }
 
     // For Account Settings
     var passwordInputs = document.querySelectorAll(".passwords-input");
