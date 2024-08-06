@@ -602,43 +602,52 @@
     var passwordConfirmInput = passwordConfirm.querySelector("input");
   }
 
-  var saveAccountSettingsBtn = document.getElementById("saveAccountSettings");
+  var modalSaveBtns = document.querySelectorAll(".modal .modal-btn.save");
+  console.log("modalSaveBtns", modalSaveBtns);
 
-  if (saveAccountSettingsBtn && passwordPrimary && passwordConfirm) {
-    saveAccountSettingsBtn.addEventListener("click", function (e) {
+  modalSaveBtns.forEach((saveBtn) => {
+    saveBtn.addEventListener("click", function (e) {
       e.preventDefault();
       formSubmitted = true;
-      var formValid = true;
-      var errorMsg = validatePassword(passwordPrimaryInput.value);
-      var errorEl = passwordPrimary.querySelector(".error_message");
-      errorEl.textContent = errorMsg;
 
-      var confirmErrEl = passwordConfirm.querySelector(".error_message");
+      if (passwordConfirmInput && passwordPrimaryInput) {
+        var formValid = true;
+        var errorMsg = validatePassword(passwordPrimaryInput.value);
+        var errorEl = passwordPrimary.querySelector(".error_message");
+        errorEl.textContent = errorMsg;
 
-      if (passwordConfirmInput.value !== passwordPrimaryInput.value) {
-        passwordConfirmInput.classList.add("croucher_input_invalid");
-        confirmErrEl.textContent = "Passwords do not match.";
-        formValid = false;
+        var confirmErrEl = passwordConfirm.querySelector(".error_message");
+
+        if (passwordConfirmInput.value !== passwordPrimaryInput.value) {
+          passwordConfirmInput.classList.add("croucher_input_invalid");
+          confirmErrEl.textContent = "Passwords do not match.";
+          formValid = false;
+        } else {
+          passwordConfirmInput.classList.remove("croucher_input_invalid");
+        }
+
+        if (errorMsg) {
+          passwordPrimaryInput.classList.add("croucher_input_invalid");
+          formValid = false;
+        }
+
+        if (formValid) {
+          console.log("submitted");
+          passwordPrimaryInput.classList.remove("croucher_input_invalid");
+          closeModal("modal1");
+          var form = this.closest("form");
+          if (form) {
+            form.submit();
+          }
+        }
       } else {
-        passwordConfirmInput.classList.remove("croucher_input_invalid");
-      }
-
-      if (errorMsg) {
-        passwordPrimaryInput.classList.add("croucher_input_invalid");
-        formValid = false;
-      }
-
-      if (formValid) {
-        console.log("submitted");
-        passwordPrimaryInput.classList.remove("croucher_input_invalid");
-        closeModal("modal1");
         var form = this.closest("form");
         if (form) {
           form.submit();
         }
       }
     });
-  }
+  });
 
   if (passwordPrimaryInput && passwordConfirmInput) {
     passwordPrimaryInput.addEventListener("input", function (e) {
