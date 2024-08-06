@@ -126,6 +126,33 @@
               }
             }
           }
+
+          .user_avatar {
+            display: none;
+            border: none;
+            cursor: pointer;
+            width: 49px;
+            height: 49px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: block;
+            background: none;
+            padding: 0;
+            margin-top: -1rem;;
+
+            &:focus {
+              outline: none;
+            }
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 50%;
+            }
+            @include lg {
+              display: block;
+            }
+          }
         }
         .close_icon,
         .menu {
@@ -341,6 +368,8 @@
           display: block;
           background: none;
           padding: 0;
+          margin-top: -1rem;;
+
           &:focus {
             outline: none;
           }
