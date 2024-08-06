@@ -642,6 +642,14 @@
         }
       } else {
         var form = this.closest("form");
+
+        var modal = saveBtn.closest(".modal");
+        console.log("modal cl", modal);
+        var backdrop = document.querySelector(".modal-backdrop");
+        removeClassName(backdrop, "show");
+        removeClassName(modal, "modal-open");
+        callLater(() => backdrop.remove(), 100);
+
         if (form) {
           form.submit();
         }
