@@ -598,8 +598,8 @@
   var passwordConfirmInput;
 
   if (passwordPrimary && passwordConfirm) {
-    var passwordPrimaryInput = passwordPrimary.querySelector("input");
-    var passwordConfirmInput = passwordConfirm.querySelector("input");
+     passwordPrimaryInput = passwordPrimary.querySelector("input");
+     passwordConfirmInput = passwordConfirm.querySelector("input");
   }
 
   var modalSaveBtns = document.querySelectorAll(".modal .modal-btn.save");
