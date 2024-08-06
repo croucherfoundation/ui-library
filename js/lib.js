@@ -634,8 +634,9 @@
         if (formValid) {
           console.log("submitted");
           passwordPrimaryInput.classList.remove("croucher_input_invalid");
-          closeModal("modal1");
           var form = this.closest("form");
+          var modal = saveBtn.closest(".modal");
+          closeModal(modal.id)
           if (form) {
             form.submit();
           }
