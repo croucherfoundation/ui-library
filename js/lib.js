@@ -245,6 +245,19 @@
   document.addEventListener("DOMContentLoaded", () => {
     var allModalDialogBtns = document.querySelectorAll("[data-toggle='modal']");
 
+    var modalCancelBtns = document.querySelectorAll("button.modal-btn.cancel");
+
+    modalCancelBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        var modal = btn.closest(".modal");
+        console.log("modal cl", modal);
+        var backdrop = document.querySelector(".modal-backdrop");
+        removeClassName(backdrop, "show");
+        removeClassName(modal, "modal-open");
+        callLater(() => backdrop.remove(), 100);
+      });
+    });
+
     allModalDialogBtns.forEach((openBt) => {
       openBt.addEventListener("click", () => {
         // var modal = document.querySelector(".modal");
@@ -581,24 +594,48 @@
   var passwordPrimary = document.querySelector(".passwords-input-primary");
   var passwordConfirm = document.querySelector(".passwords-input-confirm");
 
-  var passwordPrimaryInput = passwordPrimary.querySelector("input");
-  var passwordConfirmInput = passwordConfirm.querySelector("input");
+  var passwordPrimaryInput;
+  var passwordConfirmInput;
 
-  var yourAccountForm = document.getElementById("yourAccountForm");
+  if (passwordPrimary && passwordConfirm) {
+    var passwordPrimaryInput = passwordPrimary.querySelector("input");
+    var passwordConfirmInput = passwordConfirm.querySelector("input");
+  }
 
-  if (yourAccountForm && passwordPrimaryInput) {
-    yourAccountForm.addEventListener("submit", function (e) {
+  var saveAccountSettingsBtn = document.getElementById("saveAccountSettings");
+
+  if (saveAccountSettingsBtn && passwordPrimary && passwordConfirm) {
+    saveAccountSettingsBtn.addEventListener("click", function (e) {
       e.preventDefault();
       formSubmitted = true;
+      var formValid = true;
       var errorMsg = validatePassword(passwordPrimaryInput.value);
       var errorEl = passwordPrimary.querySelector(".error_message");
       errorEl.textContent = errorMsg;
+
+      var confirmErrEl = passwordConfirm.querySelector(".error_message");
+
+      if (passwordConfirmInput.value !== passwordPrimaryInput.value) {
+        passwordConfirmInput.classList.add("croucher_input_invalid");
+        confirmErrEl.textContent = "Passwords do not match.";
+        formValid = false;
+      } else {
+        passwordConfirmInput.classList.remove("croucher_input_invalid");
+      }
+
       if (errorMsg) {
         passwordPrimaryInput.classList.add("croucher_input_invalid");
-      } else {
+        formValid = false;
+      }
+
+      if (formValid) {
+        console.log("submitted");
         passwordPrimaryInput.classList.remove("croucher_input_invalid");
-        console.log("submitting");
         closeModal("modal1");
+        var form = this.closest("form");
+        if (form) {
+          form.submit();
+        }
       }
     });
   }
@@ -606,9 +643,11 @@
   if (passwordPrimaryInput && passwordConfirmInput) {
     passwordPrimaryInput.addEventListener("input", function (e) {
       var value = this.value;
-
+      var confirmErrEl = passwordConfirm.querySelector(".error_message");
       if (value === passwordConfirmInput.value) {
-        passwordConfirm.querySelector(".error_message").textContent = "";
+        confirmErrEl.textContent = "";
+      } else {
+        confirmErrEl.textContent = "Passwords do not match.";
       }
       if (!formSubmitted) return;
       var errorMsg = validatePassword(value);
