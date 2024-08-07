@@ -187,6 +187,11 @@
       let signinCrossBtn = signinBox.querySelector(
         ".cross_icon_container button"
       );
+      if (signinCrossBtn) {
+        signinCrossBtn.addEventListener("click", () => {
+          signinBox.classList.remove("auth_container_open");
+        });
+      }
     }
     let openSingnOut = document.querySelector(".user_avatar");
     let signoutBox = document.getElementById("signout-box");
@@ -194,23 +199,16 @@
       let signoutCrossBtn = signoutBox.querySelector(
         ".cross_icon_container button"
       );
+      if (signoutCrossBtn) {
+        signoutCrossBtn.addEventListener("click", () => {
+          signoutBox.classList.remove("auth_container_open");
+        });
+      }
     }
 
     if (openSignInBtn) {
       openSignInBtn.addEventListener("click", () => {
         signinBox.classList.add("auth_container_open");
-      });
-    }
-
-    if (signinCrossBtn) {
-      signinCrossBtn.addEventListener("click", () => {
-        signinBox.classList.remove("auth_container_open");
-      });
-    }
-
-    if (signoutCrossBtn) {
-      signoutCrossBtn.addEventListener("click", () => {
-        signoutBox.classList.remove("auth_container_open");
       });
     }
 
