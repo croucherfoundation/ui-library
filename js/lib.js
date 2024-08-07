@@ -183,14 +183,18 @@
   document.addEventListener("DOMContentLoaded", () => {
     let openSignInBtn = document.querySelector(".sign_in");
     let signinBox = document.getElementById("signin-box");
-    let signinCrossBtn = signinBox.querySelector(
-      ".cross_icon_container button"
-    );
+    if(signinBox){
+      let signinCrossBtn = signinBox.querySelector(
+        ".cross_icon_container button"
+      );
+    }
     let openSingnOut = document.querySelector(".user_avatar");
     let signoutBox = document.getElementById("signout-box");
-    let signoutCrossBtn = signoutBox.querySelector(
-      ".cross_icon_container button"
-    );
+    if (signoutBox){
+      let signoutCrossBtn = signoutBox.querySelector(
+        ".cross_icon_container button"
+      );
+    }
 
     if (openSignInBtn) {
       openSignInBtn.addEventListener("click", () => {
