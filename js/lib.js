@@ -286,6 +286,19 @@
   class MySelect {
     constructor(containerId, config) {
       this.searchable = document.getElementById(containerId);
+
+      if (this.searchable) {
+        throw new Error(`
+            My Select: There is no element with id: ${containerId}.
+            It should be the following structure.
+            <div id="yourId">
+              <div class='searchable-input'>
+                <input type='text' />
+              </div>
+            </div>
+          `);
+      }
+
       this.searchableInput = this.searchable.querySelector(
         ".searchable-input input"
       );
@@ -598,8 +611,8 @@
   var passwordConfirmInput;
 
   if (passwordPrimary && passwordConfirm) {
-     passwordPrimaryInput = passwordPrimary.querySelector("input");
-     passwordConfirmInput = passwordConfirm.querySelector("input");
+    passwordPrimaryInput = passwordPrimary.querySelector("input");
+    passwordConfirmInput = passwordConfirm.querySelector("input");
   }
 
   var modalSaveBtns = document.querySelectorAll(".modal .modal-btn.save");
@@ -636,7 +649,7 @@
           passwordPrimaryInput.classList.remove("croucher_input_invalid");
           var form = this.closest("form");
           var modal = saveBtn.closest(".modal");
-          closeModal(modal.id)
+          closeModal(modal.id);
           if (form) {
             form.submit();
           }
