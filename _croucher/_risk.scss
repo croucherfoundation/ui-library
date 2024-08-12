@@ -245,9 +245,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     &--red {
       background-color: $croucher-red;
+    }
+
+    &::before {
+      content: attr(data-info);
+      background-color: #F3F3F0;
+      position: absolute;
+      color: #000;
+      top: 100%;
+      text-align: left;
+      z-index: 10;
+      border-radius: $rounded-5;
+      display: none;
+    }
+
+    &:hover {
+      &::before {
+        display: block;
+        padding: 16px 10px;
+      }
     }
   }
 }
