@@ -1,0 +1,150 @@
+.risks {
+  position: relative;
+  min-width: 100%;
+
+  &-grid {
+    --gap: 10px;
+    --cell-size: calc((100% - var(--gap) * 5) / 7);
+    display: grid;
+    grid-template-columns: repeat(7, var(--cell-size));
+    grid-template-rows: repeat(8, 40px);
+    gap: var(--gap);
+    margin-top: 60px;
+    margin-bottom: 60px;
+    width: 100%;
+    row-gap: 40px;
+    align-items: center;
+
+    &-item {
+      //   border: 1px solid gainsboro;
+      width: 100%;
+
+      &-vertical {
+        grid-column: 4 / 4;
+        grid-row: 1 / -1;
+        align-self: stretch;
+        // background-color: red;
+      }
+
+      &-horizontal {
+        grid-column: 1 / -1;
+        // background-color: red;
+        grid-row: 4 / 4;
+        align-self: stretch;
+      }
+      &--2 {
+        margin-top: -10px;
+      }
+
+      &--3 {
+        margin-top: 18px;
+      }
+      &--5 {
+        margin-top: 20px;
+      }
+      &--6 {
+        margin-top: -20px;
+      }
+
+      &--7 {
+        grid-column: span 3;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+
+        div:first-child {
+          align-self: flex-start;
+        }
+
+        div:last-child {
+          align-self: flex-end;
+          margin-bottom: -20px;
+        }
+      }
+
+      &--8 {
+        margin-top: 10px;
+      }
+
+      &--10 {
+        margin-top: 20px;
+      }
+      &--11 {
+      }
+      &--12 {
+        margin-top: 40px;
+      }
+      &--13 {
+        margin-top: 80px;
+      }
+      &--14 {
+        margin-top: 80px;
+      }
+      &--15 {
+        grid-column: span 2;
+      }
+
+      &--16 {
+        grid-column: span 3;
+        display: flex;
+        justify-content: flex-end;
+        margin-left: -100px;
+      }
+      &--17 {
+        grid-column: span 3;
+        margin-top: 40px;
+        margin-left: 20px;
+      }
+      &--18 {
+        grid-column: span 3;
+        grid-column: span 3;
+        display: flex;
+        justify-content: flex-end;
+        gap: 90px;
+
+        div:first-child {
+          margin-left: 30px;
+        }
+      }
+      &--19 {
+        grid-column: span 3;
+      }
+      &--24 {
+        margin-top: -30px;
+      }
+      &--32 {
+        margin-left: 70px;
+      }
+      &--27,
+      &--32,
+      &--34,
+      &--36,
+      &--38 {
+        margin-top: -35px;
+      }
+    }
+
+    @include lg {
+      --gap: 30px;
+    }
+  }
+
+  &-box {
+    box-sizing: border-box;
+    padding: 0.45em 0;
+    background-color: #3f8fd4;
+    border-radius: $rounded-5;
+    text-align: center;
+    color: #fff;
+    max-width: 160px;
+    min-width: 160px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--red {
+      background-color: $croucher-red;
+    }
+  }
+}
