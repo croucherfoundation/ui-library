@@ -289,7 +289,7 @@
     constructor(containerId, config) {
       this.searchable = document.getElementById(containerId);
 
-      if (this.searchable) {
+      if (!this.searchable) {
         throw new Error(`
             My Select: There is no element with id: ${containerId}.
             It should be the following structure.
