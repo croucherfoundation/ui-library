@@ -1,16 +1,18 @@
 .risks {
   position: relative;
   min-width: 100%;
+  transform: scale(0.95);
 
   &-grid {
+    --move-left: 50px;
     --gap: 10px;
     --cell-size: calc((100% - var(--gap) * 5) / 7);
     display: grid;
     grid-template-columns: repeat(7, var(--cell-size));
     grid-template-rows: repeat(8, 40px);
     gap: var(--gap);
-    margin-top: 60px;
-    margin-bottom: 60px;
+    margin-top: 120px;
+    margin-bottom: 120px;
     width: 100%;
     row-gap: 40px;
     align-items: center;
@@ -24,16 +26,94 @@
         grid-row: 1 / -1;
         align-self: stretch;
         // background-color: red;
+        position: relative;
+        span {
+          display: block;
+          width: 2px;
+          height: 130%;
+          background-color: #717174;
+          position: absolute;
+          left: 71%;
+          top: -10%;
+
+          &::before,
+          &::after {
+            display: block;
+            position: absolute;
+            left: 0;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: 600;
+          }
+
+          &::before {
+            content: "external";
+            top: -40px;
+          }
+
+          &::after {
+            content: "internal";
+
+            bottom: -40px;
+          }
+        }
       }
 
       &-horizontal {
         grid-column: 1 / -1;
-        // background-color: red;
         grid-row: 4 / 4;
         align-self: stretch;
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        span {
+          display: block;
+          width: 80%;
+          height: 2px;
+          background-color: #717174;
+          position: absolute;
+          top: 170%;
+
+
+          &::before,
+          &::after {
+            display: block;
+            position: absolute;
+            top: 0;
+            
+            font-size: 24px;
+            font-weight: 600;
+          }
+
+          &::before {
+            content: 'stable/known';
+            left: 0;
+            transform: translateX(-110%) translateY(-50%);
+          }
+          &::after {
+            content: "changing/new";
+            right: 0;
+            transform: translateX(110%) translateY(-50%);
+          }
+        }
+      }
+      &--1 {
+        grid-column: span 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        div:nth-child(2) {
+          margin-left: var(--move-left);
+          margin-top: -20px;
+        }
+        div:last-child {
+          margin-left: var(--move-left);
+        }
       }
       &--2 {
-        margin-top: -10px;
+        margin-top: -20px;
       }
 
       &--3 {
@@ -54,11 +134,13 @@
 
         div:first-child {
           align-self: flex-start;
+          margin-left: var(--move-left);
         }
 
         div:last-child {
           align-self: flex-end;
           margin-bottom: -20px;
+          margin-left: var(--move-left);
         }
       }
 
@@ -70,6 +152,19 @@
         margin-top: 20px;
       }
       &--11 {
+        grid-column: span 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div:nth-child(2) {
+          margin-left: var(--move-left);
+          margin-top: 40px;
+        }
+        div:last-child {
+          margin-left: var(--move-left);
+          margin-top: 80px;
+        }
       }
       &--12 {
         margin-top: 40px;
@@ -89,10 +184,11 @@
         display: flex;
         justify-content: flex-end;
         margin-left: -100px;
+        margin-top: 80px;
       }
       &--17 {
         grid-column: span 3;
-        margin-top: 40px;
+        margin-top: 120px;
         margin-left: 20px;
       }
       &--18 {
@@ -101,6 +197,7 @@
         display: flex;
         justify-content: flex-end;
         gap: 90px;
+        margin-top: 70px;
 
         div:first-child {
           margin-left: 30px;
@@ -109,18 +206,24 @@
       &--19 {
         grid-column: span 3;
       }
+      &--20 {
+        margin-top: 80px;
+      }
       &--24 {
-        margin-top: -30px;
+        margin-top: 50px;
       }
       &--32 {
         margin-left: 70px;
+      }
+      &--27 {
+        margin-top: 30px;
       }
       &--27,
       &--32,
       &--34,
       &--36,
       &--38 {
-        margin-top: -35px;
+        // margin-top: -35px;
       }
     }
 
