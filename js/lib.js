@@ -515,7 +515,7 @@
       ".sign_in_form .input_group .sign_in_password"
     );
     var signInPassowrdEyeBtn = document.querySelector(
-      ".sign_in_form input_group .eye"
+      ".sign_in_form .input_group .eye"
     );
     if (signInPassowrdEyeBtn) {
       var signInPassowrdEyeImg = signInPassowrdEyeBtn.querySelector("img");
