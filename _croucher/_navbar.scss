@@ -339,6 +339,9 @@
             &:hover {
               color: $croucher-red;
             }
+            a{
+              font-weight: inherit;
+            }
           }
           span {
             font-size: 22px;
