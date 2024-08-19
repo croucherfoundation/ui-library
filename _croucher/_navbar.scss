@@ -339,6 +339,9 @@
             &:hover {
               color: $croucher-red;
             }
+            a{
+              font-weight: inherit;
+            }
           }
           span {
             font-size: 22px;
@@ -490,7 +493,9 @@
     flex-direction: row;
     gap: 60px;
     align-items: center;
-
+    &.g-40 {
+      gap: 40px;
+    }
     a:first-child {
       width: 57px;
       height: 110px;

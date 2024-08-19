@@ -54,8 +54,18 @@ body {
   margin: 0;
 }
 
-body, *{
+body,
+* {
   font-family: "MarrSans" !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+i.fa,
+i.fas,
+i.far,
+i.fal,
+i.fab {
+  display: none;
+  font-family: "FontAwesome" !important;
 }
