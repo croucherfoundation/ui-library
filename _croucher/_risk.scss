@@ -1,7 +1,6 @@
 .risks {
   position: relative;
   min-width: 100%;
-  transform: scale(0.95);
 
   &-grid {
     --move-left: 50px;
@@ -234,7 +233,6 @@
 
   &-box {
     box-sizing: border-box;
-    padding: 0.45em 0;
     background-color: #3f8fd4;
     border-radius: $rounded-5;
     text-align: center;
@@ -246,6 +244,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    line-height: 16px;
 
     &--red {
       background-color: $croucher-red;
