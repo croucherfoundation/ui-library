@@ -33,6 +33,7 @@
   }
 }
 
+
 .dark {
   a.dark-mode-link {
     position: relative;
@@ -57,4 +58,31 @@
       }
     }
   }
+}
+
+.dark {
+    footer {
+        .dark-mode-link-footer {
+            position: relative;
+            color: white !important;
+              &::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 2px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: #fff;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+              }
+
+              &:hover {
+                &::after {
+                  opacity: 1;
+                }
+              }
+        }
+    }
 }
