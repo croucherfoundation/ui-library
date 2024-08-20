@@ -218,7 +218,6 @@
         gap: 30px;
         margin-top: 76px;
         position: relative;
-        padding-right: 98px;
         > li {
           list-style: none;
           border-bottom: 1px solid $black;
@@ -426,6 +425,10 @@
           @include lg {
             display: none;
           }
+        }
+
+        @include md {
+          padding-right: 98px;
         }
       }
       .close_icon {
