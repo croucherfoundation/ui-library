@@ -217,6 +217,8 @@
       > ul {
         gap: 30px;
         margin-top: 76px;
+        position: relative;
+        padding-right: 98px;
         > li {
           list-style: none;
           border-bottom: 1px solid $black;
@@ -330,6 +332,9 @@
           padding-left: 24px; /* px-[24px] */
           padding-right: 24px; /* px-[24px] */
           border-bottom: 1px solid #000;
+          position: absolute;
+          top: 0;
+          right: 0;
           button {
             line-height: inherit;
             font-weight: inherit;
@@ -371,7 +376,13 @@
           display: block;
           background: none;
           padding: 0;
-          margin-top: -1rem;;
+          margin-top: -1rem;
+          
+          &_li {
+            position: absolute;
+            right: 0;
+            top: 0;
+          }
 
           &:focus {
             outline: none;
