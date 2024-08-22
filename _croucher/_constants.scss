@@ -37,12 +37,12 @@ $dark-theme: (
     }
 }
 
-.test-theme {
-    color: map-get($light-theme, primary-text);
-}
+// .test-theme {
+//     color: map-get($light-theme, primary-text);
+// }
 
-@include dark-mode {
-    .test-theme {
-        color: map-get($dark-theme, primary-text);
-    }
-}
+// @include dark-mode {
+//     .test-theme {
+//         color: map-get($dark-theme, primary-text);
+//     }
+// }
