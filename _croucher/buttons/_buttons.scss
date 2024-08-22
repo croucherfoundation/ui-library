@@ -60,3 +60,15 @@ a.viewall_btn,
     height: auto;
   }
 }
+
+
+@include dark-mode {
+
+  input.croucher-standard-btn[type='submit'],
+  a.croucher-standard-btn,
+  button.croucher-standard-btn,
+  .croucher-standard-btn {
+    color: #fff;
+    border-color: #fff;
+  }
+}
