@@ -71,3 +71,9 @@ i.fab {
   display: none;
   font-family: "FontAwesome" !important;
 }
+
+@include dark-mode {
+  body {
+    background-color: black;
+  }
+}

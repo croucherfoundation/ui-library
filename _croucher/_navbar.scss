@@ -557,3 +557,25 @@
     }
   }
 }
+
+
+@include dark-mode {
+  .main_sub_navbar_container {
+    background-color: #000;
+  }
+  .no-mobile {
+    .nav_wrapper {
+      background-color: #000;
+      .links_container  {
+        background-color: #000;
+      }
+    }
+
+  }
+  .nav_wrapper {
+    background-color: #000;
+    .links_container  {
+      background-color: #000;
+    }
+  }
+}
