@@ -14,3 +14,35 @@ $csw-teal: #5FC1C7;
 $rounded-5: 5px;
 $rounded-20: 20px;
 $font-black: #020202;
+
+$light-theme: (
+    primary-bg: #ffffff,
+    primary-text: #000000,
+    secondary-bg: #f5f5f5,
+    secondary-text: #333333,
+);
+
+$dark-theme: (
+    primary-bg: #000000,
+    primary-text: #ffffff,
+    secondary-bg: #333333,
+    secondary-text: #cccccc,
+);
+
+
+
+@mixin dark-mode {
+    [data-theme="dark"] {
+        @content;
+    }
+}
+
+.test-theme {
+    color: map-get($light-theme, primary-text);
+}
+
+@include dark-mode {
+    .test-theme {
+        color: map-get($dark-theme, primary-text);
+    }
+}
