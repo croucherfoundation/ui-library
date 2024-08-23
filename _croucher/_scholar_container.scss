@@ -24,9 +24,6 @@
 
       .action-buttons {
         & > div {
-          border: 1px solid #bdbdbd;
-          padding: 6px 6px 6px 8px;
-          height: 46px;
           position: absolute;
           top: 20px;
           right: 20px;
@@ -34,14 +31,22 @@
           flex-direction: row;
           justify-content: center;
           align-items: center;
+        }
+
+        a{
+          border: 1px solid #bdbdbd;
+          padding: 6px 6px 6px 8px;
+          height: 46px;
           background-color: white;
           border-radius: 22px;
+          color: #76b8b6;
         }
 
         .icon {
           width: 32px;
           height: 32px;
           float: right;
+          fill: currentColor;
         }
 
         .label {
@@ -52,7 +57,6 @@
           width: auto;
           float: right;
           margin: 0 8px 0 4px;
-          color: #76b8b6;
         }
       }
 
