@@ -20,7 +20,41 @@
     }
 
     .image-container {
-      // position: relative;
+      position: relative;
+
+      .action-buttons {
+        & > div {
+          border: 1px solid #bdbdbd;
+          padding: 6px 6px 6px 8px;
+          height: 46px;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          background-color: white;
+          border-radius: 22px;
+        }
+
+        .icon {
+          width: 32px;
+          height: 32px;
+          float: right;
+        }
+
+        .label {
+          font-size: 16px;
+          white-space: nowrap;
+          line-height: 32px;
+          vertical-align: middle;
+          width: auto;
+          float: right;
+          margin: 0 8px 0 4px;
+          color: #76b8b6;
+        }
+      }
 
       .image {
         width: 100%;
