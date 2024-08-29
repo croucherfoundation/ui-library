@@ -2,6 +2,7 @@
 
 .default_card {
   @extend %base-card;
+  position: relative;
   .img_container {
     width: 100%;
     height: 180px;
@@ -10,21 +11,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center center;
     }
-    .card_badge {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: 6px 5px 2px 5px;
-      background-color: $croucher-red;
-      color: $white;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 19px;
-      &.csw_badge {
-        background-color: $csw-teal;
-      }
-    }
+
     .image-award-caption {
       font-family: "Lettera Regular Web", sans-serif;
       font-size: 14px;
@@ -53,6 +42,24 @@
   .body_container {
     padding: 18px 15px 23px;
     min-height: 180px;
+    position: relative;
+
+    .card_badge {
+      position: absolute;
+      top: 0;
+      transform: translateY(-100%);
+      left: 0;
+      padding: 6px 5px 2px 5px;
+      background-color: $croucher-red;
+      color: $white;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 19px;
+
+      &.csw_badge {
+        background-color: $csw-teal;
+      }
+    }
     .card_title {
       font-size: 24px;
       line-height: 28px;
@@ -64,6 +71,9 @@
       font-size: 18px;
       line-height: 22px;
       font-weight: 400;
+      & > div {
+        margin-bottom: 6px;
+      }
     }
     .card_note {
       position: absolute;
@@ -71,15 +81,62 @@
       font-style: italic;
       color: $light-gray1;
     }
+    .card_item {
+      display: flex;
+      align-items: flex-start;
+
+      gap: 11px;
+
+      .icon {
+        min-width: 22px;
+        min-height: 22px;
+        display: flex;
+        justify-content: center;
+
+        .location_icon {
+          width: 22px;
+          height: 22px;
+        }
+
+        .clock_icon {
+        }
+      }
+
+      .text {
+      }
+    }
   }
   &:hover {
     .csw_card_body {
       background: $csw-public-red;
+      color: $white;
       .play_icon,
       .time_icon,
       .location_icon,
       .past_icon {
         filter: brightness(0) invert(1);
+      }
+
+      .card_item {
+        p,
+        div,
+        .text{
+          color: $white;
+          * {
+            color: $white;
+          }
+        }
+
+        .icon {
+          svg {
+            fill: $white;
+
+            path,
+            circle {
+              fill: $white;
+            }
+          }
+        }
       }
     }
     .card_title {
@@ -93,6 +150,8 @@
   }
   &:visited {
     color: $black;
+  }
+  &.csw_card {
   }
 }
 @include sm {
