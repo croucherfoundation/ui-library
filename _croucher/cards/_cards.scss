@@ -217,6 +217,10 @@
       height: 100%;
       object-fit: cover;
     }
+  }
+  .body_container {
+    padding: 18px 15px 18px;
+    min-height: 180px;
     .card_badge {
       position: absolute;
       bottom: 0;
@@ -231,10 +235,6 @@
         background-color: $csw-teal;
       }
     }
-  }
-  .body_container {
-    padding: 18px 15px 18px;
-    min-height: 180px;
     .card_title {
       font-size: 18px;
       line-height: 24px;
