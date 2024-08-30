@@ -75,6 +75,14 @@
         margin-bottom: 6px;
       }
     }
+    &.csw_card_body {
+      height: 100%;
+      .card_desc.mb-17{
+        & > div {
+          margin-bottom: 17px;
+        }
+      }
+    }
     .card_note {
       position: absolute;
       bottom: 15px;
@@ -95,6 +103,8 @@
 
 
         .clock_icon {
+          width: 22px;
+          height: 22px;
         }
         .location_icon {
           width: 22px;
@@ -102,10 +112,19 @@
         }
         .circle_icon {
           margin-top: 4px;
+          width: 13px;
+          height: 13px;
+        }
+        .play_icon{
+          width: 39px;
+          height: 39px;
         }
       }
 
       .text {
+        .mt-8{
+          margin-top: 8px;
+        }
       }
     }
   }
@@ -113,13 +132,6 @@
     .csw_card_body {
       background: $csw-public-red;
       color: $white;
-      .play_icon,
-      .time_icon,
-      .location_icon,
-      .past_icon {
-        filter: brightness(0) invert(1);
-      }
-
       .card_item {
         p,
         div,
@@ -132,7 +144,7 @@
 
         .icon {
           svg {
-            fill: $white;
+            filter: brightness(0) invert(1);
 
             path,
             circle {
