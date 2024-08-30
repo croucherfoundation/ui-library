@@ -193,13 +193,13 @@
         font-weight: 400;
       }
     }
-  }
-  &.default_card--small {
-    .img_container {
-      min-height: 153px;
-    }
-    .body_container {
-      min-height: 153px;
+    &.default_card--small {
+      .img_container {
+        min-height: 153px;
+      }
+      .body_container {
+        min-height: 153px;
+      }
     }
   }
 }
