@@ -154,18 +154,20 @@
   &:visited {
     color: $black;
   }
-  &.csw_card {
-  }
-
   &.default_card--small {
     .img_container {
-      min-height: 153px;
+      min-height: 180px;
+      height: 180px;
     }
     .body_container {
-      min-height: 153px;
+      min-height: 180px;
+      height: 180px;
     }
   }
 }
+
+
+
 @include sm {
   .default_card {
     .img_container {
@@ -193,16 +195,21 @@
         font-weight: 400;
       }
     }
+
     &.default_card--small {
       .img_container {
         min-height: 153px;
+        height: 153px;
       }
       .body_container {
         min-height: 153px;
+        height: 153px;
       }
     }
+  
   }
 }
+
 
 // .trustee_card {
 //   @extend %base-card;
