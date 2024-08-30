@@ -42,7 +42,7 @@
   .body_container {
     padding: 18px 15px 23px;
     min-height: 180px;
-    position: relative;
+    // position: relative;
 
     .card_badge {
       position: absolute;
@@ -77,11 +77,6 @@
     }
     &.csw_card_body {
       height: 100%;
-      .card_desc.mb-17{
-        & > div {
-          margin-bottom: 17px;
-        }
-      }
     }
     .card_note {
       position: absolute;
@@ -125,6 +120,10 @@
         .mt-8{
           margin-top: 8px;
         }
+      }
+
+      &.mb-17 {
+        margin-bottom: 17px;
       }
     }
   }
