@@ -3,13 +3,17 @@
 .default_card {
   @extend %base-card;
   position: relative;
+  --default-card-height: 198px;
+  --default-card-small-height: 198px;
+
   .img_container {
     width: 100%;
-    height: 180px;
+    height: var(--default-card-height);
     overflow: hidden;
     border-top-left-radius: $rounded-5;
     border-top-right-radius: $rounded-5;
     position: relative;
+
     img {
       width: 100%;
       height: 100%;
@@ -36,15 +40,17 @@
       -o-transition: all 300ms ease-in-out;
       -ms-transition: all 300ms ease-in-out;
     }
+
     &:hover {
       .image-award-caption {
         opacity: 1;
       }
     }
   }
+
   .body_container {
     padding: 18px 15px 23px;
-    min-height: 180px;
+    min-height: var(--default-card-height);
     position: relative;
 
     .card_badge {
@@ -63,6 +69,7 @@
         background-color: $csw-teal;
       }
     }
+
     .card_title {
       font-size: 24px;
       line-height: 28px;
@@ -70,23 +77,28 @@
       margin-bottom: 12px;
       margin-top: 7px;
     }
+
     .card_desc {
       font-size: 18px;
       line-height: 22px;
       font-weight: 400;
-      & > div {
+
+      &>div {
         margin-bottom: 6px;
       }
     }
+
     &.csw_card_body {
       height: 100%;
     }
+
     .card_note {
       position: absolute;
       bottom: 15px;
       font-style: italic;
       color: $light-gray1;
     }
+
     .card_item {
       display: flex;
       align-items: flex-start;
@@ -104,23 +116,26 @@
           width: 22px;
           height: 22px;
         }
+
         .location_icon {
           width: 22px;
           height: 22px;
         }
+
         .circle_icon {
           margin-top: 4px;
           width: 13px;
           height: 13px;
         }
-        .play_icon{
+
+        .play_icon {
           width: 39px;
           height: 39px;
         }
       }
 
       .text {
-        .mt-8{
+        .mt-8 {
           margin-top: 8px;
         }
       }
@@ -130,6 +145,7 @@
       }
     }
   }
+
   &:hover {
     .csw_card_body {
       background: $csw-public-red;
@@ -137,13 +153,13 @@
       .card_item {
         p,
         div,
-        .text{
+        .text {
           color: $white;
+
           * {
             color: $white;
           }
         }
-
         .icon {
           svg {
             filter: brightness(0) invert(1);
@@ -156,28 +172,34 @@
         }
       }
     }
+
     .card_title {
       &:not(.csw_title) {
         text-decoration: underline;
       }
+
       &.csw_title {
         color: white;
       }
     }
+
     .part-of {
       color: $white;
     }
   }
+
   &:visited {
     color: $black;
   }
+
   &.default_card--small {
     .img_container {
-      min-height: 180px;
-      height: 180px;
+      min-height: var(--default-card-small-height);
+      height: var(--default-card-small-height);
     }
+
     .body_container {
-      min-height: 180px;
+      min-height: var(--default-card-small-height);
     }
   }
 }
@@ -186,41 +208,11 @@
 
 @include sm {
   .default_card {
-    .img_container {
-      width: 100%;
-      height: 210px;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
+    --default-card-height: 210px;
+    --default-card-small-height: 153px;
     .body_container {
       padding: 15px;
-      min-height: 210px;
-      .card_title {
-        font-size: 24px;
-        line-height: 28px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        margin-top: 7px;
-      }
-      .card_desc {
-        font-size: 18px;
-        line-height: 24px;
-        font-weight: 400;
-      }
-    }
 
-    &.default_card--small {
-      .img_container {
-        min-height: 153px;
-        height: 153px;
-      }
-      .body_container {
-        min-height: 153px;
-      }
     }
-  
   }
 }
