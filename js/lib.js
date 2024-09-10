@@ -721,16 +721,10 @@
    * --------------------------
    */
   document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".accordion-title").forEach((header) => {
+    document.querySelectorAll(".standard-accordion-title").forEach((header) => {
       header.addEventListener("click", function () {
         const item = this.parentElement;
         item.classList.toggle("active");
-        const content = item.querySelector(".accordion-content");
-        if (item.classList.contains("active")) {
-          content.style.maxHeight = content.scrollHeight + "px";
-        } else {
-          content.style.maxHeight = 0;
-        }
       });
     });
   });

@@ -1,4 +1,4 @@
-.accordion {
+.standard-accordion {
   max-width: 798px;
   margin: 0 auto;
 
@@ -13,11 +13,11 @@
       border-width: 0px 0px 1px 0px;
     }
 
-    &.active .accordion-content {
+    &.active .standard-accordion-content {
       display: block;
     }
 
-    &.active .accordion-title::before {
+    &.active .standard-accordion-title::before {
       display: block;
       content: url("https://croucher.org.hk/assets/images/icons/v-up.svg");
       position: absolute;
@@ -51,6 +51,12 @@
       top: 61%;
       transform: translateY(-58%);
     }
+
+    &::marker,
+    &::-webkit-details-marker {
+      display: none;
+    }
+
   }
 
   &-content {
@@ -60,3 +66,6 @@
     background-color: #fff;
   }
 }
+
+
+
