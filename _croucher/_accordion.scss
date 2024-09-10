@@ -1,0 +1,62 @@
+.accordion {
+  max-width: 798px;
+  margin: 0 auto;
+
+  &-item {
+    border-style: solid;
+    border-color: #d9d9d9;
+
+    &:first-of-type {
+      border-width: 1px 0px 1px 0px;
+    }
+    &:not(:first-of-type) {
+      border-width: 0px 0px 1px 0px;
+    }
+
+    &.active .accordion-content {
+      display: block;
+    }
+
+    &.active .accordion-title::before {
+      display: block;
+      content: url("https://croucher.org.hk/assets/images/icons/v-up.svg");
+      position: absolute;
+      left: unset;
+      right: 0;
+      top: 44%;
+      transform: translateY(-50%);
+    }
+  }
+  &-title {
+    cursor: pointer;
+    padding: 15px 0px 15px 0px;
+    position: relative;
+    font-weight: 600;
+    list-style: none;
+    outline: none;
+    font-size: 20px;
+    span {
+      display: inline-block;
+      padding-top: 3px;
+      color: #000;
+      padding-right: 24px;
+    }
+
+    &::before {
+      display: block;
+      content: url("https://croucher.org.hk/assets/images/icons/v-down.svg");
+      position: absolute;
+      left: unset;
+      right: 0;
+      top: 61%;
+      transform: translateY(-58%);
+    }
+  }
+
+  &-content {
+    padding: 0 1rem 1rem 0px;
+    display: none;
+    overflow: hidden;
+    background-color: #fff;
+  }
+}

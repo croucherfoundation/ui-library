@@ -183,7 +183,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     let openSignInBtn = document.querySelector(".sign_in");
     let signinBox = document.getElementById("signin-box");
-    if(signinBox){
+    if (signinBox) {
       let signinCrossBtn = signinBox.querySelector(
         ".cross_icon_container button"
       );
@@ -195,7 +195,7 @@
     }
     let openSingnOut = document.querySelector(".user_avatar");
     let signoutBox = document.getElementById("signout-box");
-    if (signoutBox){
+    if (signoutBox) {
       let signoutCrossBtn = signoutBox.querySelector(
         ".cross_icon_container button"
       );
@@ -713,5 +713,30 @@
    * -------------------------------
    * ---- END: Password validation for Account Settings
    * -----------------------------
+   */
+
+  /**
+   * --------------------------
+   * --- START: Accordion
+   * --------------------------
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".accordion-title").forEach((header) => {
+      header.addEventListener("click", function () {
+        const item = this.parentElement;
+        item.classList.toggle("active");
+        const content = item.querySelector(".accordion-content");
+        if (item.classList.contains("active")) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+          content.style.maxHeight = 0;
+        }
+      });
+    });
+  });
+  /**
+   * --------------------------
+   * --- END: Accordion
+   * --------------------------
    */
 })();
