@@ -64,6 +64,12 @@
     display: none;
     overflow: hidden;
     background-color: #fff;
+    font-size: 20px;
+
+    ul {
+      padding-inline-start: 25px;
+      list-style-type: "— "
+    }
   }
 }
 

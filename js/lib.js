@@ -444,9 +444,13 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    new MySelect("timezonesSelect", {
-      hiddenSelectId: "hidden_timezone_select",
-    });
+    try {
+      new MySelect("timezonesSelect", {
+        hiddenSelectId: "hidden_timezone_select",
+      });
+    } catch (error) {
+      console.error(error);
+    }
   });
 
   /**
