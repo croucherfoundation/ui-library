@@ -1,6 +1,6 @@
 .announce-box {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   background-color: $croucher-red;
   margin: auto;
@@ -52,6 +52,7 @@
 @include md {
   .announce-box {
     flex-direction: row;
+    align-items: center;
     .left-text {
       font-weight: 600;
       font-size: 24px;
@@ -59,7 +60,7 @@
       align-self: auto;
     }
     .announce-button {
-      margin-top: 3px;
+      padding-bottom: 3px;
     }
   }
 }
