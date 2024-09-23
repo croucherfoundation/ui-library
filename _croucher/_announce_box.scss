@@ -1,6 +1,6 @@
 .announce-box {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   background-color: $croucher-red;
   margin: auto;
@@ -59,7 +59,7 @@
       align-self: auto;
     }
     .announce-button {
-      padding-bottom: 7px;
+      margin-top: 3px;
     }
   }
 }
