@@ -7,6 +7,26 @@ button.croucher-standard-btn,
   @extend %base_btn!optional;
   color: $croucher-dark;
 
+  &.sef_save_btn{
+    background-color: $sef-green;
+    color: white;
+    border: 1px solid $sef-green;
+    &:hover {
+      background: $white;
+      color: $sef-green;
+    }
+  }
+
+  &.sef_save_preview_btn{
+    background-color: $sef-blue;
+    color: white;
+    border: 1px solid $sef-blue;
+    &:hover {
+      background: $white;
+      color: $sef-blue;
+    }
+  }
+
   &:hover {
     background: $croucher-red;
   }
@@ -22,6 +42,19 @@ button.croucher-standard-btn,
     cursor: default;
     pointer-events: none;
   }
+}
+
+a.sef_cancel_btn{
+  border: 1px solid $sef-blue;
+  &:visited{
+    color: $sef-blue;
+  }
+  &:hover{
+    background-color: $sef-blue;
+    color: white;
+    border: 1px solid $sef-blue;
+  }
+  color: $sef-blue;
 }
 
 input.viewall_btn,
