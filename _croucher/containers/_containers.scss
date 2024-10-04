@@ -1,5 +1,8 @@
 @import "./containers-extend";
 
+$gap: 30px;
+$max-width: 878px;
+
 .croucher_container {
   @extend %base-container;
 }
@@ -19,17 +22,47 @@
 
 .card_container {
   @extend %base-card-container;
-}
-.card_container--trustees {
-  @extend %base-card-container;
-  @include sm {
-    grid-template-columns: repeat(2, 1fr);
+
+  &--trustees {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: $gap;
+    width: 100%;
+    justify-items: center;
+
+    > * {
+      width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
-  @include lg {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
-  @include xl {
-    grid-template-columns: repeat(4, 1fr) !important;
+
+  &--summercourse {
+    @extend %base-card-container;
+
+    @include sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.four-cols {
+      @include lg {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
   }
 }
 
@@ -41,23 +74,4 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
-
-.card_container--summercourse {
-  @extend %base-card-container;
-
-  
-  @include sm {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include lg {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  &.four-cols {
-    @include lg {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
 }
