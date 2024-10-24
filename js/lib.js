@@ -190,6 +190,7 @@
       if (signinCrossBtn) {
         signinCrossBtn.addEventListener("click", () => {
           signinBox.classList.remove("auth_container_open");
+          signoutBox.classList.remove("mt_open");
         });
       }
     }
@@ -202,6 +203,7 @@
       if (signoutCrossBtn) {
         signoutCrossBtn.addEventListener("click", () => {
           signoutBox.classList.remove("auth_container_open");
+          signoutBox.classList.remove("mt_open");
         });
       }
     }
@@ -209,12 +211,14 @@
     if (openSignInBtn) {
       openSignInBtn.addEventListener("click", () => {
         signinBox.classList.add("auth_container_open");
+        signinBox.classList.add("mt_open");
       });
     }
 
     if (openSingnOut) {
       openSingnOut.addEventListener("click", () => {
         signoutBox.classList.add("auth_container_open");
+        signoutBox.classList.add("mt_open");
       });
     }
   });

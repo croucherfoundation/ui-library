@@ -58,10 +58,8 @@
 
 .my-custom-modal-content {
   background-color: white;
-  max-width: 672px;
-  // max-height: 90vh;
-  // overflow-y: auto;
-  padding: 20px 0;
+  max-width: 672px !important;
+  padding: 20px 0 !important;
   border-radius: $rounded-5;
   line-height: 1.5rem;
 
@@ -132,6 +130,12 @@
   .emergency {
     margin-top: 32px;
     margin-bottom: 30px;
+  }
+
+  .organisation_admin {
+    input[type='checkbox']{
+      display: none;
+    }
   }
 
   .actions {
