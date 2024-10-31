@@ -68,7 +68,7 @@
   }
 
   h1 {
-    font-weight: 500; /* font-medium */
+    font-weight: 600; /* font-medium */
     /* leading-6 */
     color: #1a202c; /* text-gray-900 */
     font-size: 1.125rem; /* text-dh4 (assuming h4 size) */
@@ -84,8 +84,16 @@
     font-size: 16px;
   }
 
+  ul {
+    list-style: '— ';
+  }
+
   section {
     position: relative;
+  }
+
+  .mb-3{
+    margin-bottom: .75rem;
   }
 
   .form-fields {
@@ -107,6 +115,14 @@
     }
     textarea {
       resize: vertical;
+    }
+  }
+
+  .user-name{
+    display: flex;
+    justify-content: space-between;
+    input{
+      width: 308px;
     }
   }
 

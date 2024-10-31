@@ -26,6 +26,12 @@
     a {
       text-wrap: nowrap;
       display: block;
+      &:visited {
+        color: unset;
+      }
+      &:hover{
+        color: unset;
+      }
     }
   }
 

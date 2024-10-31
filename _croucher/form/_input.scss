@@ -28,6 +28,11 @@
     position: absolute;
     bottom: -20px;
     left: 0;
+    &.account_settings_error_message{
+      a{
+        display: none;
+      }
+    }
   }
 
   .croucher_input_invalid {
