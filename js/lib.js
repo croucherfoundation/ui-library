@@ -648,7 +648,9 @@
         var formValid = true;
         var errorMsg = validatePassword(passwordPrimaryInput.value);
         var errorEl = passwordPrimary.querySelector(".error_message");
-        errorEl.textContent = errorMsg;
+        if(errorEl){
+          errorEl.textContent = errorMsg;
+        }
 
         var confirmErrEl = passwordConfirm.querySelector(".error_message");
 
