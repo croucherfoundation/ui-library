@@ -181,6 +181,17 @@
    * -----------------------------
    */
   document.addEventListener("DOMContentLoaded", () => {
+
+    // show modal when user confirm email is sent
+    let emailConfirmModal = document.getElementById("emailConfirmModal");
+    if(emailConfirmModal){
+      var backdrop = createModalBackdrop();
+        callLater(function () {
+          backdrop.classList.add("show");
+          emailConfirmModal.classList.add("modal-open");
+        });
+    }
+
     let openSignInBtn = document.querySelector(".sign_in");
     let signinBox = document.getElementById("signin-box");
     if (signinBox) {

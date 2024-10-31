@@ -120,9 +120,10 @@
 
   .user-name{
     display: flex;
-    justify-content: space-between;
-    input{
-      width: 308px;
+    gap: 1rem;
+    margin-bottom: 20px;
+    div{
+      width: 100%;
     }
   }
 
