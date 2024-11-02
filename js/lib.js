@@ -192,7 +192,7 @@
         });
     }
 
-    let openSignInBtn = document.querySelector(".sign_in");
+    let openSignInBtn = document.querySelectorAll(".sign_in");
     let signinBox = document.getElementById("signin-box");
     if (signinBox) {
       let signinCrossBtn = signinBox.querySelector(
@@ -220,9 +220,13 @@
     }
 
     if (openSignInBtn) {
-      openSignInBtn.addEventListener("click", () => {
-        signinBox.classList.add("auth_container_open");
-        signinBox.classList.add("mt_open");
+      openSignInBtn.forEach((btn) => {
+        if (btn) {
+          btn.addEventListener("click", () => {
+            signinBox.classList.add("auth_container_open");
+            signinBox.classList.add("mt_open");
+          });
+        }
       });
     }
 
