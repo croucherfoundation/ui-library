@@ -182,4 +182,36 @@
       }
     }
   }
+
+  div.nested_set {
+    a.modal_nested_remove {
+      position: absolute;
+      top: -8px;
+      left: -10px;
+      background-color: white;
+      border: 2px solid white;
+      width: 20px;
+      height: 20px;
+      border-radius: 12px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    a.modal_nested_add {
+      bottom: 16px;
+      right: 165px;
+      position: absolute;
+      z-index: 20;
+      background-color: white;
+      border: 2px solid white;
+      width: 20px;
+      height: 20px;
+      border-radius: 12px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 }

@@ -37,6 +37,12 @@
       }
     }
 
+    .goto_dataroom {
+      align-items: flex-end;
+      display: flex;
+      width: 100%;
+    }
+
     @include md {
       display: flex;
       gap: 180px;
