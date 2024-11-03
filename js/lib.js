@@ -648,7 +648,7 @@
       e.preventDefault();
       formSubmitted = true;
 
-      if (passwordConfirmInput && passwordPrimaryInput) {
+      if (passwordConfirmInput && passwordPrimaryInput && passwordPrimaryInput?.value?.length > 0) {
         var formValid = true;
         var errorMsg = validatePassword(passwordPrimaryInput.value);
         var errorEl = passwordPrimary.querySelector(".error_message");
@@ -698,7 +698,7 @@
     });
   });
 
-  if (passwordPrimaryInput && passwordConfirmInput) {
+  if (passwordPrimaryInput && passwordConfirmInput && passwordPrimaryInput?.value?.length > 0) {
     passwordPrimaryInput.addEventListener("input", function (e) {
       var value = this.value;
       var confirmErrEl = passwordConfirm.querySelector(".error_message");
