@@ -28,6 +28,12 @@
       searchBar.classList.add("croucher_search_container--open");
       if (navbarSubContainer) searchBar.classList.add("mt");
       if (breadcrumbContainer) breadcrumbContainer.classList.remove("pt");
+      // close signout box if search box open
+      let signinBox = document.getElementById("signin-box");
+      if(signinBox) signinBox.classList.remove("auth_container_open");
+      let signoutBox = document.getElementById("signout-box");
+      if(signoutBox) signoutBox.classList.remove("auth_container_open");
+
     });
 
     searchCrossIcon.addEventListener("click", function () {
@@ -224,7 +230,17 @@
         if (btn) {
           btn.addEventListener("click", () => {
             signinBox.classList.add("auth_container_open");
-            signinBox.classList.add("mt_open");
+            if(navbarSubContainer) signinBox.classList.add("mt_open");
+            // close croucher_search_container
+            if(searchBar){
+              var searchBarOpen = searchBar.classList.contains(
+                "croucher_search_container--open"
+              );
+              if (!searchBarOpen) return;
+              searchBar.classList.remove("croucher_search_container--open");
+              if (navbarSubContainer) searchBar.classList.remove("mt");
+              if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
+            }
           });
         }
       });
@@ -233,7 +249,17 @@
     if (openSingnOut) {
       openSingnOut.addEventListener("click", () => {
         signoutBox.classList.add("auth_container_open");
-        signoutBox.classList.add("mt_open");
+        if(navbarSubContainer) signoutBox.classList.add("mt_open");
+        // close croucher_search_container
+        if(searchBar){
+          var searchBarOpen = searchBar.classList.contains(
+            "croucher_search_container--open"
+          );
+          if (!searchBarOpen) return;
+          searchBar.classList.remove("croucher_search_container--open");
+          if (navbarSubContainer) searchBar.classList.remove("mt");
+          if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
+        }
       });
     }
   });
