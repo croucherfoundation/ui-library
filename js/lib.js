@@ -24,10 +24,16 @@
         "croucher_search_container--open"
       );
       scrollToTopWithScroll(searchBarOpen ? 0 : 200);
-      if (searchBarOpen) return;
-      searchBar.classList.add("croucher_search_container--open");
-      if (navbarSubContainer) searchBar.classList.add("mt");
-      if (breadcrumbContainer) breadcrumbContainer.classList.remove("pt");
+      // if (searchBarOpen) return;
+      if(searchBarOpen){
+        searchBar.classList.remove("croucher_search_container--open");
+        if (navbarSubContainer) searchBar.classList.remove("mt");
+        if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
+      }else{
+        searchBar.classList.add("croucher_search_container--open");
+        if (navbarSubContainer) searchBar.classList.add("mt");
+        if (breadcrumbContainer) breadcrumbContainer.classList.remove("pt");
+      }
       // close signout box if search box open
       let signinBox = document.getElementById("signin-box");
       if(signinBox) signinBox.classList.remove("auth_container_open");
@@ -211,7 +217,7 @@
         });
       }
     }
-    let openSingnOut = document.querySelector(".user_avatar");
+    let openSignOut = document.querySelector(".user_avatar");
     let signoutBox = document.getElementById("signout-box");
     if (signoutBox) {
       let signoutCrossBtn = signoutBox.querySelector(
@@ -229,8 +235,21 @@
       openSignInBtn.forEach((btn) => {
         if (btn) {
           btn.addEventListener("click", () => {
-            signinBox.classList.add("auth_container_open");
-            if(navbarSubContainer) signinBox.classList.add("mt_open");
+
+            // open && close sign in box
+            if(signinBox){
+              var isSignBoxOpen = signinBox.classList.contains(
+                "auth_container_open"
+              );
+              if(isSignBoxOpen){
+                signinBox.classList.remove("auth_container_open");
+                if (navbarSubContainer) signinBox.classList.remove("mt_open");
+              }else{
+                signinBox.classList.add("auth_container_open");
+                if(navbarSubContainer) signinBox.classList.add("mt_open");
+              }
+            }
+
             // close croucher_search_container
             if(searchBar){
               var searchBarOpen = searchBar.classList.contains(
@@ -246,10 +265,23 @@
       });
     }
 
-    if (openSingnOut) {
-      openSingnOut.addEventListener("click", () => {
-        signoutBox.classList.add("auth_container_open");
-        if(navbarSubContainer) signoutBox.classList.add("mt_open");
+    if (openSignOut) {
+      openSignOut.addEventListener("click", () => {
+
+        // open && close sign out box
+        if(signoutBox){
+          var isSignOutBoxOpen = signoutBox.classList.contains(
+            "auth_container_open"
+          );
+          if(isSignOutBoxOpen){
+            signoutBox.classList.remove("auth_container_open");
+            if (navbarSubContainer) signoutBox.classList.remove("mt_open");
+          }else{
+            signoutBox.classList.add("auth_container_open");
+            if(navbarSubContainer) signoutBox.classList.add("mt_open");
+          }
+        }
+
         // close croucher_search_container
         if(searchBar){
           var searchBarOpen = searchBar.classList.contains(
