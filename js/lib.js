@@ -853,14 +853,20 @@ document.addEventListener('DOMContentLoaded', function() {
   var emailField = document.getElementById('u_s_e_a');
   var passwordField = document.getElementById('u_s_p_f');
 
-  if (emailField) {
-    emailField.setAttribute('disabled', 'true');
-    emailField.style.display = 'none';
-  }
-  
-  if (passwordField) {
-    passwordField.setAttribute('disabled', 'true');
-    passwordField.style.display = 'none';
+  const hostname = window.location.hostname;
+  const subdomain = hostname.split('.')[0]; // Get the first part of the hostname
+
+  if (!(subdomain === 'wiki' || subdomain === 'wikis')) {
+    // Disable and hide fields if subdomain is not 'wiki' or 'wikis'
+    if (emailField) {
+      emailField.setAttribute('disabled', 'true');
+      emailField.style.display = 'none';
+    }
+
+    if (passwordField) {
+      passwordField.setAttribute('disabled', 'true');
+      passwordField.style.display = 'none';
+    }
   }
 
 });
