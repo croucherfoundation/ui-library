@@ -817,3 +817,11 @@
    * --------------------------
    */
 })();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var emailField = document.querySelector('[name="user_email_temp"]');
+  var passwordField = document.querySelector('[name="user_password_temp"]');
+
+  if (emailField) emailField.setAttribute('name', 'user[email]');
+  if (passwordField) passwordField.setAttribute('name', 'user[password]');
+});
