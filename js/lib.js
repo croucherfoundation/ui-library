@@ -824,4 +824,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (emailField) emailField.setAttribute('name', 'user[email]');
   if (passwordField) passwordField.setAttribute('name', 'user[password]');
+
+  if (emailField) emailField.value = '';
+  if (passwordField) passwordField.value = '';
 });
