@@ -37,6 +37,7 @@
       // close signout box if search box open
       let signinBox = document.getElementById("signin-box");
       if(signinBox) signinBox.classList.remove("auth_container_open");
+      disableEmailAndPassword();
       let signoutBox = document.getElementById("signout-box");
       if(signoutBox) signoutBox.classList.remove("auth_container_open");
 
@@ -213,7 +214,8 @@
       if (signinCrossBtn) {
         signinCrossBtn.addEventListener("click", () => {
           signinBox.classList.remove("auth_container_open");
-          signoutBox.classList.remove("mt_open");
+          signinBox.classList.remove("mt_open");
+          disableEmailAndPassword();
         });
       }
     }
@@ -242,9 +244,11 @@
                 "auth_container_open"
               );
               if(isSignBoxOpen){
+                disableEmailAndPassword();
                 signinBox.classList.remove("auth_container_open");
                 if (navbarSubContainer) signinBox.classList.remove("mt_open");
               }else{
+                enableEmailAndPassword();
                 signinBox.classList.add("auth_container_open");
                 if(navbarSubContainer) signinBox.classList.add("mt_open");
               }
@@ -295,6 +299,33 @@
       });
     }
   });
+
+  function enableEmailAndPassword(){
+    var emailField = document.getElementById('u_s_e_a');
+    var passwordField = document.getElementById('u_s_p_f');
+    if(emailField){
+      emailField.removeAttribute('disabled');
+      emailField.style.display = 'block';
+    }
+    if(passwordField){
+      passwordField.removeAttribute('disabled');
+      passwordField.style.display = 'block';
+    }
+  }
+
+  function disableEmailAndPassword(){
+    var emailField = document.getElementById('u_s_e_a');
+    var passwordField = document.getElementById('u_s_p_f');
+    if(emailField){
+      emailField.setAttribute('disabled', 'true');
+      emailField.style.display = 'none';
+    }
+    if(passwordField){
+      passwordField.setAttribute('disabled', 'true');
+      passwordField.style.display = 'none';
+    }
+  }
+
 
   /**
    * -----------------------------
@@ -819,12 +850,17 @@
 })();
 
 document.addEventListener('DOMContentLoaded', function() {
-  var emailField = document.querySelector('[name="user_email_temp"]');
-  var passwordField = document.querySelector('[name="user_password_temp"]');
+  var emailField = document.getElementById('u_s_e_a');
+  var passwordField = document.getElementById('u_s_p_f');
 
-  if (emailField) emailField.setAttribute('name', 'user[email]');
-  if (passwordField) passwordField.setAttribute('name', 'user[password]');
+  if (emailField) {
+    emailField.setAttribute('disabled', 'true');
+    emailField.style.display = 'none';
+  }
+  
+  if (passwordField) {
+    passwordField.setAttribute('disabled', 'true');
+    passwordField.style.display = 'none';
+  }
 
-  if (emailField) emailField.value = '';
-  if (passwordField) passwordField.value = '';
 });
