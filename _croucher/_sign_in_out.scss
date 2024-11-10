@@ -182,3 +182,24 @@
     }
   }
 }
+
+/* Initially hide the autofill button */
+input::-webkit-credentials-auto-fill-button,
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Show the autofill button on input focus */
+input:focus::-webkit-credentials-auto-fill-button,
+input:focus::-webkit-contacts-auto-fill-button {
+  visibility: visible;
+  position: static;
+  pointer-events: auto;
+}
+
