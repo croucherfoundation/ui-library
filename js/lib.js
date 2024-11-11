@@ -854,10 +854,11 @@ document.addEventListener('DOMContentLoaded', function() {
   var passwordField = document.getElementById('u_s_p_f');
 
   const hostname = window.location.hostname;
-  const subdomain = hostname.split('.')[0]; // Get the first part of the hostname
+  const subdomain = hostname.split('.')[0];
+  const currentPath = window.location.pathname;
 
-  if (!(subdomain === 'wiki' || subdomain === 'wikis')) {
-    // Disable and hide fields if subdomain is not 'wiki' or 'wikis'
+  if (!(subdomain === 'wiki' || subdomain === 'wikis' || currentPath.endsWith('/sign_in'))) {
+    // Disable and hide fields if subdomain is not 'wiki' or 'wikis' or 'sign in page'
     if (emailField) {
       emailField.setAttribute('disabled', 'true');
       emailField.style.display = 'none';
