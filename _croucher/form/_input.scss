@@ -42,25 +42,38 @@
 
 .sign_in {
   .error_message {
-    @apply text-red text-[14px] mb-3 md:mb-0;
-  }
-  
-  input {
-    @apply rounded-b-5 mb-1;
-    @apply border border-[#dfdfdf];
-    @apply outline-none focus:outline-none;
+    font-size: 14px;
+    margin-bottom: 0.75rem;
     
-    &.has-error {
-      @apply border-red focus:border-red ring-red focus:ring-1 focus:ring-red;
+    @media (min-width: 768px) {
+      margin-bottom: 0;
     }
+  }
+
+  input {
+    border-radius: 5px;
+    margin-bottom: 0.25rem;
+    border: 0;
+    outline: none;
     
+    &:focus {
+      outline: none;
+    }
+
+    &.has-error {
+      border: 1px solid #f00;
+      box-shadow: 0 0 0 1px #f00;
+    }
+
     &:not(.has-error) {
-      @apply focus:border-[#dfdfdf];
+      &:focus {
+        border: #dfdfdf;
+      }
     }
   }
 
   &.has_error {
-    @include md {
+    @media (min-width: 768px) {
       height: 370px !important;
     }
   }
