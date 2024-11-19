@@ -42,38 +42,40 @@
 
 .sign_in {
   .error_message {
+    color: $croucher-red;
     font-size: 14px;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     
-    @media (min-width: 768px) {
+    @include md {
       margin-bottom: 0;
     }
   }
-
+  
   input {
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     margin-bottom: 0.25rem;
-    border: 0;
+    border: none;
     outline: none;
     
-    &:focus {
-      outline: none;
-    }
-
     &.has-error {
-      border: 1px solid #f00;
-      box-shadow: 0 0 0 1px #f00;
+      border: 1px solid $croucher-red;
+      
+      &:focus {
+        border-color: $croucher-red;
+        box-shadow: 0 0 0 1px $croucher-red;
+      }
     }
-
+    
     &:not(.has-error) {
       &:focus {
-        border: #dfdfdf;
+        border-color: #dfdfdf;
       }
     }
   }
 
   &.has_error {
-    @media (min-width: 768px) {
+    @include md {
       height: 370px !important;
     }
   }
