@@ -39,3 +39,29 @@
     border: 1px solid $croucher-red !important;
   }
 }
+
+.sign_in {
+  .error_message {
+    @apply text-red text-[14px] mb-3 md:mb-0;
+  }
+  
+  input {
+    @apply rounded-b-5 mb-1;
+    @apply border border-[#dfdfdf];
+    @apply outline-none focus:outline-none;
+    
+    &.has-error {
+      @apply border-red focus:border-red ring-red focus:ring-1 focus:ring-red;
+    }
+    
+    &:not(.has-error) {
+      @apply focus:border-[#dfdfdf];
+    }
+  }
+
+  &.has_error {
+    @include md {
+      height: 370px !important;
+    }
+  }
+}
