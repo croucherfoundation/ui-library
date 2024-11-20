@@ -52,24 +52,30 @@
   }
   
   input {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
     margin-bottom: 0.25rem;
     border: none;
     outline: none;
+
+    &:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
     
     &.has-error {
-      border: 1px solid $croucher-red;
+      border: 1px solid $croucher-red !important;
       
       &:focus {
-        border-color: $croucher-red;
-        box-shadow: 0 0 0 1px $croucher-red;
+        border-color: $croucher-red !important;
+        outline: $croucher-red !important;
+        box-shadow: 0 0 0 1px $croucher-red !important;
       }
     }
     
     &:not(.has-error) {
       &:focus {
-        border-color: #dfdfdf;
+        border-color: #dfdfdf !important;
       }
     }
   }
