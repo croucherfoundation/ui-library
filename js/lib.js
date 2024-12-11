@@ -878,7 +878,7 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const dropdowns = document.querySelectorAll("croucher_dropdown");
+  const dropdowns = document.querySelectorAll(".croucher_dropdown");
 
 
   dropdowns.forEach(p => {
