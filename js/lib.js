@@ -871,3 +871,85 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+
+/**
+ * START: Dropdown
+ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdowns = document.querySelectorAll("croucher_dropdown");
+
+
+  dropdowns.forEach(p => {
+
+    const selectBox = p.querySelector(".croucher_dropdown_button");
+    const optionsList = p.querySelector(".croucher_dropdown_list");
+    const selectedOptionsContainer = p.querySelector(
+      ".croucher_dropdown_selected"
+    );
+    const selectedValuesInput = p.querySelector(".selected-values");
+
+    const toggleOptionsList = () => {
+      optionsList.style.display =
+        optionsList.style.display === "block" ? "none" : "block";
+    };
+
+    const updateSelectedOptions = () => {
+      const selectedOptions = Array.from(
+        optionsList.querySelectorAll(".selected")
+      ).map((option) => option.dataset.value);
+
+      selectedOptionsContainer.innerHTML = selectedOptions
+        .map((value, idx) => {
+          let v = idx !== selectedOptions.length - 1 ? `${value},` : `${value}`;
+          return v;
+        })
+        .join("");
+
+      selectedValuesInput.value = selectedOptions.join(",");
+    };
+
+    const handleOptionClick = (event) => {
+      const option = event.target;
+      const li = option.closest("li");
+
+      if (li.classList.contains("selected")) {
+        li.classList.remove("selected");
+      } else {
+        li.classList.add("selected");
+      }
+
+      updateSelectedOptions();
+    };
+
+    const handleRemoveClick = (event) => {
+      if (event.target.classList.contains("remove")) {
+        const valueToRemove = event.target.parentElement.textContent.slice(
+          0,
+          -1
+        );
+        const option = optionsList.querySelector(
+          `[data-value="${valueToRemove}"]`
+        );
+        option.classList.remove("selected");
+        updateSelectedOptions();
+      }
+    };
+
+    selectBox.addEventListener("click", toggleOptionsList);
+    optionsList.addEventListener("click", handleOptionClick);
+    selectedOptionsContainer.addEventListener("click", handleRemoveClick);
+
+    document.addEventListener("click", (event) => {
+      if (!selectBox.contains(event.target)) {
+        optionsList.style.display = "none";
+      }
+    });
+    
+  })
+  
+});
+/**
+ * END: Dropdown
+ */
