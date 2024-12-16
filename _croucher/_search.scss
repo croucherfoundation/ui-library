@@ -28,6 +28,18 @@
     align-items: center;
     position: relative;
 
+    .input_value{
+
+      input[type="text"] {
+        border: 1px solid #000;
+        border-radius: 5px;
+
+        &::placeholder{
+          color: #000;
+        }
+      }
+    }
+
     .search_container {
       flex: 1;
 
