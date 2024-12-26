@@ -857,7 +857,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const subdomain = hostname.split('.')[0];
   const currentPath = window.location.pathname;
 
-  if (!(subdomain === 'wiki' || subdomain === 'wikis' || currentPath.endsWith('/sign_in'))) {
+  var hideForWiki = true;
+
+  if (subdomain === 'wiki' || subdomain === 'wikis') {
+    var header = document.getElementById('title');
+    if (header) {
+      if (header.innerHTML.trim() == '') {  
+        hideForWiki = false;
+      }
+    }
+  }
+
+  if (!(currentPath.endsWith('/sign_in')) && hideForWiki) {
     // Disable and hide fields if subdomain is not 'wiki' or 'wikis' or 'sign in page'
     if (emailField) {
       emailField.setAttribute('disabled', 'true');
