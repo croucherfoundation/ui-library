@@ -772,16 +772,29 @@
         }
       } else {
         var form = this.closest("form");
+        var formValid = true;
 
-        var modal = saveBtn.closest(".modal");
-        console.log("modal cl", modal);
-        var backdrop = document.querySelector(".modal-backdrop");
-        removeClassName(backdrop, "show");
-        removeClassName(modal, "modal-open");
-        callLater(() => backdrop.remove(), 100);
+        // Validate the email input
+        var emailInput = form.querySelector('input[type="email"]');
+        if (emailInput) {
+          var emailValue = emailInput.value.trim();
+          formValid = validateEmail(emailValue);
+        }
 
-        if (form) {
-          form.submit();
+        if (formValid) {
+          var modal = saveBtn.closest(".modal");
+          var backdrop = document.querySelector(".modal-backdrop");
+          removeClassName(backdrop, "show");
+          removeClassName(modal, "modal-open");
+          callLater(() => backdrop.remove(), 100);
+          if(form){
+            form.submit();
+          }
+        }
+        // Function to validate email
+        function validateEmail(email) {
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(email);
         }
       }
     });
@@ -857,18 +870,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const subdomain = hostname.split('.')[0];
   const currentPath = window.location.pathname;
 
-  var hideForWiki = true;
-
-  if (subdomain === 'wiki' || subdomain === 'wikis') {
-    var header = document.getElementById('title');
-    if (header) {
-      if (header.innerHTML.trim() == '') {  
-        hideForWiki = false;
-      }
-    }
-  }
-
-  if (!(currentPath.endsWith('/sign_in')) && hideForWiki) {
+  if (!(subdomain === 'wiki' || subdomain === 'wikis' || currentPath.endsWith('/sign_in'))) {
     // Disable and hide fields if subdomain is not 'wiki' or 'wikis' or 'sign in page'
     if (emailField) {
       emailField.setAttribute('disabled', 'true');
