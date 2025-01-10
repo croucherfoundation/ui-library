@@ -22,39 +22,12 @@
     }
   }
 
-  .error_message {
-    font-size: 10px;
-    color: $croucher-red;
-    position: absolute;
-    bottom: -20px;
-    left: 0;
-    &.account_settings_error_message{
-      a{
-        display: none;
-      }
-    }
-  }
-
   .croucher_input_invalid {
     border: 1px solid $croucher-red !important;
   }
 }
 
-.sign_in_form, .auth_container_wrapper {
-  .error_message {
-    color: $croucher-red;
-    font-size: 14px;
-    margin-bottom: 1rem;
-
-    .closer {
-      display: none;
-    }
-    
-    @include md {
-      margin-bottom: 0;
-    }
-  }
-  
+.sign_in_form {
   input {
     border-radius: 5px;
     margin-bottom: 0.25rem;
@@ -66,16 +39,16 @@
       outline: none !important;
       box-shadow: none !important;
     }
-    
+
     &.has-error {
       border: 1px solid $croucher-red !important;
-      
+
       &:focus {
         border-color: $croucher-red !important;
         outline: $croucher-red !important;
       }
     }
-    
+
     &:not(.has-error) {
       &:focus {
         border-color: #dfdfdf !important;
@@ -87,5 +60,41 @@
     @include md {
       height: 370px !important;
     }
+  }
+}
+
+.error_message_container_desktop {
+  display: none;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  width: 100%;
+
+  @include md {
+    display: block;
+  }
+}
+
+.error_message_container_mobile {
+  display: block;
+  margin-top: 0.5rem;
+  width: 100%;
+
+  @include md {
+    display: none;
+  }
+}
+
+.error_message {
+  color: $croucher-red;
+  font-size: 14px;
+  line-height: 1.2;
+  display: block;
+  word-wrap: break-word;
+  white-space: normal;
+
+  @include md {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
