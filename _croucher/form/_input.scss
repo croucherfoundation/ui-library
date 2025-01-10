@@ -40,7 +40,7 @@
   }
 }
 
-.sign_in_form {
+.sign_in_form, .auth_container_wrapper {
   .error_message {
     color: $croucher-red;
     font-size: 14px;
