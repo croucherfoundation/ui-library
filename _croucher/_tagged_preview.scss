@@ -80,6 +80,9 @@
             line-height: 32px;
             margin-bottom: 18px;
             font-weight: 700;
+            @media (max-width: 767px) {
+              font-size: 22px;
+            }
           }
           span {
             max-width: 100%;
