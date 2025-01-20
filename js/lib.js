@@ -20,20 +20,32 @@
     };
 
     searchIcon.addEventListener("click", function () {
-      var searchBarOpen = searchBar.classList.contains(
-        "croucher_search_container--open"
-      );
+      var searchBarOpen = searchBar.classList.contains("croucher_search_container--open");
+      var secondarySearchBox = document.getElementById("search-scholar-box");
+      var defaultSearchBox = document.querySelector(".search-scholar-box");
+    
       scrollToTopWithScroll(searchBarOpen ? 0 : 200);
-      // if (searchBarOpen) return;
-      if(searchBarOpen){
+    
+      if (searchBarOpen) {
+        // Close the main search bar
         searchBar.classList.remove("croucher_search_container--open");
         if (navbarSubContainer) searchBar.classList.remove("mt");
         if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
-      }else{
+    
+        // Show the default search box if secondary is hidden
+        if (secondarySearchBox) secondarySearchBox.classList.remove("croucher_search_container--open");
+        if (defaultSearchBox) defaultSearchBox.style.display = "block";
+      } else {
+        // Open the main search bar
         searchBar.classList.add("croucher_search_container--open");
         if (navbarSubContainer) searchBar.classList.add("mt");
         if (breadcrumbContainer) breadcrumbContainer.classList.remove("pt");
+    
+        // Hide the default search box and open the secondary search box
+        if (secondarySearchBox) secondarySearchBox.classList.add("croucher_search_container--open");
+        if (defaultSearchBox) defaultSearchBox.style.display = "none";
       }
+
       // close signout box if search box open
       let signinBox = document.getElementById("signin-box");
       if(signinBox) signinBox.classList.remove("auth_container_open");
@@ -42,6 +54,21 @@
       if(signoutBox) signoutBox.classList.remove("auth_container_open");
 
     });
+
+    var crossButtons = document.querySelectorAll(".cross_icon_container button, .cross_icon");
+
+    crossButtons.forEach(function (crossButton) {
+      crossButton.addEventListener("click", function () {
+        var secondarySearchBox = document.getElementById("search-scholar-box");
+        var defaultSearchBox = document.querySelector(".search-scholar-box");
+
+        if (secondarySearchBox) secondarySearchBox.classList.remove("croucher_search_container--open");
+
+        if (defaultSearchBox) defaultSearchBox.style.display = "block"; 
+      });
+    });
+
+
 
     searchCrossIcon.addEventListener("click", function () {
       var searchBarOpen = searchBar.classList.contains(
@@ -271,26 +298,29 @@
 
     if (openSignOut) {
       openSignOut.addEventListener("click", () => {
-
-        // open && close sign out box
-        if(signoutBox){
-          var isSignOutBoxOpen = signoutBox.classList.contains(
-            "auth_container_open"
-          );
-          if(isSignOutBoxOpen){
+        // Open & close signout box
+        if (signoutBox) {
+          var isSignOutBoxOpen = signoutBox.classList.contains("auth_container_open");
+          if (isSignOutBoxOpen) {
             signoutBox.classList.remove("auth_container_open");
             if (navbarSubContainer) signoutBox.classList.remove("mt_open");
-          }else{
+    
+            // Show the default search box when signout box is closed
+            let defaultSearchBox = document.querySelector(".search-scholar-box");
+            if (defaultSearchBox) defaultSearchBox.style.display = "block";
+          } else {
             signoutBox.classList.add("auth_container_open");
-            if(navbarSubContainer) signoutBox.classList.add("mt_open");
+            if (navbarSubContainer) signoutBox.classList.add("mt_open");
+    
+            // Hide the default search box when signout box is open
+            let defaultSearchBox = document.querySelector(".search-scholar-box");
+            if (defaultSearchBox) defaultSearchBox.style.display = "none";
           }
         }
-
-        // close croucher_search_container
-        if(searchBar){
-          var searchBarOpen = searchBar.classList.contains(
-            "croucher_search_container--open"
-          );
+    
+        // Close croucher_search_container
+        if (searchBar) {
+          var searchBarOpen = searchBar.classList.contains("croucher_search_container--open");
           if (!searchBarOpen) return;
           searchBar.classList.remove("croucher_search_container--open");
           if (navbarSubContainer) searchBar.classList.remove("mt");
