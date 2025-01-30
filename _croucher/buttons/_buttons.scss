@@ -95,15 +95,19 @@ a.viewall_btn,
 }
 
 .comment-btns {
-  width: 1218px;
+  max-width: 1298px;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.7rem;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin: 0 auto;
+  padding-right: 40px;
+  padding-top: 20px;
   .btn {
     color: #9b9a97;
     font-size: 20px;
-    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
   }
 }
