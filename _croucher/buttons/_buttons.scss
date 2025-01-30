@@ -93,3 +93,16 @@ a.viewall_btn,
     height: auto;
   }
 }
+
+.comment-btns {
+  width: 1218px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: flex-end;
+  .btn {
+    color: #9b9a97;
+    font-size: 20px;
+    gap: 0.5rem;
+  }
+}
