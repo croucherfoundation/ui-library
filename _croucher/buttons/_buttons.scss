@@ -98,16 +98,27 @@ a.viewall_btn,
   max-width: 1298px;
   display: flex;
   align-items: center;
-  gap: 1.7rem;
+  gap: 2rem;
   justify-content: flex-end;
   margin: 0 auto;
-  padding-right: 40px;
-  padding-top: 20px;
+  &.pt {
+    padding-top: 20px;
+  }
+  &.pb {
+    padding-bottom: 20px;
+  }
+  &.pr {
+    padding-right: 40px;
+  }
   .btn {
     color: #9b9a97;
     font-size: 20px;
     display: flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 8px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
