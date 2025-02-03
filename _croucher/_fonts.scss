@@ -108,7 +108,7 @@ $typo: (
   }
 }
 
-.text-standfirst {
+.text-title, .text-standfirst {
   max-width: 794px;
   &.detail-standfirst {
     max-width: unset;
