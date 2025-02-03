@@ -410,6 +410,10 @@
             color: $black;
             font-weight: 400;
             align-items: center;
+
+            span:last-child {
+              padding-top: 2px;
+            }
           }
           form {
             position: relative;
