@@ -232,6 +232,7 @@
         });
     }
 
+    let linksContainer = document.querySelector(".links_container")
     let openSignInBtn = document.querySelectorAll(".sign_in");
     let signinBox = document.getElementById("signin-box");
     if (signinBox) {
@@ -290,6 +291,10 @@
               searchBar.classList.remove("croucher_search_container--open");
               if (navbarSubContainer) searchBar.classList.remove("mt");
               if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
+            }
+            
+            if(linksContainer) {
+              linksContainer.classList.remove("links_container--open")
             }
           });
         }
