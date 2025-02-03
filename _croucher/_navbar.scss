@@ -402,8 +402,15 @@
         }
         
         .search_mobile {
-          padding: 16px 24px;
-          border: none;
+          // padding: 16px 24px;
+          // border: none;
+          a {
+            display: flex;
+            gap: 3.5px;
+            color: $black;
+            font-weight: 400;
+            justify-items: center;
+          }
           form {
             position: relative;
             input {
