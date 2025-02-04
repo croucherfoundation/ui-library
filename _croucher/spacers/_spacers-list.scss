@@ -61,6 +61,13 @@ $subtitle-spacers: (
   ),
 );
 
+$search-title-spacers: (
+  b: (
+    desktop: (margin-bottom: 15px),
+    mobile: (margin-bottom: 18px),
+  ),
+);
+
 $subbox-spacers: (
   t: (
     desktop: (margin-top: 60px),

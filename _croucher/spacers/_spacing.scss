@@ -9,6 +9,7 @@
 @include element-type-padding-generator($paragraph-header-spacers, "paragraph_header");
 
 @include element-type-margin-generator($subtitle-spacers, "subtitle");
+@include element-type-margin-generator($search-title-spacers, "search_title");
 @include element-type-margin-generator($subbox-spacers, "subbox");
 @include element-type-margin-generator(
   $viewall-btn-spacers,

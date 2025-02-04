@@ -115,7 +115,7 @@ $typo: (
   }
 }
 
-.rte_content_body h2, .text-subtitle, .text-smallsubtitle {
+.rte_content_body h2, .text-subtitle, .text-smallsubtitle, .search-title {
   position: relative;
 
   &::before {
@@ -197,6 +197,7 @@ $typo: (
   font-size: 40px;
 
   @media (max-width: 767px) {
-    font-size: 24px;
+    font-size: 32px;
+    line-height: 36px;
   }
 }
