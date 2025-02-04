@@ -247,7 +247,7 @@
         });
       }
     }
-    let openSignOut = document.querySelector(".user_avatar");
+    let openSignOut = document.querySelector(".user_avatar, .user_avatar_mobile");
     let signoutBox = document.getElementById("signout-box");
     if (signoutBox) {
       let signoutCrossBtn = signoutBox.querySelector(
