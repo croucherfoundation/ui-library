@@ -247,7 +247,7 @@
         });
       }
     }
-    let openSignOut = document.querySelector(".user_avatar, .user_avatar_mobile");
+    let openSignOutElements = document.querySelectorAll(".user_avatar, .user_avatar_mobile");
     let signoutBox = document.getElementById("signout-box");
     if (signoutBox) {
       let signoutCrossBtn = signoutBox.querySelector(
@@ -301,7 +301,7 @@
       });
     }
 
-    if (openSignOut) {
+    openSignOutElements.forEach(openSignOut => {
       openSignOut.addEventListener("click", () => {
         // Open & close signout box
         if (signoutBox) {
@@ -332,7 +332,7 @@
           if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
         }
       });
-    }
+    });
   });
 
   function enableEmailAndPassword(){
