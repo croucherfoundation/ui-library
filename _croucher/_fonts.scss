@@ -195,4 +195,8 @@ $typo: (
 
 .search-title {
   font-size: 40px;
+
+  @media (max-width: 767px) {
+    font-size: 24px;
+  }
 }
