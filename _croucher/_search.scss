@@ -82,16 +82,10 @@
         cursor: pointer;
       }
     }
-  }
-
-  .cross_container {
-    @extend %base-container;
-    position: relative;
-
     .cross_icon {
       position: absolute;
-      top: -295px;
-      right: 40px;
+      top: -53px;
+      right: 39px;
       cursor: pointer;
     }
   }
