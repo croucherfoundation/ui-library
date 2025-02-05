@@ -89,5 +89,24 @@
       right: 39px;
       cursor: pointer;
     }
+    // /* For smaller screens (phones) */
+    @media (max-width: 640px) {
+      .cross_icon {
+        top: -40px;  /* Adjusting position for smaller screens */
+        right: 25px; /* Less margin for smaller screens */
+        width: 20px;  /* Reduce size */
+        height: 20px;
+      }
+    }
+
+    /* For tablets */
+    @media (min-width: 640px) and (max-width: 1024px) {
+      .cross_icon {
+        top: -45px;
+        right: 48px;
+        width: 22px;
+        height: 22px;
+      }
+    }
   }
 }
