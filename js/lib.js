@@ -71,13 +71,18 @@
 
 
     searchCrossIcon.addEventListener("click", function () {
-      var searchBarOpen = searchBar.classList.contains(
-        "croucher_search_container--open"
-      );
-      if (!searchBarOpen) return;
-      searchBar.classList.remove("croucher_search_container--open");
-      if (navbarSubContainer) searchBar.classList.remove("mt");
-      if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
+      // To prevent start from new tab without no history.
+      if (window.history.length > 2) {
+        window.history.back();
+      } else {
+        var searchBarOpen = searchBar.classList.contains(
+          "croucher_search_container--open"
+        );
+        if (!searchBarOpen) return;
+        searchBar.classList.remove("croucher_search_container--open");
+        if (navbarSubContainer) searchBar.classList.remove("mt");
+        if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
+      };
     });
   }
 
