@@ -266,20 +266,21 @@
         if (btn) {
           btn.addEventListener("click", () => {
 
-            // open && close sign in box
+            // open sign in box
             if(signinBox){
               var isSignBoxOpen = signinBox.classList.contains(
                 "auth_container_open"
               );
-              if(isSignBoxOpen){
-                disableEmailAndPassword();
-                signinBox.classList.remove("auth_container_open");
-                if (navbarSubContainer) signinBox.classList.remove("mt_open");
-              }else{
+              if(!isSignBoxOpen){
                 enableEmailAndPassword();
                 signinBox.classList.add("auth_container_open");
                 if(navbarSubContainer) signinBox.classList.add("mt_open");
               }
+            }
+
+            // close the hamburger menu in mobile view
+            if(linksContainer) {
+              linksContainer.classList.remove("links_container--open")
             }
 
             // close croucher_search_container
@@ -291,10 +292,6 @@
               searchBar.classList.remove("croucher_search_container--open");
               if (navbarSubContainer) searchBar.classList.remove("mt");
               if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
-            }
-            
-            if(linksContainer) {
-              linksContainer.classList.remove("links_container--open")
             }
           });
         }
