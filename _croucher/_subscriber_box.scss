@@ -55,6 +55,8 @@
 }
 
 .subscribe-box-modal {
+  position: relative;
+  z-index: 3333;
   display: none;
   .overlay {
     position: fixed;
