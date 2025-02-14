@@ -15,7 +15,7 @@
     margin-right: auto
     @include md
       max-width: 768px
-      padding-top: 59px
+      padding-top: 62px
       padding-left: 0
       padding-right: 0
     @include lg
@@ -29,7 +29,9 @@
       .link-container
         display: flex
         flex-direction: column
-        gap: 10px
+        gap: 7.5px
+        &.last
+          gap: 34px
         .link
           font-family: "MarrSans"
           font-variation-settings: normal
@@ -42,7 +44,6 @@
           letter-spacing: 0.01em
           line-height: 24px
         .link-header
-          margin-bottom: 25px
           font-weight: 700
         .no-margin
           margin: 0
@@ -50,8 +51,8 @@
       height: 1px
       width: 100%
       background-color: white
-      margin-top: 53px
-      margin-bottom: 34px
+      margin-top: 19px
+      margin-bottom: 27px
     .footer-link-container
       display: flex
       flex-direction: row
@@ -97,7 +98,7 @@
           @media (min-width: 1186px)
             padding-left: calc(11.5vw - 1.5%)
           @media (min-width: 1218px)
-            padding-left: 138px
+            padding-left: 20px
           a
             color: white
             font-family: "MarrSans"
