@@ -174,7 +174,6 @@
    * Check Height for footer position
    */
   document.addEventListener("DOMContentLoaded", () => {
-    positionFooter();
     function positionFooter() {
       var footer = document.querySelector(".croucher-footer");
       if (footer) {
