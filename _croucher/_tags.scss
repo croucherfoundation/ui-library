@@ -3,9 +3,13 @@
   padding: 5px 5px 9px;
   border-radius: $rounded-5;
 
-  &__grey {
+  &_grey {
     background-color: $csw-grey-2;
     font-size: 16px;
     color: $black;
+
+    &--noradius {
+      border-radius: 0;
+    }
   }
 }
