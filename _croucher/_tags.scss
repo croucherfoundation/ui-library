@@ -1,5 +1,5 @@
 @import "../definitions";
-.croucher_tag {
+.croucher_tag, .token-input-token  {
   padding: 4px 15px;
   border-radius: $rounded-5;
   font-size: 16px;
@@ -8,4 +8,11 @@
   &--grey {
     background-color: $csw-grey-2;
   }
+}
+.token-input-token {
+  background-color: $csw-grey-2;
+}
+
+.token-input-delete-token {
+  color: $black !important;
 }
