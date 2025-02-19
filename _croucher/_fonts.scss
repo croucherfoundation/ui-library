@@ -113,6 +113,9 @@ $typo: (
   &.detail-standfirst {
     max-width: unset;
   }
+  &.full-width {
+    max-width: 100%;
+  }
 }
 
 .rte_content_body h2, .text-subtitle, .text-smallsubtitle, .search-title {
