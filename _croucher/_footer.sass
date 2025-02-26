@@ -66,10 +66,6 @@
         display: flex
         align-items: center
         gap: 30px
-      &.small-mt-0
-        margin-top: 0
-        @include md
-          margin-top: 35px
         
       &.for-small 
         display: flex
@@ -132,7 +128,10 @@
     min-height: unset 
     .container 
       padding-top: 37px
-      
+    .footer-link-container
+      &.small-mt-0
+          margin-top: 0
+          
 .footer-hide
   display: none !important
   @include md
