@@ -119,6 +119,12 @@ a.viewall_btn,
     svg {
       width: 20px;
       height: 20px;
+      &.document {
+        margin-top: -3px;
+        margin-right: -2px;
+        width: 22px;
+        height: 24px;
+      }
     }
   }
 }
