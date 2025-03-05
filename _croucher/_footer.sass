@@ -1,11 +1,13 @@
 .croucher-footer
   background-color: $croucher-red
   min-height: 200px
+
   &.fixed-position
     position: fixed
     left: 0px
     right: 0px
     bottom: 0px
+
   .container
     padding-top: 37px
     padding-bottom: 34px
@@ -13,25 +15,32 @@
     padding-right: 20px
     margin-left: auto
     margin-right: auto
+
     @include md
       max-width: 768px
       padding-top: 62px
       padding-left: 0
       padding-right: 0
+
     @include lg
       max-width: 1218px
+
     .grid-container
       display: grid
       gap: 30px
-      grid-template-columns: repeat(1,minmax(0,1fr))
+      grid-template-columns: repeat(1, minmax(0, 1fr))
+
       @include md
-        grid-template-columns: repeat(4,minmax(0,1fr))
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+
       .link-container
         display: flex
         flex-direction: column
         gap: 7.5px
+
         &.last
           gap: 40px
+
         .link
           font-family: "MarrSans"
           font-variation-settings: normal
@@ -43,43 +52,57 @@
           color: white
           letter-spacing: 0.01em
           line-height: 24px
+
         .link-header
           font-weight: 700
+
           &:last-child
             margin-top: -2.4px
+
         .no-margin
           margin: 0
+
     .horizontal-line
       height: 1px
       width: 100%
       background-color: white
       margin-top: 47px
       margin-bottom: 27px
+
     .footer-link-container
       margin-top: 35px
-      display: grid
-      grid-template-columns: repeat(4,minmax(0,1fr))
-      letter-spacing: 0.01em !important
+      display: flex
+      justify-content: space-between
       gap: 30px
-      .footer-link-socials 
+
+      @include md
+        display: grid
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+
+      .footer-link-socials
         grid-column: 2 / 4
         display: flex
         align-items: center
         gap: 30px
-        
-      &.for-small 
+
+      &.for-small
         display: flex
         flex-direction: column
-        .site-maps 
+
+        .site-maps
           justify-content: space-between
+
         @include md
           margin-top: 0
+
       a:first-child
         height: 26.67px
+
       .site-maps
         align-items: center
         gap: 30px
         display: flex
+
         a
           color: white
           font-family: "MarrSans"
@@ -91,25 +114,45 @@
           height: 24px
           display: flex
           align-items: center
+
+        .privacy-terms-link
+          &:hover
+            text-decoration: underline
+
+            margin-left: 15px
+
+          @include sm
+            margin-left: 20px
+
+          @include md
+            margin-left: 25px
+
+          @include lg
+            margin-left: 30px
+
       .socials
-          align-items: center
-          gap: 30px
-          display: flex
-          a
-            color: white
-            font-family: "MarrSans"
-            font-variation-settings: normal
-            font-feature-settings: normal
-            -webkit-font-smoothing: antialiased
-            text-decoration: none
-            font-size: 14px
-            height: 30px
-          .fill-red
-            fill: rgb(238, 58, 67)
+        align-items: center
+        gap: 30px
+        display: flex
+
+        a
+          color: white
+          font-family: "MarrSans"
+          font-variation-settings: normal
+          font-feature-settings: normal
+          -webkit-font-smoothing: antialiased
+          text-decoration: none
+          font-size: 14px
+          height: 30px
+
+        .fill-red
+          fill: rgb(238, 58, 67)
+
       .back-to-top
         display: flex
         align-items: center
         justify-content: flex-end
+
         button
           padding: 0
           letter-spacing: 0.01em
@@ -123,20 +166,25 @@
   .croucher-footer-logo
     width: 145px
     fill: white
-  
+
   &.only-stamp
-    min-height: unset 
-    .container 
+    min-height: unset
+
+    .container
       padding-top: 37px
+
     .footer-link-container
       &.small-mt-0
-          margin-top: 0
-          
+        margin-top: 0
+
 .footer-hide
   display: none !important
+
   @include md
     display: flex !important
+
 .footer-hide-reverse
   display: flex !important
+
   @include md
     display: none !important
