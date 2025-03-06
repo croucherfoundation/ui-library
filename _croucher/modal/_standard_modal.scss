@@ -1,4 +1,4 @@
-.modal-overlay {
+.standard-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +16,7 @@
   }
 }
 
-.modal-container {
+.standard-modal-container {
   background-color: white;
   border-radius: 0.5rem;
   max-width: 798px;
