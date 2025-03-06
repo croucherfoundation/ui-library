@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   z-index: 2001;
+  display: none;
 
   &.active {
     display: flex;
@@ -23,6 +24,7 @@
   min-width: 300px;
   overflow-y: auto;
   position: relative;
+  display: none;
   &.active {
     display: block;
     position: fixed;
@@ -43,6 +45,14 @@
     @media (max-width: 800px) {
       padding: 0 60px 2px 60px;
     }
+
+    p {
+      margin-bottom: 6px;
+
+      &.mb {
+        margin-bottom: 26px;
+      }
+    }
   }
 
   .logo {
@@ -62,11 +72,15 @@
   h2 {
     font-size: 24px;
     font-weight: 600;
-    margin-bottom: 2.6rem;
+    margin-bottom: 0.6rem;
 
     @media (max-width: 800px) {
       font-size: 20px;
       margin-bottom: 1.4rem;
+    }
+
+    &.mb {
+      margin-bottom: 2.6rem;
     }
   }
 
@@ -74,10 +88,18 @@
   ul {
     font-size: 18px;
     margin-bottom: 6px;
+
+    br {
+      display: block;
+      margin-bottom: 10px;
+      content: "";
+    }
   }
-  
-  p + p {
-    margin-bottom: 26px;
+
+  br {
+    display: block;
+    margin-bottom: 10px;
+    content: "";
   }
 
   ul {
@@ -87,7 +109,7 @@
     li {
       margin-bottom: 6px;
       position: relative;
-      
+
       &::before {
         content: "—";
         position: absolute;
@@ -215,6 +237,10 @@
     @media (max-width: 800px) {
       justify-content: space-between;
       padding: 12px 30px 40px 30px;
+      
+      &:has(button:only-child) {
+        justify-content: flex-end;
+      }
     }
 
     button {
