@@ -8,7 +8,6 @@
   justify-content: center;
   align-items: center;
   z-index: 2001;
-  display: none;
 
   &.active {
     display: flex;
@@ -24,7 +23,6 @@
   min-width: 300px;
   overflow-y: auto;
   position: relative;
-  display: none;
   &.active {
     display: block;
     position: fixed;
@@ -76,6 +74,10 @@
   ul {
     font-size: 18px;
     margin-bottom: 6px;
+  }
+  
+  p + p {
+    margin-bottom: 26px;
   }
 
   ul {
