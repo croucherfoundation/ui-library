@@ -142,7 +142,7 @@
         margin-top: 2rem;
       }
 
-      input[type="text"], textarea, [contenteditable]:not([contenteditable=false]) {
+      input:not([type="checkbox"]), textarea, [contenteditable]:not([contenteditable=false]) {
         border: none;
         border-bottom: 2px solid #9a9b97;
         padding: 0.5rem 0;
