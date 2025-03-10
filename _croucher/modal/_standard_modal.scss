@@ -53,6 +53,26 @@
         margin-bottom: 26px;
       }
     }
+
+    > ul:not(.standard-dropdown__list),
+    .modal-content ul:not(.standard-dropdown__list) {
+      list-style-type: none;
+      padding-left: 1.2rem;
+
+      li {
+        margin-bottom: 6px;
+        position: relative;
+
+        &::before {
+          content: "—";
+          position: absolute;
+          left: -1.6rem;
+          width: 1.5rem;
+          display: inline-block;
+          text-align: center;
+        }
+      }
+    }
   }
 
   .logo {
@@ -102,17 +122,17 @@
     content: "";
   }
 
-  .standard-selection-list
-    ul {
-      padding: 0;
-      li {
-        &::before {
-          content: none;
-        }
+  .standard-selection-list ul {
+    padding: 0;
+    li {
+      &::before {
+        content: none;
       }
     }
+  }
 
-  ul {
+  .modal-content ul:not(.standard-dropdown__list),
+  .container > ul:not(.standard-dropdown__list) {
     list-style-type: none;
     padding-left: 1.2rem;
 
@@ -142,7 +162,9 @@
         margin-top: 2rem;
       }
 
-      input:not([type="checkbox"]), textarea, [contenteditable]:not([contenteditable=false]) {
+      input:not([type="checkbox"]),
+      textarea,
+      [contenteditable]:not([contenteditable="false"]) {
         border: none;
         border-bottom: 2px solid #9a9b97;
         padding: 0.5rem 0;
@@ -251,13 +273,14 @@
     @media (max-width: 800px) {
       justify-content: space-between;
       padding: 12px 30px 40px 30px;
-      
+
       &:has(button:only-child) {
         justify-content: flex-end;
       }
     }
-    
-    button, .submit-button {
+
+    button,
+    .submit-button {
       border-radius: 9999px;
       font-size: 18px;
       font-weight: 600;
@@ -293,7 +316,8 @@
       }
     }
 
-    .submit, input[type="submit"] {
+    .submit,
+    input[type="submit"] {
       background-color: black;
       border: none;
       color: white;
