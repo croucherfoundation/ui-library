@@ -28,9 +28,14 @@
   &.active {
     display: block;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 90vh;
+    height: fit-content;
+    transform: none;
     z-index: 1001;
   }
 
@@ -107,7 +112,6 @@
   p,
   ul {
     font-size: 18px;
-    margin-bottom: 6px;
 
     br {
       display: block;

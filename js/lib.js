@@ -20,7 +20,9 @@
     };
 
     searchIcon.addEventListener("click", function () {
-      var searchBarOpen = searchBar.classList.contains("croucher_search_container--open");
+      var searchBarOpen = searchBar.classList.contains(
+        "croucher_search_container--open"
+      );
       var secondarySearchBox = document.getElementById("search-scholar-box");
       var defaultSearchBox = document.querySelector(".search-scholar-box");
 
@@ -33,7 +35,10 @@
         if (breadcrumbContainer) breadcrumbContainer.classList.add("pt");
 
         // Show the default search box if secondary is hidden
-        if (secondarySearchBox) secondarySearchBox.classList.remove("croucher_search_container--open");
+        if (secondarySearchBox)
+          secondarySearchBox.classList.remove(
+            "croucher_search_container--open"
+          );
         if (defaultSearchBox) defaultSearchBox.style.display = "block";
       } else {
         // Open the main search bar
@@ -42,33 +47,36 @@
         if (breadcrumbContainer) breadcrumbContainer.classList.remove("pt");
 
         // Hide the default search box and open the secondary search box
-        if (secondarySearchBox) secondarySearchBox.classList.add("croucher_search_container--open");
+        if (secondarySearchBox)
+          secondarySearchBox.classList.add("croucher_search_container--open");
         if (defaultSearchBox) defaultSearchBox.style.display = "none";
       }
 
       // close signout box if search box open
       let signinBox = document.getElementById("signin-box");
-      if(signinBox) signinBox.classList.remove("auth_container_open");
+      if (signinBox) signinBox.classList.remove("auth_container_open");
       disableEmailAndPassword();
       let signoutBox = document.getElementById("signout-box");
-      if(signoutBox) signoutBox.classList.remove("auth_container_open");
-
+      if (signoutBox) signoutBox.classList.remove("auth_container_open");
     });
 
-    var crossButtons = document.querySelectorAll(".cross_icon_container button, .cross_icon");
+    var crossButtons = document.querySelectorAll(
+      ".cross_icon_container button, .cross_icon"
+    );
 
     crossButtons.forEach(function (crossButton) {
       crossButton.addEventListener("click", function () {
         var secondarySearchBox = document.getElementById("search-scholar-box");
         var defaultSearchBox = document.querySelector(".search-scholar-box");
 
-        if (secondarySearchBox) secondarySearchBox.classList.remove("croucher_search_container--open");
+        if (secondarySearchBox)
+          secondarySearchBox.classList.remove(
+            "croucher_search_container--open"
+          );
 
         if (defaultSearchBox) defaultSearchBox.style.display = "block";
       });
     });
-
-
 
     searchCrossIcon.addEventListener("click", function () {
       var searchBarOpen = searchBar.classList.contains(
@@ -221,18 +229,17 @@
    * -----------------------------
    */
   document.addEventListener("DOMContentLoaded", () => {
-
     // show modal when user confirm email is sent
     let emailConfirmModal = document.getElementById("emailConfirmModal");
-    if(emailConfirmModal){
+    if (emailConfirmModal) {
       var backdrop = createModalBackdrop();
-        callLater(function () {
-          backdrop.classList.add("show");
-          emailConfirmModal.classList.add("modal-open");
-        });
+      callLater(function () {
+        backdrop.classList.add("show");
+        emailConfirmModal.classList.add("modal-open");
+      });
     }
 
-    let linksContainer = document.querySelector(".links_container")
+    let linksContainer = document.querySelector(".links_container");
     let openSignInBtn = document.querySelectorAll(".sign_in");
     let signinBox = document.getElementById("signin-box");
     if (signinBox) {
@@ -247,7 +254,9 @@
         });
       }
     }
-    let openSignOutElements = document.querySelectorAll(".user_avatar, .user_avatar_mobile");
+    let openSignOutElements = document.querySelectorAll(
+      ".user_avatar, .user_avatar_mobile"
+    );
     let signoutBox = document.getElementById("signout-box");
     if (signoutBox) {
       let signoutCrossBtn = signoutBox.querySelector(
@@ -265,26 +274,25 @@
       openSignInBtn.forEach((btn) => {
         if (btn) {
           btn.addEventListener("click", () => {
-
             // open sign in box
-            if(signinBox){
+            if (signinBox) {
               var isSignBoxOpen = signinBox.classList.contains(
                 "auth_container_open"
               );
-              if(!isSignBoxOpen){
+              if (!isSignBoxOpen) {
                 enableEmailAndPassword();
                 signinBox.classList.add("auth_container_open");
-                if(navbarSubContainer) signinBox.classList.add("mt_open");
+                if (navbarSubContainer) signinBox.classList.add("mt_open");
               }
             }
 
             // close the hamburger menu in mobile view
-            if(linksContainer) {
-              linksContainer.classList.remove("links_container--open")
+            if (linksContainer) {
+              linksContainer.classList.remove("links_container--open");
             }
 
             // close croucher_search_container
-            if(searchBar){
+            if (searchBar) {
               var searchBarOpen = searchBar.classList.contains(
                 "croucher_search_container--open"
               );
@@ -298,31 +306,39 @@
       });
     }
 
-    openSignOutElements.forEach(openSignOut => {
+    openSignOutElements.forEach((openSignOut) => {
       openSignOut.addEventListener("click", () => {
         // Open & close signout box
         if (signoutBox) {
-          var isSignOutBoxOpen = signoutBox.classList.contains("auth_container_open");
+          var isSignOutBoxOpen = signoutBox.classList.contains(
+            "auth_container_open"
+          );
           if (isSignOutBoxOpen) {
             signoutBox.classList.remove("auth_container_open");
             if (navbarSubContainer) signoutBox.classList.remove("mt_open");
 
             // Show the default search box when signout box is closed
-            let defaultSearchBox = document.querySelector(".search-scholar-box");
+            let defaultSearchBox = document.querySelector(
+              ".search-scholar-box"
+            );
             if (defaultSearchBox) defaultSearchBox.style.display = "block";
           } else {
             signoutBox.classList.add("auth_container_open");
             if (navbarSubContainer) signoutBox.classList.add("mt_open");
 
             // Hide the default search box when signout box is open
-            let defaultSearchBox = document.querySelector(".search-scholar-box");
+            let defaultSearchBox = document.querySelector(
+              ".search-scholar-box"
+            );
             if (defaultSearchBox) defaultSearchBox.style.display = "none";
           }
         }
 
         // Close croucher_search_container
         if (searchBar) {
-          var searchBarOpen = searchBar.classList.contains("croucher_search_container--open");
+          var searchBarOpen = searchBar.classList.contains(
+            "croucher_search_container--open"
+          );
           if (!searchBarOpen) return;
           searchBar.classList.remove("croucher_search_container--open");
           if (navbarSubContainer) searchBar.classList.remove("mt");
@@ -332,32 +348,31 @@
     });
   });
 
-  function enableEmailAndPassword(){
-    var emailField = document.getElementById('u_s_e_a');
-    var passwordField = document.getElementById('u_s_p_f');
-    if(emailField){
-      emailField.removeAttribute('disabled');
-      emailField.style.display = 'block';
+  function enableEmailAndPassword() {
+    var emailField = document.getElementById("u_s_e_a");
+    var passwordField = document.getElementById("u_s_p_f");
+    if (emailField) {
+      emailField.removeAttribute("disabled");
+      emailField.style.display = "block";
     }
-    if(passwordField){
-      passwordField.removeAttribute('disabled');
-      passwordField.style.display = 'block';
-    }
-  }
-
-  function disableEmailAndPassword(){
-    var emailField = document.getElementById('u_s_e_a');
-    var passwordField = document.getElementById('u_s_p_f');
-    if(emailField){
-      emailField.setAttribute('disabled', 'true');
-      emailField.style.display = 'none';
-    }
-    if(passwordField){
-      passwordField.setAttribute('disabled', 'true');
-      passwordField.style.display = 'none';
+    if (passwordField) {
+      passwordField.removeAttribute("disabled");
+      passwordField.style.display = "block";
     }
   }
 
+  function disableEmailAndPassword() {
+    var emailField = document.getElementById("u_s_e_a");
+    var passwordField = document.getElementById("u_s_p_f");
+    if (emailField) {
+      emailField.setAttribute("disabled", "true");
+      emailField.style.display = "none";
+    }
+    if (passwordField) {
+      passwordField.setAttribute("disabled", "true");
+      passwordField.style.display = "none";
+    }
+  }
 
   /**
    * -----------------------------
@@ -769,11 +784,15 @@
       e.preventDefault();
       formSubmitted = true;
 
-      if (passwordConfirmInput && passwordPrimaryInput && passwordPrimaryInput?.value?.length > 0) {
+      if (
+        passwordConfirmInput &&
+        passwordPrimaryInput &&
+        passwordPrimaryInput?.value?.length > 0
+      ) {
         var formValid = true;
         var errorMsg = validatePassword(passwordPrimaryInput.value);
         var errorEl = passwordPrimary.querySelector(".error_message");
-        if(errorEl){
+        if (errorEl) {
           errorEl.textContent = errorMsg;
         }
 
@@ -819,7 +838,7 @@
           removeClassName(backdrop, "show");
           removeClassName(modal, "modal-open");
           callLater(() => backdrop.remove(), 100);
-          if(form){
+          if (form) {
             form.submit();
           }
         }
@@ -832,7 +851,11 @@
     });
   });
 
-  if (passwordPrimaryInput && passwordConfirmInput && passwordPrimaryInput?.value?.length > 0) {
+  if (
+    passwordPrimaryInput &&
+    passwordConfirmInput &&
+    passwordPrimaryInput?.value?.length > 0
+  ) {
     passwordPrimaryInput.addEventListener("input", function (e) {
       var value = this.value;
       var confirmErrEl = passwordConfirm.querySelector(".error_message");
@@ -894,29 +917,33 @@
    */
 })();
 
-document.addEventListener('DOMContentLoaded', function() {
-  var emailField = document.getElementById('u_s_e_a');
-  var passwordField = document.getElementById('u_s_p_f');
+document.addEventListener("DOMContentLoaded", function () {
+  var emailField = document.getElementById("u_s_e_a");
+  var passwordField = document.getElementById("u_s_p_f");
 
   const hostname = window.location.hostname;
-  const subdomain = hostname.split('.')[0];
+  const subdomain = hostname.split(".")[0];
   const currentPath = window.location.pathname;
 
-  if (!(subdomain === 'wiki' || subdomain === 'wikis' || currentPath.endsWith('/sign_in'))) {
+  if (
+    !(
+      subdomain === "wiki" ||
+      subdomain === "wikis" ||
+      currentPath.endsWith("/sign_in")
+    )
+  ) {
     // Disable and hide fields if subdomain is not 'wiki' or 'wikis' or 'sign in page'
     if (emailField) {
-      emailField.setAttribute('disabled', 'true');
-      emailField.style.display = 'none';
+      emailField.setAttribute("disabled", "true");
+      emailField.style.display = "none";
     }
 
     if (passwordField) {
-      passwordField.setAttribute('disabled', 'true');
-      passwordField.style.display = 'none';
+      passwordField.setAttribute("disabled", "true");
+      passwordField.style.display = "none";
     }
   }
-
 });
-
 
 /**
  * START: Dropdown
@@ -925,9 +952,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", () => {
   const dropdowns = document.querySelectorAll(".croucher_dropdown");
 
-
-  dropdowns.forEach(p => {
-
+  dropdowns.forEach((p) => {
     const selectBox = p.querySelector(".croucher_dropdown_button");
     const optionsList = p.querySelector(".croucher_dropdown_list");
     const selectedOptionsContainer = p.querySelector(
@@ -991,10 +1016,17 @@ document.addEventListener("DOMContentLoaded", () => {
         optionsList.style.display = "none";
       }
     });
-
-  })
-
+  });
 });
 /**
  * END: Dropdown
  */
+
+// Import StandardDropdown functionality
+document.addEventListener("DOMContentLoaded", function () {
+  // Dynamically load the dropdown.js script
+  const script = document.createElement("script");
+  script.src = "/js/dropdown.js";
+  script.async = true;
+  document.body.appendChild(script);
+});
