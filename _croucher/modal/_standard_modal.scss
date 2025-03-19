@@ -195,9 +195,26 @@
 
       textarea {
         resize: vertical;
-        // min-height: 80px;
         line-height: 1.5;
         overflow-y: auto;
+        min-height: 80px;
+      }
+
+      [contenteditable]:not([contenteditable="false"]) {
+        font-family: "Frutiger 45 Light", "Lucida Grande", "Lucida Sans Unicode",
+          "Trebuchet MS", sans-serif;
+        font-size: 1.2rem;
+        padding: 8px;
+        border: 1px solid #bdbdbd;
+        background-color: white;
+        min-height: 4em;
+
+        &[placeholder]:empty:before {
+          content: attr(placeholder);
+          color: #bdbdbd;
+          text-transform: none;
+          font-weight: lighter;
+        }
       }
     }
   }
@@ -368,13 +385,13 @@
         box-shadow: none !important;
         -webkit-appearance: none !important;
       }
-      
+
       [data-cke-filler="true"] {
         line-height: 0 !important;
         visibility: visible !important;
         height: auto !important;
       }
-      
+
       p[data-placeholder].ck-placeholder::before,
       .ck p[data-placeholder].ck-placeholder::before,
       .ck.ck-content p[data-placeholder].ck-placeholder::before,
@@ -390,7 +407,7 @@
         right: 0 !important;
         width: 100% !important;
       }
-      
+
       p {
         font-size: 16px !important;
         margin: 0 !important;
@@ -398,11 +415,11 @@
         position: relative !important;
         z-index: 1 !important;
       }
-      
+
       > *:first-child {
         margin-top: 0 !important;
       }
-      
+
       > *:last-child {
         margin-bottom: 0 !important;
       }
