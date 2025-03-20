@@ -1,3 +1,5 @@
+import { StandardDropdown, convertSelectToDropdown, createDropdownItem } from './dropdown.js';
+
 (function () {
   /**
    * ===========================
@@ -1022,11 +1024,3 @@ document.addEventListener("DOMContentLoaded", () => {
  * END: Dropdown
  */
 
-// Import StandardDropdown functionality
-document.addEventListener("DOMContentLoaded", function () {
-  // Dynamically load the dropdown.js script
-  const script = document.createElement("script");
-  script.src = "/js/dropdown.js";
-  script.async = true;
-  document.body.appendChild(script);
-});

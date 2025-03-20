@@ -1,4 +1,4 @@
-class StandardDropdown {
+export class StandardDropdown {
     constructor(element) {
       // Store references to DOM elements
       this.dropdown = element;
@@ -204,7 +204,7 @@ class StandardDropdown {
  * Helper to convert a standard select with optgroups into our custom dropdown
  * @param {HTMLElement} selectElement - The original select element to convert
  */
-function convertSelectToDropdown(selectElement) {
+export function convertSelectToDropdown(selectElement) {
   // Create the custom dropdown container
   const dropdown = document.createElement('div');
   dropdown.className = 'standard-dropdown';
@@ -337,7 +337,7 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
 }
 
 // When creating or initializing dropdown items
-function createDropdownItem(value, text) {
+export function createDropdownItem(value, text) {
   const item = document.createElement('li');
   item.className = 'standard-dropdown__item';
   item.setAttribute('role', 'option');
