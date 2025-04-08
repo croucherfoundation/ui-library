@@ -100,3 +100,25 @@ $section-spacers: (
     mobile: (margin-bottom: 46px),
   ),
 );
+
+$title-with-no-lead-image-spacers: (
+  t: (
+    desktop: (padding-top: 53px),
+    mobile: (padding-top: 56px),
+  ),
+  b: (
+    desktop: (padding-bottom: 14px),
+    mobile: (padding-bottom: 19px),
+  ),
+);
+
+$standfirst-with-no-lead-image-spacers: (
+  t: (
+    desktop: (padding-top: 46px),
+    mobile: (padding-top: 50px),
+  ),
+  b: (
+    desktop: (padding-bottom: 70px),
+    mobile: (padding-bottom: 60px),
+  ),
+);

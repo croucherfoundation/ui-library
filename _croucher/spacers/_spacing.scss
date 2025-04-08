@@ -16,7 +16,8 @@
   "viewall_btn_wrapper"
 );
 @include element-type-margin-generator($section-spacers, "section");
-
+@include element-type-padding-generator($title-with-no-lead-image-spacers, "title_no_lead_image");
+@include element-type-padding-generator($standfirst-with-no-lead-image-spacers, "standfirst_no_lead_image");
 .my-60 {
   margin-top: 60px;
   margin-bottom: 60px;
