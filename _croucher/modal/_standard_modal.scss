@@ -120,6 +120,17 @@
     }
   }
 
+  .container ul.groups,
+  .modal-content ul.groups {
+    padding-left: 0 !important;
+    
+    li {
+      &::before {
+        content: none !important;
+      }
+    }
+  }
+
   br {
     display: block;
     margin-bottom: 10px;
