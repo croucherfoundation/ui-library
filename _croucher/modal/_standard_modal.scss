@@ -357,5 +357,17 @@
         border: 1px solid black;
       }
     }
+
+    &.pb-12 {
+      padding-bottom: 12px;
+    }
+  }
+
+  .instructions {
+    font-size: 0.9rem;
+    padding: 20px 100px;
+  }
+  .input-w522 {
+    width: 522px;
   }
 }
