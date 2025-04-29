@@ -57,6 +57,9 @@
       &.mb {
         margin-bottom: 26px;
       }
+      &.mb-15 {
+        margin-bottom: 15px;
+      }
     }
 
     > ul:not(.standard-dropdown__list),
@@ -372,5 +375,8 @@
   }
   .pl-96 {
     padding-left: 96px;
+  }
+  .std-input-mb {
+    margin-bottom: 2.5rem;
   }
 }
