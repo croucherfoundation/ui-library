@@ -123,7 +123,7 @@
   .container ul.groups,
   .modal-content ul.groups {
     padding-left: 0 !important;
-    
+
     li {
       &::before {
         content: none !important;
@@ -202,6 +202,57 @@
         }
       }
     }
+  }
+
+  /* Override Medium Editor styles to match your textarea style */
+  .rte.medium-editor-element[contenteditable]:not([contenteditable="false"]) {
+    border: none !important;
+    border-bottom: 2px solid #9a9b97 !important;
+    padding: 0.5rem 0 !important;
+    margin-bottom: 2.5rem !important;
+    font-size: 1rem !important;
+    outline: none !important;
+    width: 100% !important;
+    -webkit-appearance: none !important;
+    box-shadow: none !important;
+    min-height: auto !important;
+    background-color: transparent !important;
+    font-family: inherit !important;
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  .rte.medium-editor-element[contenteditable]:not(
+      [contenteditable="false"]
+    ):focus {
+    border-bottom-color: black !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+  }
+
+  /* Placeholder style */
+  .rte.medium-editor-element[contenteditable][placeholder]:empty:before {
+    color: #9a9b97 !important;
+    font-weight: normal !important;
+    font-size: 1rem !important;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 800px) {
+    .rte.medium-editor-element[contenteditable]:not([contenteditable="false"]) {
+      margin-bottom: 1.6rem !important;
+    }
+  }
+
+  /* Remove any popup-specific styles that might interfere */
+  div.popup
+    .rte.medium-editor-element[contenteditable]:not([contenteditable="false"]) {
+    padding: 0.5rem 0 !important;
+    border: none !important;
+    border-bottom: 2px solid #9a9b97 !important;
+    background-color: transparent !important;
+    font-size: 1rem !important;
   }
 
   .input-group {
