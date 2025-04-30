@@ -81,6 +81,10 @@
         }
       }
     }
+
+    &.std-uploader-container {
+      padding: 0 90px 0 38px;
+    }
   }
 
   .logo {
@@ -494,5 +498,25 @@
   }
   .pt-14 {
     padding-top: 14px;
+  }
+  .bg-color-unset {
+    background-color: unset !important;
+  }
+  .ml-0 {
+    margin-left: 0;
+  }
+  .m-0 {
+    margin: 0;
+  }
+  .std-modal-tags {
+    border: none;
+    padding: 0;
+  }
+  .w-222 {
+    width: 222px !important;
+  }
+  .std-modal-timezone {
+    display: inline-block;
+    margin-bottom: 15px;
   }
 }
