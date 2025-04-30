@@ -85,6 +85,16 @@
     &.std-uploader-container {
       padding: 0 90px 0 38px;
     }
+    .token-input-token{
+      p {
+        margin-bottom: 0;
+      }
+    }
+    .token-input-input-token {
+      input {
+        border: none;
+      }
+    }
   }
 
   .logo {
@@ -117,7 +127,7 @@
   }
 
   p,
-  ul {
+  ul:not(.token-input-list) {
     font-size: 18px;
 
     br:not(.medium-editor-element br) {
