@@ -184,7 +184,7 @@
         margin-top: 2rem;
       }
 
-      input:not([type="checkbox"]):not([type="radio"]),
+      input:not([type="checkbox"]):not([type="radio"]):not(.token-input-list input):not(#token-input-award_admin_tags),
       textarea,
       [contenteditable]:not([contenteditable="false"]) {
         border: none;
