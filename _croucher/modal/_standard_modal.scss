@@ -495,4 +495,51 @@
   .pt-14 {
     padding-top: 14px;
   }
+  
+  /* Medium Editor isolation */
+  .medium-editor-wrapper {
+    all: initial;
+    
+    .rte.medium-editor-element {
+      all: initial;
+      /* Reapply your Medium Editor styles here */
+      display: block;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      color: inherit;
+      min-height: 100px;
+      outline: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow: auto;
+      
+      &:focus {
+        border-color: #000;
+      }
+      
+      /* Ensure Medium Editor styles take precedence */
+      p, ul, ol, h1, h2, h3, h4, h5, h6, blockquote, pre {
+        margin: revert;
+        padding: revert;
+        font-size: revert;
+        line-height: revert;
+        font-weight: revert;
+        border: revert;
+      }
+      
+      /* Reset any styling that might be inherited from modal */
+      input:not([type="checkbox"]):not([type="radio"]),
+      textarea,
+      [contenteditable]:not([contenteditable="false"]) {
+        border: revert !important;
+        border-bottom: revert !important;
+        padding: revert !important;
+        margin-bottom: revert !important;
+        font-size: revert !important;
+        width: revert !important;
+        outline: revert !important;
+      }
+    }
+  }
 }
