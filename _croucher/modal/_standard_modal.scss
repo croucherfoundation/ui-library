@@ -194,7 +194,7 @@
         margin-top: 2rem;
       }
 
-      input:not([type="checkbox"]):not([type="radio"]):not(.token-input-list input):not(#token-input-award_admin_tags),
+      input:not([type="checkbox"]):not([type="radio"]):not(.token-input-list input):not(#token-input-award_admin_tags):not(.exclude-std-input),
       textarea,
       [contenteditable]:not([contenteditable="false"]) {
         border: none;
@@ -513,7 +513,7 @@
     background-color: unset !important;
   }
   .ml-0 {
-    margin-left: 0;
+    margin-left: 0 !important;
   }
   .m-0 {
     margin: 0;
@@ -528,5 +528,11 @@
   .std-modal-timezone {
     display: inline-block;
     margin-bottom: 15px;
+  }
+  .pd-l-0 {
+    padding-left: 0px !important;
+  }
+  .pd-r-0 {
+    padding-right: 0px !important;
   }
 }
