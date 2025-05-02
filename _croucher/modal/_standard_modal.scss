@@ -271,7 +271,16 @@
       p.slug, fieldset.slug {
         margin-top: unset;
       }
-
+      .passwords-eye {
+        position: relative;
+        left: 36rem;
+        bottom: 4.5rem;
+        width: 1.5rem;
+      }
+      .std-search-timezone {
+        border: 2px solid #9a9b97 !important;
+        border-radius: 5px;
+      }
     }
   }
 
@@ -400,7 +409,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 10px 25px 8px 25px;
+      padding: 9px 25px 8px 25px;
     }
 
     .cancel {
@@ -591,6 +600,12 @@
   }
   .pt-12 {
     padding-top: 12px !important;
+  }
+  .w-36p {
+    width: 36% !important;
+  }
+  .pr-10 {
+    padding-right: 10px;
   }
 }
 
