@@ -281,6 +281,38 @@
         border: 2px solid #9a9b97 !important;
         border-radius: 5px;
       }
+      .searchable-list {
+        ul {
+          bottom: 80px !important;
+        }
+      }
+      .full-width {
+        width: 100%
+      }
+      .mb-unset {
+        margin-bottom: unset;
+      }
+      .graduation, .institution_chooser, .round_type_chooser {
+        .twocol.unequal {
+          input {
+            margin-bottom: unset !important;
+          }
+        }
+        input {
+          margin-bottom: unset !important;
+        }
+      }
+      .linkage {
+        padding-top: 42px;
+      }
+    }
+    table.edit-profile.inputs td {
+      width: 50%;
+      vertical-align: top; /* Optional: aligns content better */
+    }
+    
+    table.edit-profile.inputs tr td:first-child {
+      padding-right: 20px;
     }
   }
 
@@ -603,6 +635,9 @@
   }
   .w-36p {
     width: 36% !important;
+  }
+  .w-24p {
+    width: 24% !important;
   }
   .pr-10 {
     padding-right: 10px;
