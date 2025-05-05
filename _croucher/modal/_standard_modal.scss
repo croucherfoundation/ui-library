@@ -287,7 +287,7 @@
         }
       }
       .full-width {
-        width: 100%
+        width: 100% !important;
       }
       .mb-unset {
         margin-bottom: unset;
@@ -313,6 +313,11 @@
     
     table.edit-profile.inputs tr td:first-child {
       padding-right: 20px;
+    }
+    &.std-modal-form {
+      position: unset !important;
+      width: 100% !important;
+      box-shadow: unset !important;
     }
   }
 
