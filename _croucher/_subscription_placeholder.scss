@@ -30,14 +30,3 @@
   margin: 0 auto;
   height: auto;
 }
-.container {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  min-height: 50px;
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}

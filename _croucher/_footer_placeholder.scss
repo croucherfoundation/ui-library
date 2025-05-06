@@ -23,19 +23,6 @@
   position: relative;
   width: 100%;
 }
-.croucher-footer .container,
-.server-footer .container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  
-  @include md {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-}
 :global(.hydrated) .server-footer {
   display: none;
 }
