@@ -18,11 +18,6 @@
     height: 100%;
   }
 }
-.croucher-footer,
-.server-footer {
-  position: relative;
-  width: 100%;
-}
 :global(.hydrated) .server-footer {
   display: none;
 }
