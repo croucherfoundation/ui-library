@@ -223,6 +223,37 @@
         display: none;
       }
 
+      label.radio_label {
+        position: relative;
+        padding-left: 40px;
+        cursor: pointer;
+        display: inline-block;
+      
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: -3px;
+          width: 24px;
+          height: 24px;
+          background-color: #ffffff;
+          border: 2px solid #9a9b97;
+          border-radius: 50%; // ⬅️ Circle for radio
+        }
+      
+        &::after {
+          content: '✓';
+          position: absolute;
+          left: 14px;
+          top: 52%;
+          transform: translate(-50%, -50%);
+          color: #9a9b97;
+          font-size: 25px;
+          font-weight: normal;
+          visibility: hidden;
+        }
+      }
+
       label.checkbox_label {
         position: relative;
         padding-left: 40px;
@@ -233,7 +264,7 @@
           content: '';
           position: absolute;
           left: 0;
-          top: -1px;
+          top: -3px;
           width: 24px;
           height: 24px;
           background-color: #ffffff;
@@ -260,6 +291,15 @@
 
       input.checkbox:checked + label.checkbox_label::after {
         visibility: visible
+      }
+
+      input.checkbox:checked + label.radio_label::after {
+        visibility: visible
+      }
+
+      input.checkbox:disabled + label {
+        opacity: 0.25;
+        pointer-events: none;
       }
 
       .formnote {
@@ -634,7 +674,7 @@
     margin-left: 0 !important;
   }
   .m-0 {
-    margin: 0;
+    margin: 0 !important;
   }
   .std-modal-tags {
     border: none;
@@ -664,6 +704,12 @@
   }
   .pr-10 {
     padding-right: 10px;
+  }
+  .mt-8 {
+    margin-top: 8px !important;
+  }
+  .mb-10 {
+    margin-bottom: 10px !important;
   }
 }
 
