@@ -1,5 +1,6 @@
 @import "./_croucher/_constants";
 @import "./_croucher/_extends";
+@import "./_croucher/_font_loading";
 
 // Essential Required Fonts And Breakpoints
 // $font-path: "../fonts/";
@@ -14,7 +15,9 @@
 @import "./_croucher/_search";
 @import "./_croucher/breadcrumb/_breadcrumb";
 @import "./_croucher/_footer";
+@import "./_croucher/_footer_placeholder";
 @import "./_croucher/_subscriber_box";
+@import "./_croucher/_subscription_placeholder";
 @import "./_croucher/_announce_box";
 @import "./_croucher/_gray_box";
 @import "./_croucher/buttons/buttons";

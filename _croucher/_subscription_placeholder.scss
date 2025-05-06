@@ -1,0 +1,43 @@
+.subscription-container {
+  position: relative;
+  min-height: 169px;
+  margin: 80px auto;
+  width: 100%;
+  max-width: 100%;
+  
+  @include md {
+    min-height: 104px;
+  }
+  
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    max-width: 794px;
+    margin: 0 auto;
+    background-color: transparent;
+    border-radius: $rounded-5;
+  }
+}
+.server-subscribe-box,
+.subscribe-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 794px;
+  margin: 0 auto;
+  height: auto;
+}
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 50px;
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

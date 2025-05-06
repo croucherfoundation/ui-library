@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'MarrSans-Regular';
+  src: url('/media/MarrSans-Regular.6d178039.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MarrSans-Semibold';
+  src: url('/media/MarrSans-Semibold.3e4b8404.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: 'MarrSans-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans-bold: 'MarrSans-Semibold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans-bold);
+  font-size-adjust: 100%;
+  letter-spacing: -0.01em;
+}
+
+body, p, div, span, button, a {
+  font-family: var(--font-sans);
+}
+
+strong, b, .font-bold, .font-semibold {
+  font-family: var(--font-sans-bold);
+}

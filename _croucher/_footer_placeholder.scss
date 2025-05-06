@@ -1,0 +1,41 @@
+.footer-container {
+  position: relative;
+  min-height: 500px;
+  width: 100%;
+  @include md {
+    min-height: 350px;
+  }
+  
+  @include lg {
+    min-height: 320px;
+  }
+  
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    height: 100%;
+  }
+}
+.croucher-footer,
+.server-footer {
+  position: relative;
+  width: 100%;
+}
+.croucher-footer .container,
+.server-footer .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  
+  @include md {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+:global(.hydrated) .server-footer {
+  display: none;
+}
