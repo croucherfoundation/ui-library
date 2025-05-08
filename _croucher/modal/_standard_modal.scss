@@ -198,7 +198,7 @@
         margin-top: 2rem;
       }
 
-      input:not([type="checkbox"]):not([type="radio"]):not(.token-input-list input):not(#token-input-award_admin_tags):not(.exclude-std-input),
+      input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not(.token-input-list input):not(#token-input-award_admin_tags):not(.exclude-std-input),
       textarea,
       [contenteditable]:not([contenteditable="false"]) {
         border: none;
@@ -210,6 +210,7 @@
         width: 100%;
         -webkit-appearance: none;
         box-shadow: none;
+        border-radius: 0 !important;
 
         @media (max-width: 800px) {
           margin-bottom: 1.6rem;
@@ -324,9 +325,15 @@
         bottom: 4.5rem;
         width: 1.5rem;
       }
-      .std-search-timezone, .searchable-input input {
+      #book_book_collection_id {
         border: 2px solid #9a9b97 !important;
         border-radius: 5px;
+      }
+      .selectize-control.single .selectize-input:after, .searchable-input .searchable-toggle {
+        display: none;
+      }
+      .selectize-input.items {
+        padding: 10px 0 !important;
       }
       .searchable-list {
         ul {
@@ -358,6 +365,18 @@
       #speaker_institution_code .select2 .selection .select2-selection {
         border: none !important;
       }
+      .selectize-control {
+        border: none !important;
+        border-bottom: 2px solid #9a9b97 !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        height: 42px;
+      }
+      .selectize-input {
+        border: none;
+        box-shadow: none;
+        padding: 0 !important;
+      }
     }
     table.edit-profile.inputs td {
       width: 50%;
@@ -371,6 +390,13 @@
       position: unset !important;
       width: 100% !important;
       box-shadow: unset !important;
+    }
+  }
+
+  #book_form, #author_form, #book_collection_form {
+    .rte {
+      border: none !important;
+      border-bottom: 2px solid #9a9b97 !important;
     }
   }
 
@@ -730,6 +756,16 @@
   .pd-0 {
     padding: 0 !important;
   }
+  .font-24 {
+    font-size: 24px !important;
+  }
+}
+#view-book-order-modal .std-content-container {
+  padding: 0 96px 60px 96px;
+}
+.std-modal-buttons {
+  justify-content: right !important;
+  gap: 30px !important;
 }
 
 // .popup {
