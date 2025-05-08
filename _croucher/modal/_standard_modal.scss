@@ -138,7 +138,10 @@
   }
 
   .token-input-list {
-    border: 2px solid #9a9b97 !important;
+    border: 0;
+    padding: 0;
+    border-bottom: 2px solid #9a9b97 !important;
+    margin-bottom: 2.5rem;
   }
 
   .container ul.groups,
