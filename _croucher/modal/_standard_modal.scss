@@ -227,7 +227,7 @@
         }
       }
 
-      input.checkbox, input.radio, #organiser_preview_image {
+      input.checkbox, input.radio, #organiser_preview_image, #speaker_banner_image {
         display: none;
       }
 
@@ -387,9 +387,6 @@
         .cropper {
           width: 100%
         }
-      }
-      .formnote {
-        display: inline-block;
       }
     }
     table.edit-profile.inputs td {
