@@ -227,7 +227,7 @@
         }
       }
 
-      input.checkbox, input.radio {
+      input.checkbox, input.radio, #organiser_preview_image {
         display: none;
       }
 
@@ -381,6 +381,15 @@
         border-radius: 0 !important;
         box-shadow: none;
         padding: 0 !important;
+      }
+      .banner_mugshot {
+        width: 100%;
+        .cropper {
+          width: 100%
+        }
+      }
+      .formnote {
+        display: inline-block;
       }
     }
     table.edit-profile.inputs td {
@@ -771,10 +780,11 @@
 .std-modal-buttons {
   justify-content: right !important;
   gap: 30px !important;
+  .mt-0 {
+    margin-top: 0 !important;
+  }
 }
 
-// .popup {
-//   .header {
-//     display: none;
-//   }
-// }
+.popup:has(.standard-modal-overlay) .header {
+  display: none;
+}
