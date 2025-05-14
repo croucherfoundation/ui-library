@@ -835,14 +835,85 @@
         }
 
         if (formValid) {
-          var modal = saveBtn.closest(".modal");
-          var backdrop = document.querySelector(".modal-backdrop");
+          if (form) {
+            fetch(form.action, {
+              method: form.method,
+              headers: {
+                "X-Requested-With": "XMLHttpRequest",
+              },
+              body: new FormData(form),
+            })
+              .then(async (response) => {
+                const modal = saveBtn.closest(".modal");
+                const backdrop = document.querySelector(".modal-backdrop");
+
+                if (!response.ok) {
+                  // ❌ FAILURE: Show error message
+                  const data = await response.json().catch(() => ({}));
+                  const validate_email = data.validate_email;
+
+                  if (validate_email) {
+                    const newEmails = document.querySelectorAll(".new-email");
+                    newEmails.forEach((emailField) => {
+                      emailField.remove();
+                    });
+                  }
+
+                  const errorMessage =
+                    data.error_message ||
+                    "Something went wrong. Please try again.";
+
+                  const flashes = document.getElementById("flashes");
+                  if (flashes) {
+                    flashes.innerHTML = `
+                      <p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">
+                        <a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display='none'; return false;">close</a>
+                        ${errorMessage}
+                      </p>
+                    `;
+                  }
+
+                  console.log("This is error message:", errorMessage);
+                } else {
+                  // ✅ SUCCESS: Clear flash messages if any
+                  const data = await response.json();
+                  if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
+                    return;
+                  }
+                  // Otherwise, just clean up modal (fallback)
+                  const flashes = document.getElementById("flashes");
+                  if (flashes) {
+                    flashes.innerHTML = "";
+                  }
+                }
+                form.reset();
+                removeClassName(backdrop, "show");
+                removeClassName(modal, "modal-open");
+                callLater(() => backdrop.remove(), 100);
+              })
+              .catch((error) => {
+                // 💥 NETWORK OR CODE ERROR
+                console.error("Error submitting form:", error);
+
+                const flashes = document.getElementById("flashes");
+                if (flashes) {
+                  flashes.innerHTML = `
+                    <p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">
+                      <a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display='none'; return false;">close</a>
+                      An unexpected error occurred.
+                    </p>
+                  `;
+                }
+              });
+          }
+        } else {
+          // ✋ Invalid form: Close modal anyway
+          const modal = saveBtn.closest(".modal");
+          const backdrop = document.querySelector(".modal-backdrop");
           removeClassName(backdrop, "show");
           removeClassName(modal, "modal-open");
           callLater(() => backdrop.remove(), 100);
-          if (form) {
-            form.submit();
-          }
         }
         // Function to validate email
         function validateEmail(email) {
@@ -1023,4 +1094,3 @@ document.addEventListener("DOMContentLoaded", () => {
 /**
  * END: Dropdown
  */
-
