@@ -93,6 +93,8 @@
     .token-input-input-token {
       input {
         border: none;
+        margin: 0;
+        padding: 6px;
       }
     }
   }
@@ -123,6 +125,9 @@
 
     &.mb {
       margin-bottom: 2.6rem;
+    }
+    &::first-letter {
+      text-transform: capitalize;
     }
   }
 
@@ -313,11 +318,11 @@
         pointer-events: none;
       }
 
-      .formnote {
-        display: block;
-        margin-top: -2rem;
-        margin-bottom: 2rem;
-      }
+      // .formnote {
+      //   display: block;
+      //   margin-top: -2rem;
+      //   margin-bottom: 2rem;
+      // }
 
       p.slug, fieldset.slug {
         margin-top: unset;
@@ -343,8 +348,14 @@
           bottom: 80px !important;
         }
       }
+      .unset-width {
+        display: inline-table;
+      }
       .full-width {
         width: 100% !important;
+      }
+      .full-max-width {
+        max-width: 100% !important;
       }
       .mb-unset {
         margin-bottom: unset;
@@ -355,7 +366,7 @@
             margin-bottom: unset !important;
           }
         }
-        input {
+        input, #interview_day_venue_attributes_name {
           margin-bottom: unset !important;
         }
       }
@@ -388,6 +399,100 @@
           width: 100%
         }
       }
+      .institution_chooser .appl_form_onecol {
+        margin-bottom: 2.5rem;
+      }
+      section.research {
+        margin: 0;
+      }
+      .onecol {
+        margin: 0
+      }
+      fieldset.repeating div.controls {
+        top: 12px
+      }
+      .interview_day {
+        .date, .time, .interview_panel, .grant_panel, .venue {
+          float: unset !important;
+        }
+      }
+      .itemised_budgets_fields {
+        #a_itemised_budgets {
+          width: 100%;
+          #itemised_budget_fields {
+            padding-top: 25px;
+            .item {
+              width: 20%;
+              input {
+                width: 85px;
+              }
+            }
+            .detail {
+              width: 30%;
+              input {
+                width: 130px;
+              }
+            }
+            .overall {
+              width: 20%;
+              input {
+                width: 85px;
+              }
+            }
+            .sponsorship {
+              width: 20%;
+              input {
+                width: 85px !important;
+              }
+            }
+            .sponsorship_percentage {
+              width: 20%;
+              input {
+                width: 85px !important;
+              }
+            }
+            input {
+              border: none !important;
+              border-bottom: 2px solid #9a9b97 !important;
+            }
+          }
+          .total_budget {
+            input {
+              width: 85px !important;
+            }
+            .row {
+              gap: 22px;
+              top: -45px;
+              right: 22px;
+            }
+          }
+        }
+      }
+      .sponsors_contact .rte.medium-editor-element{
+        border: none !important;
+        border-bottom: 2px solid #9a9b97 !important;
+      }
+      .medium {
+        height: unset;
+      }
+      .mt-1 {
+        margin-top: 1px;
+      }
+      .ml-5 {
+        margin-left: 5px;
+      }
+      h2.section {
+        font-size: 18px;
+        color: unset;
+      }
+      .grant-modal-submit {
+        border-radius: 9999px !important;
+        border-bottom: none !important;
+        border: 1px solid black !important;
+      }
+      .grants-pannel-buttons-padding {
+        padding: 0 0 0 180px;
+      }
     }
     table.edit-profile.inputs td {
       width: 50%;
@@ -408,6 +513,17 @@
     .rte {
       border: none !important;
       border-bottom: 2px solid #9a9b97 !important;
+    }
+  }
+
+  .select2.select2-container {
+    .select2-selection.select2-selection--single {
+      border: none !important;
+      border-bottom: 2px solid #9a9b97 !important;
+      border-radius: 0;
+      .select2-selection__clear {
+        right: 12px;
+      }
     }
   }
 
@@ -770,7 +886,18 @@
   .font-24 {
     font-size: 24px !important;
   }
+  .edit_round .inputs {
+    span.col.first.year, span.col.last.name {
+      width: 100% !important;
+    }
+  }
+  .std-modal-sidestep {
+    position: unset !important;
+    text-align: right;
+    padding-top: 10px;
+  }
 }
+
 #view-book-order-modal .std-content-container {
   padding: 0 96px 60px 96px;
 }
