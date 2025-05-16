@@ -847,9 +847,27 @@
                 const modal = saveBtn.closest(".modal");
                 const backdrop = document.querySelector(".modal-backdrop");
 
+                // Safely attempt to read JSON only if the server says it's JSON
+                const contentType = response.headers.get("content-type") || "";
+                const isJson = contentType.includes("application/json");
+
+                if (!isJson) {
+                  // Not JSON? Page probably returned HTML, reload
+                  window.location.reload();
+                  return;
+                }
+
+                let data = {};
+                try {
+                  data = await response.json();
+                } catch (e) {
+                  console.warn("JSON parse failed, reloading page.");
+                  window.location.reload();
+                  return;
+                }
+
                 if (!response.ok) {
                   // ❌ FAILURE: Show error message
-                  const data = await response.json().catch(() => ({}));
                   const validate_email = data.validate_email;
 
                   if (validate_email) {
@@ -860,8 +878,7 @@
                   }
 
                   const errorMessage =
-                    data.error_message ||
-                    "Something went wrong. Please try again.";
+                    data.error_message || "Something went wrong. Please try again.";
 
                   const flashes = document.getElementById("flashes");
                   if (flashes) {
@@ -875,26 +892,26 @@
 
                   console.log("This is error message:", errorMessage);
                 } else {
-                  // ✅ SUCCESS: Clear flash messages if any
-                  const data = await response.json();
+                  // ✅ SUCCESS
                   if (data.redirect_url) {
                     window.location.href = data.redirect_url;
                     return;
                   }
-                  // Otherwise, just clean up modal (fallback)
+
                   const flashes = document.getElementById("flashes");
                   if (flashes) {
                     flashes.innerHTML = "";
                   }
                 }
+
                 form.reset();
                 removeClassName(backdrop, "show");
                 removeClassName(modal, "modal-open");
                 callLater(() => backdrop.remove(), 100);
               })
               .catch((error) => {
-                // 💥 NETWORK OR CODE ERROR
-                console.error("Error submitting form:", error);
+                // 💥 Network failure or fetch threw unexpectedly
+                console.error("Fetch error:", error);
 
                 const flashes = document.getElementById("flashes");
                 if (flashes) {
