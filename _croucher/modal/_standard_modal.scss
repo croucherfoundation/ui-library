@@ -86,6 +86,8 @@
       padding: 0 90px 0 38px;
     }
     .token-input-token{
+      margin-left: 0;
+      margin-right: 12px;
       p {
         margin-bottom: 0;
       }
@@ -493,6 +495,9 @@
       .grants-pannel-buttons-padding {
         padding: 0 0 0 180px;
       }
+      .rationale_scientific_tags .token-input-list {
+        margin: 0;
+      }
     }
     table.edit-profile.inputs td {
       width: 50%;
@@ -518,9 +523,11 @@
 
   .select2.select2-container {
     .select2-selection.select2-selection--single {
-      border: none !important;
-      border-bottom: 2px solid #9a9b97 !important;
-      border-radius: 0;
+      // border: none !important;
+      // border-bottom: 2px solid #9a9b97 !important;
+      // border-radius: 0;
+      // background-image: none;
+      // padding: 0;
       .select2-selection__clear {
         right: 12px;
       }
@@ -825,7 +832,7 @@
     margin-left: 56px;
   }
   .std-input-mb {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.5rem !important;
   }
   .w-85 {
     width: 85px;
