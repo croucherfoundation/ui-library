@@ -515,6 +515,11 @@
       .mt-20 {
         margin-top: 20px !important;
       }
+      .application-picker {
+        #year, #round_id, #award_application_id {
+          margin-bottom: 2.5rem;
+        }
+      }
     }
     table.edit-profile.inputs td {
       width: 50%;
