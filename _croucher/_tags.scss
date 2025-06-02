@@ -1,4 +1,11 @@
 @import "../definitions";
+
+.croucher_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .croucher_tag, .token-input-token  {
   padding: 4px 15px;
   border-radius: $rounded-5;
