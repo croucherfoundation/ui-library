@@ -131,19 +131,25 @@
    * need to add lodash cdn link
    */
 
-  window.addEventListener("load", function () {
+  window.addEventListener("DOMContentLoaded", function () {
     function insertAfter(newNode, referenceNode) {
-      // return
-      // console.log(newNode, referenceNode)
       if (!newNode || !referenceNode) return;
       referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
-    var navbar = document.querySelector(".main_sub_navbar_container");
-    var spacer = document.createElement("div");
-    var { height } = navbar?.getBoundingClientRect();
-    spacer.style.height = `${height}px`;
-    spacer.setAttribute("class", "spacer");
-    insertAfter(spacer, navbar);
+
+    const navbar = document.querySelector(".main_sub_navbar_container");
+    
+    if (navbar) {
+      const spacer = document.createElement("div");
+      const resizeObserver = new ResizeObserver(() => {
+        const { height } = navbar.getBoundingClientRect();
+        spacer.setAttribute("class", "spacer");
+        spacer.style.height = `${height}px`;
+        insertAfter(spacer, navbar);
+      });
+      resizeObserver.observe(navbar);
+    }
+
     var mainNavContainer = document.querySelector(".nav_wrapper");
     var prevY = 0;
     var startPixel = 120; // to start show and hide
