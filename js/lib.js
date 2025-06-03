@@ -131,7 +131,7 @@
    * need to add lodash cdn link
    */
 
-  window.addEventListener("DOMContentLoaded", function () {
+  window.addEventListener("load", function () {
     function insertAfter(newNode, referenceNode) {
       // return
       // console.log(newNode, referenceNode)
@@ -447,15 +447,16 @@
       this.searchable = document.getElementById(containerId);
 
       if (!this.searchable) {
-        throw new Error(`
-            My Select: There is no element with id: ${containerId}.
-            It should be the following structure.
-            <div id="yourId">
-              <div class='searchable-input'>
-                <input type='text' />
-              </div>
-            </div>
-          `);
+        return;
+        // throw new Error(`
+        //     My Select: There is no element with id: ${containerId}.
+        //     It should be the following structure.
+        //     <div id="yourId">
+        //       <div class='searchable-input'>
+        //         <input type='text' />
+        //       </div>
+        //     </div>
+        //   `);
       }
 
       this.searchableInput = this.searchable.querySelector(
