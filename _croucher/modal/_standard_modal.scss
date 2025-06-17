@@ -534,6 +534,12 @@
       width: 100% !important;
       box-shadow: unset !important;
     }
+    
+    #upload-report-spinner {
+      margin-top: -85px;
+      margin-left: 400px;
+      padding-bottom: 61px;
+    }
   }
 
   #book_form, #author_form, #book_collection_form {
