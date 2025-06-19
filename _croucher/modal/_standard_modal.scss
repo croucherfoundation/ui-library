@@ -210,7 +210,8 @@
 
       input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not(.token-input-list input):not(#token-input-award_admin_tags):not(.exclude-std-input),
       textarea,
-      [contenteditable]:not([contenteditable="false"]) {
+      [contenteditable="true"],
+      [contenteditable="false"].not_editable {
         border: none;
         border-bottom: 2px solid #9a9b97;
         padding: 0.5rem 0;
@@ -320,11 +321,11 @@
         pointer-events: none;
       }
 
-      // .formnote {
-      //   display: block;
-      //   margin-top: -2rem;
-      //   margin-bottom: 2rem;
-      // }
+      .form-note {
+        display: block;
+        margin-top: -2rem;
+        margin-bottom: 2rem;
+      }
 
       p.slug, fieldset.slug {
         margin-top: unset;
