@@ -1,0 +1,23 @@
+@media print {
+    .main_sub_navbar_container {
+        display: none !important;
+    }
+    .spacer {
+        display: none !important;
+    }
+    .croucher-footer {
+        display: none !important;
+    }
+
+    .croucher-announce-box {
+        background-color: #f3f3f0 !important ;
+    }
+
+    #navbar {
+        display: none !important;
+    }
+
+    .new-footer  {
+        display: none !important;
+    }
+}
