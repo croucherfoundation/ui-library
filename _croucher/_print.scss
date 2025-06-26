@@ -2,6 +2,19 @@
     .main_sub_navbar_container {
         display: none !important;
     }
+    .subscribe-box {
+        display: none !important;
+    }
+    .breadcrumb-container {
+        display: none !important;
+    }
+    .img-print {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
+        page-break-inside: avoid;
+    }
     .spacer {
         display: none !important;
     }
