@@ -44,7 +44,7 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media print and (min-width: 768px) {
   .card_container,
   .card_container--summercourse {
     grid-template-columns: repeat(3, 1fr) !important;
