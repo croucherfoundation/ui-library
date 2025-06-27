@@ -55,4 +55,8 @@
     grid-template-columns: repeat(4, 1fr) !important;
     max-width: unset;
   }
+
+  .event-listing-newsletter {
+    display: none !important;
+  }
 }
