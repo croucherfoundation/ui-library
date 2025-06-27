@@ -1,4 +1,7 @@
 @media print {
+    body {
+        background-color: #ffffff !important;
+    }
     .main_sub_navbar_container {
         display: none !important;
     }
@@ -48,12 +51,12 @@
   .card_container,
   .card_container--summercourse {
     grid-template-columns: repeat(3, 1fr) !important;
-    max-width: unset;
+    max-width: unset !important;
   }
 
   .card_container--trustees {
     grid-template-columns: repeat(4, 1fr) !important;
-    max-width: unset;
+    max-width: unset !important;
   }
 
   .event-listing-newsletter,
