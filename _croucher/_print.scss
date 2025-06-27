@@ -21,16 +21,38 @@
     .croucher-footer {
         display: none !important;
     }
+  .main_sub_navbar_container {
+    display: none !important;
+  }
+  .spacer {
+    display: none !important;
+  }
+  .croucher-footer {
+    display: none !important;
+  }
 
-    .croucher-announce-box {
-        background-color: #f3f3f0 !important ;
-    }
+  .croucher-announce-box {
+    background-color: #f3f3f0 !important ;
+  }
 
-    #navbar {
-        display: none !important;
-    }
+  #navbar {
+    display: none !important;
+  }
 
-    .new-footer  {
-        display: none !important;
-    }
+  .new-footer {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card_container,
+  .card_container--summercourse {
+    grid-template-columns: repeat(3, 1fr) !important;
+    max-width: unset;
+  }
+
+  .card_container--trustees {
+    grid-template-columns: repeat(4, 1fr) !important;
+    max-width: unset;
+  }
 }
