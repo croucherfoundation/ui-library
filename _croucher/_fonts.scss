@@ -40,7 +40,7 @@ $croucher-red: #EE3A43;
 
 @font-face {
   font-family: "Blanco";
-  font-weight: 400;
+  font-weight: normal;
   font-style: normal;
   src: url("#{$font-path}Blanco-Regular.otf") format("opentype");
   font-display: block;
@@ -48,7 +48,7 @@ $croucher-red: #EE3A43;
 
 @font-face {
   font-family: "Blanco";
-  font-weight: 700;
+  font-weight: bold;
   font-style: normal;
   src: url("#{$font-path}Blanco-Bold.otf") format("opentype");
   font-display: block;
@@ -56,7 +56,7 @@ $croucher-red: #EE3A43;
 
 @font-face {
   font-family: "Blanco";
-  font-weight: 400;
+  font-weight: normal;
   font-style: italic;
   src: url("#{$font-path}Blanco-Italic.otf") format("opentype");
   font-display: block;
@@ -64,7 +64,7 @@ $croucher-red: #EE3A43;
 
 @font-face {
   font-family: "Blanco";
-  font-weight: 700;
+  font-weight: bold;
   font-style: italic;
   src: url("#{$font-path}Blanco-BoldItalic.otf") format("opentype");
   font-display: block;
