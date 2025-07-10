@@ -38,6 +38,13 @@ $croucher-red: #EE3A43;
   font-display: block;
 }
 
+@font-face {
+  font-family: "Blanco";
+  font-weight: normal;
+  src: url("#{$font-path}Blanco-Regular.otf") format("opentype");
+  font-display: block;
+}
+
 $typo: (
   title: (
     fontsize: 40px,
