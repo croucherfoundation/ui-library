@@ -8,6 +8,9 @@
 
     .banner-image {
       max-width: 100%;
+      height: auto;
+      max-height: 812px;
+      object-fit: cover;
       
       @include md {
         border-radius: 5px;
