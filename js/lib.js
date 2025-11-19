@@ -1120,17 +1120,17 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 
 
-document.addEventListener("click", function (e) {
-  const modalContainer = document.querySelector(".standard-modal-container");
-  const overlay = document.querySelector(".standard-modal-overlay");
+// document.addEventListener("click", function (e) {
+//   const modalContainer = document.querySelector(".standard-modal-container");
+//   const overlay = document.querySelector(".standard-modal-overlay");
 
-  if (!modalContainer || !overlay) return;
+//   if (!modalContainer || !overlay) return;
 
-  // If modal open and click is to the overlay (outside container)
-  if (overlay.classList.contains("active") && !modalContainer.contains(e.target)) {
-    // Close modal
-    overlay.classList.remove("active");
-    modalContainer.classList.remove("active");
-    document.querySelector(".popup").style.display = "none"; // optional
-  }
-});
+//   // If modal open and click is to the overlay (outside container)
+//   if (overlay.classList.contains("active") && !modalContainer.contains(e.target)) {
+//     // Close modal
+//     overlay.classList.remove("active");
+//     modalContainer.classList.remove("active");
+//     document.querySelector(".popup").style.display = "none"; // optional
+//   }
+// });
