@@ -132,6 +132,7 @@
    */
 
   window.addEventListener("DOMContentLoaded", function () {
+    const applicationTable = document.getElementById("applicationTable");
     function insertAfter(newNode, referenceNode) {
       if (!newNode || !referenceNode) return;
       referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -154,6 +155,11 @@
     var prevY = 0;
     var startPixel = 120; // to start show and hide
     function handleScroll() {
+
+      if(applicationTable && applicationTable.getBoundingClientRect().top < 54) {
+        return;
+      }
+
       var scrolledPixels = document.documentElement.scrollTop;
       var { height } = mainNavContainer.getBoundingClientRect();
       if (scrolledPixels < prevY) {
