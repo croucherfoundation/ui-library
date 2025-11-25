@@ -1,20 +1,18 @@
 const headerRow = document.getElementById("headerRow");
-let hasStickyShadow = false;
+  let hasStickyShadow = false;
 
-window.addEventListener("DOMContentLoaded", () => {
-  const thead = document.querySelector("thead");
-  if (thead) {
-    thead.style.width = `${document.documentElement.width}px`;
-  }
-});
+  window.addEventListener("DOMContentLoaded", () => {
+    const thead = document.querySelector("thead");
+    if (thead) {
+      thead.style.width = `${document.documentElement.clientWidth}px`;
+    }
+  });
 
-window.addEventListener(
-  "scroll",
-  () => {
+  const handleScroll = _.throttle(() => {
     const rows = document.querySelectorAll(".header-row");
     rows.forEach((row) => {
       const headerRect = row.getBoundingClientRect();
-      const shouldShowShadow = headerRect.top <= 54;
+      const shouldShowShadow = headerRect.top <= 0;
 
       if (shouldShowShadow && !hasStickyShadow) {
         headerRow.classList.add("sticky");
@@ -24,6 +22,6 @@ window.addEventListener(
         hasStickyShadow = false;
       }
     });
-  },
-  { passive: true }
-);
+  }, 100);
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
