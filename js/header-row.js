@@ -11,16 +11,19 @@ window.addEventListener("DOMContentLoaded", () => {
 window.addEventListener(
   "scroll",
   () => {
-    const headerRect = headerRow.getBoundingClientRect();
-    const shouldShowShadow = headerRect.top <= 54;
+    const rows = document.querySelectorAll(".header-row");
+    rows.forEach((row) => {
+      const headerRect = row.getBoundingClientRect();
+      const shouldShowShadow = headerRect.top <= 54;
 
-    if (shouldShowShadow && !hasStickyShadow) {
-      headerRow.classList.add("sticky");
-      hasStickyShadow = true;
-    } else if (!shouldShowShadow && hasStickyShadow) {
-      headerRow.classList.remove("sticky");
-      hasStickyShadow = false;
-    }
+      if (shouldShowShadow && !hasStickyShadow) {
+        headerRow.classList.add("sticky");
+        hasStickyShadow = true;
+      } else if (!shouldShowShadow && hasStickyShadow) {
+        headerRow.classList.remove("sticky");
+        hasStickyShadow = false;
+      }
+    });
   },
   { passive: true }
 );
