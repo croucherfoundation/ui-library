@@ -1,27 +1,21 @@
-const headerRow = document.getElementById("headerRow");
-  let hasStickyShadow = false;
+const standardSubNavbar = document.querySelector(".navbar_sub_container");
 
-  window.addEventListener("DOMContentLoaded", () => {
-    const thead = document.querySelector("thead");
-    if (thead) {
-      thead.style.width = `${document.documentElement.clientWidth}px`;
-    }
-  });
+const rows = document.querySelectorAll(".header-row");
+const applicationTable = document.getElementById("applicationTable");
+const handleScroll = _.throttle(() => {
+  const { top } = applicationTable.getBoundingClientRect();
+  if (top <= 0) {
+    standardSubNavbar.style.backgroundColor = "white";
+    standardSubNavbar.style.boxShadow = "0 1px 1px rgba(0,0,0,0.1)";
+    // rows.forEach((row) => {
+    //   const { top } = row.getBoundingClientRect();
 
-  const handleScroll = _.throttle(() => {
-    const rows = document.querySelectorAll(".header-row");
-    rows.forEach((row) => {
-      const headerRect = row.getBoundingClientRect();
-      const shouldShowShadow = headerRect.top <= 0;
+    // });
+  } else {
+    standardSubNavbar.style.backgroundColor = "#f8f8f5";
+    standardSubNavbar.style.boxShadow = "none"
 
-      if (shouldShowShadow && !hasStickyShadow) {
-        headerRow.classList.add("sticky");
-        hasStickyShadow = true;
-      } else if (!shouldShowShadow && hasStickyShadow) {
-        headerRow.classList.remove("sticky");
-        hasStickyShadow = false;
-      }
-    });
-  }, 100);
+  }
+}, 250);
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
+window.addEventListener("scroll", handleScroll, { passive: true });
