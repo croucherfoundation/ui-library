@@ -16,6 +16,6 @@ const handleScroll = _.throttle(() => {
     standardSubNavbar.style.boxShadow = "none"
 
   }
-}, 250);
+}, 400);
 
 window.addEventListener("scroll", handleScroll, { passive: true });
