@@ -29,7 +29,7 @@
       &:visited {
         color: unset;
       }
-      &:hover{
+      &:hover {
         color: unset;
       }
     }
@@ -40,8 +40,8 @@
   }
 
   .hide-scroll {
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   &.mb {
@@ -84,4 +84,21 @@
       border-color: $croucher-red;
     }
   }
+}
+
+
+// this is for sub-sub-navbar table
+.header-row {
+  /* background: #f8f8f5; */
+  background-color: white;
+  font-weight: 600;
+  font-size: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: none;
+  /* transition: box-shadow 0.3s ease; */
+  z-index: 3000000;
+  height: 54px;
+  /* box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1); */
 }
