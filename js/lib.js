@@ -139,7 +139,7 @@
     }
 
     const navbar = document.querySelector(".main_sub_navbar_container");
-    
+
     if (navbar) {
       const spacer = document.createElement("div");
       const resizeObserver = new ResizeObserver(() => {
@@ -154,9 +154,26 @@
     var mainNavContainer = document.querySelector(".nav_wrapper");
     var prevY = 0;
     var startPixel = 120; // to start show and hide
-    function handleScroll() {
 
-      if(applicationTable && applicationTable.getBoundingClientRect().top < 54) {
+
+    function handleScroll() {
+      const { top } = applicationTable.getBoundingClientRect();
+      if (top <= 0) {
+        navbarSubContainer.style.backgroundColor = "white";
+        navbarSubContainer.style.boxShadow = "0 1px 1px rgba(0,0,0,0.1)";
+        // rows.forEach((row) => {
+        //   const { top } = row.getBoundingClientRect();
+
+        // });
+      } else {
+        navbarSubContainer.style.backgroundColor = "#f8f8f5";
+        navbarSubContainer.style.boxShadow = "none";
+      }
+
+      if (
+        applicationTable &&
+        applicationTable.getBoundingClientRect().top < 54
+      ) {
         return;
       }
 
@@ -891,7 +908,8 @@
                   }
 
                   const errorMessage =
-                    data.error_message || "Something went wrong. Please try again.";
+                    data.error_message ||
+                    "Something went wrong. Please try again.";
 
                   const flashes = document.getElementById("flashes");
                   if (flashes) {
@@ -1124,7 +1142,6 @@ document.addEventListener("DOMContentLoaded", () => {
 /**
  * END: Dropdown
  */
-
 
 // document.addEventListener("click", function (e) {
 //   const modalContainer = document.querySelector(".standard-modal-container");
