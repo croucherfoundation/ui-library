@@ -168,9 +168,9 @@
           }px`;
         }
         if(top < 54) {
-          navbarSubContainer.classList.add('blur-bg')
+          e.classList.add('blur-bg')
         } else {
-          navbarSubContainer.classList.remove('blur-bg')
+          e.classList.remove('blur-bg')
           
         }
       });
