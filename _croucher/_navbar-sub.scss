@@ -86,15 +86,22 @@
   }
 }
 
-
 // this is for sub-sub-navbar table
 .header-row {
   background-color: white;
   font-weight: 600;
   font-size: 18px;
   position: sticky;
-  top: 0;
+  top: 54px;
   box-shadow: none;
   z-index: 2000;
   height: 54px;
+  transition: top 350ms linear;
+}
+
+.header-row.blur-bg {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgb(255 255 255 / 0%);
+  border-bottom: 1px solid rgb(241 241 241 / 10%);
 }

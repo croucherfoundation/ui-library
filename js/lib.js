@@ -154,31 +154,35 @@
     var mainNavContainer = document.querySelector(".nav_wrapper");
     var prevY = 0;
     var startPixel = 120; // to start show and hide
-
+    var rows = document.querySelectorAll(".header-row");
 
     function handleScroll() {
       const { top } = applicationTable.getBoundingClientRect();
-      if (top <= 0) {
-        navbarSubContainer.style.backgroundColor = "white";
-        navbarSubContainer.style.boxShadow = "0 1px 1px rgba(0,0,0,0.1)";
-        // rows.forEach((row) => {
-        //   const { top } = row.getBoundingClientRect();
-
-        // });
-      } else {
-        navbarSubContainer.style.backgroundColor = "#f8f8f5";
-        navbarSubContainer.style.boxShadow = "none";
-      }
-
-      if (
-        applicationTable &&
-        applicationTable.getBoundingClientRect().top < 54
-      ) {
-        return;
-      }
-
       var scrolledPixels = document.documentElement.scrollTop;
       var { height } = mainNavContainer.getBoundingClientRect();
+      console.log(navbarSubContainer.getBoundingClientRect());
+      rows.forEach((e) => {
+        if (top < 164) {
+          e.style.top = `${
+            navbarSubContainer.getBoundingClientRect().top + 54
+          }px`;
+        }
+        if(top < 54) {
+          navbarSubContainer.classList.add('blur-bg')
+        } else {
+          navbarSubContainer.classList.remove('blur-bg')
+          
+        }
+      });
+
+      // if (
+      //   applicationTable &&
+      //   applicationTable.getBoundingClientRect().top < height
+      // ) {
+      //   console.log(applicationTable.getBoundingClientRect().top)
+      //   // return;
+      // }
+
       if (scrolledPixels < prevY) {
         navbar.style.top = "0px";
         if (scrolledPixels > startPixel) {
@@ -188,11 +192,12 @@
         }
       } else if (scrolledPixels > 0) {
         navbar.style.top = `-${height}px`;
+        // console.log('seeting ', scrolledPixels)
       }
       prevY = scrolledPixels <= 0 ? 0 : scrolledPixels;
     }
     if (navbar) {
-      window.addEventListener("scroll", _.throttle(handleScroll, 250));
+      window.addEventListener("scroll", _.throttle(handleScroll, 280));
     }
   });
 
@@ -216,7 +221,6 @@
     function positionFooter() {
       var footer = document.querySelector(".croucher-footer");
       if (footer) {
-        var { height } = footer.getBoundingClientRect();
         var { height: bodyHeight } = document.body.getBoundingClientRect();
         var windownHeight = window.innerHeight;
         if (bodyHeight < windownHeight) {
