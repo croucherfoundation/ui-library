@@ -159,7 +159,7 @@
     function handleScroll() {
       var top = 0;
       if( applicationTable ) {
-        top = applicationTable.getBoundingClientRect();
+        top = applicationTable.getBoundingClientRect().top;
       }
       // const { top } = applicationTable.getBoundingClientRect();
       var scrolledPixels = document.documentElement.scrollTop;
