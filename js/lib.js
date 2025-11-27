@@ -157,35 +157,9 @@
     var rows = document.querySelectorAll(".header-row");
 
     function handleScroll() {
-      var top = 0;
-      if( applicationTable ) {
-        top = applicationTable.getBoundingClientRect().top;
-      }
-      // const { top } = applicationTable.getBoundingClientRect();
+
       var scrolledPixels = document.documentElement.scrollTop;
       var { height } = mainNavContainer.getBoundingClientRect();
-      console.log(navbarSubContainer.getBoundingClientRect());
-      rows.forEach((e) => {
-        if (top < 164) {
-          e.style.top = `${
-            navbarSubContainer.getBoundingClientRect().top + 54
-          }px`;
-        }
-        if(top < 54) {
-          e.classList.add('blur-bg')
-        } else {
-          e.classList.remove('blur-bg')
-          
-        }
-      });
-
-      // if (
-      //   applicationTable &&
-      //   applicationTable.getBoundingClientRect().top < height
-      // ) {
-      //   console.log(applicationTable.getBoundingClientRect().top)
-      //   // return;
-      // }
 
       if (scrolledPixels < prevY) {
         navbar.style.top = "0px";
@@ -194,9 +168,10 @@
         } else {
           mainNavContainer.classList.remove("no_padding");
         }
+        console.log('scrolling scrolledPixels < prevY')
       } else if (scrolledPixels > 0) {
         navbar.style.top = `-${height}px`;
-        // console.log('seeting ', scrolledPixels)
+        console.log('scrolledPixels > prevY')
       }
       prevY = scrolledPixels <= 0 ? 0 : scrolledPixels;
     }
