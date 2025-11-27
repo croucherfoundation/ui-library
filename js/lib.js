@@ -168,15 +168,17 @@
         } else {
           mainNavContainer.classList.remove("no_padding");
         }
-        console.log('scrolling scrolledPixels < prevY')
         rows.forEach(e => {
           e.style.top = '164px';
+          e.classList.add("bg-blur")
         })
       } else if (scrolledPixels > 0) {
         navbar.style.top = `-${height}px`;
         console.log('scrolledPixels > prevY')
         rows.forEach(e => {
           e.style.top = '54px';
+          e.classList.remove("bg-blur")
+
         })
       }
       prevY = scrolledPixels <= 0 ? 0 : scrolledPixels;
