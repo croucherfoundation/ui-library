@@ -157,7 +157,11 @@
     var rows = document.querySelectorAll(".header-row");
 
     function handleScroll() {
-      const { top } = applicationTable.getBoundingClientRect();
+      var top = 0;
+      if( applicationTable ) {
+        top = applicationTable.getBoundingClientRect();
+      }
+      // const { top } = applicationTable.getBoundingClientRect();
       var scrolledPixels = document.documentElement.scrollTop;
       var { height } = mainNavContainer.getBoundingClientRect();
       console.log(navbarSubContainer.getBoundingClientRect());
