@@ -170,14 +170,14 @@
         }
         rows.forEach(e => {
           e.style.top = '164px';
-          e.classList.add("bg-blur")
+          e.classList.add("blur-bg")
         })
       } else if (scrolledPixels > 0) {
         navbar.style.top = `-${height}px`;
         console.log('scrolledPixels > prevY')
         rows.forEach(e => {
           e.style.top = '54px';
-          e.classList.remove("bg-blur")
+          e.classList.remove("blur-bg")
 
         })
       }
