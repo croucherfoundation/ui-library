@@ -155,8 +155,12 @@
     var prevY = 0;
     var startPixel = 120; // to start show and hide
     var rows = document.querySelectorAll(".header-row");
+    var applicationTop = 0;
 
     function handleScroll() {
+      if (applicationTable) {
+        applicationTop = applicationTable.getBoundingClientRect().top;
+      }
 
       var scrolledPixels = document.documentElement.scrollTop;
       var { height } = mainNavContainer.getBoundingClientRect();
@@ -168,18 +172,26 @@
         } else {
           mainNavContainer.classList.remove("no_padding");
         }
-        rows.forEach(e => {
-          e.style.top = '164px';
-          e.classList.add("blur-bg")
-        })
+        rows.forEach((e) => {
+          e.style.top = "164px";
+          if (applicationTop < 54) {
+            e.classList.add("blur-bg");
+          } else {
+            e.classList.remove("blur-bg");
+          }
+        });
       } else if (scrolledPixels > 0) {
         navbar.style.top = `-${height}px`;
-        console.log('scrolledPixels > prevY')
-        rows.forEach(e => {
-          e.style.top = '54px';
-          e.classList.remove("blur-bg")
-
-        })
+        console.log("scrolledPixels > prevY");
+        rows.forEach((e) => {
+          e.style.top = "54px";
+          e.classList.remove("blur-bg");
+          if (applicationTop < 54) {
+            e.classList.add("blur-bg");
+          } else {
+            e.classList.remove("blur-bg");
+          }
+        });
       }
       prevY = scrolledPixels <= 0 ? 0 : scrolledPixels;
     }
