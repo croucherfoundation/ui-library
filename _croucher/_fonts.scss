@@ -244,3 +244,8 @@ $typo: (
 .body-copy {
   letter-spacing:.01em !important;
 }
+
+.body-copy 
+  .text-standfirst, form {
+  letter-spacing: normal !important;
+}
