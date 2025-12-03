@@ -1167,10 +1167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var nav_wrapper = document.querySelector(".main_sub_navbar_container");
   if(menuIcon && nav_wrapper && linksContainer) {
     menuIcon.addEventListener("click", () => {
-      if(linksContainer.classList.contains("links_container--open")) {
-        // linksContainer.style.top = `${nav_wrapper.getBoundingClientRect().height - 20}px !important`
-        linksContainer.setAttribute("style", `top: ${nav_wrapper.getBoundingClientRect().height - 20} !important;`)
-      }
+      linksContainer.setAttribute("style", `top: ${nav_wrapper.getBoundingClientRect().height - 20}px !important;`)
     })
   }
 })
