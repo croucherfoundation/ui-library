@@ -1160,3 +1160,16 @@ document.addEventListener("DOMContentLoaded", () => {
 //     document.querySelector(".popup").style.display = "none"; // optional
 //   }
 // });
+
+document.addEventListener("DOMContentLoaded", () => {
+  var menuIcon = document.querySelector(".user_menu .menu");
+  var linksContainer = document.querySelector(".links_container")
+  var nav_wrapper = document.querySelector(".main_sub_navbar_container");
+  if(menuIcon && nav_wrapper && linksContainer) {
+    menuIcon.addEventListener("click", () => {
+      if(linksContainer.classList.contains("links_container--open")) {
+        linksContainer.style.top = `${nav_wrapper.getBoundingClientRect().height - 20}px !important`
+      }
+    })
+  }
+})
