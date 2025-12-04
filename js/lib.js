@@ -1164,7 +1164,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   var menuIcon = document.querySelector(".user_menu .menu");
   var linksContainer = document.querySelector(".links_container")
-  var nav_wrapper = document.querySelector(".main_sub_navbar_container");
+  var nav_wrapper = document.querySelector(".nav_wrapper");
   if(menuIcon && nav_wrapper && linksContainer) {
     menuIcon.addEventListener("click", () => {
       linksContainer.setAttribute("style", `top: ${nav_wrapper.getBoundingClientRect().height - 20}px !important;`)
