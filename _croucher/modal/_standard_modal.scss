@@ -40,7 +40,7 @@
   }
 
   @media (max-width: 800px) {
-    max-width: 358px;
+    max-width: 90%;
     max-height: 100vh;
   }
 
@@ -48,7 +48,7 @@
     padding: 0 96px 0 96px;
 
     @media (max-width: 800px) {
-      padding: 0 60px 2px 60px;
+      padding: 0 40px 2px 40px;
     }
 
     p {
@@ -103,15 +103,17 @@
 
   .logo {
     height: 40px;
+    max-width: 220px;
     margin-left: 96px;
     margin-bottom: 3rem;
     margin-top: 58px;
 
     @media (max-width: 800px) {
       height: 30px;
-      margin-left: 60px;
+      margin-left: 40px;
       margin-bottom: 2rem;
       margin-top: 40px;
+      max-width: 165px;
     }
   }
 
@@ -646,7 +648,7 @@
 
     @media (max-width: 800px) {
       justify-content: space-between;
-      padding: 12px 30px 40px 30px;
+      padding: 12px 40px 40px 40px;
 
       &:has(button:only-child) {
         justify-content: flex-end;
