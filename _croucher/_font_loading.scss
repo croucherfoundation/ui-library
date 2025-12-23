@@ -19,16 +19,18 @@
   --font-sans-bold: 'MarrSans-Semibold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sans-bold);
-  font-size-adjust: 100%;
-  letter-spacing: -0.01em;
-}
+body:not(.hkfx) {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans-bold);
+    font-size-adjust: 100%;
+    letter-spacing: -0.01em;
+  }
 
-body, p, div, span, button, a {
-  font-family: var(--font-sans);
-}
+  p, div, span, button, a {
+    font-family: var(--font-sans);
+  }
 
-strong, b, .font-bold, .font-semibold {
-  font-family: var(--font-sans-bold);
+  strong, b, .font-bold, .font-semibold {
+    font-family: var(--font-sans-bold);
+  }
 }

@@ -69,8 +69,8 @@ body {
   margin: 0;
 }
 
-body,
-* {
+body:not(.hkfx),
+body:not(.hkfx) * {
   font-family: "MarrSans" !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
