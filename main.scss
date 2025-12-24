@@ -76,6 +76,12 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
+body.hkfx.opensans {
+  *{
+    font-family: "Open Sans", sans-serif !important;
+  }
+}
+
 i.fa,
 i.fas,
 i.far,
