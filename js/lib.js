@@ -1074,6 +1074,52 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  toggleDropdown();
+});
+
+function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown"]') {
+  var triggers = document.querySelectorAll(triggerSelector);
+  
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      var affected = this.getAttribute('data-affected');
+      var target;
+      
+      if (affected) {
+        // Check next sibling first, then global selector
+        target = this.nextElementSibling && this.nextElementSibling.matches(affected) 
+          ? this.nextElementSibling 
+          : document.querySelector(affected);
+      } else {
+        // Default to next sibling if no data-affected
+        target = this.nextElementSibling;
+      }
+      
+      if (target) {
+        target.classList.toggle('up');
+      }
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    var isOutside = true;
+    triggers.forEach(trigger => {
+      var affected = trigger.getAttribute('data-affected');
+      var target = affected ? (trigger.nextElementSibling && trigger.nextElementSibling.matches(affected) ? trigger.nextElementSibling : document.querySelector(affected)) : trigger.nextElementSibling;
+      if (trigger.contains(e.target) || (target && target.contains(e.target))) {
+        isOutside = false;
+      }
+    });
+    if (isOutside) {
+      document.querySelectorAll('.up').forEach(el => el.classList.remove('up'));
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
   const dropdowns = document.querySelectorAll(".croucher_dropdown");
 
   dropdowns.forEach((p) => {

@@ -127,4 +127,35 @@ a.viewall_btn,
       }
     }
   }
+
+  .more-actions {
+    .toggle-commands-dropdown {
+      display: block;
+      margin-top: -6px;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+      color: #9B9A98;
+      cursor: pointer;
+    
+      &:before {
+        content: '...';
+      }
+    }
+  
+    .action-commands-dropdown {
+      display: none;
+      &.up {
+        position: absolute;
+        width: max-content;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #F8F8F6;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
 }
