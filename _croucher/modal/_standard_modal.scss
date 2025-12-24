@@ -49,6 +49,13 @@
 
     @media (max-width: 800px) {
       padding: 0 40px 2px 40px;
+      p.mobile-mb-38{
+        margin-bottom: 38px;
+      }
+    }
+
+    section.mb-0{
+      margin-bottom: 0;
     }
 
     p {
@@ -227,6 +234,9 @@
 
         @media (max-width: 800px) {
           margin-bottom: 1.6rem;
+          &.mb_0 {
+            margin-bottom: 0;
+          }
         }
 
         &:focus {

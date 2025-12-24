@@ -717,11 +717,11 @@
         if (signInInput.type == "password") {
           signInInput.type = "text";
           signInPassowrdEyeImg.src =
-            "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
+            "https://croucher.org.hk/assets/images/icons/eye-01.svg";
         } else {
           signInInput.type = "password";
           signInPassowrdEyeImg.src =
-            "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
+            "https://croucher.org.hk/assets/images/icons/eye-02.svg";
         }
       });
     }
@@ -738,11 +738,11 @@
           if (input.type === "password") {
             input.type = "text";
             eyeImage.src =
-              "https://cmss.croucher.org.hk/assets/images/icons/eye-01.svg";
+              "https://croucher.org.hk/assets/images/icons/eye-01.svg";
           } else {
             input.type = "password";
             eyeImage.src =
-              "https://cmss.croucher.org.hk/assets/images/icons/eye-02.svg";
+              "https://croucher.org.hk/assets/images/icons/eye-02.svg";
           }
         });
       });
