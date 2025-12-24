@@ -159,3 +159,29 @@ a.viewall_btn,
     }
   }
 }
+
+@media (max-width: 767px) {
+  .standard-btn-group {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .standard-btn-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  .standard-btn-group .btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
