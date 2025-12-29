@@ -101,25 +101,24 @@
 
     .card_item {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
 
       gap: 11px;
 
       .icon {
-        min-width: 22px;
-        min-height: 22px;
+        min-width: 20px;
+        min-height: 20px;
         display: flex;
         justify-content: center;
-
-
+        
         .clock_icon {
-          width: 22px;
-          height: 22px;
+          width: 20px;
+          height: 20px;
         }
 
         .location_icon {
-          width: 22px;
-          height: 22px;
+          width: 20px;
+          height: 20px;
         }
 
         .circle_icon {
