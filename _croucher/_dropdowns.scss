@@ -1,3 +1,69 @@
+.croucher_search_detail {
+  width: 100vw;
+  position: relative;
+  left: calc(-50vw + 50%);
+  margin-left: unset;
+  padding-left: unset;
+  
+  .search_options, fieldset.selecter {
+    display: block !important;
+    width: 1218px !important;
+    margin: 0 auto !important;
+  }
+
+  fieldset.selecter {
+    padding-top: 20px
+  }
+
+  @media (max-width: 1024px) {
+    .search_options, fieldset.selecter {
+      width: 92% !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    fieldset.selecter {
+      .action {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  }
+}
+.croucher_dropdown_container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 30px;
+  row-gap: 20px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  .input_value {
+    input[type="text"] {
+      border: 1px solid #000;
+      border-radius: 5px;
+
+      &::placeholder {
+        color: #000;
+      }
+    }
+
+    .custom_date_box {
+      width: 100% !important;
+      font-size: 1em;
+      min-height: 42px;
+      padding: 0px 22px;
+      color: #000;
+    }
+  }
+}
+
 .croucher_dropdown {
   position: relative;
   font-family: Arial, sans-serif;
