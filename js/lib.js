@@ -1217,3 +1217,15 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 })
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Div checkbox toggle functionality
+  document.querySelectorAll('.div-checkbox').forEach(function(checkbox) {
+    checkbox.addEventListener('click', function() {
+      this.classList.toggle('checked');
+      const isChecked = this.classList.contains('checked');
+      this.dataset.value = isChecked ? '1' : '0';
+    });
+  });
+});
