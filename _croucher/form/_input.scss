@@ -294,3 +294,19 @@ input.checkbox:checked + label.checkbox_label::after {
 .div-checkbox.small .div-checkbox-text {
   line-height: 18px;
 }
+
+.div-checkbox.small .div-checkbox-box.three-dots::after {
+  content: "...";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 4px;
+  height: 9px;
+  font-size: 24px;
+  color: #9a9b97;
+  opacity: 1;
+  letter-spacing: -1px;
+  line-height: 0px;
+  border: none;
+  transform: none;
+}
