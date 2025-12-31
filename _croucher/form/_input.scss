@@ -171,7 +171,7 @@ input.checkbox:checked + label.checkbox_label::after {
   content: "";
   position: absolute;
   left: 0;
-  top: 0;
+  top: -3px;
   width: 22px;
   height: 22px;
   background-color: #ffffff;
@@ -188,15 +188,15 @@ input.checkbox:checked + label.checkbox_label::after {
 .standard-checkbox .standard-checkbox-label::after {
   content: "";
   position: absolute;
-  left: 8px;
-  top: 4px;
+  left: 8.5px;
+  top: 1px;
   width: 5px;
   height: 11px;
   border: solid #9a9b97;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.05s ease;
 }
 
 .standard-checkbox input[type="checkbox"]:checked+.standard-checkbox-label::after {
