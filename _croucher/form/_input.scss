@@ -298,15 +298,22 @@ input.checkbox:checked + label.checkbox_label::after {
 .div-checkbox.small .div-checkbox-box.three-dots::after {
   content: "...";
   position: absolute;
-  left: 2px;
-  top: 2px;
+  left: 2.1px;
+  top: 4px;
   width: 4px;
   height: 9px;
   font-size: 24px;
-  color: #9a9b97;
+  color: #101820;
   opacity: 1;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
   line-height: 0px;
   border: none;
   transform: none;
+  transition: none;
+}
+
+/* Hide checkmark when not checked (prevents flash when removing three-dots) */
+.div-checkbox:not(.checked) .div-checkbox-box:not(.three-dots)::after {
+  opacity: 0;
+  transition: none;
 }
