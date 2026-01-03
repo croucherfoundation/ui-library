@@ -1229,3 +1229,158 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+/**
+ * START: Select with Search functionality
+ */
+
+function initSearchableSelect(selector) {
+  var elements = document.querySelectorAll(selector);
+  
+  // Early return if no elements found
+  if (!elements || !elements.length) {
+    return;
+  }
+
+  elements.forEach(function(originalSelect) {
+    // Skip if element doesn't exist or is not a select
+    if (!originalSelect || originalSelect.tagName !== 'SELECT') {
+      return;
+    }
+    
+    // Read options from data attributes
+    var placeholder = originalSelect.dataset.placeholder || "Select an option";
+    var searchPlaceholder = originalSelect.dataset.searchPlaceholder || "Search...";
+    var showBothValueAndText = originalSelect.dataset.showBoth === 'true';
+    
+    // Hide the original select
+    originalSelect.style.display = 'none';
+    
+    // Create custom dropdown structure
+    var customDropdown = document.createElement('div');
+    customDropdown.className = 'searchable-select-dropdown';
+    
+    var selectedDisplay = document.createElement('div');
+    selectedDisplay.className = 'searchable-select-selected';
+    selectedDisplay.textContent = placeholder;
+    
+    var dropdownList = document.createElement('div');
+    dropdownList.className = 'searchable-select-list';
+    dropdownList.style.display = 'none';
+    
+    var searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.className = 'searchable-select-search';
+    searchInput.placeholder = searchPlaceholder;
+    
+    var itemsContainer = document.createElement('div');
+    itemsContainer.className = 'searchable-select-items';
+    
+    // Insert custom dropdown after original select
+    originalSelect.parentNode.insertBefore(customDropdown, originalSelect.nextSibling);
+    customDropdown.appendChild(selectedDisplay);
+    customDropdown.appendChild(dropdownList);
+    dropdownList.appendChild(searchInput);
+    dropdownList.appendChild(itemsContainer);
+    
+    // Populate dropdown items from original select options
+    Array.from(originalSelect.options).forEach(function(option) {
+      var optionValue = option.value;
+      var optionText = option.textContent;
+      
+      if (optionValue) {
+        var displayText = showBothValueAndText ? optionValue + ' - ' + optionText : optionText;
+        var dropdownItem = document.createElement('div');
+        dropdownItem.className = 'searchable-select-item';
+        dropdownItem.dataset.value = optionValue;
+        dropdownItem.textContent = displayText;
+        itemsContainer.appendChild(dropdownItem);
+      }
+    });
+    
+    // Set initial selected value if exists
+    var selectedValue = originalSelect.value;
+    if (selectedValue) {
+      var selectedOption = originalSelect.options[originalSelect.selectedIndex];
+      if (selectedOption) {
+        var displayText = showBothValueAndText ? selectedValue + ' - ' + selectedOption.textContent : selectedOption.textContent;
+        selectedDisplay.textContent = displayText;
+      }
+    }
+    
+    // Toggle dropdown on click
+    selectedDisplay.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // Close other dropdowns
+      document.querySelectorAll('.searchable-select-list').forEach(function(list) {
+        if (list !== dropdownList) {
+          list.style.display = 'none';
+        }
+      });
+      
+      if (dropdownList.style.display === 'none') {
+        dropdownList.style.display = 'block';
+        searchInput.focus();
+      } else {
+        dropdownList.style.display = 'none';
+      }
+    });
+    
+    // Handle item selection
+    itemsContainer.addEventListener('click', function(e) {
+      var target = e.target;
+      if (target.classList.contains('searchable-select-item')) {
+        var value = target.dataset.value;
+        var text = target.textContent;
+        
+        selectedDisplay.textContent = text;
+        originalSelect.value = value;
+        
+        // Trigger input event for autosave forms
+        var inputEvent = new Event('input', { bubbles: true });
+        originalSelect.dispatchEvent(inputEvent);
+        
+        // Also trigger change event
+        var changeEvent = new Event('change', { bubbles: true });
+        originalSelect.dispatchEvent(changeEvent);
+        
+        dropdownList.style.display = 'none';
+      }
+    });
+    
+    // Search functionality
+    searchInput.addEventListener('keyup', function() {
+      var searchValue = searchInput.value.toLowerCase();
+      
+      itemsContainer.querySelectorAll('.searchable-select-item').forEach(function(item) {
+        var itemText = item.textContent.toLowerCase();
+        if (itemText.indexOf(searchValue) !== -1) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+    
+    // Prevent dropdown from closing when clicking inside
+    dropdownList.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+}
+
+// Close all searchable select dropdowns when clicking outside
+document.addEventListener('click', function() {
+  document.querySelectorAll('.searchable-select-list').forEach(function(list) {
+    list.style.display = 'none';
+  });
+});
+
+// Auto-initialize searchable selects on page load
+document.addEventListener('DOMContentLoaded', function() {
+  initSearchableSelect('.searchable-select');
+});
+
+/**
+ * END: Select with Search functionality
+ */
