@@ -85,6 +85,10 @@
 
       &>div {
         margin-bottom: 6px;
+
+        &.card_meta_divider {
+          margin-bottom: 15px;
+        }
       }
     }
 
