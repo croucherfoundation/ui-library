@@ -212,17 +212,14 @@ a.viewall_btn,
     width: 100%;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    overflow-x: auto;
+    position: relative;
+  }
 
-    &:not(.oy-visible) {
-      overflow-x: auto;
-    }
-
-    &.oy-visible {
-      overflow-x: auto;
-      overflow-y: visible;
-      // Prevent overflow-x from forcing overflow-y to auto
-      overflow: visible auto;
-    }
+  // When dropdown is open, disable overflow to prevent iOS Safari clipping
+  .standard-btn-group.dropdown-open {
+    overflow: visible !important;
+    -webkit-overflow-scrolling: auto;
   }
 
   .standard-btn-group::-webkit-scrollbar {
@@ -234,23 +231,7 @@ a.viewall_btn,
     white-space: nowrap;
   }
 
-  .standard-btn-group.oy-visible .more-actions {
-    position: static;
-
-    .action-commands-dropdown.up {
-      position: fixed;
-      left: auto;
-      right: 16px;
-      top: 0;
-      z-index: 10000;
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-  }
-
-  .standard-btn-group:not(.oy-visible) .more-actions {
+  .standard-btn-group .more-actions {
     position: relative;
 
     .action-commands-dropdown.up {
@@ -258,8 +239,7 @@ a.viewall_btn,
       left: auto;
       right: 0;
       top: calc(100% + 8px);
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
+      z-index: 10000;
     }
   }
 }

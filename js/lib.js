@@ -1082,13 +1082,6 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
   var activeDropdown = null;
   var activeTrigger = null;
 
-  function positionMobileDropdown(trigger, target) {
-    if (window.innerWidth <= 767) {
-      var triggerRect = trigger.getBoundingClientRect();
-      target.style.top = (triggerRect.bottom + 8) + 'px';
-    }
-  }
-
   function closeAllDropdowns() {
     document.querySelectorAll('.up').forEach(el => {
       el.classList.remove('up');
@@ -1096,12 +1089,17 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
       el.classList.remove('positioned');
       el.style.top = '';
     });
+    
+    // Remove dropdown-open class from all btn-groups (fixes iOS overflow clipping)
+    document.querySelectorAll('.standard-btn-group.dropdown-open').forEach(el => {
+      el.classList.remove('dropdown-open');
+    });
+    
     activeDropdown = null;
     activeTrigger = null;
   }
   
   triggers.forEach(trigger => {
-    // Handle both click and touchstart for mobile
     var handleToggle = function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -1126,16 +1124,21 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
           // Close any other open dropdowns first
           closeAllDropdowns();
 
-          // Opening dropdown - check positioning
+          // Opening dropdown
           target.classList.add('up');
           activeDropdown = target;
           activeTrigger = this;
           
+          // Add dropdown-open class to parent btn-group on mobile (fixes iOS overflow clipping)
+          if (window.innerWidth <= 767) {
+            var btnGroup = target.closest('.standard-btn-group');
+            if (btnGroup) {
+              btnGroup.classList.add('dropdown-open');
+            }
+          }
+          
           // Check if dropdown overflows right edge and position it
           setTimeout(() => {
-            // Position mobile dropdown if needed
-            positionMobileDropdown(this, target);
-
             var rect = target.getBoundingClientRect();
             var viewportWidth = window.innerWidth;
             
