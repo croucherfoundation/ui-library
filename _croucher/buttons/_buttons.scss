@@ -167,6 +167,9 @@ a.viewall_btn,
         z-index: 9999;
         opacity: 0;
         transition: opacity 0.1s ease;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        will-change: transform, opacity;
 
         &.positioned {
           opacity: 1;
@@ -238,7 +241,12 @@ a.viewall_btn,
       position: fixed;
       left: auto;
       right: 16px;
+      top: 0;
       z-index: 10000;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
   }
 
@@ -250,6 +258,8 @@ a.viewall_btn,
       left: auto;
       right: 0;
       top: calc(100% + 8px);
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
     }
   }
 }

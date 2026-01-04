@@ -1158,12 +1158,11 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
       }
     };
 
-    // Add both click and touchstart event listeners for better mobile support
-    trigger.addEventListener('click', handleToggle);
-    trigger.addEventListener('touchstart', handleToggle, { passive: false });
+    // Use pointerdown for better mobile and cross-device support
+    trigger.addEventListener('pointerdown', handleToggle);
   });
 
-  // Close dropdown when clicking/touching outside
+  // Close dropdown when clicking/touching outside - use pointerdown for consistency
   var handleOutsideClick = function(e) {
     var isOutside = true;
     triggers.forEach(trigger => {
@@ -1178,8 +1177,7 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
     }
   };
 
-  document.addEventListener('click', handleOutsideClick);
-  document.addEventListener('touchstart', handleOutsideClick, { passive: true });
+  document.addEventListener('pointerdown', handleOutsideClick);
 
   // Close dropdown on scroll (mobile)
   var scrollTimeout;
