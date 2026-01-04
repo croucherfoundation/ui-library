@@ -1079,6 +1079,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown"]') {
   var triggers = document.querySelectorAll(triggerSelector);
+  var activeDropdown = null;
+  var activeTrigger = null;
+
+  function positionDropdown(trigger, target) {
+    if (window.innerWidth <= 767) {
+      // Mobile: use fixed positioning
+      var triggerRect = trigger.getBoundingClientRect();
+      target.style.top = (triggerRect.bottom + 8) + 'px';
+    }
+  }
+
+  function closeAllDropdowns() {
+    document.querySelectorAll('.up').forEach(el => {
+      el.classList.remove('up');
+      el.classList.remove('align-right');
+      el.classList.remove('positioned');
+      el.style.top = '';
+    });
+    activeDropdown = null;
+    activeTrigger = null;
+  }
   
   triggers.forEach(trigger => {
     trigger.addEventListener('click', function(e) {
@@ -1098,7 +1119,40 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
       }
       
       if (target) {
-        target.classList.toggle('up');
+        var isOpen = target.classList.contains('up');
+        
+        if (!isOpen) {
+          // Close any other open dropdowns first
+          closeAllDropdowns();
+
+          // Opening dropdown - check positioning
+          target.classList.add('up');
+          activeDropdown = target;
+          activeTrigger = this;
+          
+          // Check if dropdown overflows right edge and position it
+          setTimeout(() => {
+            positionDropdown(this, target);
+
+            var rect = target.getBoundingClientRect();
+            var viewportWidth = window.innerWidth;
+            
+            // If dropdown would overflow right edge, align it to the right instead
+            if (rect.right > viewportWidth - 20) {
+              target.classList.add('align-right');
+            } else {
+              target.classList.remove('align-right');
+            }
+
+            // Make visible after positioning
+            setTimeout(() => {
+              target.classList.add('positioned');
+            }, 10);
+          }, 10);
+        } else {
+          // Closing dropdown
+          closeAllDropdowns();
+        }
       }
     });
   });
@@ -1114,9 +1168,20 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
       }
     });
     if (isOutside) {
-      document.querySelectorAll('.up').forEach(el => el.classList.remove('up'));
+      closeAllDropdowns();
     }
   });
+
+  // Close dropdown on scroll (mobile)
+  var scrollTimeout;
+  window.addEventListener('scroll', function() {
+    if (activeDropdown && window.innerWidth <= 767) {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function() {
+        closeAllDropdowns();
+      }, 50);
+    }
+  }, true); // Use capture to catch scroll events on any element
 }
 
 document.addEventListener("DOMContentLoaded", () => {
