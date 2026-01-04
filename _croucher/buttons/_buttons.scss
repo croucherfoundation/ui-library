@@ -139,6 +139,9 @@ a.viewall_btn,
       font-weight: bold;
       color: #9B9A98;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
     
       &:before {
         content: '...';

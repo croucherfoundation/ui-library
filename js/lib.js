@@ -1101,8 +1101,10 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
   }
   
   triggers.forEach(trigger => {
-    trigger.addEventListener('click', function(e) {
+    // Handle both click and touchstart for mobile
+    var handleToggle = function(e) {
       e.preventDefault();
+      e.stopPropagation();
       
       var affected = this.getAttribute('data-affected');
       var target;
@@ -1154,11 +1156,15 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
           closeAllDropdowns();
         }
       }
-    });
+    };
+
+    // Add both click and touchstart event listeners for better mobile support
+    trigger.addEventListener('click', handleToggle);
+    trigger.addEventListener('touchstart', handleToggle, { passive: false });
   });
 
-  // Close dropdown when clicking outside
-  document.addEventListener('click', function(e) {
+  // Close dropdown when clicking/touching outside
+  var handleOutsideClick = function(e) {
     var isOutside = true;
     triggers.forEach(trigger => {
       var affected = trigger.getAttribute('data-affected');
@@ -1170,7 +1176,10 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
     if (isOutside) {
       closeAllDropdowns();
     }
-  });
+  };
+
+  document.addEventListener('click', handleOutsideClick);
+  document.addEventListener('touchstart', handleOutsideClick, { passive: true });
 
   // Close dropdown on scroll (mobile)
   var scrollTimeout;
