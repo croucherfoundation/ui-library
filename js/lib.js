@@ -1095,6 +1095,11 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
       el.classList.remove('dropdown-open');
     });
     
+    // Remove active class from all toggle buttons (grey background)
+    document.querySelectorAll('.toggle-commands-dropdown.active').forEach(el => {
+      el.classList.remove('active');
+    });
+    
     activeDropdown = null;
     activeTrigger = null;
   }
@@ -1128,6 +1133,9 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
           target.classList.add('up');
           activeDropdown = target;
           activeTrigger = this;
+          
+          // Add active class to toggle button for grey background (Notion-style)
+          this.classList.add('active');
           
           // Add dropdown-open class to parent btn-group on mobile (fixes iOS overflow clipping)
           if (window.innerWidth <= 767) {
