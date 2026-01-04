@@ -213,6 +213,16 @@
     .inputs {
       margin-top: 2.1rem;
 
+      &.hide-req-icon{
+        input {
+          background-image: unset;
+          &::placeholder {
+            color: #6b7280;
+            opacity: 1;
+          }
+        }
+      }
+
       @media (max-width: 800px) {
         margin-top: 2rem;
       }
