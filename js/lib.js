@@ -1082,9 +1082,8 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
   var activeDropdown = null;
   var activeTrigger = null;
 
-  function positionDropdown(trigger, target) {
+  function positionMobileDropdown(trigger, target) {
     if (window.innerWidth <= 767) {
-      // Mobile: use fixed positioning
       var triggerRect = trigger.getBoundingClientRect();
       target.style.top = (triggerRect.bottom + 8) + 'px';
     }
@@ -1132,7 +1131,8 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
           
           // Check if dropdown overflows right edge and position it
           setTimeout(() => {
-            positionDropdown(this, target);
+            // Position mobile dropdown if needed
+            positionMobileDropdown(this, target);
 
             var rect = target.getBoundingClientRect();
             var viewportWidth = window.innerWidth;

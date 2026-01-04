@@ -197,7 +197,6 @@ a.viewall_btn,
   .standard-btn-group {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
     justify-content: flex-end;
     -webkit-overflow-scrolling: touch;
     gap: 12px;
@@ -207,8 +206,16 @@ a.viewall_btn,
     width: 100%;
     -ms-overflow-style: none;
     scrollbar-width: none;
+
+    &:not(.oy-visible) {
+      overflow-x: auto;
+    }
+
     &.oy-visible {
+      overflow-x: auto;
       overflow-y: visible;
+      // Prevent overflow-x from forcing overflow-y to auto
+      overflow: visible auto;
     }
   }
 
@@ -221,15 +228,25 @@ a.viewall_btn,
     white-space: nowrap;
   }
 
-  .standard-btn-group .more-actions {
+  .standard-btn-group.oy-visible .more-actions {
     position: static;
 
     .action-commands-dropdown.up {
       position: fixed;
       left: auto;
       right: 16px;
-      top: auto;
-      margin-top: 8px;
+      z-index: 10000;
+    }
+  }
+
+  .standard-btn-group:not(.oy-visible) .more-actions {
+    position: relative;
+
+    .action-commands-dropdown.up {
+      position: absolute;
+      left: auto;
+      right: 0;
+      top: calc(100% + 8px);
     }
   }
 }
