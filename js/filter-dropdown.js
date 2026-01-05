@@ -125,7 +125,44 @@
     this.button.addEventListener('keydown', this.handleKeyboardNavigation);
     this.dropdown.addEventListener('keydown', this.handleKeyboardNavigation);
 
+    // Handle initial state - if "Select All" is pre-selected, check all items
+    // OR if all items are pre-selected, check "Select All"
+    this.handleInitialSelectAll();
+    
     this.updateSelection();
+  };
+
+  FilterDropdown.prototype.handleInitialSelectAll = function() {
+    var selectAllItem = this.dropdown.querySelector('.filter-dropdown__item--select-all');
+    if (!selectAllItem) return;
+
+    var selectAllCheckbox = selectAllItem.querySelector('input[type="checkbox"]');
+    if (!selectAllCheckbox) return;
+
+    // Get all regular items (excluding "Select All")
+    var regularItems = Array.from(this.items).filter(
+      function(item) { return !item.classList.contains('filter-dropdown__item--select-all'); }
+    );
+
+    // If "Select All" is checked on page load, check all other items
+    if (selectAllCheckbox.checked) {
+      regularItems.forEach(function(item) {
+        var checkbox = item.querySelector('input[type="checkbox"]');
+        if (checkbox) {
+          checkbox.checked = true;
+        }
+      });
+    } else {
+      // If all regular items are checked, also check "Select All"
+      var allRegularItemsChecked = regularItems.every(function(item) {
+        var checkbox = item.querySelector('input[type="checkbox"]');
+        return checkbox && checkbox.checked;
+      });
+
+      if (allRegularItemsChecked && regularItems.length > 0) {
+        selectAllCheckbox.checked = true;
+      }
+    }
   };
 
   FilterDropdown.prototype.toggleDropdown = function(e) {
@@ -244,6 +281,63 @@
         });
       }
     }.bind(this));
+
+    // Sync checkbox states back to the original select element
+    this.syncToSelect();
+
+    // Update inline display if this dropdown has the inline-display class
+    if (this.dropdown.classList.contains('filter-dropdown--inline-display')) {
+      this.updateInlineDisplay();
+    }
+  };
+
+  FilterDropdown.prototype.syncToSelect = function() {
+    var select = this.dropdown.querySelector('select[multiple]');
+    if (!select) return;
+
+    // Get all selected values (excluding "Select All")
+    var selectedValues = this.selectedValues.map(function(v) { return v.value; });
+
+    // Update the original select element options
+    Array.from(select.options).forEach(function(option) {
+      // Skip the "Select All" option in the original select
+      if (option.value === 'all' || option.value === 'select-all') {
+        option.selected = false;
+        return;
+      }
+      
+      // Set selected state based on checkbox state
+      option.selected = selectedValues.includes(option.value);
+    });
+  };
+
+  FilterDropdown.prototype.updateInlineDisplay = function() {
+    if (!this.selectedText) return;
+
+    if (this.selectedValues.length === 0) {
+      this.selectedText.innerHTML = `<div class="truncate">${this.placeholder}</div>`;
+      this.selectedText.classList.add('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.remove('filter-dropdown__selected--value');
+    } else if (this.selectedValues.length === 1) {
+      // Show single item
+      this.selectedText.innerHTML = `<div class="truncate">${this.selectedValues[0].label}</div>`;
+      this.selectedText.classList.remove('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.add('filter-dropdown__selected--value');
+    } else if (this.selectedValues.length === 2) {
+      // Show both items
+      var displayText = this.selectedValues[0].label + ', ' + this.selectedValues[1].label;
+      this.selectedText.innerHTML = `<div class="truncate">${displayText}</div>`;
+      this.selectedText.classList.remove('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.add('filter-dropdown__selected--value');
+    } else {
+      // Show first 2 items and "+X more"
+      var remaining = this.selectedValues.length - 2;
+      var displayText = this.selectedValues[0].label + ', ' + this.selectedValues[1].label + ', +' + remaining + ' more';
+      
+      this.selectedText.innerHTML = `<div class="truncate">${displayText}</div>`;
+      this.selectedText.classList.remove('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.add('filter-dropdown__selected--value');
+    }
   };
 
   FilterDropdown.prototype.dispatchChangeEvent = function() {
