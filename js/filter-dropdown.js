@@ -1,41 +1,41 @@
 /**
  * FilterDropdown - Multi-select dropdown with checkboxes
- * 
+ *
  * Can be initialized with either:
  * 1. A <select multiple> element (will auto-generate the UI)
  * 2. Pre-built HTML structure with .filter-dropdown__button, .filter-dropdown__list, etc.
  */
 
-const allFilterDropdowns = new Set();
+(function () {
+  var allFilterDropdowns = new Set();
 
-export class FilterDropdown {
-  constructor(element) {
+  function FilterDropdown(element) {
     this.dropdown = element;
     this.placeholder = this.dropdown.dataset.placeholder || "Select options";
     this.selectedValues = [];
-    
+
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.closeOnClickOutside = this.closeOnClickOutside.bind(this);
     this.handleKeyboardNavigation = this.handleKeyboardNavigation.bind(this);
-    
+
     this.buildDropdownFromSelect();
-    
+
     this.button = this.dropdown.querySelector('.filter-dropdown__button');
     this.selectedText = this.dropdown.querySelector('.filter-dropdown__selected');
     this.list = this.dropdown.querySelector('.filter-dropdown__list');
     this.items = this.dropdown.querySelectorAll('.filter-dropdown__item');
-    
+
     allFilterDropdowns.add(this);
-    
+
     this.init();
   }
-  
-  buildDropdownFromSelect() {
-    const select = this.dropdown.querySelector('select[multiple]');
+
+  FilterDropdown.prototype.buildDropdownFromSelect = function() {
+    var select = this.dropdown.querySelector('select[multiple]');
     if (!select) return;
     if (this.dropdown.querySelector('.filter-dropdown__button')) return;
-    
-    const button = document.createElement('div');
+
+    var button = document.createElement('div');
     button.className = 'filter-dropdown__button';
     button.setAttribute('tabindex', '0');
     button.setAttribute('role', 'combobox');
@@ -50,100 +50,100 @@ export class FilterDropdown {
         </svg>
       </div>
     `;
-    
-    const list = document.createElement('ul');
+
+    var list = document.createElement('ul');
     list.className = 'filter-dropdown__list';
     list.setAttribute('role', 'listbox');
-    
-    Array.from(select.options).forEach((option, index) => {
-      const item = document.createElement('li');
+
+    Array.from(select.options).forEach(function(option, index) {
+      var item = document.createElement('li');
       item.className = 'filter-dropdown__item';
       item.setAttribute('data-value', option.value);
       item.setAttribute('data-label', option.textContent);
       item.setAttribute('role', 'option');
-      
+
       if (option.value === 'all' || option.value === 'select-all') {
         item.classList.add('filter-dropdown__item--select-all');
       }
-      
-      const checkboxId = `${select.id || 'filter'}-option-${index}`;
+
+      var checkboxId = `${select.id || 'filter'}-option-${index}`;
       item.innerHTML = `
         <div class="standard-checkbox">
           <input type="checkbox" id="${checkboxId}" ${option.selected ? 'checked' : ''}>
           <label class="standard-checkbox-label" for="${checkboxId}">${option.textContent}</label>
         </div>
       `;
-      
+
       list.appendChild(item);
     });
-    
+
     this.dropdown.appendChild(button);
     this.dropdown.appendChild(list);
-  }
-  
-  init() {
+  };
+
+  FilterDropdown.prototype.init = function() {
     if (!this.button) return;
-    
+
     this.button.addEventListener('click', this.toggleDropdown);
-    
-    this.items.forEach(item => {
-      const checkbox = item.querySelector('input[type="checkbox"]');
-      
-      item.addEventListener('click', (e) => {
+
+    this.items.forEach(function(item) {
+      var checkbox = item.querySelector('input[type="checkbox"]');
+
+      item.addEventListener('click', function(e) {
         if (e.target.tagName !== 'INPUT') {
           e.preventDefault();
           this.toggleItem(item);
         }
-      });
-      
+      }.bind(this));
+
       if (checkbox) {
-        checkbox.addEventListener('change', (e) => {
+        checkbox.addEventListener('change', function(e) {
           e.stopPropagation();
-          
-          const isSelectAll = item.classList.contains('filter-dropdown__item--select-all');
-          
+
+          var isSelectAll = item.classList.contains('filter-dropdown__item--select-all');
+
           if (isSelectAll) {
-            const newCheckedState = checkbox.checked;
-            this.items.forEach(otherItem => {
+            var newCheckedState = checkbox.checked;
+            this.items.forEach(function(otherItem) {
               if (!otherItem.classList.contains('filter-dropdown__item--select-all')) {
-                const otherCheckbox = otherItem.querySelector('input[type="checkbox"]');
+                var otherCheckbox = otherItem.querySelector('input[type="checkbox"]');
                 if (otherCheckbox) {
                   otherCheckbox.checked = newCheckedState;
                 }
               }
-            });
+            }.bind(this));
           } else {
             this.updateSelectAllState();
           }
-          
+
           this.updateSelection();
           this.dispatchChangeEvent();
-        });
+        }.bind(this));
       }
-    });
-    
+    }.bind(this));
+
     this.button.addEventListener('keydown', this.handleKeyboardNavigation);
     this.dropdown.addEventListener('keydown', this.handleKeyboardNavigation);
-    
+
     this.updateSelection();
-  }
-  
-  toggleDropdown(e) {
+  };
+
+  FilterDropdown.prototype.toggleDropdown = function(e) {
     e?.stopPropagation();
-    
-    const wasOpen = this.dropdown.classList.contains('filter-dropdown--open');
-    
+
+    var wasOpen = this.dropdown.classList.contains('filter-dropdown--open');
+
     // Close other dropdowns when opening this one
     if (!wasOpen) {
-      allFilterDropdowns.forEach(dropdown => {
+      allFilterDropdowns.forEach(function(dropdown) {
         if (dropdown !== this) {
           dropdown.close();
         }
-      });
+      }.bind(this));
     }
-    
-    const isOpen = this.dropdown.classList.toggle('filter-dropdown--open');
-    
+
+    var isOpen = this.dropdown.classList.toggle('filter-dropdown--open');
+
     if (isOpen) {
       this.positionDropdownList();
       document.addEventListener('click', this.closeOnClickOutside);
@@ -153,145 +153,145 @@ export class FilterDropdown {
       this.button.setAttribute('aria-expanded', 'false');
       this.dropdown.classList.remove('filter-dropdown--upward');
     }
-  }
-  
-  close() {
+  };
+
+  FilterDropdown.prototype.close = function() {
     this.dropdown.classList.remove('filter-dropdown--open');
     this.dropdown.classList.remove('filter-dropdown--upward');
     document.removeEventListener('click', this.closeOnClickOutside);
     if (this.button) {
       this.button.setAttribute('aria-expanded', 'false');
     }
-  }
-  
-  positionDropdownList() {
-    const buttonRect = this.button.getBoundingClientRect();
-    const listHeight = this.list.offsetHeight || 200;
-    const spaceBelow = window.innerHeight - buttonRect.bottom;
-    const shouldOpenUpward = spaceBelow < listHeight && buttonRect.top > listHeight;
-    
+  };
+
+  FilterDropdown.prototype.positionDropdownList = function() {
+    var buttonRect = this.button.getBoundingClientRect();
+    var listHeight = this.list.offsetHeight || 200;
+    var spaceBelow = window.innerHeight - buttonRect.bottom;
+    var shouldOpenUpward = spaceBelow < listHeight && buttonRect.top > listHeight;
+
     if (shouldOpenUpward) {
       this.dropdown.classList.add('filter-dropdown--upward');
     } else {
       this.dropdown.classList.remove('filter-dropdown--upward');
     }
-  }
-  
-  closeOnClickOutside(event) {
+  };
+
+  FilterDropdown.prototype.closeOnClickOutside = function(event) {
     if (!this.dropdown.contains(event.target)) {
       this.close();
     }
-  }
-  
-  toggleItem(item) {
-    const checkbox = item.querySelector('input[type="checkbox"]');
+  };
+
+  FilterDropdown.prototype.toggleItem = function(item) {
+    var checkbox = item.querySelector('input[type="checkbox"]');
     if (!checkbox) return;
-    
-    const isSelectAll = item.classList.contains('filter-dropdown__item--select-all');
-    
+
+    var isSelectAll = item.classList.contains('filter-dropdown__item--select-all');
+
     if (isSelectAll) {
-      const newCheckedState = !checkbox.checked;
+      var newCheckedState = !checkbox.checked;
       checkbox.checked = newCheckedState;
-      
-      this.items.forEach(otherItem => {
+
+      this.items.forEach(function(otherItem) {
         if (!otherItem.classList.contains('filter-dropdown__item--select-all')) {
-          const otherCheckbox = otherItem.querySelector('input[type="checkbox"]');
+          var otherCheckbox = otherItem.querySelector('input[type="checkbox"]');
           if (otherCheckbox) {
             otherCheckbox.checked = newCheckedState;
           }
         }
-      });
+      }.bind(this));
     } else {
       checkbox.checked = !checkbox.checked;
       this.updateSelectAllState();
     }
-    
+
     this.updateSelection();
     this.dispatchChangeEvent();
-  }
-  
-  updateSelectAllState() {
-    const selectAllItem = this.dropdown.querySelector('.filter-dropdown__item--select-all');
+  };
+
+  FilterDropdown.prototype.updateSelectAllState = function() {
+    var selectAllItem = this.dropdown.querySelector('.filter-dropdown__item--select-all');
     if (!selectAllItem) return;
-    
-    const selectAllCheckbox = selectAllItem.querySelector('input[type="checkbox"]');
+
+    var selectAllCheckbox = selectAllItem.querySelector('input[type="checkbox"]');
     if (!selectAllCheckbox) return;
-    
-    const regularItems = Array.from(this.items).filter(
-      item => !item.classList.contains('filter-dropdown__item--select-all')
+
+    var regularItems = Array.from(this.items).filter(
+      function(item) { return !item.classList.contains('filter-dropdown__item--select-all'); }
     );
-    
-    const allChecked = regularItems.every(item => {
-      const checkbox = item.querySelector('input[type="checkbox"]');
+
+    var allChecked = regularItems.every(function(item) {
+      var checkbox = item.querySelector('input[type="checkbox"]');
       return checkbox && checkbox.checked;
     });
-    
+
     selectAllCheckbox.checked = allChecked;
-  }
-  
-  updateSelection() {
+  };
+
+  FilterDropdown.prototype.updateSelection = function() {
     this.selectedValues = [];
-    
-    this.items.forEach(item => {
+
+    this.items.forEach(function(item) {
       // "Select all" is just a control, not an actual filter value
       if (item.classList.contains('filter-dropdown__item--select-all')) return;
-      
-      const checkbox = item.querySelector('input[type="checkbox"]');
+
+      var checkbox = item.querySelector('input[type="checkbox"]');
       if (checkbox && checkbox.checked) {
         this.selectedValues.push({
           value: item.dataset.value,
           label: item.dataset.label
         });
       }
-    });
-  }
-  
-  dispatchChangeEvent() {
-    const event = new CustomEvent('filter-change', {
+    }.bind(this));
+  };
+
+  FilterDropdown.prototype.dispatchChangeEvent = function() {
+    var event = new CustomEvent('filter-change', {
       detail: {
-        values: this.selectedValues.map(v => v.value),
+        values: this.selectedValues.map(function(v) { return v.value; }),
         options: this.selectedValues
       }
     });
     this.dropdown.dispatchEvent(event);
-  }
-  
-  handleKeyboardNavigation(event) {
-    const isOpen = this.dropdown.classList.contains('filter-dropdown--open');
-    const selectableItems = Array.from(this.items);
-    
+  };
+
+  FilterDropdown.prototype.handleKeyboardNavigation = function(event) {
+    var isOpen = this.dropdown.classList.contains('filter-dropdown--open');
+    var selectableItems = Array.from(this.items);
+
     switch (event.key) {
       case 'Enter':
       case ' ':
         if (!isOpen) {
           this.toggleDropdown(event);
         } else {
-          const focused = document.activeElement;
-          const focusedItem = focused.closest('.filter-dropdown__item');
+          var focused = document.activeElement;
+          var focusedItem = focused.closest('.filter-dropdown__item');
           if (focusedItem) {
             this.toggleItem(focusedItem);
           }
         }
         event.preventDefault();
         break;
-        
+
       case 'Escape':
         if (isOpen) {
           this.close();
           this.button.focus();
         }
         break;
-        
+
       case 'ArrowDown':
         if (!isOpen) {
           this.toggleDropdown(event);
         } else {
-          const focused = document.activeElement;
+          var focused = document.activeElement;
           if (focused === this.button) {
             selectableItems[0]?.querySelector('input')?.focus();
           } else {
-            const currentItem = focused.closest('.filter-dropdown__item');
-            const currentIndex = selectableItems.indexOf(currentItem);
+            var currentItem = focused.closest('.filter-dropdown__item');
+            var currentIndex = selectableItems.indexOf(currentItem);
             if (currentIndex >= 0 && currentIndex < selectableItems.length - 1) {
               selectableItems[currentIndex + 1].querySelector('input')?.focus();
             }
@@ -299,12 +299,12 @@ export class FilterDropdown {
         }
         event.preventDefault();
         break;
-        
+
       case 'ArrowUp':
         if (isOpen) {
-          const focused = document.activeElement;
-          const currentItem = focused.closest('.filter-dropdown__item');
-          const currentIndex = selectableItems.indexOf(currentItem);
+          var focused = document.activeElement;
+          var currentItem = focused.closest('.filter-dropdown__item');
+          var currentIndex = selectableItems.indexOf(currentItem);
           if (currentIndex > 0) {
             selectableItems[currentIndex - 1].querySelector('input')?.focus();
           } else {
@@ -314,38 +314,38 @@ export class FilterDropdown {
         }
         break;
     }
-  }
-  
-  getSelectedValues() {
-    return this.selectedValues.map(v => v.value);
-  }
-  
-  getSelectedOptions() {
+  };
+
+  FilterDropdown.prototype.getSelectedValues = function() {
+    return this.selectedValues.map(function(v) { return v.value; });
+  };
+
+  FilterDropdown.prototype.getSelectedOptions = function() {
     return this.selectedValues;
-  }
-  
-  clearSelection() {
-    this.items.forEach(item => {
-      const checkbox = item.querySelector('input[type="checkbox"]');
+  };
+
+  FilterDropdown.prototype.clearSelection = function() {
+    this.items.forEach(function(item) {
+      var checkbox = item.querySelector('input[type="checkbox"]');
       if (checkbox) {
         checkbox.checked = false;
       }
-    });
+    }.bind(this));
     this.updateSelection();
     this.dispatchChangeEvent();
-  }
-  
-  setSelection(values) {
-    this.items.forEach(item => {
-      const checkbox = item.querySelector('input[type="checkbox"]');
+  };
+
+  FilterDropdown.prototype.setSelection = function(values) {
+    this.items.forEach(function(item) {
+      var checkbox = item.querySelector('input[type="checkbox"]');
       if (checkbox) {
         checkbox.checked = values.includes(item.dataset.value);
       }
-    });
+    }.bind(this));
     this.updateSelection();
-  }
-  
-  destroy() {
+  };
+
+  FilterDropdown.prototype.destroy = function() {
     allFilterDropdowns.delete(this);
     document.removeEventListener('click', this.closeOnClickOutside);
     if (this.button) {
@@ -353,185 +353,186 @@ export class FilterDropdown {
       this.button.removeEventListener('keydown', this.handleKeyboardNavigation);
     }
     this.dropdown.removeEventListener('keydown', this.handleKeyboardNavigation);
-  }
-}
+  };
 
-/**
- * FilterDropdownGroup - Manages multiple dropdowns with a shared results bar
- */
-export class FilterDropdownGroup {
-  constructor(container) {
+  /**
+   * FilterDropdownGroup - Manages multiple dropdowns with a shared results bar
+   */
+  function FilterDropdownGroup(container) {
     this.container = container;
     this.dropdownGroup = container.querySelector('.filter-dropdown-group');
     this.resultsBar = container.querySelector('.filter-results-bar');
     this.tagsContainer = container.querySelector('.filter-results-bar__tags');
     this.clearButton = container.querySelector('.filter-results-bar__clear');
     this.labelElement = container.querySelector('.filter-results-bar__label');
-    
+
     this.dropdowns = new Map();
     this.showResultsLabel = this.resultsBar?.dataset.showResultsLabel || "Showing results for:";
     this.clearFiltersLabel = this.resultsBar?.dataset.clearFiltersLabel || "Clear filters";
     this.clearFilterLabel = this.resultsBar?.dataset.clearFilterLabel || "Clear filter";
-    
+
     this.init();
   }
-  
-  init() {
-    const dropdownElements = this.container.querySelectorAll('.filter-dropdown');
-    dropdownElements.forEach(element => {
-      const dropdown = new FilterDropdown(element);
-      const id = element.dataset.id || element.id;
+
+  FilterDropdownGroup.prototype.init = function() {
+    var dropdownElements = this.container.querySelectorAll('.filter-dropdown');
+    dropdownElements.forEach(function(element) {
+      var dropdown = new FilterDropdown(element);
+      var id = element.dataset.id || element.id;
       this.dropdowns.set(id, dropdown);
-      
-      element.addEventListener('filter-change', (e) => {
+
+      element.addEventListener('filter-change', function(e) {
         this.updateResultsBar();
         this.dispatchGroupChangeEvent(id, e.detail);
-      });
-    });
-    
+      }.bind(this));
+    }.bind(this));
+
     if (this.clearButton) {
-      this.clearButton.addEventListener('click', () => this.clearAllFilters());
+      this.clearButton.addEventListener('click', function() { this.clearAllFilters(); }.bind(this));
     }
-    
+
     this.updateResultsBar();
-  }
-  
-  updateResultsBar() {
+  };
+
+  FilterDropdownGroup.prototype.updateResultsBar = function() {
     if (!this.resultsBar || !this.tagsContainer) return;
-    
-    const allFilters = [];
-    this.dropdowns.forEach((dropdown, dropdownId) => {
-      dropdown.getSelectedOptions().forEach(option => {
+
+    var allFilters = [];
+    this.dropdowns.forEach(function(dropdown, dropdownId) {
+      dropdown.getSelectedOptions().forEach(function(option) {
         allFilters.push({
-          dropdownId,
+          dropdownId: dropdownId,
           value: option.value,
           label: option.label
         });
       });
     });
-    
+
     if (allFilters.length === 0) {
       this.resultsBar.style.display = 'none';
       return;
     }
-    
+
     this.resultsBar.style.display = '';
-    
+
     if (this.clearButton) {
-      this.clearButton.textContent = allFilters.length === 1 
-        ? this.clearFilterLabel 
+      this.clearButton.textContent = allFilters.length === 1
+        ? this.clearFilterLabel
         : this.clearFiltersLabel;
     }
-    
-    this.tagsContainer.innerHTML = allFilters.map(filter => `
-      <span class="filter-results-bar__tag" data-dropdown-id="${filter.dropdownId}" data-value="${filter.value}">
-        <span class="filter-results-bar__tag-icon">
-          <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.5 3.205L8.795 2.5 6 5.295 3.205 2.5l-.705.705L5.295 6 2.5 8.795l.705.705L6 6.705 8.795 9.5l.705-.705L6.705 6z"/>
-          </svg>
+
+    this.tagsContainer.innerHTML = allFilters.map(function(filter) {
+      return `
+        <span class="filter-results-bar__tag" data-dropdown-id="${filter.dropdownId}" data-value="${filter.value}">
+          <span class="filter-results-bar__tag-icon">
+            <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.5 3.205L8.795 2.5 6 5.295 3.205 2.5l-.705.705L5.295 6 2.5 8.795l.705.705L6 6.705 8.795 9.5l.705-.705L6.705 6z"/>
+            </svg>
+          </span>
+          <span class="filter-results-bar__tag-text">${filter.label}</span>
         </span>
-        <span class="filter-results-bar__tag-text">${filter.label}</span>
-      </span>
-    `).join('');
-    
-    this.tagsContainer.querySelectorAll('.filter-results-bar__tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        const dropdownId = tag.dataset.dropdownId;
-        const value = tag.dataset.value;
+      `;
+    }).join('');
+
+    this.tagsContainer.querySelectorAll('.filter-results-bar__tag').forEach(function(tag) {
+      tag.addEventListener('click', function() {
+        var dropdownId = tag.dataset.dropdownId;
+        var value = tag.dataset.value;
         this.removeFilter(dropdownId, value);
-      });
-    });
-  }
-  
-  removeFilter(dropdownId, value) {
-    const dropdown = this.dropdowns.get(dropdownId);
+      }.bind(this));
+    }.bind(this));
+  };
+
+  FilterDropdownGroup.prototype.removeFilter = function(dropdownId, value) {
+    var dropdown = this.dropdowns.get(dropdownId);
     if (!dropdown) return;
-    
-    const currentValues = dropdown.getSelectedValues();
-    const newValues = currentValues.filter(v => v !== value);
+
+    var currentValues = dropdown.getSelectedValues();
+    var newValues = currentValues.filter(function(v) { return v !== value; });
     dropdown.setSelection(newValues);
     this.updateResultsBar();
-  }
-  
-  clearAllFilters() {
-    this.dropdowns.forEach(dropdown => {
+  };
+
+  FilterDropdownGroup.prototype.clearAllFilters = function() {
+    this.dropdowns.forEach(function(dropdown) {
       dropdown.clearSelection();
-    });
+    }.bind(this));
     this.updateResultsBar();
-  }
-  
-  dispatchGroupChangeEvent(dropdownId, detail) {
-    const event = new CustomEvent('filter-group-change', {
+  };
+
+  FilterDropdownGroup.prototype.dispatchGroupChangeEvent = function(dropdownId, detail) {
+    var event = new CustomEvent('filter-group-change', {
       detail: {
-        dropdownId,
-        ...detail
+        dropdownId: dropdownId,
+        values: detail.values,
+        options: detail.options
       }
     });
     this.container.dispatchEvent(event);
-  }
-  
-  getDropdown(id) {
+  };
+
+  FilterDropdownGroup.prototype.getDropdown = function(id) {
     return this.dropdowns.get(id);
-  }
-  
-  getAllSelectedFilters() {
-    const filters = {};
-    this.dropdowns.forEach((dropdown, id) => {
+  };
+
+  FilterDropdownGroup.prototype.getAllSelectedFilters = function() {
+    var filters = {};
+    this.dropdowns.forEach(function(dropdown, id) {
       filters[id] = dropdown.getSelectedValues();
     });
     return filters;
+  };
+
+  // Auto-init on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.filter-dropdown:not(.filter-dropdown-group-container .filter-dropdown)').forEach(function(element) {
+      new FilterDropdown(element);
+    });
+
+    document.querySelectorAll('.filter-dropdown-group-container').forEach(function(container) {
+      new FilterDropdownGroup(container);
+    });
+  });
+
+  // Fallback if DOM already loaded
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(function() {
+      document.querySelectorAll('.filter-dropdown:not(.filter-dropdown-group-container .filter-dropdown)').forEach(function(element) {
+        if (!element._filterDropdown) {
+          element._filterDropdown = new FilterDropdown(element);
+        }
+      });
+
+      document.querySelectorAll('.filter-dropdown-group-container').forEach(function(container) {
+        if (!container._filterDropdownGroup) {
+          container._filterDropdownGroup = new FilterDropdownGroup(container);
+        }
+      });
+    }, 1);
   }
-}
 
-// Auto-init on page load
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.filter-dropdown:not(.filter-dropdown-group-container .filter-dropdown)').forEach(element => {
-    new FilterDropdown(element);
-  });
-  
-  document.querySelectorAll('.filter-dropdown-group-container').forEach(container => {
-    new FilterDropdownGroup(container);
-  });
-});
+  function createFilterDropdownItem(value, label, id) {
+    var item = document.createElement('li');
+    item.className = 'filter-dropdown__item';
+    item.setAttribute('data-value', value);
+    item.setAttribute('data-label', label);
 
-// Fallback if DOM already loaded
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  setTimeout(() => {
-    document.querySelectorAll('.filter-dropdown:not(.filter-dropdown-group-container .filter-dropdown)').forEach(element => {
-      if (!element._filterDropdown) {
-        element._filterDropdown = new FilterDropdown(element);
-      }
-    });
-    
-    document.querySelectorAll('.filter-dropdown-group-container').forEach(container => {
-      if (!container._filterDropdownGroup) {
-        container._filterDropdownGroup = new FilterDropdownGroup(container);
-      }
-    });
-  }, 1);
-}
+    var checkbox = document.createElement('div');
+    checkbox.className = 'standard-checkbox';
 
-export function createFilterDropdownItem(value, label, id) {
-  const item = document.createElement('li');
-  item.className = 'filter-dropdown__item';
-  item.setAttribute('data-value', value);
-  item.setAttribute('data-label', label);
-  
-  const checkbox = document.createElement('div');
-  checkbox.className = 'standard-checkbox';
-  
-  const input = document.createElement('input');
-  input.type = 'checkbox';
-  input.id = id || `filter-${value}`;
-  
-  const labelEl = document.createElement('label');
-  labelEl.className = 'standard-checkbox-label';
-  labelEl.setAttribute('for', input.id);
-  labelEl.textContent = label;
-  
-  checkbox.appendChild(input);
-  checkbox.appendChild(labelEl);
-  item.appendChild(checkbox);
-  
-  return item;
-}
+    var input = document.createElement('input');
+    input.type = 'checkbox';
+    input.id = id || `filter-${value}`;
+
+    var labelEl = document.createElement('label');
+    labelEl.className = 'standard-checkbox-label';
+    labelEl.setAttribute('for', input.id);
+    labelEl.textContent = label;
+
+    checkbox.appendChild(input);
+    checkbox.appendChild(labelEl);
+    item.appendChild(checkbox);
+
+    return item;
+  }
+})();
