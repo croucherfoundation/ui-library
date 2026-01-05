@@ -23,3 +23,53 @@
     }
   }
 }
+
+/*
+  CSC and ASI list page use the same css of summary in its own css file, 
+  if making changes here, please also check those files (can replace with standard class names).
+*/
+.standard-summary {
+  width: 100vw;
+  position: relative;
+  left: calc(-50vw + 50%);
+  background-color: #F3F3F0;
+  margin-bottom: 60px;
+  .statistics {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 20px 0 18px;
+    .section_1 {
+      margin-right: 142px;
+    }
+    .section_2 {
+      margin-right: 170px;
+    }
+    .section_1, .section_2, .section_3 {
+      text-align: left;
+      p.label {
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 12px;
+      }
+      p.count {
+        font-size: 46px;
+        font-weight: 600;
+        line-height: 46px;
+        color: #ED1C24;
+      }
+    }
+  }
+
+  @media only  screen and (max-width: 912px) {
+    .statistics {
+      flex-direction: column;
+      .section_1, .section_2, .section_3 {
+        margin-right: unset;
+      }
+      .section_1, .section_2 {
+        margin-bottom: 24px;
+      }
+    }
+  }
+}
