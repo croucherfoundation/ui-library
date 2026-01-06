@@ -1485,3 +1485,157 @@ document.addEventListener('DOMContentLoaded', function() {
 /**
  * END: Select with Search functionality
  */
+
+
+/**
+ * START: Orderable Cards Drag and Drop
+ */
+function initOrderableCards() {
+  const container = document.querySelector('.cards-order-container');
+  if (!container) return;
+  
+  // Prevent double initialization
+  if (container.dataset.initialized === 'true') return;
+  container.dataset.initialized = 'true';
+  
+  const cards = container.querySelectorAll('.orderable-card');
+  const hiddenField = document.getElementById('repositioned_ids');
+  let draggedCard = null;
+  
+  // Update hidden field with current order
+  function updateOrder() {
+    const orderedData = Array.from(container.querySelectorAll('.orderable-card'))
+      .map((card, index) => ({
+        id: parseInt(card.dataset.id, 10),
+        position: index + 1
+      }));
+    if (hiddenField) {
+      hiddenField.value = JSON.stringify(orderedData);
+    }
+  }
+  
+  // Clear all drop indicators
+  function clearDropIndicators() {
+    container.querySelectorAll('.orderable-card').forEach(card => {
+      card.classList.remove('drag-over-swap', 'drop-indicator-top', 'drop-indicator-bottom');
+    });
+  }
+  
+  // Get drop zone: left 25% = place before, right 25% = place after, middle 50% = swap
+  function getDropZone(card, x) {
+    const rect = card.getBoundingClientRect();
+    const relativeX = x - rect.left;
+    const percentage = relativeX / rect.width;
+    
+    if (percentage < 0.25) return 'top';
+    if (percentage > 0.75) return 'bottom';
+    return 'swap';
+  }
+  
+  cards.forEach(card => {
+    card.addEventListener('dragstart', (e) => {
+      draggedCard = card;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', card.dataset.id);
+    });
+    
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+      clearDropIndicators();
+      draggedCard = null;
+      updateOrder();
+    });
+    
+    card.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (card === draggedCard) return;
+      
+      clearDropIndicators();
+      
+      const zone = getDropZone(card, e.clientX);
+      if (zone === 'swap') {
+        card.classList.add('drag-over-swap');
+      } else if (zone === 'top') {
+        card.classList.add('drop-indicator-top');
+      } else {
+        card.classList.add('drop-indicator-bottom');
+      }
+    });
+    
+    card.addEventListener('dragleave', () => {
+      card.classList.remove('drag-over-swap', 'drop-indicator-top', 'drop-indicator-bottom');
+    });
+    
+    card.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (card === draggedCard) return;
+      
+      const zone = getDropZone(card, e.clientX);
+      
+      if (zone === 'swap') {
+        // Swap mode: exchange positions
+        const draggedIndex = Array.from(container.children).indexOf(draggedCard);
+        const targetIndex = Array.from(container.children).indexOf(card);
+        
+        if (draggedIndex < targetIndex) {
+          container.insertBefore(card, draggedCard);
+          container.insertBefore(draggedCard, container.children[targetIndex + 1] || null);
+        } else {
+          container.insertBefore(draggedCard, card);
+          container.insertBefore(card, container.children[draggedIndex + 1] || null);
+        }
+      } else if (zone === 'top') {
+        container.insertBefore(draggedCard, card);
+      } else {
+        container.insertBefore(draggedCard, card.nextSibling);
+      }
+      
+      clearDropIndicators();
+    });
+  });
+  
+  // Initialize order
+  updateOrder();
+}
+
+// Try to initialize on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+  initOrderableCards();
+});
+
+// Also watch for modals opening (when modal-open class is added)
+document.addEventListener('DOMContentLoaded', function() {
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        const target = mutation.target;
+        if (target.classList.contains('modal-open')) {
+          // Modal just opened, try to initialize orderable cards inside it
+          setTimeout(initOrderableCards, 50);
+        }
+      }
+      // Also check for added nodes (in case container is dynamically inserted)
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === 1) { // Element node
+            if (node.classList && node.classList.contains('cards-order-container')) {
+              setTimeout(initOrderableCards, 50);
+            } else if (node.querySelector && node.querySelector('.cards-order-container')) {
+              setTimeout(initOrderableCards, 50);
+            }
+          }
+        });
+      }
+    });
+  });
+  
+  observer.observe(document.body, {
+    attributes: true,
+    childList: true,
+    subtree: true
+  });
+});
+/**
+ * END: Orderable Cards Drag and Drop
+ */

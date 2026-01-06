@@ -210,7 +210,59 @@
   }
 }
 
-
+.orderable-card {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  user-select: none;
+  position: relative;
+  min-height: 60px;
+  display: flex;
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  &.dragging {
+    opacity: 0.8;
+    cursor: grabbing;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    z-index: 1000;
+  }
+  &.drag-over-swap {
+    border-color: #74b87a;
+    background: #f0fff4;
+    border-width: 2px;
+  }
+  &.drop-indicator-top::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #2c91c9;
+    border-radius: 2px;
+  }
+  &.drop-indicator-bottom::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #2c91c9;
+    border-radius: 2px;
+  }
+  .orderable-card-title {
+    margin: 0;
+    pointer-events: none;
+    font-weight: 500;
+  }
+}
 
 @include sm {
   .default_card {
