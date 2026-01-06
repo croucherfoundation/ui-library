@@ -726,6 +726,24 @@
       });
     }
 
+    // For Password Reset
+    var resetInput = document.querySelector(".user.reset input[type='password']");
+    var resetEyeBtn = document.querySelector(".user.reset .input_group .eye");
+    if (resetEyeBtn) {
+      var resetEyeImg = resetEyeBtn.querySelector("img");
+      resetEyeBtn.addEventListener("click", () => {
+        if (resetInput.type == "password") {
+          resetInput.type = "text";
+          resetEyeImg.src =
+            "https://croucher.org.hk/assets/images/icons/eye-01.svg";
+        } else {
+          resetInput.type = "password";
+          resetEyeImg.src =
+            "https://croucher.org.hk/assets/images/icons/eye-02.svg";
+        }
+      });
+    }
+
     // For Account Settings
     var passwordInputs = document.querySelectorAll(".passwords-input");
     passwordInputs.forEach((passwordInput) => {
