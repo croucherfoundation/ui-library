@@ -48,15 +48,6 @@
     white-space: nowrap;
     font-size: 16px;
     line-height: 1.2;
-    margin-right: 8px; // Add space between text and arrow
-
-    // Ensure the truncate div also handles overflow properly
-    .truncate {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 100%;
-    }
 
     &--placeholder {
       color: $black;
@@ -76,7 +67,6 @@
     flex-shrink: 0;
     width: 16px;
     height: 16px;
-    min-width: 16px; // Ensure arrow doesn't shrink
 
     svg {
       width: 16px;
@@ -132,6 +122,10 @@
 
     &:hover {
       background-color: $light-gray;
+
+      .standard-checkbox-label::before {
+        box-shadow: inset 0 0 0 1px #9a9b97;
+      }
     }
 
     // "Select all" option styling
@@ -139,6 +133,67 @@
       border-bottom: 1px solid #e5e5e5;
       margin-bottom: 4px;
       padding-bottom: 14px;
+
+      .standard-checkbox-label {
+        font-weight: 600;
+      }
+    }
+
+    // Use standard-checkbox inside filter dropdown items
+    .standard-checkbox {
+      width: 100%;
+      
+      input[type='checkbox'] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        pointer-events: none;
+      }
+
+      .standard-checkbox-label {
+        position: relative;
+        padding-left: 32px;
+        cursor: pointer;
+        display: inline-block;
+        user-select: none;
+        min-height: 22px;
+        line-height: 22px;
+        color: $black;
+        font-weight: 500;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: -1px;
+          width: 22px;
+          height: 22px;
+          background-color: #ffffff;
+          border: 1px solid #9a9b97;
+          border-radius: 5px;
+          box-shadow: inset 0 0 0 0 #9a9b97;
+          transition: box-shadow 0.1s ease;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 8.5px;
+          top: 3px;
+          width: 5px;
+          height: 11px;
+          border: solid #101820;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+          opacity: 0;
+          transition: opacity 0.05s ease;
+        }
+      }
+
+      input[type='checkbox']:checked + .standard-checkbox-label::after {
+        opacity: 1;
+      }
     }
   }
 
@@ -163,16 +218,6 @@
 
     &.filter-dropdown--open .filter-dropdown__arrow {
       transform: rotate(0deg);
-    }
-  }
-
-  // Inline display variant - shows selected items in the button
-  &--inline-display {
-    .filter-dropdown__selected {
-      &--value {
-        color: $black;
-        font-weight: 500;
-      }
     }
   }
 }
@@ -333,6 +378,305 @@
 
     &:hover {
       opacity: 0.6;
+    }
+  }
+}
+
+// Calendar Dropdown Styles
+.filter-dropdown {
+  &__calendar {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    min-width: 320px;
+    background-color: $white;
+    border: 1px solid #ccc;
+    border-radius: $rounded-5;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    display: none;
+    padding: 20px;
+    font-family: "MarrSans", sans-serif;
+
+    @include md {
+      min-width: 380px;
+    }
+  }
+
+  &--open &__calendar {
+    display: block;
+  }
+
+  &--upward &__calendar {
+    top: auto;
+    bottom: calc(100% + 4px);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  &__calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__calendar-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: $black;
+
+    // For month/year toggle (calendar header)
+    display: flex;
+    align-items: center;
+  }
+
+  &__calendar-title-part {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 5px;
+    border-radius: 4px;
+    font: inherit;
+    color: inherit;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $light-gray;
+    }
+  }
+
+  &__calendar-body {
+    min-height: 240px; // ensures small fade but allow body to grow
+    // removed fixed max-height so grid never overlaps actions
+    transition: opacity 0.15s ease-in-out;
+  }
+
+  &__calendar--transitioning {
+    .filter-dropdown__calendar-body {
+      opacity: 0;
+    }
+  }
+
+  &__calendar-months,
+  &__calendar-years {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding-top: 8px;
+    overflow-y: auto;
+    max-height: 320px; // scroll if months/years exceed
+  }
+
+  &__calendar-month,
+  &__calendar-year {
+    background: #f6f6f4;
+    border: none;
+    border-radius: $rounded-5;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 8px;
+    min-height: 44px; // keeps same height as day cell
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__calendar-month--active,
+  &__calendar-year--active {
+    background-color: $black;
+    color: $white;
+  }
+
+  // current system month/year highlight (pink similar to today day cell)
+  &__calendar-month--current,
+  &__calendar-year--current {
+    color: $csw-public-red;
+    font-weight: 600;
+    border: 1px solid $csw-public-red;
+  }
+
+  &__calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: $black;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    padding: 0;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      color: $white;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+    text-align: center;
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: $black;
+      padding: 8px 0;
+    }
+  }
+
+  &__calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  &__calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    font-size: 16px;
+    font-weight: 400;
+    color: $black;
+    background-color: transparent;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    padding: 0;
+    position: relative;
+
+    &:hover:not(&--selected):not(&--in-range) {
+      background-color: $light-gray;
+    }
+
+    &--other-month {
+      color: #999;
+    }
+
+    &--today {
+      color: $csw-public-red;
+      font-weight: 600;
+      border-color: $csw-public-red;
+    }
+
+    &--selected {
+      background-color: $black;
+      color: $white;
+      border-color: $black;
+      font-weight: 500;
+    }
+
+    &--in-range {
+      background-color: #f0f0f0;
+      border-color: #e5e5e5;
+    }
+
+    &--range-start {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      
+      &:not(&.filter-dropdown__calendar-day--single) {
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          right: -1px;
+          top: 0;
+          bottom: 0;
+          width: 50%;
+          background-color: #f0f0f0;
+          z-index: -1;
+        }
+      }
+    }
+
+    &--range-end {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      
+      &:not(&.filter-dropdown__calendar-day--single) {
+        position: relative;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          left: -1px;
+          top: 0;
+          bottom: 0;
+          width: 50%;
+          background-color: #f0f0f0;
+          z-index: -1;
+        }
+      }
+    }
+
+    &--single {
+      border-radius: 4px;
+    }
+
+    &--disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+
+  &__calendar-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  &__calendar-btn {
+    flex: 1;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: $rounded-5;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &--clear {
+      background-color: $white;
+      color: $black;
+      border: 1px solid $black;
+
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+
+    &--confirm {
+      background-color: $black;
+      color: $white;
+      border: 1px solid $black;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }
