@@ -229,29 +229,27 @@
     z-index: 1000;
   }
   &.drag-over-swap {
-    border-color: #74b87a;
-    background: #f0fff4;
-    border-width: 2px;
+    border: 2px dashed #2c91c9;
   }
   &.drop-indicator-top::before {
     content: '';
     position: absolute;
-    left: -6px;
+    left: -10px;
     top: 0;
     bottom: 0;
     width: 4px;
-    background: #2c91c9;
-    border-radius: 2px;
+    border-radius: 1px;
+    border: 2px dashed #2c91c9;
   }
   &.drop-indicator-bottom::after {
     content: '';
     position: absolute;
-    right: -6px;
+    right: -11px;
     top: 0;
     bottom: 0;
     width: 4px;
-    background: #2c91c9;
-    border-radius: 2px;
+    border-radius: 1px;
+    border: 2px dashed #2c91c9;
   }
   .orderable-card-title {
     margin: 0;
