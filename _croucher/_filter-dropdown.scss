@@ -122,78 +122,12 @@
 
     &:hover {
       background-color: $light-gray;
-
-      .standard-checkbox-label::before {
-        box-shadow: inset 0 0 0 1px #9a9b97;
-      }
     }
 
-    // "Select all" option styling
     &--select-all {
       border-bottom: 1px solid #e5e5e5;
       margin-bottom: 4px;
       padding-bottom: 14px;
-
-      .standard-checkbox-label {
-        font-weight: 600;
-      }
-    }
-
-    // Use standard-checkbox inside filter dropdown items
-    .standard-checkbox {
-      width: 100%;
-      
-      input[type='checkbox'] {
-        position: absolute;
-        opacity: 0;
-        width: 0;
-        height: 0;
-        pointer-events: none;
-      }
-
-      .standard-checkbox-label {
-        position: relative;
-        padding-left: 32px;
-        cursor: pointer;
-        display: inline-block;
-        user-select: none;
-        min-height: 22px;
-        line-height: 22px;
-        color: $black;
-        font-weight: 500;
-
-        &::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: -1px;
-          width: 22px;
-          height: 22px;
-          background-color: #ffffff;
-          border: 1px solid #9a9b97;
-          border-radius: 5px;
-          box-shadow: inset 0 0 0 0 #9a9b97;
-          transition: box-shadow 0.1s ease;
-        }
-
-        &::after {
-          content: '';
-          position: absolute;
-          left: 8.5px;
-          top: 3px;
-          width: 5px;
-          height: 11px;
-          border: solid #101820;
-          border-width: 0 2px 2px 0;
-          transform: rotate(45deg);
-          opacity: 0;
-          transition: opacity 0.05s ease;
-        }
-      }
-
-      input[type='checkbox']:checked + .standard-checkbox-label::after {
-        opacity: 1;
-      }
     }
   }
 
