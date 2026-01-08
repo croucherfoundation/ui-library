@@ -1,0 +1,67 @@
+.croucher-tab-container {
+  &.pb_tab {
+    padding-bottom: 25px;
+  }
+  .standard-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .tab {
+      font-size: 20px;
+      padding: 5px 0;
+      margin-right: 15px;
+      cursor: pointer;
+      color: #828387;
+      background: none;
+      border: none;
+      outline: none;
+      transition: color 0.3s, border-bottom 0.3s;
+      white-space: nowrap;
+      flex-shrink: 0;
+
+      &.active {
+        color: #101820;
+        border-bottom: 2px solid #EE3A43;
+        pointer-events: none;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tabs {
+      gap: 5px;
+
+      .tab {
+        padding: 5px 0;
+        margin-right: 10px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tabs {
+      .tab {
+        padding: 4px 0;
+        margin-right: 8px;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
