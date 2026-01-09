@@ -1,8 +1,9 @@
 .lead-image-container {
   width: 100%;
   position: relative;
-  max-width: 1218px;
   margin: auto;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .lead-image {
@@ -22,4 +23,12 @@
 .lead-image-container--tall .lead-image {
   object-fit: cover;
   height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .lead-image-container {
+    max-width: 1298px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
