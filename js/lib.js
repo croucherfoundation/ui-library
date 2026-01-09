@@ -1639,37 +1639,3 @@ document.addEventListener('DOMContentLoaded', function() {
 /**
  * END: Orderable Cards Drag and Drop
  */
-
-/**
- * ===========================
- * Tab Component
- * ===========================
- */
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.croucher-tab-container').forEach(function(container) {
-    const tabItems = container.querySelectorAll('.tab-item');
-    const contentWrapper = container.nextElementSibling;
-    const hasContent = contentWrapper && contentWrapper.classList.contains('tab-content-wrapper');
-    
-    tabItems.forEach(function(tab) {
-      tab.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Toggle active state on tabs
-        tabItems.forEach(item => item.classList.remove('active'));
-        this.classList.add('active');
-        
-        // Switch content if wrapper exists
-        if (hasContent) {
-          const targetId = this.getAttribute('href').replace('#', '');
-          contentWrapper.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-          const target = contentWrapper.querySelector('[data-tab="' + targetId + '"]');
-          if (target) target.classList.add('active');
-        }
-      });
-    });
-  });
-});
-/**
- * END: Tab Component
- */
