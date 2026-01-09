@@ -4,400 +4,10 @@
  * Can be initialized with either:
  * 1. A <select multiple> element (will auto-generate the UI)
  * 2. Pre-built HTML structure with .filter-dropdown__button, .filter-dropdown__list, etc.
- * 3. A calendar date picker (data-type="calendar")
  */
 
 (function () {
   var allFilterDropdowns = new Set();
-
-  /**
-   * FilterDropdownCalendar - Date picker with single date or date range selection
-   */
-  function FilterDropdownCalendar(element) {
-    this.dropdown = element;
-    this.placeholder = this.dropdown.dataset.placeholder || "Select date";
-    this.startDate = null;
-    this.endDate = null;
-    this.currentMonth = new Date();
-    this.isSelectingEndDate = false;
-
-    this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.closeOnClickOutside = this.closeOnClickOutside.bind(this);
-
-    this.buildCalendarUI();
-
-    this.button = this.dropdown.querySelector('.filter-dropdown__button');
-    this.selectedText = this.dropdown.querySelector('.filter-dropdown__selected');
-    this.calendarContainer = this.dropdown.querySelector('.filter-dropdown__calendar');
-
-    allFilterDropdowns.add(this);
-
-    this.init();
-  }
-
-  FilterDropdownCalendar.prototype.buildCalendarUI = function() {
-    if (this.dropdown.querySelector('.filter-dropdown__button')) return;
-
-    var button = document.createElement('div');
-    button.className = 'filter-dropdown__button';
-    button.setAttribute('tabindex', '0');
-    button.setAttribute('role', 'combobox');
-    button.setAttribute('aria-expanded', 'false');
-    button.innerHTML = `
-      <div class="filter-dropdown__selected filter-dropdown__selected--placeholder">
-        <div class="truncate">${this.placeholder}</div>
-      </div>
-      <div class="filter-dropdown__arrow">
-        <svg viewBox="0 0 53 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#231f20" d="M26.8,41.9c-1.5,0-2.9-.7-3.9-1.8L2,13.8c-.8-1-.6-2.4.4-3.2,1-.8,2.4-.6,3.2.4l20.8,26.3c.1.1.3,0,.5.2.1,0,.3,0,.5-.2l20.1-26.1c.8-1,2.2-1.2,3.2-.4s1.2,2.2.4,3.2l-20.2,26.2c-1,1.2-2.5,1.9-4,1.9h0,0Z"/>
-        </svg>
-      </div>
-    `;
-
-    var calendarContainer = document.createElement('div');
-    calendarContainer.className = 'filter-dropdown__calendar';
-
-    this.dropdown.appendChild(button);
-    this.dropdown.appendChild(calendarContainer);
-  };
-
-  FilterDropdownCalendar.prototype.init = function() {
-    if (!this.button) return;
-
-    this.button.addEventListener('click', this.toggleDropdown);
-    this.renderCalendar();
-  };
-
-  FilterDropdownCalendar.prototype.renderCalendar = function() {
-    var self = this;
-    var year = this.currentMonth.getFullYear();
-    var month = this.currentMonth.getMonth();
-
-    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-    var dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
-    var firstDay = new Date(year, month, 1);
-    var lastDay = new Date(year, month + 1, 0);
-    var startDayOfWeek = (firstDay.getDay() + 6) % 7; // Monday = 0
-    var daysInMonth = lastDay.getDate();
-
-    var prevMonthLastDay = new Date(year, month, 0).getDate();
-
-    var html = `
-      <div class="filter-dropdown__calendar-header">
-        <button type="button" class="filter-dropdown__calendar-nav filter-dropdown__calendar-nav--prev" data-action="prev">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <span class="filter-dropdown__calendar-title">${monthNames[month]} ${year}</span>
-        <button type="button" class="filter-dropdown__calendar-nav filter-dropdown__calendar-nav--next" data-action="next">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-      <div class="filter-dropdown__calendar-weekdays">
-        ${dayNames.map(function(day) { return '<span>' + day + '</span>'; }).join('')}
-      </div>
-      <div class="filter-dropdown__calendar-days">
-    `;
-
-    // Previous month days
-    for (var i = startDayOfWeek - 1; i >= 0; i--) {
-      var day = prevMonthLastDay - i;
-      var date = new Date(year, month - 1, day);
-      html += this.renderDay(date, true);
-    }
-
-    // Current month days
-    for (var d = 1; d <= daysInMonth; d++) {
-      var date = new Date(year, month, d);
-      html += this.renderDay(date, false);
-    }
-
-    // Next month days to fill the grid
-    var totalCells = startDayOfWeek + daysInMonth;
-    var remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-    for (var n = 1; n <= remainingCells; n++) {
-      var date = new Date(year, month + 1, n);
-      html += this.renderDay(date, true);
-    }
-
-    html += `
-      </div>
-      <div class="filter-dropdown__calendar-actions">
-        <button type="button" class="filter-dropdown__calendar-btn filter-dropdown__calendar-btn--clear" data-action="clear">Clear</button>
-        <button type="button" class="filter-dropdown__calendar-btn filter-dropdown__calendar-btn--confirm" data-action="confirm">Confirm</button>
-      </div>
-    `;
-
-    this.calendarContainer.innerHTML = html;
-
-    // Add event listeners
-    this.calendarContainer.querySelector('.filter-dropdown__calendar-nav--prev').addEventListener('click', function(e) {
-      e.stopPropagation();
-      self.navigateMonth(-1);
-    });
-
-    this.calendarContainer.querySelector('.filter-dropdown__calendar-nav--next').addEventListener('click', function(e) {
-      e.stopPropagation();
-      self.navigateMonth(1);
-    });
-
-    this.calendarContainer.querySelectorAll('.filter-dropdown__calendar-day').forEach(function(dayEl) {
-      dayEl.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (!dayEl.classList.contains('filter-dropdown__calendar-day--disabled')) {
-          var timestamp = parseInt(dayEl.dataset.date);
-          self.selectDate(new Date(timestamp));
-        }
-      });
-    });
-
-    this.calendarContainer.querySelector('.filter-dropdown__calendar-btn--clear').addEventListener('click', function(e) {
-      e.stopPropagation();
-      self.clearSelection();
-    });
-
-    this.calendarContainer.querySelector('.filter-dropdown__calendar-btn--confirm').addEventListener('click', function(e) {
-      e.stopPropagation();
-      self.confirmSelection();
-    });
-  };
-
-  FilterDropdownCalendar.prototype.renderDay = function(date, isOtherMonth) {
-    var classes = ['filter-dropdown__calendar-day'];
-    
-    if (isOtherMonth) {
-      classes.push('filter-dropdown__calendar-day--other-month');
-    }
-
-    var isStart = this.startDate && this.isSameDay(date, this.startDate);
-    var isEnd = this.endDate && this.isSameDay(date, this.endDate);
-    var isInRange = this.startDate && this.endDate && date > this.startDate && date < this.endDate;
-
-    if (isStart) {
-      classes.push('filter-dropdown__calendar-day--selected');
-      classes.push('filter-dropdown__calendar-day--range-start');
-    }
-    if (isEnd) {
-      classes.push('filter-dropdown__calendar-day--selected');
-      classes.push('filter-dropdown__calendar-day--range-end');
-    }
-    if (isInRange) {
-      classes.push('filter-dropdown__calendar-day--in-range');
-    }
-    if (isStart && isEnd) {
-      classes.push('filter-dropdown__calendar-day--single');
-    }
-
-    return '<button type="button" class="' + classes.join(' ') + '" data-date="' + date.getTime() + '">' + date.getDate() + '</button>';
-  };
-
-  FilterDropdownCalendar.prototype.isSameDay = function(date1, date2) {
-    return date1.getFullYear() === date2.getFullYear() &&
-           date1.getMonth() === date2.getMonth() &&
-           date1.getDate() === date2.getDate();
-  };
-
-  FilterDropdownCalendar.prototype.selectDate = function(date) {
-    if (!this.startDate || (this.startDate && this.endDate)) {
-      // Start new selection
-      this.startDate = date;
-      this.endDate = date;
-      this.isSelectingEndDate = true;
-    } else if (this.isSelectingEndDate) {
-      // Set end date
-      if (date < this.startDate) {
-        this.endDate = this.startDate;
-        this.startDate = date;
-      } else {
-        this.endDate = date;
-      }
-      this.isSelectingEndDate = false;
-    }
-
-    this.renderCalendar();
-  };
-
-  FilterDropdownCalendar.prototype.navigateMonth = function(direction) {
-    this.currentMonth.setMonth(this.currentMonth.getMonth() + direction);
-    this.renderCalendar();
-  };
-
-  FilterDropdownCalendar.prototype.clearSelection = function() {
-    this.startDate = null;
-    this.endDate = null;
-    this.isSelectingEndDate = false;
-    this.renderCalendar();
-    this.updateButtonText();
-    this.dispatchChangeEvent();
-  };
-
-  FilterDropdownCalendar.prototype.confirmSelection = function() {
-    this.updateButtonText();
-    this.close();
-    this.dispatchChangeEvent();
-  };
-
-  FilterDropdownCalendar.prototype.updateButtonText = function() {
-    var selectedDiv = this.button.querySelector('.filter-dropdown__selected');
-    var truncateDiv = selectedDiv.querySelector('.truncate');
-
-    if (this.startDate) {
-      var text = this.formatDateDisplay(this.startDate);
-      if (this.endDate && !this.isSameDay(this.startDate, this.endDate)) {
-        text += ' - ' + this.formatDateDisplay(this.endDate);
-      }
-      truncateDiv.textContent = text;
-      selectedDiv.classList.remove('filter-dropdown__selected--placeholder');
-      selectedDiv.classList.add('filter-dropdown__selected--value');
-    } else {
-      truncateDiv.textContent = this.placeholder;
-      selectedDiv.classList.add('filter-dropdown__selected--placeholder');
-      selectedDiv.classList.remove('filter-dropdown__selected--value');
-    }
-  };
-
-  FilterDropdownCalendar.prototype.formatDateDisplay = function(date) {
-    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    var months = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-
-    return days[date.getDay()] + ' ' + date.getDate() + ' ' + months[date.getMonth()];
-  };
-
-  FilterDropdownCalendar.prototype.toggleDropdown = function(e) {
-    e?.stopPropagation();
-
-    var wasOpen = this.dropdown.classList.contains('filter-dropdown--open');
-
-    if (!wasOpen) {
-      allFilterDropdowns.forEach(function(dropdown) {
-        if (dropdown !== this) {
-          dropdown.close();
-        }
-      }.bind(this));
-    }
-
-    var isOpen = this.dropdown.classList.toggle('filter-dropdown--open');
-
-    if (isOpen) {
-      this.positionCalendar();
-      document.addEventListener('click', this.closeOnClickOutside);
-      this.button.setAttribute('aria-expanded', 'true');
-    } else {
-      document.removeEventListener('click', this.closeOnClickOutside);
-      this.button.setAttribute('aria-expanded', 'false');
-      this.dropdown.classList.remove('filter-dropdown--upward');
-    }
-  };
-
-  FilterDropdownCalendar.prototype.positionCalendar = function() {
-    var buttonRect = this.button.getBoundingClientRect();
-    var calendarHeight = this.calendarContainer.offsetHeight || 400;
-    var spaceBelow = window.innerHeight - buttonRect.bottom;
-    var shouldOpenUpward = spaceBelow < calendarHeight && buttonRect.top > calendarHeight;
-
-    if (shouldOpenUpward) {
-      this.dropdown.classList.add('filter-dropdown--upward');
-    } else {
-      this.dropdown.classList.remove('filter-dropdown--upward');
-    }
-  };
-
-  FilterDropdownCalendar.prototype.close = function() {
-    this.dropdown.classList.remove('filter-dropdown--open');
-    this.dropdown.classList.remove('filter-dropdown--upward');
-    document.removeEventListener('click', this.closeOnClickOutside);
-    if (this.button) {
-      this.button.setAttribute('aria-expanded', 'false');
-    }
-  };
-
-  FilterDropdownCalendar.prototype.closeOnClickOutside = function(event) {
-    if (!this.dropdown.contains(event.target)) {
-      this.close();
-    }
-  };
-
-  FilterDropdownCalendar.prototype.dispatchChangeEvent = function() {
-    var detail = {
-      startDate: this.startDate,
-      endDate: this.endDate,
-      values: [],
-      options: []
-    };
-
-    if (this.startDate) {
-      var label = this.formatDateDisplay(this.startDate);
-      if (this.endDate && !this.isSameDay(this.startDate, this.endDate)) {
-        label += ' - ' + this.formatDateDisplay(this.endDate);
-      }
-      detail.values = [this.startDate.toISOString()];
-      if (this.endDate && !this.isSameDay(this.startDate, this.endDate)) {
-        detail.values.push(this.endDate.toISOString());
-      }
-      detail.options = [{
-        value: detail.values.join(','),
-        label: label
-      }];
-    }
-
-    var event = new CustomEvent('filter-change', { detail: detail });
-    this.dropdown.dispatchEvent(event);
-  };
-
-  FilterDropdownCalendar.prototype.getSelectedValues = function() {
-    if (!this.startDate) return [];
-    var values = [this.startDate.toISOString()];
-    if (this.endDate && !this.isSameDay(this.startDate, this.endDate)) {
-      values.push(this.endDate.toISOString());
-    }
-    return values;
-  };
-
-  FilterDropdownCalendar.prototype.getSelectedOptions = function() {
-    if (!this.startDate) return [];
-    var label = this.formatDateDisplay(this.startDate);
-    if (this.endDate && !this.isSameDay(this.startDate, this.endDate)) {
-      label += ' - ' + this.formatDateDisplay(this.endDate);
-    }
-    return [{
-      value: this.getSelectedValues().join(','),
-      label: label
-    }];
-  };
-
-  FilterDropdownCalendar.prototype.clearSelection = function() {
-    this.startDate = null;
-    this.endDate = null;
-    this.isSelectingEndDate = false;
-    this.renderCalendar();
-    this.updateButtonText();
-    this.dispatchChangeEvent();
-  };
-
-  FilterDropdownCalendar.prototype.setSelection = function(values) {
-    if (values && values.length > 0) {
-      this.startDate = new Date(values[0]);
-      this.endDate = values.length > 1 ? new Date(values[1]) : new Date(values[0]);
-      this.renderCalendar();
-      this.updateButtonText();
-    } else {
-      this.clearSelection();
-    }
-  };
-
-  FilterDropdownCalendar.prototype.destroy = function() {
-    allFilterDropdowns.delete(this);
-    document.removeEventListener('click', this.closeOnClickOutside);
-    if (this.button) {
-      this.button.removeEventListener('click', this.toggleDropdown);
-    }
-  };
 
   function FilterDropdown(element) {
     this.dropdown = element;
@@ -515,7 +125,44 @@
     this.button.addEventListener('keydown', this.handleKeyboardNavigation);
     this.dropdown.addEventListener('keydown', this.handleKeyboardNavigation);
 
+    // Handle initial state - if "Select All" is pre-selected, check all items
+    // OR if all items are pre-selected, check "Select All"
+    this.handleInitialSelectAll();
+    
     this.updateSelection();
+  };
+
+  FilterDropdown.prototype.handleInitialSelectAll = function() {
+    var selectAllItem = this.dropdown.querySelector('.filter-dropdown__item--select-all');
+    if (!selectAllItem) return;
+
+    var selectAllCheckbox = selectAllItem.querySelector('input[type="checkbox"]');
+    if (!selectAllCheckbox) return;
+
+    // Get all regular items (excluding "Select All")
+    var regularItems = Array.from(this.items).filter(
+      function(item) { return !item.classList.contains('filter-dropdown__item--select-all'); }
+    );
+
+    // If "Select All" is checked on page load, check all other items
+    if (selectAllCheckbox.checked) {
+      regularItems.forEach(function(item) {
+        var checkbox = item.querySelector('input[type="checkbox"]');
+        if (checkbox) {
+          checkbox.checked = true;
+        }
+      });
+    } else {
+      // If all regular items are checked, also check "Select All"
+      var allRegularItemsChecked = regularItems.every(function(item) {
+        var checkbox = item.querySelector('input[type="checkbox"]');
+        return checkbox && checkbox.checked;
+      });
+
+      if (allRegularItemsChecked && regularItems.length > 0) {
+        selectAllCheckbox.checked = true;
+      }
+    }
   };
 
   FilterDropdown.prototype.toggleDropdown = function(e) {
@@ -634,6 +281,63 @@
         });
       }
     }.bind(this));
+
+    // Sync checkbox states back to the original select element
+    this.syncToSelect();
+
+    // Update inline display if this dropdown has the inline-display class
+    if (this.dropdown.classList.contains('filter-dropdown--inline-display')) {
+      this.updateInlineDisplay();
+    }
+  };
+
+  FilterDropdown.prototype.syncToSelect = function() {
+    var select = this.dropdown.querySelector('select[multiple]');
+    if (!select) return;
+
+    // Get all selected values (excluding "Select All")
+    var selectedValues = this.selectedValues.map(function(v) { return v.value; });
+
+    // Update the original select element options
+    Array.from(select.options).forEach(function(option) {
+      // Skip the "Select All" option in the original select
+      if (option.value === 'all' || option.value === 'select-all') {
+        option.selected = false;
+        return;
+      }
+      
+      // Set selected state based on checkbox state
+      option.selected = selectedValues.includes(option.value);
+    });
+  };
+
+  FilterDropdown.prototype.updateInlineDisplay = function() {
+    if (!this.selectedText) return;
+
+    if (this.selectedValues.length === 0) {
+      this.selectedText.innerHTML = `<div class="truncate">${this.placeholder}</div>`;
+      this.selectedText.classList.add('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.remove('filter-dropdown__selected--value');
+    } else if (this.selectedValues.length === 1) {
+      // Show single item
+      this.selectedText.innerHTML = `<div class="truncate">${this.selectedValues[0].label}</div>`;
+      this.selectedText.classList.remove('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.add('filter-dropdown__selected--value');
+    } else if (this.selectedValues.length === 2) {
+      // Show both items
+      var displayText = this.selectedValues[0].label + ', ' + this.selectedValues[1].label;
+      this.selectedText.innerHTML = `<div class="truncate">${displayText}</div>`;
+      this.selectedText.classList.remove('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.add('filter-dropdown__selected--value');
+    } else {
+      // Show first 2 items and "+X more"
+      var remaining = this.selectedValues.length - 2;
+      var displayText = this.selectedValues[0].label + ', ' + this.selectedValues[1].label + ', +' + remaining + ' more';
+      
+      this.selectedText.innerHTML = `<div class="truncate">${displayText}</div>`;
+      this.selectedText.classList.remove('filter-dropdown__selected--placeholder');
+      this.selectedText.classList.add('filter-dropdown__selected--value');
+    }
   };
 
   FilterDropdown.prototype.dispatchChangeEvent = function() {
@@ -767,8 +471,7 @@
   FilterDropdownGroup.prototype.init = function() {
     var dropdownElements = this.container.querySelectorAll('.filter-dropdown');
     dropdownElements.forEach(function(element) {
-      var isCalendar = element.dataset.type === 'calendar';
-      var dropdown = isCalendar ? new FilterDropdownCalendar(element) : new FilterDropdown(element);
+      var dropdown = new FilterDropdown(element);
       var id = element.dataset.id || element.id;
       this.dropdowns.set(id, dropdown);
 
@@ -877,11 +580,7 @@
   // Auto-init on page load
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.filter-dropdown:not(.filter-dropdown-group-container .filter-dropdown)').forEach(function(element) {
-      if (element.dataset.type === 'calendar') {
-        new FilterDropdownCalendar(element);
-      } else {
-        new FilterDropdown(element);
-      }
+      new FilterDropdown(element);
     });
 
     document.querySelectorAll('.filter-dropdown-group-container').forEach(function(container) {
@@ -894,11 +593,7 @@
     setTimeout(function() {
       document.querySelectorAll('.filter-dropdown:not(.filter-dropdown-group-container .filter-dropdown)').forEach(function(element) {
         if (!element._filterDropdown) {
-          if (element.dataset.type === 'calendar') {
-            element._filterDropdown = new FilterDropdownCalendar(element);
-          } else {
-            element._filterDropdown = new FilterDropdown(element);
-          }
+          element._filterDropdown = new FilterDropdown(element);
         }
       });
 
@@ -935,6 +630,3 @@
     return item;
   }
 })();
-
-
-
