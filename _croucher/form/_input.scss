@@ -102,6 +102,38 @@
   }
 }
 
+.error_message--with-margin {
+  margin-top: 3px;
+}
+
+// Error styling for filter-dropdown
+.filter-dropdown.has-error {
+  .filter-dropdown__button {
+    border-color: $croucher-red !important;
+  }
+}
+
+// Error styling for searchable-select
+.searchable-select-dropdown.has-error {
+  .searchable-select-selected {
+    border-color: $croucher-red !important;
+  }
+}
+
+// Error styling for radio button groups
+.sessions.has-error,
+.study-level.has-error {
+  .form-label {
+    color: $croucher-red;
+  }
+  
+  .standard-radio {
+    .standard-radio-label {
+      color: $croucher-red;
+    }
+  }
+}
+
 input.checkbox {
   display: none;
 }
