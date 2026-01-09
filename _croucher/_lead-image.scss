@@ -1,0 +1,22 @@
+.lead-image-container {
+  width: 100%;
+  position: relative;
+}
+
+.lead-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+.lead-image-container--tall {
+  aspect-ratio: 3 / 2;
+  max-height: 812px;
+  overflow: hidden;
+}
+
+.lead-image-container--tall .lead-image {
+  object-fit: cover;
+  height: 100%;
+}
