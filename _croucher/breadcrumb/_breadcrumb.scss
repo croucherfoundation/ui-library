@@ -13,6 +13,10 @@
     padding-inline: 0;
   }
 
+  .part-of{
+    position: relative;
+  }
+
 
   .center {
     width: 100%;
@@ -80,7 +84,7 @@
   }
 
   @include sm {
-    a {
+    a, .part-of {
       display: initial;
       &:nth-child(2) {
         &::after {
@@ -90,7 +94,7 @@
     }
   }
 
-  a {
+  a, .part-of {
     &:last-child {
       &::after {
         content: "";
