@@ -26,8 +26,17 @@
   height: 100%;
 }
 
-@media (min-width: 1218px) {
+@media only screen and (min-width: 768px) {
+  .lead-image-container {
+    width: 95%;
+  }
   .lead-image {
     border-radius: 5px;
+  }
+}
+
+@media (min-width: 1214px) {
+  .lead-image-container {
+    width: 100%;
   }
 }
