@@ -7,6 +7,18 @@
   margin-right: auto;
 }
 
+.project-lead-image-container {
+  width: 100vw;
+  position: relative;
+  margin: auto;
+  max-width: 1218px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 0;
+  left: calc(-50vw + 50%);
+}
+
 .lead-image {
   width: 100%;
   height: auto;
@@ -33,10 +45,20 @@
   .lead-image {
     border-radius: 5px;
   }
+  .project-lead-image-container{
+    width: 100%;
+    top: unset;
+    left: unset;
+  }
 }
 
 @media (min-width: 1214px) {
   .lead-image-container {
     width: 100%;
+  }
+  .project-lead-image-container{
+    width: 100%;
+    top: unset;
+    left: unset;
   }
 }
