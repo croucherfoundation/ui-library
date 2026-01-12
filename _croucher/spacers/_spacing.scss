@@ -4,6 +4,7 @@
 @include element-type-padding-generator($title-spacers, "title");
 @include element-type-padding-generator($banner-image-spacers, "banner_image");
 @include element-type-padding-generator($standfirst-spacers, "standfirst");
+@include element-type-padding-generator($standfirst-with-tabs-spacers, "standfirst_with_tabs");
 @include element-type-padding-generator($bodysubtitle-spacers, "bodysubtitle");
 @include element-type-padding-generator($paragraph-spacers, "paragraph");
 @include element-type-padding-generator($paragraph-header-spacers, "paragraph_header");
