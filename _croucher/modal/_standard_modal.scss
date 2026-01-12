@@ -338,7 +338,7 @@
         visibility: visible
       }
 
-      input.radio:disabled + label {
+      input.radio:disabled, input.gatekeeper-checkbox:disabled + label {
         opacity: 0.25;
         pointer-events: none;
       }
