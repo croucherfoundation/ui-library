@@ -209,7 +209,7 @@ input.checkbox:checked + label.checkbox_label::after {
   display: inline-block;
   user-select: none;
   min-height: 22px;
-  line-height: 22px;
+  line-height: 18px;
   &.overflow-unset {
     overflow: unset !important;
   }
