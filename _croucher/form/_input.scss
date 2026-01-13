@@ -217,6 +217,9 @@ input.checkbox:checked + label.checkbox_label::after {
     background-position: unset !important;
     background-image: unset !important;
   }
+  &.pr-10 {
+    padding-right: 10px;
+  }
 }
 
 .standard-checkbox .standard-checkbox-label::before,
