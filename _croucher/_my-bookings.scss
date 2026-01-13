@@ -34,12 +34,12 @@ $status-recording-text: #1565C0;
 // =====================================================
 .my-bookings-page {
   min-height: calc(100vh - 200px);
-  background-color: $light-gray;
-  padding: 24px 16px 48px;
+  // background-color: $light-gray;
+  // padding: 24px 16px 48px;
 
-  @include lg {
-    padding: 40px 40px 60px;
-  }
+  // @include lg {
+  //   padding: 40px 40px 60px;
+  // }
 }
 
 .my-bookings-container {
@@ -51,11 +51,7 @@ $status-recording-text: #1565C0;
 // HEADER SECTION
 // =====================================================
 .my-bookings-header {
-  margin-bottom: 24px;
 
-  @include lg {
-    margin-bottom: 32px;
-  }
 }
 
 .my-bookings-title {
@@ -114,7 +110,7 @@ $status-recording-text: #1565C0;
 .my-bookings-tabs {
   display: flex;
   gap: 8px;
-  margin-bottom: 20px;
+
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 4px;
@@ -125,20 +121,6 @@ $status-recording-text: #1565C0;
 }
 
 .my-bookings-tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  background: $white;
-  border: 1px solid $gray-1;
-  border-radius: 24px;
-  font-size: 14px;
-  font-weight: 600;
-  color: $croucher-dark;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-
   &:hover {
     border-color: $croucher-dark;
   }
@@ -171,6 +153,8 @@ $status-recording-text: #1565C0;
   border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
+  margin-left: 10px;
+  transform: translateY(-2px);
 
   &--alert {
     background: $csw-public-red;
@@ -362,7 +346,6 @@ $status-recording-text: #1565C0;
   justify-content: center;
   gap: 12px;
   padding: 16px 20px;
-  flex-direction: column;
   min-width: 140px;
 
   @include lg {
@@ -427,7 +410,7 @@ $status-recording-text: #1565C0;
   width: 20px;
   height: 20px;
   color: $light-gray1;
-  margin-top: 8px;
+  margin-bottom: 2px;
 }
 
 // Action Banner
