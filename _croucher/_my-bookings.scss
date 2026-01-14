@@ -187,11 +187,11 @@ $status-recording-text: #1565C0;
   overflow: hidden;
   cursor: pointer;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
-  border: 2px solid transparent;
+  border: 2px solid rgba(116, 113, 113, 0.1);
 
-  &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
+  // &:hover {
+  //   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  // }
 
   &--selected {
     border-color: $csw-teal;
