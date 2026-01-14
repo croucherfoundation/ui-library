@@ -6,7 +6,7 @@
   overflow: hidden;
 
   a {
-    color: $dark;
+    color: #101820;
   }
   .sort-link {
     display: inline-flex;
@@ -18,7 +18,7 @@
   .sort-icon {
     display: inline-flex;
     align-items: center;
-    color: $coolgrey6;
+    color: #a4a5a9;
     svg {
       display: block;
       width: 12px;
@@ -28,10 +28,10 @@
     }
   }
   .sort-icon.active.asc svg {
-    color: $dark;
+    color: #101820;
   }
   .sort-icon.active.desc svg {
-    color: $dark;
+    color: #101820;
     transform: rotate(0deg);
   }
 
