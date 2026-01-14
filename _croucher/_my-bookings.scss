@@ -1239,25 +1239,241 @@ $status-recording-text: #1565C0;
 // =====================================================
 // MOBILE RESPONSIVE ADJUSTMENTS
 // =====================================================
+
+// Mobile status badge (top right) - hidden on desktop
+.booking-card__mobile-status {
+  display: none;
+}
+
+// Mobile toggle button - hidden on desktop
+.booking-card__toggle-btn {
+  display: none;
+}
+
+// Mobile meta layouts
+.booking-card__meta--mobile {
+  display: none;
+}
+
+.booking-card__meta--desktop {
+  display: flex;
+}
+
+.booking-card__meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
 @media (max-width: 1023px) {
+  // Booking card - single column layout on mobile
   .booking-card {
-    // Full width tap area on mobile
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: default;
+
+    // Remove tap overlay on mobile
     &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 1;
+      display: none;
     }
 
-    // Hide chevron on mobile (entire card is tappable)
+    // Hide chevron on mobile
     .booking-card__chevron {
       display: none;
     }
   }
 
-  // Stack status below content on mobile
+  // Hide date block on mobile
+  .booking-card__date-block {
+    display: none;
+  }
+
+  // Hide desktop status area on mobile
   .booking-card__status-area {
-    justify-content: flex-start;
+    display: none;
+  }
+
+  // Show mobile status badge - top right corner
+  .booking-card__mobile-status {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+  }
+
+  // Content area adjustments for mobile
+  .booking-card__content {
+    padding: 16px;
+    padding-top: 12px;
+    padding-right: 120px; // Make room for status badge
+    cursor: pointer;
+  }
+
+  .booking-card__title {
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .booking-card__category-tag {
+    margin-bottom: 8px;
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  // Hide desktop meta, show mobile meta
+  .booking-card__meta--desktop {
+    display: none;
+  }
+
+  .booking-card__meta--mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .booking-card__meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+
+  .booking-card__meta-item {
+    font-size: 12px;
+    gap: 4px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  // Mobile toggle button - full width at bottom
+  .booking-card__toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 16px;
+    background: $light-gray;
+    border: none;
+    border-top: 1px solid $gray-1;
+    font-size: 14px;
+    font-weight: 600;
+    color: $croucher-dark;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: darken($light-gray, 3%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $csw-teal;
+      outline-offset: -2px;
+    }
+  }
+
+  .booking-card__toggle-icon {
+    width: 16px;
+    height: 16px;
+    color: $light-gray1;
+  }
+
+  // Mobile booking card wrapper
+  .booking-card-wrapper {
+    margin-bottom: 16px;
+  }
+
+  // Mobile inline detail panel
+  .mobile-detail-panel {
+    display: block;
+    margin-top: -2px;
+    margin-bottom: 8px;
+    animation: slideDown 0.3s ease-out;
+
+    .sidebar-detail {
+      border-radius: 0 0 $rounded-5 $rounded-5;
+      border-top: none;
+    }
+
+    .sidebar-detail__header {
+      padding: 20px 16px;
+    }
+
+    .sidebar-detail__title {
+      font-size: 16px;
+    }
+
+    .sidebar-detail__body {
+      padding: 16px;
+    }
+
+    .sidebar-detail__section {
+      margin-bottom: 20px;
+
+      h4 {
+        font-size: 13px;
+      }
+    }
+
+    .sidebar-detail__list {
+      grid-template-columns: 90px 1fr;
+      gap: 6px 10px;
+
+      dt, dd {
+        font-size: 13px;
+      }
+    }
+
+    .sidebar-detail__actions {
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+  }
+
+  // Selected card styling on mobile
+  .booking-card--selected {
+    border-radius: $rounded-5 $rounded-5 0 0;
+    margin-bottom: 0;
+    border-color: $csw-teal;
+
+    .booking-card__toggle-btn {
+      background: rgba($csw-teal, 0.1);
+      color: darken($csw-teal, 15%);
+      border-radius: 0;
+    }
+
+    .booking-card__toggle-icon {
+      color: darken($csw-teal, 10%);
+    }
+  }
+}
+
+// Hide mobile detail panel on desktop
+@media (min-width: 1024px) {
+  .mobile-detail-panel {
+    display: none;
+  }
+
+  .booking-card-wrapper {
+    .booking-card {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
