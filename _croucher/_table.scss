@@ -69,11 +69,41 @@
       color: #000;
       border-radius: 5px;
       padding: 0.268rem 0.438rem;
-      font-size: 14px;
+      font-size: 13px;
       margin: 2px;
 
       &.more {
         background-color: unset;
+      }
+
+      &.red {
+        background-color: #EE3A43;
+        color: #fff;
+      }
+
+      &.orange {
+        background-color: #f18812;
+        color: #fff;
+      }
+
+      &.green {
+        background-color: #74b87a;
+        color: #fff;
+      }
+
+      &.blue {
+        background-color: #2c91c9;
+        color: #fff;
+      }
+
+      &.soft_blue {
+        background-color: #00A3A1;
+        color: #fff;
+      }
+
+      &.dark {
+        background-color: #101820;
+        color: #fff;
       }
     }
     .table-label {
