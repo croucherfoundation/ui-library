@@ -292,6 +292,16 @@ $status-recording-text: #1565C0;
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 12px;
+  color: $white;
+
+  &--desktop {
+    display: inline-block;
+  }
+
+  &--mobile {
+    display: none;
+    margin-bottom: 0;
+  }
 
   &--digital {
     background: rgba($category-digital, 0.15);
@@ -1317,8 +1327,14 @@ $status-recording-text: #1565C0;
     line-height: 1.4;
   }
 
-  .booking-card__category-tag {
-    margin-bottom: 8px;
+  // Hide desktop category tag, show mobile category tag
+  .booking-card__category-tag--desktop {
+    display: none;
+  }
+
+  .booking-card__category-tag--mobile {
+    display: inline-block;
+    margin-bottom: 0;
     font-size: 11px;
     padding: 3px 10px;
   }
@@ -1337,6 +1353,7 @@ $status-recording-text: #1565C0;
   .booking-card__meta-row {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 6px 12px;
   }
 
