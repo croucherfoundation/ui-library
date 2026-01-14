@@ -1193,16 +1193,11 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
 
   // Close dropdown when clicking/touching outside - use pointerdown for consistency
   var handleOutsideClick = function(e) {
-    var isOutside = true;
-    triggers.forEach(trigger => {
-      var affected = trigger.getAttribute('data-affected');
-      var target = affected ? (trigger.nextElementSibling && trigger.nextElementSibling.matches(affected) ? trigger.nextElementSibling : document.querySelector(affected)) : trigger.nextElementSibling;
-      if (trigger.contains(e.target) || (target && target.contains(e.target))) {
-        isOutside = false;
+    if (activeDropdown && activeTrigger) {
+      // Only close if click is outside the active dropdown and its trigger
+      if (!activeTrigger.contains(e.target) && !activeDropdown.contains(e.target)) {
+        closeAllDropdowns();
       }
-    });
-    if (isOutside) {
-      closeAllDropdowns();
     }
   };
 
