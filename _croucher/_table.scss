@@ -1,0 +1,131 @@
+.croucher-standard-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 5px;
+  overflow: hidden;
+
+  a {
+    color: $dark;
+  }
+  .sort-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .sort-icon {
+    display: inline-flex;
+    align-items: center;
+    color: $coolgrey6;
+    svg {
+      display: block;
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s, color 0.2s;
+      transform: rotate(180deg);
+    }
+  }
+  .sort-icon.active.asc svg {
+    color: $dark;
+  }
+  .sort-icon.active.desc svg {
+    color: $dark;
+    transform: rotate(0deg);
+  }
+
+  thead {
+    background-color: #f5f5f5;
+  }
+  th,
+  td {
+    padding: 15px;
+    text-align: left;
+  }
+  th {
+    font-weight: 600;
+    font-size: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    color: #555;
+  }
+  tbody tr {
+    cursor: pointer;
+    background-color: #fff;
+    transition: background 0.3s;
+  }
+  tbody tr:hover {
+    background-color: #f0f8ff;
+  }
+  td {
+    position: relative;
+    font-size: 20px;
+    vertical-align: top;
+    border-bottom: 1px solid #eee;
+
+    .table-tag {
+      display: inline-block;
+      background-color: #F3F3F0;
+      color: #000;
+      border-radius: 5px;
+      padding: 0.268rem 0.438rem;
+      font-size: 16rem;
+      margin: 2px;
+
+      &.more {
+        background-color: unset;
+      }
+    }
+    .table-label {
+      display: none;
+    }
+    .table-value {
+      position: relative;
+
+      a.menu {
+        position: absolute;
+      }
+    }
+  }
+}/* Mobile stacked view */
+@media (max-width: 768px) {
+  .croucher-standard-table {
+    box-shadow: none;
+    border-collapse: unset;
+    thead {
+      display: none;
+    }
+    tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      background: #fff;
+    }
+    td {
+      display: block;
+      padding: 6px 0;
+      text-align: left;
+      border: none;
+
+      .table-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #555;
+        word-wrap: break-word;
+      }
+      .table-value {
+        display: block;
+        color: #111;
+        word-wrap: break-word;
+        margin-bottom: 4px;
+
+        a.menu {
+          display: none;
+        }
+      }
+    }
+  }
+};
