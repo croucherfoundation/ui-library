@@ -1,4 +1,4 @@
-$font-black: #020202;
+$font-black: #101820;
 $croucher-red: #EE3A43;
 
 @font-face {
@@ -111,7 +111,12 @@ $typo: (
     fontsize: 18px,
     fontweight: 400,
     lineheight: 21.6px,
-  )
+  ),
+  preview-title: (
+    fontsize: 24px,
+    fontweight: 400,
+    lineheight: 32px,
+  ),
 );
 
 @each $name, $style in $typo {
