@@ -82,6 +82,14 @@
     .table-value {
       position: relative;
 
+      &.actions {
+        display: flex;
+        gap: 10px;
+        svg {
+          margin-top: -4px
+        }
+      }
+
       a.menu {
         position: absolute;
       }
