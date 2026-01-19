@@ -271,7 +271,7 @@ input.checkbox:checked + label.checkbox_label::after {
     &::after {
       width: 4px;
       height: 9px;
-      left: 6px;
+      left: 7px;
       top: 3px;
     }
   }
@@ -567,6 +567,5 @@ input.checkbox:checked + label.checkbox_label::after {
 }
 
 .standard-checkbox.small.web-fix .standard-checkbox-label::after {
-    left: 7px;
     top: 4px;
 }
