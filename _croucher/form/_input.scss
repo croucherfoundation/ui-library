@@ -207,6 +207,7 @@ input.checkbox:checked + label.checkbox_label::after {
   user-select: none;
   min-height: 22px;
   line-height: 18px;
+  text-wrap: nowrap;
   
   &.overflow-unset {
     overflow: unset !important;
@@ -253,22 +254,27 @@ input.checkbox:checked + label.checkbox_label::after {
   opacity: 1;
 }
 
-.standard-checkbox.small .standard-checkbox-label {
-  padding-left: 26px;
-  min-height: 18px;
-  line-height: 18px;
-}
+.standard-checkbox.small {
+  .standard-checkbox-label {
+    display: flex;
+    align-items: center;
+    padding-left: 26px;
+    min-height: 18px;
+    font-size: 14px;
 
-.standard-checkbox.small .standard-checkbox-label::before {
-  width: 18px;
-  height: 18px;
-}
+    &::before {
+      width: 18px;
+      height: 18px;
+      top: 0;
+    }
 
-.standard-checkbox.small .standard-checkbox-label::after {
-  left: 7px;
-  top: 3px;
-  width: 4px;
-  height: 9px;
+    &::after {
+      width: 4px;
+      height: 9px;
+      left: 6px;
+      top: 3px;
+    }
+  }
 }
 
 .standard-radio {
@@ -284,35 +290,72 @@ input.checkbox:checked + label.checkbox_label::after {
       margin-bottom: 20px;
     }
   }
-}
 
-.standard-radio input[type='radio'] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
+  input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
 
-.standard-radio .standard-radio-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
-  min-height: 22px;
-  
-  .radio-label-text {
-    line-height: 1.5;
-    margin-top: 1px;
+  .standard-radio-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    min-height: 22px;
+    
+    .radio-label-text {
+      line-height: 1.5;
+      margin-top: 1px;
+    }
+    
+    &.overflow-unset {
+      overflow: unset !important;
+    }
+    &.bg-image-unset {
+      background-position: unset !important;
+      background-image: unset !important;
+    }
+
+    &:hover .radio-control-indicator {
+      box-shadow: inset 0 0 0 1px #9a9b97;
+    }
   }
-  
-  &.overflow-unset {
-    overflow: unset !important;
+
+  input[type='radio']:checked + .standard-radio-label .radio-control-indicator::after {
+    opacity: 1;
   }
-  &.bg-image-unset {
-    background-position: unset !important;
-    background-image: unset !important;
+
+  &.small {
+    .standard-radio-label {
+      gap: 8px;
+      min-height: 18px;
+      font-size: 14px;
+
+      .radio-label-text {
+        font-size: 14px;
+        line-height: 18px;
+        margin-top: 0;
+      }
+
+      &:hover .radio-control-indicator {
+        box-shadow: inset 0 0 0 1px #9a9b97;
+      }
+    }
+
+    .radio-control-indicator {
+      width: 18px;
+      height: 18px;
+      margin-top: 0;
+
+      &::after {
+        width: 10px;
+        height: 10px;
+      }
+    }
   }
 }
 
@@ -327,43 +370,21 @@ input.checkbox:checked + label.checkbox_label::after {
   box-shadow: inset 0 0 0 0 #9a9b97;
   transition: box-shadow 0.1s ease;
   margin-top: 2px;
-}
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.standard-radio .standard-radio-label:hover .radio-control-indicator {
-  box-shadow: inset 0 0 0 1px #9a9b97;
-}
-
-.radio-control-indicator::after {
-  content: '';
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.05s ease;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background-color: #101820;
-}
-
-.standard-radio input[type='radio']:checked + .standard-radio-label .radio-control-indicator::after {
-  opacity: 1;
-}
-
-.standard-radio.small .standard-radio-label {
-  gap: 8px;
-}
-
-.standard-radio.small .radio-control-indicator {
-  width: 18px;
-  height: 18px;
-  margin-top: 0;
-}
-
-.standard-radio.small .radio-control-indicator::after {
-  width: 10px;
-  height: 10px;
+  &::after {
+    content: '';
+    position: relative; 
+    opacity: 0;
+    transition: opacity 0.05s ease;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: #101820;
+  }
 }
 
 /* Div-only checkbox component */
@@ -543,4 +564,9 @@ input.checkbox:checked + label.checkbox_label::after {
   &:last-child {
     border-bottom: none;
   }
+}
+
+.standard-checkbox.small.web-fix .standard-checkbox-label::after {
+    left: 7px;
+    top: 4px;
 }
