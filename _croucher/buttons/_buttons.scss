@@ -126,6 +126,11 @@ a.viewall_btn,
         height: 24px;
       }
     }
+
+    svg:has(use[href="#pdf_symbol"]),
+    svg:has(use[xlink\:href="#pdf_symbol"]) {
+      margin-top: -4px;
+    }
   }
 
   .more-actions {
