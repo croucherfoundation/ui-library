@@ -122,6 +122,9 @@
 .nowrap {
   white-space: nowrap;
 }
+.styled-list-inside {
+  list-style-position: inside;
+}
 /* Mobile stacked view */
 @media (max-width: 768px) {
   .croucher-standard-table {
