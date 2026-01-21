@@ -115,7 +115,14 @@
       }
     }
   }
-}/* Mobile stacked view */
+  &.overflow-visible {
+    overflow: visible;
+  }
+}
+.nowrap {
+  white-space: nowrap;
+}
+/* Mobile stacked view */
 @media (max-width: 768px) {
   .croucher-standard-table {
     box-shadow: none;
