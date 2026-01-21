@@ -37,7 +37,7 @@
   justify-self: center;
 }
 
-.rbc-toolbar-right {
+.rbc-toolbar-right, .toolbar-right {
   display: flex;
   align-items: center;
   justify-self: end;
@@ -69,6 +69,16 @@
 
     &:hover {
       background-color: #f0f0f0;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+      transform: rotate(90deg);
+
+      &.next {
+        transform: rotate(-90deg);
+      }
     }
   }
 }
@@ -636,6 +646,10 @@
     align-items: center;
     justify-content: center;
 
+    svg {
+      width: 24px;
+      height: 23px;
+    }
     svg line {
       stroke: #D3D3D3;
     }
@@ -689,7 +703,7 @@
 
   .toolbar-left,
   .toolbar-center,
-  .rbc-toolbar-right {
+  .rbc-toolbar-right, .toolbar-right {
     justify-self: center;
   }
 

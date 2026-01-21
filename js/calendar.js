@@ -7,16 +7,16 @@
       let events = [];
 
       // DOM Elements
-      const calendarView = document.getElementById('calendarView');
-      const dateRange = document.getElementById('dateRange');
+      const calendarView = document.getElementById('calendar-view');
+      const dateRange = document.getElementById('date-range');
       const viewBtns = document.querySelectorAll('.view-btn');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const todayBtn = document.getElementById('todayBtn');
-      const dialogOverlay = document.getElementById('dialogOverlay');
-      const dialogTitle = document.getElementById('dialogTitle');
-      const dialogBody = document.getElementById('dialogBody');
-      const dialogClose = document.getElementById('dialogClose');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const todayBtn = document.getElementById('today-btn');
+      const dialogOverlay = document.getElementById('dialog-overlay');
+      const dialogTitle = document.getElementById('dialog-title');
+      const dialogBody = document.getElementById('dialog-body');
+      const dialogClose = document.getElementById('dialog-close');
 
       // Sample events data (replace with API call)
       const sampleEvents = [
