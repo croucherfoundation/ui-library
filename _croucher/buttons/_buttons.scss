@@ -88,6 +88,10 @@ a.viewall_btn,
   }
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
   .croucher-standard-btn.view-all-btn {
     height: auto;
