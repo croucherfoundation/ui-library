@@ -179,7 +179,7 @@
         const startDay = firstDayOfMonth.getDay();
         const totalDays = lastDayOfMonth.getDate();
 
-        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
 
         let html = `<div class="month-view">`;
@@ -201,7 +201,7 @@
           const date = new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day);
           const dayEvents = getEventsForDay(date);
           html += `<div class="month-cell other-month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-          html += `<div class="month-day-number">${day}</div>`;
+          html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
           dayEvents.slice(0, 2).forEach(event => {
             html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
           });
@@ -218,7 +218,7 @@
           const dayEvents = getEventsForDay(date);
           
           html += `<div class="month-cell${isToday ? ' today' : ''}" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-          html += `<div class="month-day-number">${day}</div>`;
+          html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
           dayEvents.slice(0, 2).forEach(event => {
             html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
           });
@@ -229,14 +229,15 @@
         }
 
         // Next month days
-        const totalCells = 42;
         const filledCells = startDay + totalDays;
+        const totalCells = Math.ceil(filledCells / 7) * 7;
         const remainingCells = totalCells - filledCells;
+        
         for (let day = 1; day <= remainingCells; day++) {
           const date = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, day);
           const dayEvents = getEventsForDay(date);
           html += `<div class="month-cell other-month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-          html += `<div class="month-day-number">${day}</div>`;
+          html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
           dayEvents.slice(0, 2).forEach(event => {
             html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
           });
@@ -465,14 +466,14 @@
       const showDialog = (date, dayEvents) => {
         dialogTitle.textContent = formatDate(date, 'MMMM d, yyyy');
         
-        let html = '<ul>';
+        let html = '<ul class="event-list">';
         dayEvents.forEach(event => {
           html += `<li data-event-id="${event.id}">${event.title}</li>`;
         });
         html += '</ul>';
         
         dialogBody.innerHTML = html;
-        dialogOverlay.classList.remove('hidden');
+        dialogOverlay.style.display = 'block';
 
         // Add click handlers for events
         dialogBody.querySelectorAll('li').forEach(el => {
@@ -488,7 +489,7 @@
       };
 
       const closeDialog = () => {
-        dialogOverlay.classList.add('hidden');
+        dialogOverlay.style.display = 'none';
       };
 
       // Navigation
@@ -609,7 +610,9 @@
 
         dialogClose.addEventListener('click', closeDialog);
         dialogOverlay.addEventListener('click', (e) => {
-          if (e.target === dialogOverlay) closeDialog();
+          if (e.target.classList.contains('dialog-overlay') || e.target.classList.contains('dialog-wrapper')) {
+            closeDialog();
+          }
         });
 
         // Keyboard navigation
