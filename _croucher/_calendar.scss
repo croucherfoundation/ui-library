@@ -710,6 +710,15 @@
   .date-range {
     font-size: 1.5em;
   }
+
+  .week-day-name,
+  .week-day-number {
+    font-size: 12px;
+  }
+
+  .month-event {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 480px) {
