@@ -34,6 +34,7 @@ $status-recording-text: #1565C0;
 // =====================================================
 .my-bookings-page {
   min-height: calc(100vh - 200px);
+  padding-bottom: 60px;
   // background-color: $light-gray;
   // padding: 24px 16px 48px;
 
@@ -51,22 +52,22 @@ $status-recording-text: #1565C0;
 // HEADER SECTION
 // =====================================================
 .my-bookings-header {
-
+  margin-bottom: 26px;
 }
 
 .my-bookings-title {
-  font-size: 28px;
+  // font-size: 28px;
   font-weight: 700;
   color: $croucher-dark;
   margin-bottom: 8px;
 
-  @include lg {
-    font-size: 36px;
-  }
+  // @include lg {
+  //   font-size: 36px;
+  // }
 }
 
 .my-bookings-updated {
-  font-size: 14px;
+  font-size: 18px;
   color: $light-gray1;
 }
 
@@ -263,6 +264,7 @@ $status-recording-text: #1565C0;
   min-width: 70px;
   background: $light-gray;
   border-right: 1px solid $gray-1;
+  position: relative;
 
   @include lg {
     padding: 20px 24px;
@@ -271,27 +273,20 @@ $status-recording-text: #1565C0;
 }
 
 .booking-card__month {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   color: $csw-public-red;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 
-  @include lg {
-    font-size: 12px;
-  }
 }
 
 .booking-card__day {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: $croucher-dark;
   line-height: 1;
   margin: 4px 0;
-
-  @include lg {
-    font-size: 32px;
-  }
 }
 
 .booking-card__weekday {
@@ -311,14 +306,14 @@ $status-recording-text: #1565C0;
 }
 
 .booking-card__title {
-  font-size: 16px;
+  // font-size: 16px;
   font-weight: 600;
   color: $croucher-dark;
   margin-bottom: 8px;
   line-height: 1.3;
 
+  font-size: 24px;
   @include lg {
-    font-size: 18px;
     margin-bottom: 10px;
   }
 }
@@ -332,6 +327,7 @@ $status-recording-text: #1565C0;
   font-weight: 600;
   margin-bottom: 12px;
   color: $white;
+  padding-top: 4.5px;
 
   &--desktop {
     display: inline-block;
@@ -367,19 +363,19 @@ $status-recording-text: #1565C0;
 .booking-card__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 20px;
+  gap: 12px 26px;
 }
 
 .booking-card__meta-item {
   display: flex;
-  align-items: center;
+  // align-items: center;
   gap: 6px;
-  font-size: 13px;
-  color: #666;
+  // font-size: 14px;
+  // color: #666;
 
-  @include lg {
-    font-size: 14px;
-  }
+  // font-size: 18px;
+  // @include lg {
+  // }
 }
 
 .booking-card__icon {
@@ -412,6 +408,7 @@ $status-recording-text: #1565C0;
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
+  padding-top: 7.5px;
 
   &--live {
     background: $status-live-bg;
@@ -485,7 +482,7 @@ $status-recording-text: #1565C0;
 
 .booking-card__action-message {
   display: flex;
-  align-items: center;
+  // align-items: center;
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
@@ -502,10 +499,10 @@ $status-recording-text: #1565C0;
   color: $csw-public-red;
   text-decoration: none;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 
-  &:hover {
-    text-decoration: underline;
-  }
+
 }
 
 // =====================================================
@@ -534,16 +531,16 @@ $status-recording-text: #1565C0;
 }
 
 .my-bookings-empty__title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
   color: $croucher-dark;
   margin-bottom: 12px;
 }
 
 .my-bookings-empty__text {
-  font-size: 16px;
-  color: #666;
-  max-width: 360px;
+  font-size: 18px;
+  color: $darker-gray-color;
+  // max-width: 360px;
   margin-bottom: 24px;
   line-height: 1.5;
 }
@@ -618,6 +615,7 @@ $status-recording-text: #1565C0;
   background: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  padding-top: 0;
 
   svg {
     width: 16px;
@@ -1324,14 +1322,14 @@ $status-recording-text: #1565C0;
   .booking-card__content {
     padding: 16px;
     padding-top: 12px;
-    padding-right: 120px; // Make room for status badge
     cursor: pointer;
   }
 
   .booking-card__title {
-    font-size: 15px;
+    // font-size: 18px;
     margin-bottom: 10px;
     line-height: 1.4;
+    padding-right: 125px;
   }
 
   // Hide desktop category tag, show mobile category tag
@@ -1365,13 +1363,9 @@ $status-recording-text: #1565C0;
   }
 
   .booking-card__meta-item {
-    font-size: 12px;
-    gap: 4px;
+    // font-size: 12px;
+    // gap: 4px;
 
-    svg {
-      width: 14px;
-      height: 14px;
-    }
   }
 
   // Mobile toggle button - full width at bottom
@@ -1568,7 +1562,7 @@ $status-recording-text: #1565C0;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
+  padding: 5px 16px;
   background-color: $croucher-red;
   color: white;
   text-decoration: none;
@@ -1578,6 +1572,7 @@ $status-recording-text: #1565C0;
   cursor: pointer;
   border: none;
   animation: twinkle 2.5s ease-in-out infinite;
+  padding-top: 6.5px;
 
 }
 
