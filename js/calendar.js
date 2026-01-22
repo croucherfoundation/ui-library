@@ -4,16 +4,16 @@
     let currentView = 'month';
     let events = [];
 
-    const calendarView = document.getElementById('calendar-view');
-    const dateRange = document.getElementById('date-range');
-    const viewBtns = document.querySelectorAll('.view-btn');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const todayBtn = document.getElementById('today-btn');
-    const dialogOverlay = document.getElementById('dialog-overlay');
-    const dialogTitle = document.getElementById('dialog-title');
-    const dialogBody = document.getElementById('dialog-body');
-    const dialogClose = document.getElementById('dialog-close');
+    const calendarView = document.getElementById('calendar_view');
+    const dateRange = document.getElementById('date_range');
+    const viewBtns = document.querySelectorAll('.view_btn');
+    const prevBtn = document.getElementById('prev_btn');
+    const nextBtn = document.getElementById('next_btn');
+    const todayBtn = document.getElementById('today_btn');
+    const dialogOverlay = document.getElementById('dialog_overlay');
+    const dialogTitle = document.getElementById('dialog_title');
+    const dialogBody = document.getElementById('dialog_body');
+    const dialogClose = document.getElementById('dialog_close');
 
     const formatDate = (date, format) => {
       const months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -126,28 +126,28 @@
       const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const today = new Date();
 
-      let html = `<div class="month-view">`;
+      let html = `<div class="month_view">`;
       
-      html += `<div class="month-header">`;
+      html += `<div class="month_header">`;
       weekdays.forEach(day => {
-        html += `<div class="month-header-cell">${day}</div>`;
+        html += `<div class="month_header_cell">${day}</div>`;
       });
       html += `</div>`;
 
-      html += `<div class="month-body">`;
+      html += `<div class="month_body">`;
 
       const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
       for (let i = startDay - 1; i >= 0; i--) {
         const day = prevMonth.getDate() - i;
         const date = new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day);
         const dayEvents = getEventsForDay(date);
-        html += `<div class="month-cell other-month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
+        html += `<div class="month_cell other_month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
+        html += `<div class="month_day_number">${String(day).padStart(2, '0')}</div>`;
         dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
+          html += `<div class="month_event" data-event-id="${event.id}">${event.title}</div>`;
         });
         if (dayEvents.length > 2) {
-          html += `<div class="more-events">+${dayEvents.length - 2} more</div>`;
+          html += `<div class="more_events">+${dayEvents.length - 2} more</div>`;
         }
         html += `</div>`;
       }
@@ -157,13 +157,13 @@
         const isToday = isSameDay(date, today);
         const dayEvents = getEventsForDay(date);
         
-        html += `<div class="month-cell${isToday ? ' today' : ''}" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
+        html += `<div class="month_cell${isToday ? ' today' : ''}" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
+        html += `<div class="month_day_number">${String(day).padStart(2, '0')}</div>`;
         dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
+          html += `<div class="month_event" data-event-id="${event.id}">${event.title}</div>`;
         });
         if (dayEvents.length > 2) {
-          html += `<div class="more-events">+${dayEvents.length - 2} more</div>`;
+          html += `<div class="more_events">+${dayEvents.length - 2} more</div>`;
         }
         html += `</div>`;
       }
@@ -175,13 +175,13 @@
       for (let day = 1; day <= remainingCells; day++) {
         const date = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, day);
         const dayEvents = getEventsForDay(date);
-        html += `<div class="month-cell other-month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
+        html += `<div class="month_cell other_month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
+        html += `<div class="month_day_number">${String(day).padStart(2, '0')}</div>`;
         dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
+          html += `<div class="month_event" data-event-id="${event.id}">${event.title}</div>`;
         });
         if (dayEvents.length > 2) {
-          html += `<div class="more-events">+${dayEvents.length - 2} more</div>`;
+          html += `<div class="more_events">+${dayEvents.length - 2} more</div>`;
         }
         html += `</div>`;
       }
@@ -189,7 +189,7 @@
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.month-event').forEach(el => {
+      document.querySelectorAll('.month_event').forEach(el => {
         el.addEventListener('click', (e) => {
           e.stopPropagation();
           const eventId = parseInt(el.dataset.eventId);
@@ -203,47 +203,47 @@
       const weekStart = startOfWeek(currentDate);
       const today = new Date();
 
-      let html = `<div class="week-view">`;
+      let html = `<div class="week_view">`;
 
-      html += `<div class="week-header"><div class="week-day-headers">`;
+      html += `<div class="week_header"><div class="week_day_headers">`;
       for (let i = 0; i < 7; i++) {
         const day = addDays(weekStart, i);
         const isToday = isSameDay(day, today);
-        html += `<div class="week-day-header">`;
-        html += `<div class="week-day-name">${formatDate(day, 'EEE')}</div>`;
-        html += `<div class="week-day-number${isToday ? ' today' : ''}">${formatDate(day, 'd')}</div>`;
+        html += `<div class="week_day_header">`;
+        html += `<div class="week_day_name">${formatDate(day, 'EEE')}</div>`;
+        html += `<div class="week_day_number${isToday ? ' today' : ''}">${formatDate(day, 'd')}</div>`;
         html += `</div>`;
       }
       html += `</div></div>`;
 
-      html += `<div class="week-body">`;
+      html += `<div class="week_body">`;
 
-      html += `<div class="time-column">`;
-      html += `<div class="time-slot empty-slot"></div>`;
+      html += `<div class="time_column">`;
+      html += `<div class="time_slot empty_slot"></div>`;
       for (let i = 1; i < 24; i++) {
         const hour = i % 12 || 12;
         const ampm = i < 12 ? 'AM' : 'PM';
-        html += `<div class="time-slot"><span class="time-label">${hour} ${ampm}</span></div>`;
+        html += `<div class="time_slot"><span class="time_label">${hour} ${ampm}</span></div>`;
       }
-      html += `<div class="time-slot"><span class="time-label">12 AM</span></div>`;
-      html += `<div class="time-slot extra-row"></div>`;
+      html += `<div class="time_slot"><span class="time_label">12 AM</span></div>`;
+      html += `<div class="time_slot extra_row"></div>`;
       html += `</div>`;
 
-      html += `<div class="week-event-grid">`;
+      html += `<div class="week_event_grid">`;
       for (let i = 0; i < 7; i++) {
         const day = addDays(weekStart, i);
         const dayEvents = getEventsForDay(day);
 
-        html += `<div class="week-day-column">`;
+        html += `<div class="week_day_column">`;
         
         for (let h = 0; h <= 25; h++) {
-          html += `<div class="hour-line" style="top: ${h * 35}px"></div>`;
+          html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
         }
 
         dayEvents.forEach(event => {
           const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-          html += `<div class="week-event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
-          html += `<div class="week-event-title">${event.title}</div>`;
+          html += `<div class="week_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
+          html += `<div class="week_event_title">${event.title}</div>`;
           html += `</div>`;
         });
 
@@ -254,7 +254,7 @@
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.week-event').forEach(el => {
+      document.querySelectorAll('.week_event').forEach(el => {
         el.addEventListener('click', () => {
           const eventId = parseInt(el.dataset.eventId);
           const event = events.find(ev => ev.id === eventId);
@@ -268,40 +268,40 @@
       const isToday = isSameDay(currentDate, today);
       const dayEvents = getEventsForDay(currentDate);
 
-      let html = `<div class="day-view">`;
+      let html = `<div class="day_view">`;
 
-      html += `<div class="day-header-wrapper">`;
-      html += `<div class="day-day-headers">`;
-      html += `<div class="day-day-header">`;
-      html += `<div class="day-day-name">${formatDate(currentDate, 'EEE')}</div>`;
-      html += `<div class="day-day-number${isToday ? ' today' : ''}">${formatDate(currentDate, 'd')}</div>`;
+      html += `<div class="day_header_wrapper">`;
+      html += `<div class="day_day_headers">`;
+      html += `<div class="day_day_header">`;
+      html += `<div class="day_day_name">${formatDate(currentDate, 'EEE')}</div>`;
+      html += `<div class="day_day_number${isToday ? ' today' : ''}">${formatDate(currentDate, 'd')}</div>`;
       html += `</div>`;
       html += `</div></div>`;
 
-      html += `<div class="day-body">`;
+      html += `<div class="day_body">`;
 
-      html += `<div class="time-column">`;
-      html += `<div class="time-slot empty-slot"></div>`;
+      html += `<div class="time_column">`;
+      html += `<div class="time_slot empty_slot"></div>`;
       for (let i = 1; i < 24; i++) {
         const hour = i % 12 || 12;
         const ampm = i < 12 ? 'AM' : 'PM';
-        html += `<div class="time-slot"><span class="time-label">${hour} ${ampm}</span></div>`;
+        html += `<div class="time_slot"><span class="time_label">${hour} ${ampm}</span></div>`;
       }
-      html += `<div class="time-slot"><span class="time-label">12 AM</span></div>`;
-      html += `<div class="time-slot extra-row"></div>`;
+      html += `<div class="time_slot"><span class="time_label">12 AM</span></div>`;
+      html += `<div class="time_slot extra_row"></div>`;
       html += `</div>`;
 
-      html += `<div class="day-event-grid">`;
-      html += `<div class="day-column">`;
+      html += `<div class="day_event_grid">`;
+      html += `<div class="day_column">`;
       
       for (let h = 0; h <= 25; h++) {
-        html += `<div class="hour-line" style="top: ${h * 35}px"></div>`;
+        html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
       }
 
       dayEvents.forEach(event => {
         const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-        html += `<div class="day-event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
-        html += `<div class="day-event-title">${event.title}</div>`;
+        html += `<div class="day_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
+        html += `<div class="day_event_title">${event.title}</div>`;
         html += `</div>`;
       });
 
@@ -310,7 +310,7 @@
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.day-event').forEach(el => {
+      document.querySelectorAll('.day_event').forEach(el => {
         el.addEventListener('click', () => {
           const eventId = parseInt(el.dataset.eventId);
           const event = events.find(ev => ev.id === eventId);
@@ -325,26 +325,26 @@
       const months = ['January', 'February', 'March', 'April', 'May', 'June',
                       'July', 'August', 'September', 'October', 'November', 'December'];
 
-      let html = `<div class="year-view"><div class="year-grid">`;
+      let html = `<div class="year_view"><div class="year_grid">`;
 
       for (let month = 0; month < 12; month++) {
         const monthStart = new Date(year, month, 1);
         const monthEnd = new Date(year, month + 1, 0);
         const startWeekday = monthStart.getDay();
 
-        html += `<div class="year-month-grid">`;
-        html += `<h3 class="year-month-title">${months[month]} ${year}</h3>`;
+        html += `<div class="year_month_grid">`;
+        html += `<h3 class="year_month_title">${months[month]} ${year}</h3>`;
         
-        html += `<div class="weekday-headers">`;
+        html += `<div class="weekday_headers">`;
         weekdays.forEach(day => {
-          html += `<div class="weekday-header">${day}</div>`;
+          html += `<div class="weekday_header">${day}</div>`;
         });
         html += `</div>`;
 
-        html += `<div class="year-days-grid">`;
+        html += `<div class="year_days_grid">`;
         
         for (let i = 0; i < startWeekday; i++) {
-          html += `<div class="year-day-cell empty-cell"></div>`;
+          html += `<div class="year_day_cell empty_cell"></div>`;
         }
 
         for (let day = 1; day <= monthEnd.getDate(); day++) {
@@ -352,12 +352,12 @@
           const dayEvents = getEventsForDay(date);
           const hasEvents = dayEvents.length > 0;
           
-          html += `<div class="year-day-cell${hasEvents ? ' has-events' : ''}" 
+          html += `<div class="year_day_cell${hasEvents ? ' has_events' : ''}" 
                         data-date="${formatDate(date, 'yyyy-MM-dd')}"
                         data-has-events="${hasEvents}">`;
           html += `${day}`;
           if (hasEvents) {
-            html += `<span class="event-indicator">•</span>`;
+            html += `<span class="event_indicator">•</span>`;
           }
           html += `</div>`;
         }
@@ -368,7 +368,7 @@
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.year-day-cell.has-events').forEach(el => {
+      document.querySelectorAll('.year_day_cell.has_events').forEach(el => {
         el.addEventListener('click', () => {
           const dateStr = el.dataset.date;
           const date = new Date(dateStr + 'T00:00:00');
@@ -381,7 +381,7 @@
     const showDialog = (date, dayEvents) => {
       dialogTitle.textContent = formatDate(date, 'MMMM d, yyyy');
       
-      let html = '<ul class="event-list">';
+      let html = '<ul class="event_list">';
       dayEvents.forEach(event => {
         html += `<li data-event-id="${event.id}">${event.title}</li>`;
       });
@@ -495,6 +495,18 @@
       }
     };
 
+    const parseDateStr = (dateStr) => {
+      try {
+        let cleanStr = dateStr.replace(',', '').replace(/([ap]m)$/i, ' $1');
+        let date = new Date(cleanStr);
+        if (!isNaN(date.getTime())) return date;
+        return new Date(dateStr); 
+      } catch (e) {
+        console.error('Error parsing date:', dateStr, e);
+        return new Date();
+      }
+    };
+
     const fetchEvents = async () => {
       const apiUrl = calendarView.getAttribute('data-events');
       
@@ -503,7 +515,7 @@
         return;
       }
 
-      calendarView.innerHTML = '<div class="loading-state">Loading events...</div>';
+      calendarView.innerHTML = '<div class="loading_state">Loading events...</div>';
       
       try {
         const response = await fetch(apiUrl);
@@ -512,24 +524,33 @@
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data = await response.json();
+        const responseData = await response.json();
+        const eventData = Array.isArray(responseData) ? responseData : (responseData.data || []);
         
-        if (!Array.isArray(data)) {
+        if (!Array.isArray(eventData)) {
           throw new Error('Invalid data format: Expected an array of events.');
         }
 
-        events = data.map(event => ({
-          ...event,
-          start: new Date(event.start),
-          end: new Date(event.end)
-        }));
+        events = eventData.map(item => {
+          const props = item.attributes || item;
+          const id = item.id || props.id;
+          
+          return {
+            id: id,
+            title: props.title,
+            start: parseDateStr(props.start),
+            end: parseDateStr(props.end),
+            full_url: props.full_url,
+            is_published: props.is_published
+          };
+        });
 
         render();
       } catch (error) {
         console.error('Calendar: Error fetching events:', error);
-        calendarView.innerHTML = `<div class="error-state">
+        calendarView.innerHTML = `<div class="error_state">
           <p>Unable to load events.</p>
-          <p class="error-details">${error.message}</p>
+          <p class="error_details">${error.message}</p>
         </div>`;
       }
     };
@@ -545,7 +566,7 @@
 
       dialogClose.addEventListener('click', closeDialog);
       dialogOverlay.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dialog-overlay') || e.target.classList.contains('dialog-wrapper')) {
+        if (e.target.classList.contains('dialog_overlay') || e.target.classList.contains('dialog_wrapper')) {
           closeDialog();
         }
       });
