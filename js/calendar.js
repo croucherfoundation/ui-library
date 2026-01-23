@@ -390,7 +390,6 @@
         html += `<div class="time_slot"><span class="time_label">${hour} ${ampm}</span></div>`;
       }
       html += `<div class="time_slot"><span class="time_label">12 AM</span></div>`;
-      html += `<div class="time_slot extra_row"></div>`;
       html += `</div>`;
 
       html += `<div class="week_event_grid">`;
@@ -424,10 +423,9 @@
         
         html += `<div class="week_day_column">`;
         // Hour lines (same as day view)
-        for (let h = 0; h <= 25; h++) {
+        for (let h = 0; h <= 24; h++) {
           html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
         }
-        
         // Render single-day events at their time position (same formula as day view)
         dayEvents.forEach(event => {
           const startHour = event.start.getHours() + event.start.getMinutes() / 60;
@@ -478,16 +476,14 @@
         html += `<div class="time_slot"><span class="time_label">${hour} ${ampm}</span></div>`;
       }
       html += `<div class="time_slot"><span class="time_label">12 AM</span></div>`;
-      html += `<div class="time_slot extra_row"></div>`;
       html += `</div>`;
 
       html += `<div class="day_event_grid">`;
       html += `<div class="day_column">`;
       
-      for (let h = 0; h <= 25; h++) {
+      for (let h = 0; h <= 24; h++) {
         html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
       }
-
       dayEvents.forEach(event => {
         const startHour = event.start.getHours() + event.start.getMinutes() / 60;
         html += `<div class="day_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
