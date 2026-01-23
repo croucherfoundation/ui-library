@@ -699,6 +699,41 @@
 
     const parseDateStr = (dateStr) => {
       try {
+        // Handle format like "09 March 2026, 10:00am" or "09 March 2026, 10:00pm"
+        const monthNames = {
+          'january': 0, 'february': 1, 'march': 2, 'april': 3,
+          'may': 4, 'june': 5, 'july': 6, 'august': 7,
+          'september': 8, 'october': 9, 'november': 10, 'december': 11
+        };
+        
+        // Match pattern: "DD Month YYYY, HH:MMam/pm" or "DD Month YYYY"
+        const regex = /^(\d{1,2})\s+(\w+)\s+(\d{4})(?:,?\s*(\d{1,2}):(\d{2})([ap]m)?)?$/i;
+        const match = dateStr.trim().match(regex);
+        
+        if (match) {
+          const day = parseInt(match[1], 10);
+          const monthName = match[2].toLowerCase();
+          const year = parseInt(match[3], 10);
+          const month = monthNames[monthName];
+          
+          if (month !== undefined) {
+            let hours = match[4] ? parseInt(match[4], 10) : 0;
+            const minutes = match[5] ? parseInt(match[5], 10) : 0;
+            const ampm = match[6] ? match[6].toLowerCase() : null;
+            
+            if (ampm) {
+              if (ampm === 'pm' && hours !== 12) {
+                hours += 12;
+              } else if (ampm === 'am' && hours === 12) {
+                hours = 0;
+              }
+            }
+            
+            return new Date(year, month, day, hours, minutes, 0, 0);
+          }
+        }
+        
+        // Fallback: try native parsing
         let cleanStr = dateStr.replace(',', '').replace(/([ap]m)$/i, ' $1');
         let date = new Date(cleanStr);
         if (!isNaN(date.getTime())) return date;
