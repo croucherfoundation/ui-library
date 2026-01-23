@@ -962,9 +962,9 @@
   }
 
   .standard-modal-close-btn {
-    text-align: right;
-    padding-top: 10px;
-    padding-right: 10px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
   }
 }
 

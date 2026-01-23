@@ -96,20 +96,38 @@
    * Close standard modal
    * ===========================
    */
-
+ 
   // Close modal or popup when clicking standard close control (delegated)
-  $(document).on('click', '.standard-modal-close-btn', function(e) {
-    e.preventDefault();
+  function closeStandardModalOrPopup($trigger) {
     // Remove modal-open/show/fade from modal and body
     $('.modal').removeClass('modal-open');
     // Remove any Bootstrap modal backdrops
     $('.modal-backdrop').removeClass('show fade').remove();
-
+ 
     // Additionally, close closest popup and remove mask overlay if present
-    var $popup = $(this).closest('.popup');
+    var $popup = $trigger.closest('.popup');
     if ($popup.length) {
       // Trigger popup.js 'close' to run proper hide logic
       $popup.trigger('close');
+    }
+  }
+ 
+  $(document).on('click', '.standard-modal-close-btn', function(e) {
+    e.preventDefault();
+    closeStandardModalOrPopup($(this));
+  });
+ 
+  // Close modal or popup when pressing Escape key
+  $(document).on('keydown', function(e) {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      // Try to find the topmost visible modal or popup
+      var $modal = $('.modal.modal-open').last();
+      var $popup = $('.popup:visible').last();
+      if ($modal.length) {
+        closeStandardModalOrPopup($modal);
+      } else if ($popup.length) {
+        closeStandardModalOrPopup($popup);
+      }
     }
   });
 
