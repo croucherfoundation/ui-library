@@ -110,6 +110,12 @@
       // Trigger popup.js 'close' to run proper hide logic
       $popup.trigger('close');
     }
+
+    // Hide floater if it exists to avoid JS errors on pages without floater
+    var $floater = $('#floater');
+    if ($floater.length) {
+      $floater.hide();
+    }
   }
  
   $(document).on('click', '.standard-modal-close-btn', function(e) {
@@ -127,6 +133,12 @@
         closeStandardModalOrPopup($modal);
       } else if ($popup.length) {
         closeStandardModalOrPopup($popup);
+      }
+      
+      // Hide floater if it exists when pressing Escape
+      var $floater = $('#floater');
+      if ($floater.length) {
+        $floater.hide();
       }
     }
   });
