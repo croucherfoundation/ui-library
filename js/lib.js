@@ -93,6 +93,21 @@
 
   /**
    * ===========================
+   * Close standard modal
+   * ===========================
+   */
+
+  // Close password reset modal when clicking its close control
+  $('.standard-modal-close-btn').click(function(e) {
+    e.preventDefault();
+    // Remove modal-open/show/fade from modal and body
+    $('.modal').removeClass('modal-open');
+    // Remove any Bootstrap modal backdrops
+    $('.modal-backdrop').removeClass('show fade').remove();
+  });
+
+  /**
+   * ===========================
    * I-Format Photo Text
    * ===========================
    */
