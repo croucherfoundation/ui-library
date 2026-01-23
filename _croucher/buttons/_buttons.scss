@@ -233,6 +233,9 @@ a.viewall_btn,
     scrollbar-width: none;
     overflow-x: auto;
     position: relative;
+    &.mobile-flex-start {
+      justify-content: flex-start;
+    }
   }
 
   // When dropdown is open, disable overflow to prevent iOS Safari clipping
