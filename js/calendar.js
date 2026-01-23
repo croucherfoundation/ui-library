@@ -3,6 +3,8 @@
     let currentDate = new Date();
     let currentView = 'month';
     let events = [];
+    let isLoading = false;
+    let abortController = null;
 
     const calendarView = document.getElementById('calendar_view');
     const dateRange = document.getElementById('date_range');
@@ -117,11 +119,25 @@
       dateRange.textContent = label;
     };
 
-    const updateUrlParams = () => {
-      const params = new URLSearchParams(window.location.search);
+    const updateUrlParams = (pushState = true) => {
+      const params = new URLSearchParams();
       params.set('range_type', currentView);
       params.set('date', formatDate(currentDate, 'yyyy-MM-dd'));
-      window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`);
+      
+      if (pushState) {
+        window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`);
+      }
+      
+      return params.toString();
+    };
+
+    const getApiUrl = () => {
+      const baseUrl = calendarView.getAttribute('data-events');
+      if (!baseUrl) return null;
+      
+      const queryString = updateUrlParams(false);
+      const separator = baseUrl.includes('?') ? '&' : '?';
+      return `${baseUrl}${separator}${queryString}`;
     };
 
     const handleEventClick = (event) => {
@@ -630,8 +646,8 @@
           currentDate = new Date();
           break;
       }
-      render();
       updateUrlParams();
+      fetchEvents();
     };
 
     const changeView = (view) => {
@@ -639,8 +655,8 @@
       viewBtns.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.view === view);
       });
-      render();
       updateUrlParams();
+      fetchEvents();
     };
 
     const render = () => {
@@ -694,17 +710,27 @@
     };
 
     const fetchEvents = async () => {
-      const apiUrl = calendarView.getAttribute('data-events');
+      const apiUrl = getApiUrl();
       
       if (!apiUrl) {
         console.warn('Calendar: No data-events attribute provided. Events will not be loaded.');
+        render();
         return;
       }
 
-      // Keep existing view while loading - don't show loading state
+      // Cancel any pending request
+      if (abortController) {
+        abortController.abort();
+      }
+      abortController = new AbortController();
+
+      isLoading = true;
+      updateDateRangeLabel();
       
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+          signal: abortController.signal
+        });
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -731,8 +757,15 @@
           };
         });
 
+        isLoading = false;
         render();
       } catch (error) {
+        if (error.name === 'AbortError') {
+          // Request was cancelled, ignore
+          return;
+        }
+        
+        isLoading = false;
         console.error('Calendar: Error fetching events:', error);
         calendarView.innerHTML = `<div class="error_state">
           <p>Unable to load events.</p>
@@ -761,12 +794,17 @@
         if (e.key === 'Escape') closeDialog();
       });
 
+      // Handle browser back/forward navigation
+      window.addEventListener('popstate', () => {
+        initFromUrl();
+        fetchEvents();
+      });
+
+      // Initialize from URL params or set defaults
       initFromUrl();
-
-      if (!window.location.search.includes('range_type') || !window.location.search.includes('date')) {
-        updateUrlParams();
-      }
-
+      updateUrlParams();
+      
+      // Initial fetch
       fetchEvents();
     };
 
