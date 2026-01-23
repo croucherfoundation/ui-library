@@ -315,7 +315,7 @@
           
           html += `<div class="${classes}" 
                         data-event-id="${event.id}"
-                        style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${topOffset}px;">`;
+                        style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${topOffset}px; --span: ${span};">`;
           html += `<span class="month_event_title">${event.title}</span>`;
           html += `</div>`;
         });
@@ -699,22 +699,28 @@
 
     const parseDateStr = (dateStr) => {
       try {
+        // Try ISO 8601 format first: "2026-03-01T10:00:00" or "2026-03-01 10:00"
+        if (/^\d{4}-\d{2}-\d{2}/.test(dateStr)) {
+          const date = new Date(dateStr);
+          if (!isNaN(date.getTime())) return date;
+        }
+        
         const months = {
           'january': 0, 'february': 1, 'march': 2, 'april': 3,
           'may': 4, 'june': 5, 'july': 6, 'august': 7,
           'september': 8, 'october': 9, 'november': 10, 'december': 11
         };
         
-        // Match format: "09 March 2026, 10:00am" or "09 March 2026, 10:00 am"
-        const regex = /^(\d{1,2})\s+(\w+)\s+(\d{4}),?\s*(\d{1,2}):(\d{2})\s*(am|pm)?$/i;
+        // Match format: "09 March 2026, 10:00am" or "09 March 2026, 10:00" (24hr)
+        const regex = /^(\d{1,2})\s+(\w+)\s+(\d{4})(?:,?\s*(\d{1,2}):(\d{2})(?:\s*(am|pm))?)?$/i;
         const match = dateStr.trim().match(regex);
         
         if (match) {
           const day = parseInt(match[1], 10);
           const monthName = match[2].toLowerCase();
           const year = parseInt(match[3], 10);
-          let hours = parseInt(match[4], 10);
-          const minutes = parseInt(match[5], 10);
+          let hours = match[4] ? parseInt(match[4], 10) : 0;
+          const minutes = match[5] ? parseInt(match[5], 10) : 0;
           const ampm = match[6] ? match[6].toLowerCase() : null;
           
           const month = months[monthName];
@@ -723,21 +729,24 @@
             return new Date(dateStr);
           }
           
-          // Convert to 24-hour format
-          if (ampm === 'pm' && hours !== 12) {
-            hours += 12;
-          } else if (ampm === 'am' && hours === 12) {
-            hours = 0;
+          // Convert to 24-hour format if am/pm is present
+          if (ampm) {
+            if (ampm === 'pm' && hours !== 12) {
+              hours += 12;
+            } else if (ampm === 'am' && hours === 12) {
+              hours = 0;
+            }
           }
           
           return new Date(year, month, day, hours, minutes, 0, 0);
         }
         
-        // Fallback to original parsing
-        let cleanStr = dateStr.replace(',', '').replace(/([ap]m)$/i, ' $1');
-        let date = new Date(cleanStr);
+        // Fallback to native Date parsing
+        const date = new Date(dateStr);
         if (!isNaN(date.getTime())) return date;
-        return new Date(dateStr); 
+        
+        console.warn('Could not parse date:', dateStr);
+        return new Date();
       } catch (e) {
         console.error('Error parsing date:', dateStr, e);
         return new Date();
@@ -782,11 +791,19 @@
           const props = item.attributes || item;
           const id = item.id || props.id;
           
+          const startDate = parseDateStr(props.start);
+          const endDate = parseDateStr(props.end);
+          
+          console.log(`Event: ${props.title}`);
+          console.log(`  Start: ${startDate} (${startDate.getTime()})`);
+          console.log(`  End: ${endDate} (${endDate.getTime()})`);
+          console.log(`  Same day: ${normalizeDate(startDate).getTime() === normalizeDate(endDate).getTime()}`);
+          
           return {
             id: id,
             title: props.title,
-            start: parseDateStr(props.start),
-            end: parseDateStr(props.end),
+            start: startDate,
+            end: endDate,
             full_url: props.full_url,
             is_published: props.is_published
           };
