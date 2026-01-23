@@ -83,8 +83,21 @@
       return d;
     };
 
+    const normalizeDate = (date) => {
+      const d = new Date(date);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    };
+
+    const isDateInRange = (date, startDate, endDate) => {
+      const normalizedDate = normalizeDate(date).getTime();
+      const normalizedStart = normalizeDate(startDate).getTime();
+      const normalizedEnd = normalizeDate(endDate).getTime();
+      return normalizedDate >= normalizedStart && normalizedDate <= normalizedEnd;
+    };
+
     const getEventsForDay = (date) => {
-      return events.filter(event => isSameDay(event.start, date));
+      return events.filter(event => isDateInRange(date, event.start, event.end));
     };
 
     const updateDateRangeLabel = () => {
@@ -117,14 +130,117 @@
       }
     };
 
-    const renderMonthView = () => {
-      const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-      const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    // Helper to get all dates in calendar grid for a month
+    const getCalendarGridDates = (year, month) => {
+      const firstDayOfMonth = new Date(year, month, 1);
+      const lastDayOfMonth = new Date(year, month + 1, 0);
       const startDay = firstDayOfMonth.getDay();
       const totalDays = lastDayOfMonth.getDate();
+      
+      const dates = [];
+      
+      // Previous month days
+      const prevMonth = new Date(year, month, 0);
+      for (let i = startDay - 1; i >= 0; i--) {
+        const day = prevMonth.getDate() - i;
+        dates.push(new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day));
+      }
+      
+      // Current month days
+      for (let day = 1; day <= totalDays; day++) {
+        dates.push(new Date(year, month, day));
+      }
+      
+      // Next month days
+      const filledCells = startDay + totalDays;
+      const totalCells = Math.ceil(filledCells / 7) * 7;
+      const remainingCells = totalCells - filledCells;
+      for (let day = 1; day <= remainingCells; day++) {
+        dates.push(new Date(year, month + 1, day));
+      }
+      
+      return dates;
+    };
 
+    // Calculate spanning events for a week row
+    const getSpanningEventsForWeek = (weekDates, allEvents) => {
+      const spanningEvents = [];
+      const usedSlots = new Array(weekDates.length).fill(null).map(() => []);
+      
+      // Sort events by start date, then by duration (longer events first)
+      const sortedEvents = [...allEvents].sort((a, b) => {
+        const startDiff = normalizeDate(a.start).getTime() - normalizeDate(b.start).getTime();
+        if (startDiff !== 0) return startDiff;
+        // Longer events first
+        const aDuration = normalizeDate(a.end).getTime() - normalizeDate(a.start).getTime();
+        const bDuration = normalizeDate(b.end).getTime() - normalizeDate(b.start).getTime();
+        return bDuration - aDuration;
+      });
+      
+      sortedEvents.forEach(event => {
+        const eventStart = normalizeDate(event.start);
+        const eventEnd = normalizeDate(event.end);
+        
+        // Find which days of this week the event spans
+        let startCol = -1;
+        let endCol = -1;
+        
+        for (let i = 0; i < weekDates.length; i++) {
+          const cellDate = normalizeDate(weekDates[i]);
+          if (cellDate.getTime() >= eventStart.getTime() && cellDate.getTime() <= eventEnd.getTime()) {
+            if (startCol === -1) startCol = i;
+            endCol = i;
+          }
+        }
+        
+        if (startCol === -1) return; // Event not in this week
+        
+        // Find the first available slot row for this span
+        let slotRow = 0;
+        let foundSlot = false;
+        while (!foundSlot) {
+          foundSlot = true;
+          for (let col = startCol; col <= endCol; col++) {
+            if (usedSlots[col][slotRow]) {
+              foundSlot = false;
+              slotRow++;
+              break;
+            }
+          }
+        }
+        
+        // Mark slots as used
+        for (let col = startCol; col <= endCol; col++) {
+          usedSlots[col][slotRow] = event.id;
+        }
+        
+        // Check if event starts before this week
+        const startsBeforeWeek = eventStart.getTime() < normalizeDate(weekDates[0]).getTime();
+        // Check if event continues after this week
+        const continuesAfterWeek = eventEnd.getTime() > normalizeDate(weekDates[6]).getTime();
+        
+        spanningEvents.push({
+          event,
+          startCol,
+          endCol,
+          slotRow,
+          span: endCol - startCol + 1,
+          startsBeforeWeek,
+          continuesAfterWeek
+        });
+      });
+      
+      return spanningEvents;
+    };
+
+    const renderMonthView = () => {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
       const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const today = new Date();
+      
+      const gridDates = getCalendarGridDates(year, month);
+      const numWeeks = gridDates.length / 7;
 
       let html = `<div class="month_view">`;
       
@@ -136,53 +252,73 @@
 
       html += `<div class="month_body">`;
 
-      const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
-      for (let i = startDay - 1; i >= 0; i--) {
-        const day = prevMonth.getDate() - i;
-        const date = new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day);
-        const dayEvents = getEventsForDay(date);
-        html += `<div class="month_cell other_month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month_day_number">${String(day).padStart(2, '0')}</div>`;
-        dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month_event" data-event-id="${event.id}">${event.title}</div>`;
-        });
-        if (dayEvents.length > 2) {
-          html += `<div class="more_events">+${dayEvents.length - 2} more</div>`;
-        }
-        html += `</div>`;
-      }
-
-      for (let day = 1; day <= totalDays; day++) {
-        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        const isToday = isSameDay(date, today);
-        const dayEvents = getEventsForDay(date);
+      // Render each week row
+      for (let week = 0; week < numWeeks; week++) {
+        const weekDates = gridDates.slice(week * 7, (week + 1) * 7);
+        const spanningEvents = getSpanningEventsForWeek(weekDates, events);
+        const maxSlots = Math.max(2, ...spanningEvents.map(e => e.slotRow + 1));
         
-        html += `<div class="month_cell${isToday ? ' today' : ''}" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month_day_number">${String(day).padStart(2, '0')}</div>`;
-        dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month_event" data-event-id="${event.id}">${event.title}</div>`;
+        html += `<div class="month_week_row">`;
+        
+        // Day cells (background)
+        html += `<div class="month_week_cells">`;
+        weekDates.forEach((date, dayIndex) => {
+          const isCurrentMonth = date.getMonth() === month;
+          const isToday = isSameDay(date, today);
+          const dayNum = String(date.getDate()).padStart(2, '0');
+          
+          html += `<div class="month_cell${isToday ? ' today' : ''}${!isCurrentMonth ? ' other_month' : ''}" 
+                        data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
+          html += `<div class="month_day_number">${dayNum}</div>`;
+          html += `</div>`;
         });
-        if (dayEvents.length > 2) {
-          html += `<div class="more_events">+${dayEvents.length - 2} more</div>`;
-        }
         html += `</div>`;
-      }
-
-      const filledCells = startDay + totalDays;
-      const totalCells = Math.ceil(filledCells / 7) * 7;
-      const remainingCells = totalCells - filledCells;
-      
-      for (let day = 1; day <= remainingCells; day++) {
-        const date = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, day);
-        const dayEvents = getEventsForDay(date);
-        html += `<div class="month_cell other_month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month_day_number">${String(day).padStart(2, '0')}</div>`;
-        dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month_event" data-event-id="${event.id}">${event.title}</div>`;
+        
+        // Events layer (absolute positioned spanning events)
+        html += `<div class="month_week_events">`;
+        
+        const visibleEvents = spanningEvents.filter(e => e.slotRow < 2);
+        const hiddenEventsPerDay = new Array(7).fill(0);
+        
+        spanningEvents.forEach(e => {
+          if (e.slotRow >= 2) {
+            for (let col = e.startCol; col <= e.endCol; col++) {
+              hiddenEventsPerDay[col]++;
+            }
+          }
         });
-        if (dayEvents.length > 2) {
-          html += `<div class="more_events">+${dayEvents.length - 2} more</div>`;
-        }
+        
+        visibleEvents.forEach(({ event, startCol, span, slotRow, startsBeforeWeek, continuesAfterWeek }) => {
+          const leftPercent = (startCol / 7) * 100;
+          const widthPercent = (span / 7) * 100;
+          const topOffset = 28 + (slotRow * 26); // Day number height + slot offset
+          
+          let classes = 'month_event month_event_spanning';
+          if (startsBeforeWeek) classes += ' continues_left';
+          if (continuesAfterWeek) classes += ' continues_right';
+          
+          html += `<div class="${classes}" 
+                        data-event-id="${event.id}"
+                        style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${topOffset}px;">`;
+          html += `<span class="month_event_title">${event.title}</span>`;
+          html += `</div>`;
+        });
+        
+        // Show "+N more" indicators for each day with hidden events
+        hiddenEventsPerDay.forEach((count, dayIndex) => {
+          if (count > 0) {
+            const leftPercent = (dayIndex / 7) * 100;
+            const widthPercent = (1 / 7) * 100;
+            const dateStr = formatDate(weekDates[dayIndex], 'yyyy-MM-dd');
+            html += `<div class="more_events" 
+                          data-date="${dateStr}"
+                          style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${28 + (2 * 26)}px;">
+                      +${count} more
+                    </div>`;
+          }
+        });
+        
+        html += `</div>`;
         html += `</div>`;
       }
 
@@ -192,9 +328,20 @@
       document.querySelectorAll('.month_event').forEach(el => {
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
+        });
+      });
+
+      // Add click handler for "+N more" elements
+      document.querySelectorAll('.more_events').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const dateStr = el.dataset.date;
+          const date = new Date(dateStr + 'T00:00:00');
+          const dayEvents = getEventsForDay(date);
+          showDialog(date, dayEvents);
         });
       });
     };
@@ -202,6 +349,23 @@
     const renderWeekView = () => {
       const weekStart = startOfWeek(currentDate);
       const today = new Date();
+      
+      // Get week dates array
+      const weekDates = [];
+      for (let i = 0; i < 7; i++) {
+        weekDates.push(addDays(weekStart, i));
+      }
+      
+      // Helper to check if event is multi-day
+      const isMultiDayEvent = (event) => {
+        const startDay = normalizeDate(event.start).getTime();
+        const endDay = normalizeDate(event.end).getTime();
+        return endDay > startDay;
+      };
+      
+      // Get only multi-day events for spanning
+      const multiDayEvents = events.filter(isMultiDayEvent);
+      const spanningEvents = getSpanningEventsForWeek(weekDates, multiDayEvents);
 
       let html = `<div class="week_view">`;
 
@@ -230,23 +394,48 @@
       html += `</div>`;
 
       html += `<div class="week_event_grid">`;
-      for (let i = 0; i < 7; i++) {
-        const day = addDays(weekStart, i);
-        const dayEvents = getEventsForDay(day);
-
-        html += `<div class="week_day_column">`;
+      
+      // Render spanning multi-day events layer - position at their start time
+      html += `<div class="week_spanning_events">`;
+      spanningEvents.forEach(({ event, startCol, span, startsBeforeWeek, continuesAfterWeek }) => {
+        const leftPercent = (startCol / 7) * 100;
+        const widthPercent = (span / 7) * 100;
+        // Position at the event's actual start time (same formula as day view)
+        const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+        const topOffset = startHour * 35;
         
+        let classes = 'week_event_spanning';
+        if (startsBeforeWeek) classes += ' continues_left';
+        if (continuesAfterWeek) classes += ' continues_right';
+        
+        html += `<div class="${classes}" 
+                      data-event-id="${event.id}"
+                      style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${topOffset}px;">`;
+        html += `<span class="week_event_title">${event.title}</span>`;
+        html += `</div>`;
+      });
+      html += `</div>`;
+      
+      // Day columns with hour lines and single-day events
+      for (let i = 0; i < 7; i++) {
+        const day = weekDates[i];
+        // Get only single-day events for this day
+        const dayEvents = getEventsForDay(day).filter(event => !isMultiDayEvent(event));
+        
+        html += `<div class="week_day_column">`;
+        // Hour lines (same as day view)
         for (let h = 0; h <= 25; h++) {
           html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
         }
-
+        
+        // Render single-day events at their time position (same formula as day view)
         dayEvents.forEach(event => {
           const startHour = event.start.getHours() + event.start.getMinutes() / 60;
           html += `<div class="week_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
           html += `<div class="week_event_title">${event.title}</div>`;
           html += `</div>`;
         });
-
+        
         html += `</div>`;
       }
       html += `</div>`;
@@ -254,10 +443,11 @@
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.week_event').forEach(el => {
+      // Event handlers for week view events
+      document.querySelectorAll('.week_event_spanning, .week_event').forEach(el => {
         el.addEventListener('click', () => {
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
         });
       });
@@ -312,8 +502,8 @@
 
       document.querySelectorAll('.day_event').forEach(el => {
         el.addEventListener('click', () => {
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
         });
       });
@@ -392,8 +582,8 @@
 
       dialogBody.querySelectorAll('li').forEach(el => {
         el.addEventListener('click', () => {
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) {
             closeDialog();
             handleEventClick(event);
@@ -515,7 +705,7 @@
         return;
       }
 
-      calendarView.innerHTML = '<div class="loading_state">Loading events...</div>';
+      // Keep existing view while loading - don't show loading state
       
       try {
         const response = await fetch(apiUrl);

@@ -126,6 +126,7 @@
   @media (min-width: 640px) {
     max-width: 1298px;
     margin: 0 auto;
+    margin-bottom: 20px;
 
     a {
       display: initial;
@@ -135,7 +136,11 @@
 
 .breadcrumb_padding {
   padding: 5px 0 5px 0;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+
+  @media (min-width: 640px) {
+    margin-bottom: 20px;
+  }
 }
 
 .date_range {
@@ -218,9 +223,28 @@
 }
 
 .month_body {
+  display: flex;
+  flex-direction: column;
+}
+
+.month_week_row {
+  position: relative;
+  min-height: 123px;
+}
+
+.month_week_cells {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  align-content: start;
+  height: 100%;
+}
+
+.month_week_events {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
 }
 
 .month_cell {
@@ -266,9 +290,42 @@
   padding: 3px 5px;
   border-radius: 5px;
   font-size: 16px;
-  margin-bottom: 2px;
   cursor: pointer;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: auto;
+}
+
+.month_event_spanning {
+  position: absolute;
+  height: 22px;
+  line-height: 16px;
+  border-radius: 4px;
+  margin: 0 2px;
+  box-sizing: border-box;
+  
+  // Adjust width to account for margins
+  &:not(.continues_left):not(.continues_right) {
+    width: calc(100% / 7 * var(--span, 1) - 4px) !important;
+  }
+}
+
+.month_event_spanning.continues_left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0;
+  padding-left: 8px;
+}
+
+.month_event_spanning.continues_right {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
+}
+
+.month_event_title {
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -278,9 +335,12 @@
 }
 
 .more_events {
+  position: absolute;
   font-size: 12px;
   color: #666;
   cursor: pointer;
+  pointer-events: auto;
+  padding: 2px 5px;
 }
 
 /* ========== Week View Styles ========== */
@@ -334,6 +394,8 @@
   color: white;
 }
 
+// All-day / Multi-day events section - removed, using spanning events instead
+
 .week_body {
   display: flex;
   flex: 1;
@@ -380,6 +442,55 @@
   flex: 1;
   position: relative;
   min-height: 910px;
+}
+
+.week_spanning_events {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.week_event_spanning {
+  position: absolute;
+  height: 24px;
+  line-height: 18px;
+  background-color: #ee3a43;
+  color: white;
+  padding: 3px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  margin: 0 2px;
+  pointer-events: auto;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+  
+  &.continues_left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 0;
+  }
+  
+  &.continues_right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 0;
+  }
+  
+  .week_event_title {
+    font-size: 14px;
+    margin-top: 0;
+  }
 }
 
 .week_day_column {
@@ -741,6 +852,22 @@
   .week_event,
   .day_event {
     height: 20px;
+  }
+
+  .time_column,
+  .week_event_grid,
+  .week_day_column,
+  .day_event_grid,
+  .day_column {
+    min-height: auto;
+  }
+
+  .time_column .time_slot:last-child {
+    display: none;
+  }
+
+  .time_slot.empty_slot {
+    height: 35px;
   }
 
   .month_event {
