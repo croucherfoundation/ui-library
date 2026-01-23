@@ -97,13 +97,20 @@
    * ===========================
    */
 
-  // Close password reset modal when clicking its close control
-  $('.standard-modal-close-btn').click(function(e) {
+  // Close modal or popup when clicking standard close control (delegated)
+  $(document).on('click', '.standard-modal-close-btn', function(e) {
     e.preventDefault();
     // Remove modal-open/show/fade from modal and body
     $('.modal').removeClass('modal-open');
     // Remove any Bootstrap modal backdrops
     $('.modal-backdrop').removeClass('show fade').remove();
+
+    // Additionally, close closest popup and remove mask overlay if present
+    var $popup = $(this).closest('.popup');
+    if ($popup.length) {
+      // Trigger popup.js 'close' to run proper hide logic
+      $popup.trigger('close');
+    }
   });
 
   /**
