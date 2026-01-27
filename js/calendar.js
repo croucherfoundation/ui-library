@@ -48,6 +48,14 @@
           return `${months[m]} ${d}, ${y}`;
         case 'yyyy-MM-dd':
           return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        case 'h:mm a':
+          let hours = date.getHours();
+          const minutes = date.getMinutes();
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          hours = hours % 12;
+          hours = hours ? hours : 12; // the hour '0' should be '12'
+          const strMinutes = minutes < 10 ? '0' + minutes : minutes;
+          return `${hours}:${strMinutes} ${ampm}`;
         default:
           return date.toDateString();
       }
@@ -443,12 +451,47 @@
           html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
         }
         // Render single-day events at their time position (same formula as day view)
+        // Group events by hour
+        const eventsByHour = {};
         dayEvents.forEach(event => {
-          const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-          html += `<div class="week_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
-          html += `<div class="week_event_title">${event.title}</div>`;
-          html += `</div>`;
+          const hour = event.start.getHours();
+          if (!eventsByHour[hour]) eventsByHour[hour] = [];
+          eventsByHour[hour].push(event);
         });
+
+        // Render events or +N buttons
+        for (let h = 0; h < 24; h++) {
+          if (eventsByHour[h] && eventsByHour[h].length > 0) {
+            const hourEvents = eventsByHour[h];
+            
+            // If overlapping events (more than 1 in this hour slot), show first and +N
+            if (hourEvents.length > 1) {
+              // Show first event
+              const event = hourEvents[0];
+              const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+              
+              html += `<div class="week_event" style="top: ${startHour * 35}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
+              html += `<div class="week_event_title">${event.title}</div>`;
+              html += `</div>`;
+              
+              // Show +N button
+              const count = hourEvents.length - 1;
+              html += `<div class="week_more_events" 
+                           style="top: ${startHour * 35 + 28}px;" 
+                           data-date="${formatDate(day, 'yyyy-MM-dd')}"
+                           data-hour="${h}">
+                        +${count} more
+                      </div>`;
+            } else {
+              // Just one event, render normally
+              const event = hourEvents[0];
+              const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+              html += `<div class="week_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
+              html += `<div class="week_event_title">${event.title}</div>`;
+              html += `</div>`;
+            }
+          }
+        }
         
         html += `</div>`;
       }
@@ -463,6 +506,24 @@
           const eventId = el.dataset.eventId;
           const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
+        });
+      });
+
+      // Event handlers for +N buttons
+      document.querySelectorAll('.week_more_events').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const dateStr = el.dataset.date;
+          const hour = parseInt(el.dataset.hour, 10);
+          const date = new Date(dateStr + 'T00:00:00'); // Base date
+          
+          // Filter events for this day and hour
+          // We need to fetch all events for this day again to be safe/consistent
+          const dayEvents = getEventsForDay(date).filter(event => !isMultiDayEvent(event));
+          const hourEvents = dayEvents.filter(event => event.start.getHours() === hour);
+          
+          // Show dialog with these specific events
+          showDialog(date, hourEvents);
         });
       });
     };
@@ -500,12 +561,46 @@
       for (let h = 0; h <= 24; h++) {
         html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
       }
+
+      // Group events by hour
+      const eventsByHour = {};
       dayEvents.forEach(event => {
-        const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-        html += `<div class="day_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
-        html += `<div class="day_event_title">${event.title}</div>`;
-        html += `</div>`;
+        const hour = event.start.getHours();
+        if (!eventsByHour[hour]) eventsByHour[hour] = [];
+        eventsByHour[hour].push(event);
       });
+
+      // Render events or +N buttons
+      for (let h = 0; h < 24; h++) {
+        if (eventsByHour[h] && eventsByHour[h].length > 0) {
+          const hourEvents = eventsByHour[h];
+          
+          if (hourEvents.length > 1) {
+             // Show first event
+             const event = hourEvents[0];
+             const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+             
+             html += `<div class="day_event" style="top: ${startHour * 35}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
+             html += `<div class="day_event_title">${event.title}</div>`;
+             html += `</div>`;
+             
+             // Show +N button
+             const count = hourEvents.length - 1;
+             html += `<div class="day_more_events" 
+                          style="top: ${startHour * 35 + 28}px;" 
+                          data-date="${formatDate(currentDate, 'yyyy-MM-dd')}"
+                          data-hour="${h}">
+                       +${count} more
+                     </div>`;
+          } else {
+             const event = hourEvents[0];
+             const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+             html += `<div class="day_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
+             html += `<div class="day_event_title">${event.title}</div>`;
+             html += `</div>`;
+          }
+        }
+      }
 
       html += `</div></div>`;
 
@@ -517,6 +612,21 @@
           const eventId = el.dataset.eventId;
           const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
+        });
+      });
+
+      // Event handlers for +N buttons
+      document.querySelectorAll('.day_more_events').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const dateStr = el.dataset.date;
+          const hour = parseInt(el.dataset.hour, 10);
+          const date = new Date(dateStr + 'T00:00:00');
+          
+          const dayEventsLocal = getEventsForDay(date);
+          const hourEvents = dayEventsLocal.filter(event => event.start.getHours() === hour);
+          
+          showDialog(date, hourEvents);
         });
       });
     };
@@ -585,7 +695,11 @@
       
       let html = '<ul class="event_list">';
       dayEvents.forEach(event => {
-        html += `<li data-event-id="${event.id}">${event.title}</li>`;
+        const timeStr = formatDate(event.start, 'h:mm a');
+        html += `<li data-event-id="${event.id}">
+          <div class="event_time">${timeStr}</div>
+          <div class="event_title">${event.title}</div>
+        </li>`;
       });
       html += '</ul>';
       

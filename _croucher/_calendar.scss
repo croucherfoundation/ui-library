@@ -464,7 +464,7 @@
     position: absolute;
     left: 2px;
     right: 2px;
-    padding: 5px;
+    padding: 0 5px;
     border-radius: 5px;
     color: white;
     overflow: hidden;
@@ -473,16 +473,19 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     background-color: #ee3a43;
     height: 27px;
+    display: flex;
+    align-items: center;
   }
 
   .week_event_title {
-    font-size: 16px;
+    font-size: 13px;
     color: white;
     font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: -2px;
+    line-height: 1;
+    margin-top: 0;
   }
 
   /* ========== Day View Styles ========== */
@@ -563,7 +566,7 @@
     position: absolute;
     left: 2px;
     right: 2px;
-    padding: 5px;
+    padding: 0 5px;
     border-radius: 5px;
     color: white;
     overflow: hidden;
@@ -572,16 +575,19 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     background-color: #ee3a43;
     height: 27px;
+    display: flex;
+    align-items: center;
   }
 
   .day_event_title {
-    font-size: 16px;
+    font-size: 13px;
     color: white;
     font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: -2px;
+    line-height: 1;
+    margin-top: 0;
   }
 
   /* ========== Year View Styles ========== */
@@ -737,14 +743,62 @@
 
       li {
         padding: 0.5rem;
-        border-radius: 0.25rem;
+        border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.15s ease;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+
+        &:last-child {
+          border-bottom: none;
+        }
 
         &:hover {
-          background-color: #f3f4f6;
+          background-color: #f8f9fa;
+        }
+
+        .event_time {
+          font-size: 0.85em;
+          color: #666;
+          white-space: nowrap;
+          min-width: 65px;
+          flex-shrink: 0;
+        }
+
+        .event_title {
+          font-weight: 500;
+          color: #333;
+          font-size: 0.95rem;
+          line-height: 1.4;
         }
       }
+    }
+  }
+
+  .week_more_events, .day_more_events {
+    position: absolute;
+    left: 2px;
+    right: auto;
+    height: auto;
+    padding: 0;
+    font-size: 11px;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 20;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    line-height: 1.2;
+
+    &:hover {
+      text-decoration: underline;
+      color: #333;
+      background-color: transparent;
     }
   }
 }
