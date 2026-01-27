@@ -70,7 +70,34 @@
   }
 }
 
+// Section divider style for separating different sections
 .section-divider {
   border-top: 0.5px solid #9a9b9d;
   margin: 20px 0;
+}
+
+// Detail rows for labels and values in user profile sections
+.detail-row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.detail-label {
+  width: 25%;
+}
+
+@media (max-width: 768px) {
+  .detail-row {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .detail-label{
+    width: 100%;
+    flex: none;
+    margin-bottom: 2px;
+  }
+  .detail-value {
+    width: 100%;
+    flex: none;
+  }
 }
