@@ -8,26 +8,26 @@
 // =====================================================
 
 // Color Variables for Event Categories
-$category-digital: #00A5AA;    // Teal for digital events
-$category-workshop: #E85D00;   // Orange for workshops
-$category-talk: #7B2D8E;       // Purple for talks/lectures
-$category-show: #C8102E;       // Red for science shows
+$category-digital: #00a5aa; // Teal for digital events
+$category-workshop: #e85d00; // Orange for workshops
+$category-talk: #7b2d8e; // Purple for talks/lectures
+$category-show: #c8102e; // Red for science shows
 
 // Status Colors
-$status-live-bg: #C8102E;
+$status-live-bg: #c8102e;
 $status-live-text: #ffffff;
-$status-confirmed-bg: #E8F5E9;
-$status-confirmed-text: #2E7D32;
-$status-waitlisted-bg: #FFF3E0;
-$status-waitlisted-text: #E65100;
-$status-pending-bg: #FFF8E1;
-$status-pending-text: #F57C00;
-$status-cancelled-bg: #FFEBEE;
-$status-cancelled-text: #C62828;
-$status-attended-bg: #F3E5F5;
-$status-attended-text: #7B2D8E;
-$status-recording-bg: #E3F2FD;
-$status-recording-text: #1565C0;
+$status-confirmed-bg: #e8f5e9;
+$status-confirmed-text: #2e7d32;
+$status-waitlisted-bg: #fff3e0;
+$status-waitlisted-text: #e65100;
+$status-pending-bg: #fff8e1;
+$status-pending-text: #f57c00;
+$status-cancelled-bg: #ffebee;
+$status-cancelled-text: #c62828;
+$status-attended-bg: #f3e5f5;
+$status-attended-text: #7b2d8e;
+$status-recording-bg: #e3f2fd;
+$status-recording-text: #1565c0;
 
 // =====================================================
 // PAGE CONTAINER
@@ -201,7 +201,7 @@ $status-recording-text: #1565C0;
   // Lines on either side of the text
 
   &::after {
-    content: '';
+    content: "";
     flex: 1;
     height: 1px;
     background-color: $gray-1;
@@ -226,7 +226,9 @@ $status-recording-text: #1565C0;
   margin-bottom: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
   border: 2px solid rgba(116, 113, 113, 0.1);
 
   // &:hover {
@@ -247,10 +249,18 @@ $status-recording-text: #1565C0;
   bottom: 0;
   width: 5px;
 
-  &--digital { background-color: $category-digital; }
-  &--workshop { background-color: $category-workshop; }
-  &--talk { background-color: $category-talk; }
-  &--show { background-color: $category-show; }
+  &--digital {
+    background-color: $category-digital;
+  }
+  &--workshop {
+    background-color: $category-workshop;
+  }
+  &--talk {
+    background-color: $category-talk;
+  }
+  &--show {
+    background-color: $category-show;
+  }
 }
 
 // Date Block
@@ -278,7 +288,6 @@ $status-recording-text: #1565C0;
   color: $csw-public-red;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-
 }
 
 .booking-card__day {
@@ -448,8 +457,13 @@ $status-recording-text: #1565C0;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .booking-card__chevron {
@@ -501,8 +515,6 @@ $status-recording-text: #1565C0;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
-
-
 }
 
 // =====================================================
@@ -724,7 +736,11 @@ $status-recording-text: #1565C0;
 
 // Help Card
 .sidebar-help {
-  background: linear-gradient(135deg, $csw-teal 0%, darken($csw-teal, 10%) 100%);
+  background: linear-gradient(
+    135deg,
+    $csw-teal 0%,
+    darken($csw-teal, 10%) 100%
+  );
   color: $white;
 }
 
@@ -776,10 +792,34 @@ $status-recording-text: #1565C0;
   padding: 24px 20px;
   color: $white;
 
-  &--digital { background: linear-gradient(135deg, $category-digital 0%, darken($category-digital, 15%) 100%); }
-  &--workshop { background: linear-gradient(135deg, $category-workshop 0%, darken($category-workshop, 15%) 100%); }
-  &--talk { background: linear-gradient(135deg, $category-talk 0%, darken($category-talk, 15%) 100%); }
-  &--show { background: linear-gradient(135deg, $category-show 0%, darken($category-show, 15%) 100%); }
+  &--digital {
+    background: linear-gradient(
+      135deg,
+      $category-digital 0%,
+      darken($category-digital, 15%) 100%
+    );
+  }
+  &--workshop {
+    background: linear-gradient(
+      135deg,
+      $category-workshop 0%,
+      darken($category-workshop, 15%) 100%
+    );
+  }
+  &--talk {
+    background: linear-gradient(
+      135deg,
+      $category-talk 0%,
+      darken($category-talk, 15%) 100%
+    );
+  }
+  &--show {
+    background: linear-gradient(
+      135deg,
+      $category-show 0%,
+      darken($category-show, 15%) 100%
+    );
+  }
 }
 
 .sidebar-detail__close {
@@ -898,7 +938,7 @@ $status-recording-text: #1565C0;
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
-  background: #2D8CFF;
+  background: #2d8cff;
   color: $white;
   border-radius: $rounded-5;
   text-decoration: none;
@@ -912,7 +952,7 @@ $status-recording-text: #1565C0;
   }
 
   &:hover {
-    background: darken(#2D8CFF, 10%);
+    background: darken(#2d8cff, 10%);
   }
 }
 
@@ -1011,45 +1051,64 @@ $status-recording-text: #1565C0;
 }
 
 .cancel-modal__title {
-  font-size: 20px;
-  font-weight: 600;
-  color: $croucher-dark;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 .cancel-modal__text {
-  font-size: 15px;
-  color: #666;
+  font-size: 16px;
   line-height: 1.5;
-  margin-bottom: 24px;
+  // margin-bottom: 40px;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include lg {
+    max-width: 70%;
+  }
 }
+
+// .cancel-modal__event {
+//   margin-bottom: 40px;
+//   p {
+//     font-size: 16px;
+//     font-weight: 600;
+//     color: $croucher-dark;
+//   }
+// }
 
 .cancel-modal__actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+
+  @include lg {
+    flex-direction: row;
+  }
+
+  button {
+    box-sizing: border-box;
+    background: transparent !important;
+    border-color: $black !important;
+    width: 100%;
+
+    &:hover {
+      background: $csw-public-red !important;
+      border-color: transparent !important;
+    }
+
+    @include lg {
+      width: 240px;
+    }
+  }
 }
 
 .cancel-modal__btn-cancel {
-  background: $status-cancelled-bg !important;
-  border-color: $status-cancelled-bg !important;
-  color: $status-cancelled-text !important;
-
-  &:hover {
-    background: darken($status-cancelled-bg, 5%) !important;
-    border-color: darken($status-cancelled-bg, 5%) !important;
-  }
 }
 
 .cancel-modal__btn-keep {
-  background: $croucher-dark !important;
-  border-color: $croucher-dark !important;
-  color: $white !important;
-
-  &:hover {
-    background: $csw-teal !important;
-    border-color: $csw-teal !important;
-  }
 }
 
 // =====================================================
@@ -1118,7 +1177,12 @@ $status-recording-text: #1565C0;
 }
 
 .skeleton {
-  background: linear-gradient(90deg, $light-gray 25%, darken($light-gray, 3%) 50%, $light-gray 75%);
+  background: linear-gradient(
+    90deg,
+    $light-gray 25%,
+    darken($light-gray, 3%) 50%,
+    $light-gray 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
@@ -1166,8 +1230,12 @@ $status-recording-text: #1565C0;
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 // =====================================================
@@ -1367,7 +1435,6 @@ $status-recording-text: #1565C0;
   .booking-card__meta-item {
     // font-size: 12px;
     // gap: 4px;
-
   }
 
   // Mobile toggle button - full width at bottom
@@ -1444,7 +1511,8 @@ $status-recording-text: #1565C0;
       grid-template-columns: 90px 1fr;
       gap: 6px 10px;
 
-      dt, dd {
+      dt,
+      dd {
         font-size: 13px;
       }
     }
@@ -1516,7 +1584,9 @@ $status-recording-text: #1565C0;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   z-index: 100;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   svg {
     width: 24px;
@@ -1558,8 +1628,6 @@ $status-recording-text: #1565C0;
   border: 0;
 }
 
-
-
 .live-button {
   display: flex;
   align-items: center;
@@ -1575,7 +1643,6 @@ $status-recording-text: #1565C0;
   border: none;
   animation: twinkle 2.5s ease-in-out infinite;
   padding-top: 6.5px;
-
 }
 
 .live-dot {
@@ -1586,7 +1653,8 @@ $status-recording-text: #1565C0;
 }
 
 @keyframes twinkle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
