@@ -23,7 +23,7 @@
         color: #9ca3af;
       }
       .card_item {
-        .icon svg {
+        .icon svg:not(.play_icon) {
            filter: brightness(0) invert(1);
         }
       }
@@ -165,7 +165,7 @@
           height: 39px;
           .dark & {
             path, circle {
-              fill: #F6E36C;
+              fill: #F6E36C !important;
             }
           }
         }
