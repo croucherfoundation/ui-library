@@ -823,11 +823,13 @@ $status-recording-text: #1565C0;
 
 .sidebar-detail__status-bar {
   display: flex;
-  align-items: center;
+  // align-items: center;
   gap: 10px;
   padding: 12px 20px;
   font-size: 14px;
   font-weight: 600;
+  margin: 16px;
+  border-radius: $rounded-5;
 
   &--live {
     background: $status-live-bg;
