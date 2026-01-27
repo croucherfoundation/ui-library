@@ -419,13 +419,14 @@
       html += `<div class="week_event_grid">`;
       
       // Render spanning multi-day events layer - position at their start time
+      // Only show the first spanning event (slotRow 0)
       html += `<div class="week_spanning_events">`;
-      spanningEvents.forEach(({ event, startCol, span, startsBeforeWeek, continuesAfterWeek }) => {
+      spanningEvents.filter(se => se.slotRow === 0).forEach(({ event, startCol, span, startsBeforeWeek, continuesAfterWeek }) => {
         const leftPercent = (startCol / 7) * 100;
         const widthPercent = (span / 7) * 100;
         // Position at the event's actual start time (same formula as day view)
         const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-        const topOffset = startHour * 35;
+        const topOffset = startHour * 45;
         
         let classes = 'week_event_spanning';
         if (startsBeforeWeek) classes += ' continues_left';
@@ -442,53 +443,98 @@
       // Day columns with hour lines and single-day events
       for (let i = 0; i < 7; i++) {
         const day = weekDates[i];
+        // Get all events for this day
+        const allDayEvents = getEventsForDay(day);
         // Get only single-day events for this day
-        const dayEvents = getEventsForDay(day).filter(event => !isMultiDayEvent(event));
+        const dayEvents = allDayEvents.filter(event => !isMultiDayEvent(event));
+        // Get multi-day events for this day (to show count)
+        const multiDayEventsOnDay = allDayEvents.filter(event => isMultiDayEvent(event));
         
         html += `<div class="week_day_column">`;
         // Hour lines (same as day view)
         for (let h = 0; h <= 24; h++) {
-          html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
+          html += `<div class="hour_line" style="top: ${h * 45}px"></div>`;
         }
-        // Render single-day events at their time position (same formula as day view)
-        // Group events by hour
-        const eventsByHour = {};
-        dayEvents.forEach(event => {
-          const hour = event.start.getHours();
-          if (!eventsByHour[hour]) eventsByHour[hour] = [];
-          eventsByHour[hour].push(event);
-        });
+        
+        // If there are events on this day beyond what's shown in spanning bars, show "+N more"
+        const totalEventsOnDay = allDayEvents.length;
+        // Count only the first spanning event (slotRow 0) as visible
+        const visibleSpanningCount = spanningEvents.filter(se => 
+          se.slotRow === 0 && i >= se.startCol && i <= se.endCol
+        ).length;
+        
+        const hiddenEventsCount = totalEventsOnDay - visibleSpanningCount;
+        
+        if (hiddenEventsCount > 0) {
+          const dateStr = formatDate(day, 'yyyy-MM-dd');
+          // Position the "+N more" below the visible spanning event (if any)
+          const visibleSpanningForThisDay = spanningEvents.filter(se => 
+            se.slotRow === 0 && i >= se.startCol && i <= se.endCol
+          );
+          if (visibleSpanningForThisDay.length > 0) {
+            // Get the visible spanning event to position below it
+            const firstSpanning = visibleSpanningForThisDay[0];
+            const startHour = firstSpanning.event.start.getHours() + firstSpanning.event.start.getMinutes() / 60;
+            const topOffset = startHour * 45 + 28;
+            html += `<div class="week_more_events" 
+                         style="top: ${topOffset}px; left: 5px;" 
+                         data-date="${dateStr}"
+                         data-hour="-1">
+                      +${hiddenEventsCount} more
+                    </div>`;
+          } else {
+            // No visible spanning event, position at top
+            html += `<div class="week_more_events" 
+                         style="top: 5px; left: 5px;" 
+                         data-date="${dateStr}"
+                         data-hour="-1">
+                      +${hiddenEventsCount} more
+                    </div>`;
+          }
+        }
+        
+        if (visibleSpanningCount === 0) {
+          // Only render single-day events if there are no multi-day events on this day
+          // Render single-day events at their time position (same formula as day view)
+          // Group events by hour
+          const eventsByHour = {};
+          dayEvents.forEach(event => {
+            const hour = event.start.getHours();
+            if (!eventsByHour[hour]) eventsByHour[hour] = [];
+            eventsByHour[hour].push(event);
+          });
 
-        // Render events or +N buttons
-        for (let h = 0; h < 24; h++) {
-          if (eventsByHour[h] && eventsByHour[h].length > 0) {
-            const hourEvents = eventsByHour[h];
-            
-            // If overlapping events (more than 1 in this hour slot), show first and +N
-            if (hourEvents.length > 1) {
-              // Show first event
-              const event = hourEvents[0];
-              const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+          // Render events or +N buttons
+          for (let h = 0; h < 24; h++) {
+            if (eventsByHour[h] && eventsByHour[h].length > 0) {
+              const hourEvents = eventsByHour[h];
               
-              html += `<div class="week_event" style="top: ${startHour * 35}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
-              html += `<div class="week_event_title">${event.title}</div>`;
-              html += `</div>`;
-              
-              // Show +N button
-              const count = hourEvents.length - 1;
-              html += `<div class="week_more_events" 
-                           style="top: ${startHour * 35 + 28}px;" 
-                           data-date="${formatDate(day, 'yyyy-MM-dd')}"
-                           data-hour="${h}">
-                        +${count} more
-                      </div>`;
-            } else {
-              // Just one event, render normally
-              const event = hourEvents[0];
-              const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-              html += `<div class="week_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
-              html += `<div class="week_event_title">${event.title}</div>`;
-              html += `</div>`;
+              // If overlapping events (more than 1 in this hour slot), show first and +N
+              if (hourEvents.length > 1) {
+                // Show first event
+                const event = hourEvents[0];
+                const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+                
+                html += `<div class="week_event" style="top: ${startHour * 45}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
+                html += `<div class="week_event_title">${event.title}</div>`;
+                html += `</div>`;
+                
+                // Show +N button
+                const count = hourEvents.length - 1;
+                html += `<div class="week_more_events" 
+                             style="top: ${startHour * 45 + 28}px;" 
+                             data-date="${formatDate(day, 'yyyy-MM-dd')}"
+                             data-hour="${h}">
+                          +${count} more
+                        </div>`;
+              } else {
+                // Just one event, render normally
+                const event = hourEvents[0];
+                const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+                html += `<div class="week_event" style="top: ${startHour * 45}px" data-event-id="${event.id}">`;
+                html += `<div class="week_event_title">${event.title}</div>`;
+                html += `</div>`;
+              }
             }
           }
         }
@@ -517,13 +563,19 @@
           const hour = parseInt(el.dataset.hour, 10);
           const date = new Date(dateStr + 'T00:00:00'); // Base date
           
-          // Filter events for this day and hour
-          // We need to fetch all events for this day again to be safe/consistent
-          const dayEvents = getEventsForDay(date).filter(event => !isMultiDayEvent(event));
-          const hourEvents = dayEvents.filter(event => event.start.getHours() === hour);
-          
-          // Show dialog with these specific events
-          showDialog(date, hourEvents);
+          // If hour is -1, show all events for the day (multi-day + single-day)
+          if (hour === -1) {
+            const allDayEvents = getEventsForDay(date);
+            showDialog(date, allDayEvents);
+          } else {
+            // Filter events for this day and hour
+            // We need to fetch all events for this day again to be safe/consistent
+            const dayEvents = getEventsForDay(date).filter(event => !isMultiDayEvent(event));
+            const hourEvents = dayEvents.filter(event => event.start.getHours() === hour);
+            
+            // Show dialog with these specific events
+            showDialog(date, hourEvents);
+          }
         });
       });
     };
@@ -559,7 +611,7 @@
       html += `<div class="day_column">`;
       
       for (let h = 0; h <= 24; h++) {
-        html += `<div class="hour_line" style="top: ${h * 35}px"></div>`;
+        html += `<div class="hour_line" style="top: ${h * 45}px"></div>`;
       }
 
       // Group events by hour
@@ -580,14 +632,14 @@
              const event = hourEvents[0];
              const startHour = event.start.getHours() + event.start.getMinutes() / 60;
              
-             html += `<div class="day_event" style="top: ${startHour * 35}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
+             html += `<div class="day_event" style="top: ${startHour * 45}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
              html += `<div class="day_event_title">${event.title}</div>`;
              html += `</div>`;
              
              // Show +N button
              const count = hourEvents.length - 1;
              html += `<div class="day_more_events" 
-                          style="top: ${startHour * 35 + 28}px;" 
+                          style="top: ${startHour * 45 + 28}px;" 
                           data-date="${formatDate(currentDate, 'yyyy-MM-dd')}"
                           data-hour="${h}">
                        +${count} more
@@ -595,7 +647,7 @@
           } else {
              const event = hourEvents[0];
              const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-             html += `<div class="day_event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
+             html += `<div class="day_event" style="top: ${startHour * 45}px" data-event-id="${event.id}">`;
              html += `<div class="day_event_title">${event.title}</div>`;
              html += `</div>`;
           }
@@ -793,7 +845,7 @@
 
     const initFromUrl = () => {
       const params = new URLSearchParams(window.location.search);
-      const viewParam = params.get('range_type');
+      const viewParam = params.get('range_type') || 'month';
       const dateParam = params.get('date');
 
       if (viewParam && ['day', 'week', 'month', 'year'].includes(viewParam)) {
@@ -908,11 +960,6 @@
           const startDate = parseDateStr(props.start);
           const endDate = parseDateStr(props.end);
           
-          console.log(`Event: ${props.title}`);
-          console.log(`  Start: ${startDate} (${startDate.getTime()})`);
-          console.log(`  End: ${endDate} (${endDate.getTime()})`);
-          console.log(`  Same day: ${normalizeDate(startDate).getTime() === normalizeDate(endDate).getTime()}`);
-          
           return {
             id: id,
             title: props.title,
@@ -941,20 +988,30 @@
     };
 
     const init = () => {
-      viewBtns.forEach(btn => {
-        btn.addEventListener('click', () => changeView(btn.dataset.view));
-      });
+      // Check if required elements exist
+      if (!calendarView) {
+        console.warn('Calendar: calendar_view element not found');
+        return;
+      }
 
-      prevBtn.addEventListener('click', () => navigate('PREV'));
-      nextBtn.addEventListener('click', () => navigate('NEXT'));
-      todayBtn.addEventListener('click', () => navigate('TODAY'));
+      if (viewBtns && viewBtns.length > 0) {
+        viewBtns.forEach(btn => {
+          btn.addEventListener('click', () => changeView(btn.dataset.view));
+        });
+      }
 
-      dialogClose.addEventListener('click', closeDialog);
-      dialogOverlay.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dialog_overlay') || e.target.classList.contains('dialog_wrapper')) {
-          closeDialog();
-        }
-      });
+      if (prevBtn) prevBtn.addEventListener('click', () => navigate('PREV'));
+      if (nextBtn) nextBtn.addEventListener('click', () => navigate('NEXT'));
+      if (todayBtn) todayBtn.addEventListener('click', () => navigate('TODAY'));
+
+      if (dialogClose) dialogClose.addEventListener('click', closeDialog);
+      if (dialogOverlay) {
+        dialogOverlay.addEventListener('click', (e) => {
+          if (e.target.classList.contains('dialog_overlay') || e.target.classList.contains('dialog_wrapper')) {
+            closeDialog();
+          }
+        });
+      }
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeDialog();
