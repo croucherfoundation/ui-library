@@ -745,9 +745,17 @@
     const showDialog = (date, dayEvents) => {
       dialogTitle.textContent = formatDate(date, 'MMMM d, yyyy');
       
+      // Sort events by start time (hour:minute only, ignoring date)
+      const sortedEvents = [...dayEvents].sort((a, b) => {
+        const aMinutes = a.start.getHours() * 60 + a.start.getMinutes();
+        const bMinutes = b.start.getHours() * 60 + b.start.getMinutes();
+        return aMinutes - bMinutes;
+      });
+      
       let html = '<ul class="event_list">';
-      dayEvents.forEach(event => {
+      sortedEvents.forEach(event => {
         const timeStr = formatDate(event.start, 'h:mm a');
+        
         html += `<li data-event-id="${event.id}">
           <div class="event_time">${timeStr}</div>
           <div class="event_title">${event.title}</div>
