@@ -241,6 +241,72 @@ $status-recording-text: #1565c0;
   }
 }
 
+// =====================================================
+// NOTIFICATION PREFERENCES MODAL
+// =====================================================
+.noti-preferences-modal {
+  // @include card-base;
+  width: 100%;
+  max-width: 520px;
+  background: $white;
+  border-radius: $rounded-5;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.noti-preferences {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.noti-preferences__header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.noti-preferences__title {
+  font-size: 22px;
+  font-weight: 700;
+  // color: $croucher-dark;
+  margin: 0;
+}
+
+.noti-preferences__description {
+  margin: 0;
+  // color: $gray-3;
+  line-height: 1.5;
+}
+
+.noti-preferences__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.noti-preferences__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.noti-preferences__btn {
+  min-width: 140px;
+  justify-content: center;
+
+  &--secondary {
+    background: transparent;
+    color: $croucher-dark;
+    border: 1px solid $croucher-dark;
+  }
+
+  &--primary {
+    background: $croucher-dark;
+    color: $white;
+  }
+}
+
 // Category Color Bar
 .booking-card__color-bar {
   position: absolute;
@@ -1660,4 +1726,110 @@ $status-recording-text: #1565c0;
   50% {
     opacity: 0.8;
   }
+}
+
+// =====================================================
+// QR MODAL
+// =====================================================
+.qr-modal-container {
+  width: 100%;
+  max-width: 720px;
+  background: $white;
+  border-radius: $rounded-5;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
+}
+
+.qr-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.qr-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.qr-modal__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: $croucher-dark;
+}
+
+.qr-modal__close {
+  min-width: 96px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.qr-modal__caption {
+  margin: 0;
+  font-weight: 600;
+}
+
+.qr-modal__image-wrap {
+  width: 100%;
+  // background: $gray-0;
+  // border: 1px solid $gray-1;
+  // border-radius: $rounded-5;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-modal__image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.qr-modal__thumbs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 8px 4px;
+  margin: 0 -4px;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $gray-2;
+    border-radius: 999px;
+  }
+}
+
+.qr-modal__thumb {
+  background: $white;
+  // border: 1px solid $gray-1;
+  // border-radius: $rounded-4;
+  padding: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  flex: 0 0 auto;
+
+  &:hover {
+    border-color: $croucher-dark;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $csw-teal;
+    outline-offset: 2px;
+  }
+
+  &--active {
+    border-color: $csw-teal;
+  }
+}
+
+.qr-modal__thumb-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  display: block;
 }
