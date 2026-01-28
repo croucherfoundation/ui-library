@@ -1117,20 +1117,20 @@ $status-recording-text: #1565c0;
 }
 
 .cancel-modal__title {
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 }
 
 .cancel-modal__text {
   font-size: 16px;
   line-height: 1.5;
   // margin-bottom: 40px;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  // max-width: 90%;
+  // margin-left: auto;
+  // margin-right: auto;
 
-  @include lg {
-    max-width: 70%;
-  }
+  // @include lg {
+  //   max-width: 70%;
+  // }
 }
 
 // .cancel-modal__event {
@@ -1147,8 +1147,8 @@ $status-recording-text: #1565c0;
   flex-direction: column;
   gap: 25px;
   align-items: center;
-  justify-content: center;
-  margin-top: 40px;
+  justify-content: flex-end;
+  margin-top: 16px;
 
   @include lg {
     flex-direction: row;
@@ -1832,4 +1832,54 @@ $status-recording-text: #1565c0;
   height: 72px;
   object-fit: contain;
   display: block;
+}
+
+// =====================================================
+// MODIFY BOOKING MODAL
+// =====================================================
+.modify-booking-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modify-booking-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modify-booking-stepper__btn {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  padding: 0;
+}
+
+.modify-booking-stepper__value {
+  min-width: 56px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: $croucher-dark;
+}
+
+.booking-modal__error {
+  color: $csw-public-red;
+  margin: 0;
+}
+
+.booking-modal__success {
+  color: $csw-teal;
+  margin: 0;
+}
+
+.modify-booking-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
 }
