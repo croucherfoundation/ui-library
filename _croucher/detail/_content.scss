@@ -82,10 +82,19 @@
   .detail-row {
     display: flex;
     margin-bottom: 10px;
+    align-items: flex-start;
   }
 
   .detail-label {
     width: 25%;
+    flex-shrink: 0;
+    padding-right: 15px;
+  }
+
+  .detail-value {
+    flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   span.unknown {
@@ -100,11 +109,15 @@
     .detail-label{
       width: 100%;
       flex: none;
-      margin-bottom: 2px;
+      margin-bottom: 6px;
+      padding-right: 0;
     }
     .detail-value {
       width: 100%;
       flex: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
     }
   }
 }
