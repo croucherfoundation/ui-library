@@ -70,34 +70,51 @@
   }
 }
 
-// Section divider style for separating different sections
-.section-divider {
-  border-top: 0.5px solid #9a9b9d;
-  margin: 20px 0;
-}
+// Standard content page styles for detail views
+.standard-content-page {
+    // Section divider style for separating different sections
+  .section-divider {
+    border-top: 0.5px solid #9a9b9d;
+    margin: 20px 0;
+  }
 
-// Detail rows for labels and values in user profile sections
-.detail-row {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.detail-label {
-  width: 25%;
-}
-
-@media (max-width: 768px) {
+    // Detail rows for labels and values in user profile sections
   .detail-row {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .detail-label {
+    width: 25%;
+  }
+
+  @media (max-width: 768px) {
+    .detail-row {
+      display: block;
+      margin-bottom: 12px;
+    }
+    .detail-label{
+      width: 100%;
+      flex: none;
+      margin-bottom: 2px;
+    }
+    .detail-value {
+      width: 100%;
+      flex: none;
+    }
+  }
+}
+
+// Chinese name styling - prevent breaking and keep on single line
+.standard-chinese-name {
+  display: inline-block;
+  white-space: nowrap;
+  word-break: keep-all;
+  margin-left: 8px;
+  
+  @media (max-width: 768px) {
     display: block;
-    margin-bottom: 12px;
-  }
-  .detail-label{
-    width: 100%;
-    flex: none;
-    margin-bottom: 2px;
-  }
-  .detail-value {
-    width: 100%;
-    flex: none;
+    margin-left: 0;
+    margin-top: 8px;
   }
 }
