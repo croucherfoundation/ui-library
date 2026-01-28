@@ -69,3 +69,69 @@
     }
   }
 }
+
+// Standard content page styles for detail views
+.standard-content-page {
+    // Section divider style for separating different sections
+  .section-divider {
+    border-top: 0.5px solid #9a9b9d;
+    margin: 20px 0;
+  }
+
+    // Detail rows for labels and values in user profile sections
+  .detail-row {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+
+  .detail-label {
+    width: 25%;
+    flex-shrink: 0;
+    padding-right: 15px;
+  }
+
+  .detail-value {
+    flex: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  span.unknown {
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .detail-row {
+      display: block;
+      margin-bottom: 12px;
+    }
+    .detail-label{
+      width: 100%;
+      flex: none;
+      margin-bottom: 6px;
+      padding-right: 0;
+    }
+    .detail-value {
+      width: 100%;
+      flex: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+  }
+}
+
+// Chinese name styling - prevent breaking and keep on single line
+.standard-chinese-name {
+  display: inline-block;
+  white-space: nowrap;
+  word-break: keep-all;
+  margin-left: 8px;
+  
+  @media (max-width: 768px) {
+    display: block;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+}

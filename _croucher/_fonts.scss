@@ -122,6 +122,9 @@ $typo: (
 @each $name, $style in $typo {
   .text-#{$name} {
     color: $font-black;
+    .dark & {
+      color: var(--color-text-primary);
+    }
     font-size: map-get($style, fontsize);
     line-height: map-get($style, lineheight);
     font-weight: map-get($style, fontweight);

@@ -6,6 +6,30 @@
   --default-card-height: 198px;
   --default-card-small-height: 198px;
 
+  .dark & {
+    background-color: var(--color-background-card); // Charcoal
+    
+    .body_container {
+      .card_title {
+        color: var(--color-text-primary); // White
+      }
+      .card_desc {
+        color: #d1d5db; // Light Grey
+        .card_item .text {
+           color: #d1d5db;
+        }
+      }
+      .card_note {
+        color: #9ca3af;
+      }
+      .card_item {
+        .icon svg:not(.play_icon) {
+           filter: brightness(0) invert(1);
+        }
+      }
+    }
+  }
+
   .img_container {
     width: 100%;
     height: var(--default-card-height);
@@ -67,6 +91,10 @@
 
       &.csw_badge {
         background-color: $csw-teal;
+        .dark & {
+          background-color: #F6E36C;
+          color: black;
+        }
       }
     }
 
@@ -135,6 +163,11 @@
         .play_icon {
           width: 39px;
           height: 39px;
+          .dark & {
+            path, circle {
+              fill: #F6E36C !important;
+            }
+          }
         }
       }
 
@@ -155,6 +188,9 @@
 
     .csw_card_body {
       background: $csw-public-red;
+      .dark & {
+        background: $csw-magenta;
+      }
       color: $white;
       .card_item {
         p,

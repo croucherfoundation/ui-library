@@ -50,7 +50,8 @@
                 font-weight: normal;
               }
               &:hover {
-                color: $black;
+                filter: brightness(85%);
+                -webkit-filter: brightness(85%);
               }
               &:focus {
                 outline: none;
@@ -267,7 +268,8 @@
               outline: none;
             }
             &:hover {
-              color: $font-black;
+              filter: brightness(85%);
+              -webkit-filter: brightness(85%);
             }
           }
           > ul {

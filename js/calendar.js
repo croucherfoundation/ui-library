@@ -3,17 +3,19 @@
     let currentDate = new Date();
     let currentView = 'month';
     let events = [];
+    let isLoading = false;
+    let abortController = null;
 
-    const calendarView = document.getElementById('calendar-view');
-    const dateRange = document.getElementById('date-range');
-    const viewBtns = document.querySelectorAll('.view-btn');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const todayBtn = document.getElementById('today-btn');
-    const dialogOverlay = document.getElementById('dialog-overlay');
-    const dialogTitle = document.getElementById('dialog-title');
-    const dialogBody = document.getElementById('dialog-body');
-    const dialogClose = document.getElementById('dialog-close');
+    const calendarView = document.getElementById('calendar_view');
+    const dateRange = document.getElementById('date_range');
+    const viewBtns = document.querySelectorAll('.view_btn');
+    const prevBtn = document.getElementById('prev_btn');
+    const nextBtn = document.getElementById('next_btn');
+    const todayBtn = document.getElementById('today_btn');
+    const dialogOverlay = document.getElementById('dialog_overlay');
+    const dialogTitle = document.getElementById('dialog_title');
+    const dialogBody = document.getElementById('dialog_body');
+    const dialogClose = document.getElementById('dialog_close');
 
     const formatDate = (date, format) => {
       const months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -46,6 +48,14 @@
           return `${months[m]} ${d}, ${y}`;
         case 'yyyy-MM-dd':
           return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        case 'h:mm a':
+          let hours = date.getHours();
+          const minutes = date.getMinutes();
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          hours = hours % 12;
+          hours = hours ? hours : 12; // the hour '0' should be '12'
+          const strMinutes = minutes < 10 ? '0' + minutes : minutes;
+          return `${hours}:${strMinutes} ${ampm}`;
         default:
           return date.toDateString();
       }
@@ -83,8 +93,21 @@
       return d;
     };
 
+    const normalizeDate = (date) => {
+      const d = new Date(date);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    };
+
+    const isDateInRange = (date, startDate, endDate) => {
+      const normalizedDate = normalizeDate(date).getTime();
+      const normalizedStart = normalizeDate(startDate).getTime();
+      const normalizedEnd = normalizeDate(endDate).getTime();
+      return normalizedDate >= normalizedStart && normalizedDate <= normalizedEnd;
+    };
+
     const getEventsForDay = (date) => {
-      return events.filter(event => isSameDay(event.start, date));
+      return events.filter(event => isDateInRange(date, event.start, event.end));
     };
 
     const updateDateRangeLabel = () => {
@@ -104,11 +127,25 @@
       dateRange.textContent = label;
     };
 
-    const updateUrlParams = () => {
-      const params = new URLSearchParams(window.location.search);
+    const updateUrlParams = (pushState = true) => {
+      const params = new URLSearchParams();
       params.set('range_type', currentView);
       params.set('date', formatDate(currentDate, 'yyyy-MM-dd'));
-      window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`);
+      
+      if (pushState) {
+        window.history.pushState({}, '', `${window.location.pathname}?${params.toString()}`);
+      }
+      
+      return params.toString();
+    };
+
+    const getApiUrl = () => {
+      const baseUrl = calendarView.getAttribute('data-events');
+      if (!baseUrl) return null;
+      
+      const queryString = updateUrlParams(false);
+      const separator = baseUrl.includes('?') ? '&' : '?';
+      return `${baseUrl}${separator}${queryString}`;
     };
 
     const handleEventClick = (event) => {
@@ -117,84 +154,218 @@
       }
     };
 
-    const renderMonthView = () => {
-      const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-      const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    // Helper to get all dates in calendar grid for a month
+    const getCalendarGridDates = (year, month) => {
+      const firstDayOfMonth = new Date(year, month, 1);
+      const lastDayOfMonth = new Date(year, month + 1, 0);
       const startDay = firstDayOfMonth.getDay();
       const totalDays = lastDayOfMonth.getDate();
-
-      const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      const today = new Date();
-
-      let html = `<div class="month-view">`;
       
-      html += `<div class="month-header">`;
-      weekdays.forEach(day => {
-        html += `<div class="month-header-cell">${day}</div>`;
-      });
-      html += `</div>`;
-
-      html += `<div class="month-body">`;
-
-      const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+      const dates = [];
+      
+      // Previous month days
+      const prevMonth = new Date(year, month, 0);
       for (let i = startDay - 1; i >= 0; i--) {
         const day = prevMonth.getDate() - i;
-        const date = new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day);
-        const dayEvents = getEventsForDay(date);
-        html += `<div class="month-cell other-month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
-        dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
-        });
-        if (dayEvents.length > 2) {
-          html += `<div class="more-events">+${dayEvents.length - 2} more</div>`;
-        }
-        html += `</div>`;
+        dates.push(new Date(prevMonth.getFullYear(), prevMonth.getMonth(), day));
       }
-
+      
+      // Current month days
       for (let day = 1; day <= totalDays; day++) {
-        const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-        const isToday = isSameDay(date, today);
-        const dayEvents = getEventsForDay(date);
-        
-        html += `<div class="month-cell${isToday ? ' today' : ''}" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
-        dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
-        });
-        if (dayEvents.length > 2) {
-          html += `<div class="more-events">+${dayEvents.length - 2} more</div>`;
-        }
-        html += `</div>`;
+        dates.push(new Date(year, month, day));
       }
-
+      
+      // Next month days
       const filledCells = startDay + totalDays;
       const totalCells = Math.ceil(filledCells / 7) * 7;
       const remainingCells = totalCells - filledCells;
-      
       for (let day = 1; day <= remainingCells; day++) {
-        const date = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, day);
-        const dayEvents = getEventsForDay(date);
-        html += `<div class="month-cell other-month" data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
-        html += `<div class="month-day-number">${String(day).padStart(2, '0')}</div>`;
-        dayEvents.slice(0, 2).forEach(event => {
-          html += `<div class="month-event" data-event-id="${event.id}">${event.title}</div>`;
-        });
-        if (dayEvents.length > 2) {
-          html += `<div class="more-events">+${dayEvents.length - 2} more</div>`;
+        dates.push(new Date(year, month + 1, day));
+      }
+      
+      return dates;
+    };
+
+    // Calculate spanning events for a week row
+    const getSpanningEventsForWeek = (weekDates, allEvents) => {
+      const spanningEvents = [];
+      const usedSlots = new Array(weekDates.length).fill(null).map(() => []);
+      
+      // Sort events by start date, then by duration (longer events first)
+      const sortedEvents = [...allEvents].sort((a, b) => {
+        const startDiff = normalizeDate(a.start).getTime() - normalizeDate(b.start).getTime();
+        if (startDiff !== 0) return startDiff;
+        // Longer events first
+        const aDuration = normalizeDate(a.end).getTime() - normalizeDate(a.start).getTime();
+        const bDuration = normalizeDate(b.end).getTime() - normalizeDate(b.start).getTime();
+        return bDuration - aDuration;
+      });
+      
+      sortedEvents.forEach(event => {
+        const eventStart = normalizeDate(event.start);
+        const eventEnd = normalizeDate(event.end);
+        
+        // Find which days of this week the event spans
+        let startCol = -1;
+        let endCol = -1;
+        
+        for (let i = 0; i < weekDates.length; i++) {
+          const cellDate = normalizeDate(weekDates[i]);
+          if (cellDate.getTime() >= eventStart.getTime() && cellDate.getTime() <= eventEnd.getTime()) {
+            if (startCol === -1) startCol = i;
+            endCol = i;
+          }
         }
+        
+        if (startCol === -1) return; // Event not in this week
+        
+        // Find the first available slot row for this span
+        let slotRow = 0;
+        let foundSlot = false;
+        while (!foundSlot) {
+          foundSlot = true;
+          for (let col = startCol; col <= endCol; col++) {
+            if (usedSlots[col][slotRow]) {
+              foundSlot = false;
+              slotRow++;
+              break;
+            }
+          }
+        }
+        
+        // Mark slots as used
+        for (let col = startCol; col <= endCol; col++) {
+          usedSlots[col][slotRow] = event.id;
+        }
+        
+        // Check if event starts before this week
+        const startsBeforeWeek = eventStart.getTime() < normalizeDate(weekDates[0]).getTime();
+        // Check if event continues after this week
+        const continuesAfterWeek = eventEnd.getTime() > normalizeDate(weekDates[6]).getTime();
+        
+        spanningEvents.push({
+          event,
+          startCol,
+          endCol,
+          slotRow,
+          span: endCol - startCol + 1,
+          startsBeforeWeek,
+          continuesAfterWeek
+        });
+      });
+      
+      return spanningEvents;
+    };
+
+    const renderMonthView = () => {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const today = new Date();
+      
+      const gridDates = getCalendarGridDates(year, month);
+      const numWeeks = gridDates.length / 7;
+
+      let html = `<div class="month_view">`;
+      
+      html += `<div class="month_header">`;
+      weekdays.forEach(day => {
+        html += `<div class="month_header_cell">${day}</div>`;
+      });
+      html += `</div>`;
+
+      html += `<div class="month_body">`;
+
+      // Render each week row
+      for (let week = 0; week < numWeeks; week++) {
+        const weekDates = gridDates.slice(week * 7, (week + 1) * 7);
+        const spanningEvents = getSpanningEventsForWeek(weekDates, events);
+        const maxSlots = Math.max(2, ...spanningEvents.map(e => e.slotRow + 1));
+        
+        html += `<div class="month_week_row">`;
+        
+        // Day cells (background)
+        html += `<div class="month_week_cells">`;
+        weekDates.forEach((date, dayIndex) => {
+          const isCurrentMonth = date.getMonth() === month;
+          const isToday = isSameDay(date, today);
+          const dayNum = String(date.getDate()).padStart(2, '0');
+          
+          html += `<div class="month_cell${isToday ? ' today' : ''}${!isCurrentMonth ? ' other_month' : ''}" 
+                        data-date="${formatDate(date, 'yyyy-MM-dd')}">`;
+          html += `<div class="month_day_number">${dayNum}</div>`;
+          html += `</div>`;
+        });
+        html += `</div>`;
+        
+        // Events layer (absolute positioned spanning events)
+        html += `<div class="month_week_events">`;
+        
+        const visibleEvents = spanningEvents.filter(e => e.slotRow < 2);
+        const hiddenEventsPerDay = new Array(7).fill(0);
+        
+        spanningEvents.forEach(e => {
+          if (e.slotRow >= 2) {
+            for (let col = e.startCol; col <= e.endCol; col++) {
+              hiddenEventsPerDay[col]++;
+            }
+          }
+        });
+        
+        visibleEvents.forEach(({ event, startCol, span, slotRow, startsBeforeWeek, continuesAfterWeek }) => {
+          const leftPercent = (startCol / 7) * 100;
+          const widthPercent = (span / 7) * 100;
+          const topOffset = 28 + (slotRow * 26); // Day number height + slot offset
+          
+          let classes = 'month_event month_event_spanning';
+          if (startsBeforeWeek) classes += ' continues_left';
+          if (continuesAfterWeek) classes += ' continues_right';
+          
+          html += `<div class="${classes}" 
+                        data-event-id="${event.id}"
+                        style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${topOffset}px; --span: ${span};">`;
+          html += `<span class="month_event_title">${event.title}</span>`;
+          html += `</div>`;
+        });
+        
+        // Show "+N more" indicators for each day with hidden events
+        hiddenEventsPerDay.forEach((count, dayIndex) => {
+          if (count > 0) {
+            const leftPercent = (dayIndex / 7) * 100;
+            const widthPercent = (1 / 7) * 100;
+            const dateStr = formatDate(weekDates[dayIndex], 'yyyy-MM-dd');
+            html += `<div class="more_events" 
+                          data-date="${dateStr}"
+                          style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${28 + (2 * 26)}px;">
+                      +${count} more
+                    </div>`;
+          }
+        });
+        
+        html += `</div>`;
         html += `</div>`;
       }
 
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.month-event').forEach(el => {
+      document.querySelectorAll('.month_event').forEach(el => {
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
+        });
+      });
+
+      // Add click handler for "+N more" elements
+      document.querySelectorAll('.more_events').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const dateStr = el.dataset.date;
+          const date = new Date(dateStr + 'T00:00:00');
+          const dayEvents = getEventsForDay(date);
+          showDialog(date, dayEvents);
         });
       });
     };
@@ -202,51 +373,172 @@
     const renderWeekView = () => {
       const weekStart = startOfWeek(currentDate);
       const today = new Date();
+      
+      // Get week dates array
+      const weekDates = [];
+      for (let i = 0; i < 7; i++) {
+        weekDates.push(addDays(weekStart, i));
+      }
+      
+      // Helper to check if event is multi-day
+      const isMultiDayEvent = (event) => {
+        const startDay = normalizeDate(event.start).getTime();
+        const endDay = normalizeDate(event.end).getTime();
+        return endDay > startDay;
+      };
+      
+      // Get only multi-day events for spanning
+      const multiDayEvents = events.filter(isMultiDayEvent);
+      const spanningEvents = getSpanningEventsForWeek(weekDates, multiDayEvents);
 
-      let html = `<div class="week-view">`;
+      let html = `<div class="week_view">`;
 
-      html += `<div class="week-header"><div class="week-day-headers">`;
+      html += `<div class="week_header"><div class="week_day_headers">`;
       for (let i = 0; i < 7; i++) {
         const day = addDays(weekStart, i);
         const isToday = isSameDay(day, today);
-        html += `<div class="week-day-header">`;
-        html += `<div class="week-day-name">${formatDate(day, 'EEE')}</div>`;
-        html += `<div class="week-day-number${isToday ? ' today' : ''}">${formatDate(day, 'd')}</div>`;
+        html += `<div class="week_day_header">`;
+        html += `<div class="week_day_name">${formatDate(day, 'EEE')}</div>`;
+        html += `<div class="week_day_number${isToday ? ' today' : ''}">${formatDate(day, 'd')}</div>`;
         html += `</div>`;
       }
       html += `</div></div>`;
 
-      html += `<div class="week-body">`;
+      html += `<div class="week_body">`;
 
-      html += `<div class="time-column">`;
-      html += `<div class="time-slot empty-slot"></div>`;
+      html += `<div class="time_column">`;
+      html += `<div class="time_slot empty_slot"></div>`;
       for (let i = 1; i < 24; i++) {
         const hour = i % 12 || 12;
         const ampm = i < 12 ? 'AM' : 'PM';
-        html += `<div class="time-slot"><span class="time-label">${hour} ${ampm}</span></div>`;
+        html += `<div class="time_slot"><span class="time_label">${hour} ${ampm}</span></div>`;
       }
-      html += `<div class="time-slot"><span class="time-label">12 AM</span></div>`;
-      html += `<div class="time-slot extra-row"></div>`;
+      html += `<div class="time_slot"><span class="time_label">12 AM</span></div>`;
       html += `</div>`;
 
-      html += `<div class="week-event-grid">`;
-      for (let i = 0; i < 7; i++) {
-        const day = addDays(weekStart, i);
-        const dayEvents = getEventsForDay(day);
-
-        html += `<div class="week-day-column">`;
+      html += `<div class="week_event_grid">`;
+      
+      // Render spanning multi-day events layer - position at their start time
+      // Only show the first spanning event (slotRow 0)
+      html += `<div class="week_spanning_events">`;
+      spanningEvents.filter(se => se.slotRow === 0).forEach(({ event, startCol, span, startsBeforeWeek, continuesAfterWeek }) => {
+        const leftPercent = (startCol / 7) * 100;
+        const widthPercent = (span / 7) * 100;
+        // Position at the event's actual start time (same formula as day view)
+        const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+        const topOffset = startHour * 45;
         
-        for (let h = 0; h <= 25; h++) {
-          html += `<div class="hour-line" style="top: ${h * 35}px"></div>`;
+        let classes = 'week_event_spanning';
+        if (startsBeforeWeek) classes += ' continues_left';
+        if (continuesAfterWeek) classes += ' continues_right';
+        
+        html += `<div class="${classes}" 
+                      data-event-id="${event.id}"
+                      style="left: ${leftPercent}%; width: ${widthPercent}%; top: ${topOffset}px;">`;
+        html += `<span class="week_event_title">${event.title}</span>`;
+        html += `</div>`;
+      });
+      html += `</div>`;
+      
+      // Day columns with hour lines and single-day events
+      for (let i = 0; i < 7; i++) {
+        const day = weekDates[i];
+        // Get all events for this day
+        const allDayEvents = getEventsForDay(day);
+        // Get only single-day events for this day
+        const dayEvents = allDayEvents.filter(event => !isMultiDayEvent(event));
+        // Get multi-day events for this day (to show count)
+        const multiDayEventsOnDay = allDayEvents.filter(event => isMultiDayEvent(event));
+        
+        html += `<div class="week_day_column">`;
+        // Hour lines (same as day view)
+        for (let h = 0; h <= 24; h++) {
+          html += `<div class="hour_line" style="top: ${h * 45}px"></div>`;
         }
+        
+        // If there are events on this day beyond what's shown in spanning bars, show "+N more"
+        const totalEventsOnDay = allDayEvents.length;
+        // Count only the first spanning event (slotRow 0) as visible
+        const visibleSpanningCount = spanningEvents.filter(se => 
+          se.slotRow === 0 && i >= se.startCol && i <= se.endCol
+        ).length;
+        
+        const hiddenEventsCount = totalEventsOnDay - visibleSpanningCount;
+        
+        if (hiddenEventsCount > 0) {
+          const dateStr = formatDate(day, 'yyyy-MM-dd');
+          // Position the "+N more" below the visible spanning event (if any)
+          const visibleSpanningForThisDay = spanningEvents.filter(se => 
+            se.slotRow === 0 && i >= se.startCol && i <= se.endCol
+          );
+          if (visibleSpanningForThisDay.length > 0) {
+            // Get the visible spanning event to position below it
+            const firstSpanning = visibleSpanningForThisDay[0];
+            const startHour = firstSpanning.event.start.getHours() + firstSpanning.event.start.getMinutes() / 60;
+            const topOffset = startHour * 45 + 28;
+            html += `<div class="week_more_events" 
+                         style="top: ${topOffset}px; left: 5px;" 
+                         data-date="${dateStr}"
+                         data-hour="-1">
+                      +${hiddenEventsCount} more
+                    </div>`;
+          } else {
+            // No visible spanning event, position at top
+            html += `<div class="week_more_events" 
+                         style="top: 5px; left: 5px;" 
+                         data-date="${dateStr}"
+                         data-hour="-1">
+                      +${hiddenEventsCount} more
+                    </div>`;
+          }
+        }
+        
+        if (visibleSpanningCount === 0) {
+          // Only render single-day events if there are no multi-day events on this day
+          // Render single-day events at their time position (same formula as day view)
+          // Group events by hour
+          const eventsByHour = {};
+          dayEvents.forEach(event => {
+            const hour = event.start.getHours();
+            if (!eventsByHour[hour]) eventsByHour[hour] = [];
+            eventsByHour[hour].push(event);
+          });
 
-        dayEvents.forEach(event => {
-          const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-          html += `<div class="week-event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
-          html += `<div class="week-event-title">${event.title}</div>`;
-          html += `</div>`;
-        });
-
+          // Render events or +N buttons
+          for (let h = 0; h < 24; h++) {
+            if (eventsByHour[h] && eventsByHour[h].length > 0) {
+              const hourEvents = eventsByHour[h];
+              
+              // If overlapping events (more than 1 in this hour slot), show first and +N
+              if (hourEvents.length > 1) {
+                // Show first event
+                const event = hourEvents[0];
+                const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+                
+                html += `<div class="week_event" style="top: ${startHour * 45}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
+                html += `<div class="week_event_title">${event.title}</div>`;
+                html += `</div>`;
+                
+                // Show +N button
+                const count = hourEvents.length - 1;
+                html += `<div class="week_more_events" 
+                             style="top: ${startHour * 45 + 28}px;" 
+                             data-date="${formatDate(day, 'yyyy-MM-dd')}"
+                             data-hour="${h}">
+                          +${count} more
+                        </div>`;
+              } else {
+                // Just one event, render normally
+                const event = hourEvents[0];
+                const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+                html += `<div class="week_event" style="top: ${startHour * 45}px" data-event-id="${event.id}">`;
+                html += `<div class="week_event_title">${event.title}</div>`;
+                html += `</div>`;
+              }
+            }
+          }
+        }
+        
         html += `</div>`;
       }
       html += `</div>`;
@@ -254,11 +546,36 @@
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.week-event').forEach(el => {
+      // Event handlers for week view events
+      document.querySelectorAll('.week_event_spanning, .week_event').forEach(el => {
         el.addEventListener('click', () => {
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
+        });
+      });
+
+      // Event handlers for +N buttons
+      document.querySelectorAll('.week_more_events').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const dateStr = el.dataset.date;
+          const hour = parseInt(el.dataset.hour, 10);
+          const date = new Date(dateStr + 'T00:00:00'); // Base date
+          
+          // If hour is -1, show all events for the day (multi-day + single-day)
+          if (hour === -1) {
+            const allDayEvents = getEventsForDay(date);
+            showDialog(date, allDayEvents);
+          } else {
+            // Filter events for this day and hour
+            // We need to fetch all events for this day again to be safe/consistent
+            const dayEvents = getEventsForDay(date).filter(event => !isMultiDayEvent(event));
+            const hourEvents = dayEvents.filter(event => event.start.getHours() === hour);
+            
+            // Show dialog with these specific events
+            showDialog(date, hourEvents);
+          }
         });
       });
     };
@@ -268,53 +585,100 @@
       const isToday = isSameDay(currentDate, today);
       const dayEvents = getEventsForDay(currentDate);
 
-      let html = `<div class="day-view">`;
+      let html = `<div class="day_view">`;
 
-      html += `<div class="day-header-wrapper">`;
-      html += `<div class="day-day-headers">`;
-      html += `<div class="day-day-header">`;
-      html += `<div class="day-day-name">${formatDate(currentDate, 'EEE')}</div>`;
-      html += `<div class="day-day-number${isToday ? ' today' : ''}">${formatDate(currentDate, 'd')}</div>`;
+      html += `<div class="day_header_wrapper">`;
+      html += `<div class="day_day_headers">`;
+      html += `<div class="day_day_header">`;
+      html += `<div class="day_day_name">${formatDate(currentDate, 'EEE')}</div>`;
+      html += `<div class="day_day_number${isToday ? ' today' : ''}">${formatDate(currentDate, 'd')}</div>`;
       html += `</div>`;
       html += `</div></div>`;
 
-      html += `<div class="day-body">`;
+      html += `<div class="day_body">`;
 
-      html += `<div class="time-column">`;
-      html += `<div class="time-slot empty-slot"></div>`;
+      html += `<div class="time_column">`;
+      html += `<div class="time_slot empty_slot"></div>`;
       for (let i = 1; i < 24; i++) {
         const hour = i % 12 || 12;
         const ampm = i < 12 ? 'AM' : 'PM';
-        html += `<div class="time-slot"><span class="time-label">${hour} ${ampm}</span></div>`;
+        html += `<div class="time_slot"><span class="time_label">${hour} ${ampm}</span></div>`;
       }
-      html += `<div class="time-slot"><span class="time-label">12 AM</span></div>`;
-      html += `<div class="time-slot extra-row"></div>`;
+      html += `<div class="time_slot"><span class="time_label">12 AM</span></div>`;
       html += `</div>`;
 
-      html += `<div class="day-event-grid">`;
-      html += `<div class="day-column">`;
+      html += `<div class="day_event_grid">`;
+      html += `<div class="day_column">`;
       
-      for (let h = 0; h <= 25; h++) {
-        html += `<div class="hour-line" style="top: ${h * 35}px"></div>`;
+      for (let h = 0; h <= 24; h++) {
+        html += `<div class="hour_line" style="top: ${h * 45}px"></div>`;
       }
 
+      // Group events by hour
+      const eventsByHour = {};
       dayEvents.forEach(event => {
-        const startHour = event.start.getHours() + event.start.getMinutes() / 60;
-        html += `<div class="day-event" style="top: ${startHour * 35}px" data-event-id="${event.id}">`;
-        html += `<div class="day-event-title">${event.title}</div>`;
-        html += `</div>`;
+        const hour = event.start.getHours();
+        if (!eventsByHour[hour]) eventsByHour[hour] = [];
+        eventsByHour[hour].push(event);
       });
+
+      // Render events or +N buttons
+      for (let h = 0; h < 24; h++) {
+        if (eventsByHour[h] && eventsByHour[h].length > 0) {
+          const hourEvents = eventsByHour[h];
+          
+          if (hourEvents.length > 1) {
+             // Show first event
+             const event = hourEvents[0];
+             const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+             
+             html += `<div class="day_event" style="top: ${startHour * 45}px; width: calc(100% - 4px);" data-event-id="${event.id}">`;
+             html += `<div class="day_event_title">${event.title}</div>`;
+             html += `</div>`;
+             
+             // Show +N button
+             const count = hourEvents.length - 1;
+             html += `<div class="day_more_events" 
+                          style="top: ${startHour * 45 + 28}px;" 
+                          data-date="${formatDate(currentDate, 'yyyy-MM-dd')}"
+                          data-hour="${h}">
+                       +${count} more
+                     </div>`;
+          } else {
+             const event = hourEvents[0];
+             const startHour = event.start.getHours() + event.start.getMinutes() / 60;
+             html += `<div class="day_event" style="top: ${startHour * 45}px" data-event-id="${event.id}">`;
+             html += `<div class="day_event_title">${event.title}</div>`;
+             html += `</div>`;
+          }
+        }
+      }
 
       html += `</div></div>`;
 
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.day-event').forEach(el => {
+      document.querySelectorAll('.day_event').forEach(el => {
         el.addEventListener('click', () => {
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) handleEventClick(event);
+        });
+      });
+
+      // Event handlers for +N buttons
+      document.querySelectorAll('.day_more_events').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const dateStr = el.dataset.date;
+          const hour = parseInt(el.dataset.hour, 10);
+          const date = new Date(dateStr + 'T00:00:00');
+          
+          const dayEventsLocal = getEventsForDay(date);
+          const hourEvents = dayEventsLocal.filter(event => event.start.getHours() === hour);
+          
+          showDialog(date, hourEvents);
         });
       });
     };
@@ -325,26 +689,26 @@
       const months = ['January', 'February', 'March', 'April', 'May', 'June',
                       'July', 'August', 'September', 'October', 'November', 'December'];
 
-      let html = `<div class="year-view"><div class="year-grid">`;
+      let html = `<div class="year_view"><div class="year_grid">`;
 
       for (let month = 0; month < 12; month++) {
         const monthStart = new Date(year, month, 1);
         const monthEnd = new Date(year, month + 1, 0);
         const startWeekday = monthStart.getDay();
 
-        html += `<div class="year-month-grid">`;
-        html += `<h3 class="year-month-title">${months[month]} ${year}</h3>`;
+        html += `<div class="year_month_grid">`;
+        html += `<h3 class="year_month_title">${months[month]} ${year}</h3>`;
         
-        html += `<div class="weekday-headers">`;
+        html += `<div class="weekday_headers">`;
         weekdays.forEach(day => {
-          html += `<div class="weekday-header">${day}</div>`;
+          html += `<div class="weekday_header">${day}</div>`;
         });
         html += `</div>`;
 
-        html += `<div class="year-days-grid">`;
+        html += `<div class="year_days_grid">`;
         
         for (let i = 0; i < startWeekday; i++) {
-          html += `<div class="year-day-cell empty-cell"></div>`;
+          html += `<div class="year_day_cell empty_cell"></div>`;
         }
 
         for (let day = 1; day <= monthEnd.getDate(); day++) {
@@ -352,12 +716,12 @@
           const dayEvents = getEventsForDay(date);
           const hasEvents = dayEvents.length > 0;
           
-          html += `<div class="year-day-cell${hasEvents ? ' has-events' : ''}" 
+          html += `<div class="year_day_cell${hasEvents ? ' has_events' : ''}" 
                         data-date="${formatDate(date, 'yyyy-MM-dd')}"
                         data-has-events="${hasEvents}">`;
           html += `${day}`;
           if (hasEvents) {
-            html += `<span class="event-indicator">•</span>`;
+            html += `<span class="event_indicator">•</span>`;
           }
           html += `</div>`;
         }
@@ -368,7 +732,7 @@
       html += `</div></div>`;
       calendarView.innerHTML = html;
 
-      document.querySelectorAll('.year-day-cell.has-events').forEach(el => {
+      document.querySelectorAll('.year_day_cell.has_events').forEach(el => {
         el.addEventListener('click', () => {
           const dateStr = el.dataset.date;
           const date = new Date(dateStr + 'T00:00:00');
@@ -381,9 +745,21 @@
     const showDialog = (date, dayEvents) => {
       dialogTitle.textContent = formatDate(date, 'MMMM d, yyyy');
       
-      let html = '<ul class="event-list">';
-      dayEvents.forEach(event => {
-        html += `<li data-event-id="${event.id}">${event.title}</li>`;
+      // Sort events by start time (hour:minute only, ignoring date)
+      const sortedEvents = [...dayEvents].sort((a, b) => {
+        const aMinutes = a.start.getHours() * 60 + a.start.getMinutes();
+        const bMinutes = b.start.getHours() * 60 + b.start.getMinutes();
+        return aMinutes - bMinutes;
+      });
+      
+      let html = '<ul class="event_list">';
+      sortedEvents.forEach(event => {
+        const timeStr = formatDate(event.start, 'h:mm a');
+        
+        html += `<li data-event-id="${event.id}">
+          <div class="event_time">${timeStr}</div>
+          <div class="event_title">${event.title}</div>
+        </li>`;
       });
       html += '</ul>';
       
@@ -392,8 +768,8 @@
 
       dialogBody.querySelectorAll('li').forEach(el => {
         el.addEventListener('click', () => {
-          const eventId = parseInt(el.dataset.eventId);
-          const event = events.find(ev => ev.id === eventId);
+          const eventId = el.dataset.eventId;
+          const event = events.find(ev => String(ev.id) === String(eventId));
           if (event) {
             closeDialog();
             handleEventClick(event);
@@ -444,8 +820,8 @@
           currentDate = new Date();
           break;
       }
-      render();
       updateUrlParams();
+      fetchEvents();
     };
 
     const changeView = (view) => {
@@ -453,8 +829,8 @@
       viewBtns.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.view === view);
       });
-      render();
       updateUrlParams();
+      fetchEvents();
     };
 
     const render = () => {
@@ -477,7 +853,7 @@
 
     const initFromUrl = () => {
       const params = new URLSearchParams(window.location.search);
-      const viewParam = params.get('range_type');
+      const viewParam = params.get('range_type') || 'month';
       const dateParam = params.get('date');
 
       if (viewParam && ['day', 'week', 'month', 'year'].includes(viewParam)) {
@@ -495,71 +871,171 @@
       }
     };
 
+    const parseDateStr = (dateStr) => {
+      try {
+        // Try ISO 8601 format first: "2026-03-01T10:00:00" or "2026-03-01 10:00"
+        if (/^\d{4}-\d{2}-\d{2}/.test(dateStr)) {
+          const date = new Date(dateStr);
+          if (!isNaN(date.getTime())) return date;
+        }
+        
+        const months = {
+          'january': 0, 'february': 1, 'march': 2, 'april': 3,
+          'may': 4, 'june': 5, 'july': 6, 'august': 7,
+          'september': 8, 'october': 9, 'november': 10, 'december': 11
+        };
+        
+        // Match format: "09 March 2026, 10:00am" or "09 March 2026, 10:00" (24hr)
+        const regex = /^(\d{1,2})\s+(\w+)\s+(\d{4})(?:,?\s*(\d{1,2}):(\d{2})(?:\s*(am|pm))?)?$/i;
+        const match = dateStr.trim().match(regex);
+        
+        if (match) {
+          const day = parseInt(match[1], 10);
+          const monthName = match[2].toLowerCase();
+          const year = parseInt(match[3], 10);
+          let hours = match[4] ? parseInt(match[4], 10) : 0;
+          const minutes = match[5] ? parseInt(match[5], 10) : 0;
+          const ampm = match[6] ? match[6].toLowerCase() : null;
+          
+          const month = months[monthName];
+          if (month === undefined) {
+            console.error('Unknown month:', monthName);
+            return new Date(dateStr);
+          }
+          
+          // Convert to 24-hour format if am/pm is present
+          if (ampm) {
+            if (ampm === 'pm' && hours !== 12) {
+              hours += 12;
+            } else if (ampm === 'am' && hours === 12) {
+              hours = 0;
+            }
+          }
+          
+          return new Date(year, month, day, hours, minutes, 0, 0);
+        }
+        
+        // Fallback to native Date parsing
+        const date = new Date(dateStr);
+        if (!isNaN(date.getTime())) return date;
+        
+        console.warn('Could not parse date:', dateStr);
+        return new Date();
+      } catch (e) {
+        console.error('Error parsing date:', dateStr, e);
+        return new Date();
+      }
+    };
+
     const fetchEvents = async () => {
-      const apiUrl = calendarView.getAttribute('data-events');
+      const apiUrl = getApiUrl();
       
       if (!apiUrl) {
         console.warn('Calendar: No data-events attribute provided. Events will not be loaded.');
+        render();
         return;
       }
 
-      calendarView.innerHTML = '<div class="loading-state">Loading events...</div>';
+      // Cancel any pending request
+      if (abortController) {
+        abortController.abort();
+      }
+      abortController = new AbortController();
+
+      isLoading = true;
+      updateDateRangeLabel();
       
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+          signal: abortController.signal
+        });
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data = await response.json();
+        const responseData = await response.json();
+        const eventData = Array.isArray(responseData) ? responseData : (responseData.data || []);
         
-        if (!Array.isArray(data)) {
+        if (!Array.isArray(eventData)) {
           throw new Error('Invalid data format: Expected an array of events.');
         }
 
-        events = data.map(event => ({
-          ...event,
-          start: new Date(event.start),
-          end: new Date(event.end)
-        }));
+        events = eventData.map(item => {
+          const props = item.attributes || item;
+          const id = item.id || props.id;
+          
+          const startDate = parseDateStr(props.start);
+          const endDate = parseDateStr(props.end);
+          
+          return {
+            id: id,
+            title: props.title,
+            start: startDate,
+            end: endDate,
+            full_url: props.full_url,
+            is_published: props.is_published
+          };
+        });
 
+        isLoading = false;
         render();
       } catch (error) {
+        if (error.name === 'AbortError') {
+          // Request was cancelled, ignore
+          return;
+        }
+        
+        isLoading = false;
         console.error('Calendar: Error fetching events:', error);
-        calendarView.innerHTML = `<div class="error-state">
+        calendarView.innerHTML = `<div class="error_state">
           <p>Unable to load events.</p>
-          <p class="error-details">${error.message}</p>
+          <p class="error_details">${error.message}</p>
         </div>`;
       }
     };
 
     const init = () => {
-      viewBtns.forEach(btn => {
-        btn.addEventListener('click', () => changeView(btn.dataset.view));
-      });
+      // Check if required elements exist
+      if (!calendarView) {
+        console.warn('Calendar: calendar_view element not found');
+        return;
+      }
 
-      prevBtn.addEventListener('click', () => navigate('PREV'));
-      nextBtn.addEventListener('click', () => navigate('NEXT'));
-      todayBtn.addEventListener('click', () => navigate('TODAY'));
+      if (viewBtns && viewBtns.length > 0) {
+        viewBtns.forEach(btn => {
+          btn.addEventListener('click', () => changeView(btn.dataset.view));
+        });
+      }
 
-      dialogClose.addEventListener('click', closeDialog);
-      dialogOverlay.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dialog-overlay') || e.target.classList.contains('dialog-wrapper')) {
-          closeDialog();
-        }
-      });
+      if (prevBtn) prevBtn.addEventListener('click', () => navigate('PREV'));
+      if (nextBtn) nextBtn.addEventListener('click', () => navigate('NEXT'));
+      if (todayBtn) todayBtn.addEventListener('click', () => navigate('TODAY'));
+
+      if (dialogClose) dialogClose.addEventListener('click', closeDialog);
+      if (dialogOverlay) {
+        dialogOverlay.addEventListener('click', (e) => {
+          if (e.target.classList.contains('dialog_overlay') || e.target.classList.contains('dialog_wrapper')) {
+            closeDialog();
+          }
+        });
+      }
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeDialog();
       });
 
+      // Handle browser back/forward navigation
+      window.addEventListener('popstate', () => {
+        initFromUrl();
+        fetchEvents();
+      });
+
+      // Initialize from URL params or set defaults
       initFromUrl();
-
-      if (!window.location.search.includes('range_type') || !window.location.search.includes('date')) {
-        updateUrlParams();
-      }
-
+      updateUrlParams();
+      
+      // Initial fetch
       fetchEvents();
     };
 

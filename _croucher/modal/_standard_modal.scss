@@ -960,6 +960,16 @@
     text-align: right;
     padding-top: 10px;
   }
+
+  .standard-modal-close-btn {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    svg{
+      width: 24px;
+      height: 23px;
+    }
+  }
 }
 
 #view-book-order-modal .std-content-container {
