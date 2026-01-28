@@ -920,6 +920,12 @@
           console.log("submitted");
           passwordPrimaryInput.classList.remove("croucher_input_invalid");
           var form = this.closest("form");
+
+          if (form && !form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
           var modal = saveBtn.closest(".modal");
           closeModal(modal.id);
           if (form) {
@@ -929,6 +935,11 @@
       } else {
         var form = this.closest("form");
         var formValid = true;
+
+        if (form && !form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
         // Validate the email input
         var emailInput = form.querySelector('input[type="email"]');

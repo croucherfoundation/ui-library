@@ -69,6 +69,12 @@
       }
     }
 
+    .rte {
+      p {
+        margin-bottom: 0;
+      }
+    }
+
     > ul:not(.standard-dropdown__list),
     .modal-content ul:not(.standard-dropdown__list) {
       list-style-type: none;
