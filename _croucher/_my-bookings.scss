@@ -1979,3 +1979,99 @@ $status-recording-text: #1565c0;
     opacity: 1;
   }
 }
+// =====================================================
+// ON/OFF SWITCH COMPONENT
+// =====================================================
+.on-off-switch {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.on-off-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.on-off-switch__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.on-off-switch__text {
+  font-size: 16px;
+  color: $croucher-dark;
+  font-weight: 500;
+}
+
+.on-off-switch__toggle {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background-color: $gray-1;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+// Placement variant - start
+.on-off-switch__label--start .on-off-switch__toggle {
+  margin-left: 0;
+  margin-right: 12px;
+}
+
+.on-off-switch__slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background-color: $white;
+  border-radius: 50%;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+// Checked state
+.on-off-switch__input:checked + .on-off-switch__label {
+  .on-off-switch__toggle {
+    background-color: $csw-teal;
+  }
+
+  .on-off-switch__slider {
+    transform: translateX(24px);
+  }
+}
+
+// Hover state
+.on-off-switch:hover .on-off-switch__toggle {
+  opacity: 0.9;
+}
+
+// Disabled state
+.on-off-switch__input:disabled + .on-off-switch__label {
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  .on-off-switch__toggle {
+    cursor: not-allowed;
+  }
+}
+
+// Focus state for accessibility
+.on-off-switch__input:focus-visible + .on-off-switch__label {
+  .on-off-switch__toggle {
+    outline: 2px solid $csw-teal;
+    outline-offset: 2px;
+  }
+}
