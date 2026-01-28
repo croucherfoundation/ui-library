@@ -88,6 +88,10 @@
     width: 25%;
   }
 
+  span.unknown {
+    color: #000;
+  }
+
   @media (max-width: 768px) {
     .detail-row {
       display: block;
