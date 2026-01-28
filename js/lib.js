@@ -1120,6 +1120,36 @@
    * --- END: Accordion
    * --------------------------
    */
+
+  /**
+   * --------------------------
+   * --- START: Textarea Auto Expand
+   * --------------------------
+   */
+  document.querySelectorAll('.standard-modal-container textarea, .standard-modal-container .rte').forEach(textarea => {
+    // Store the original height
+    const minHeight = textarea.offsetHeight || 38;
+    
+    // Set initial height
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.max(textarea.scrollHeight, minHeight) + 'px';
+    
+    // Expand on input (including Enter key)
+    textarea.addEventListener('input', function() {
+      this.style.height = 'auto';
+      // If empty, reset to minimum height
+      if (this.value.trim() === '') {
+        this.style.height = minHeight + 'px';
+      } else {
+        this.style.height = Math.max(this.scrollHeight, minHeight) + 'px';
+      }
+    });
+  });
+  /**
+   * --------------------------
+   * --- END: Textarea Auto Expand
+   * --------------------------
+   */
 })();
 
 document.addEventListener("DOMContentLoaded", function () {
