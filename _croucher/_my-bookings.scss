@@ -1613,6 +1613,10 @@ $status-recording-text: #1565c0;
     display: none;
   }
 
+  .mobile-fullscreen-detail {
+    display: none;
+  }
+
   .booking-card-wrapper {
     .booking-card {
       margin-bottom: 16px;
@@ -1882,4 +1886,96 @@ $status-recording-text: #1565c0;
   justify-content: flex-end;
   gap: 12px;
   margin-top: 8px;
+}
+
+// =====================================================
+// MOBILE FULLSCREEN DETAIL PANEL
+// =====================================================
+.mobile-fullscreen-detail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: $white;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  // animation: slideInFromRight 0.3s ease-out;
+
+  @include lg {
+    display: none;
+  }
+}
+
+.mobile-fullscreen-detail__header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: $white;
+  border-bottom: 1px solid $gray-1;
+  flex-shrink: 0;
+}
+
+.mobile-fullscreen-detail__back-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: $croucher-dark;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  margin-left: -12px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    color: $csw-teal;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $csw-teal;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.mobile-fullscreen-detail__content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  .sidebar-detail {
+    border-radius: 0;
+    min-height: 100%;
+  }
+
+  .sidebar-detail__header {
+    border-radius: 0;
+  }
+
+  .sidebar-detail__close {
+    display: none;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
