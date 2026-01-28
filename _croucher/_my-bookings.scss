@@ -2058,13 +2058,24 @@ $status-recording-text: #1565c0;
   opacity: 0.9;
 }
 
+// Prevent hover effect when disabled
+.on-off-switch__input:disabled ~ .on-off-switch__label .on-off-switch__toggle {
+  opacity: 1;
+}
+
 // Disabled state
 .on-off-switch__input:disabled + .on-off-switch__label {
   opacity: 0.5;
   cursor: not-allowed;
+  pointer-events: none;
 
   .on-off-switch__toggle {
     cursor: not-allowed;
+    background-color: $gray-1 !important;
+  }
+
+  .on-off-switch__text {
+    color: $light-gray1;
   }
 }
 
