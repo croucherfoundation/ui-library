@@ -69,8 +69,12 @@
       }
     }
 
-    .rte {
-      p {
+    textarea, .rte[contenteditable]:not([contenteditable=false]) {
+      min-height: 38px;
+      overflow: hidden;
+      resize: none;
+      
+      p, div {
         margin-bottom: 0;
       }
     }
