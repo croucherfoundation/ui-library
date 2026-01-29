@@ -13,6 +13,10 @@
   var CENTER_X = 100;
   var CENTER_Y = 100;
   var ANIMATION_DURATION = 1200;
+  
+  // Guard against multiple initializations
+  var isInitialized = false;
+  var currentAnimationId = null;
 
   // Rotate polygon points around center
   function rotatePolygon(pointsString, centerX, centerY, angleDegrees) {
@@ -72,6 +76,11 @@
 
   // Animate needle from current angle to target angle
   function animateNeedle(needle, startAngle, targetAngle, duration) {
+    // Cancel any existing animation
+    if (currentAnimationId) {
+      cancelAnimationFrame(currentAnimationId);
+    }
+    
     var startTime = performance.now();
     
     function animate(currentTime) {
@@ -83,11 +92,13 @@
       needle.setAttribute('points', rotatePolygon(ORIGINAL_POINTS, CENTER_X, CENTER_Y, currentAngle));
       
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        currentAnimationId = requestAnimationFrame(animate);
+      } else {
+        currentAnimationId = null;
       }
     }
     
-    requestAnimationFrame(animate);
+    currentAnimationId = requestAnimationFrame(animate);
   }
 
   // Initialize gauge
@@ -99,11 +110,33 @@
       return;
     }
     
+    // Skip if already initialized for this container (prevents flickering)
+    if (container.dataset.gaugeInitialized === 'true') {
+      return;
+    }
+    
+    // Mark as initialized
+    container.dataset.gaugeInitialized = 'true';
+    isInitialized = true;
+    
     var gaugeValue = parseInt(container.dataset.gaugeValue) || 0;
     var targetAngle = calculateAngle(gaugeValue);
     
     // Animate needle from 0 to target angle
     animateNeedle(needle, 0, targetAngle, ANIMATION_DURATION);
+  }
+  
+  // Reset initialization state (for page transitions)
+  function resetGaugeMeter() {
+    var container = document.getElementById('gauge-meter-container');
+    if (container) {
+      container.dataset.gaugeInitialized = 'false';
+    }
+    isInitialized = false;
+    if (currentAnimationId) {
+      cancelAnimationFrame(currentAnimationId);
+      currentAnimationId = null;
+    }
   }
 
   // Initialize when DOM is ready
@@ -114,7 +147,9 @@
     initGaugeMeter();
   }
 
-  // Also support Turbolinks/Turbo if used
+  // Support Turbolinks/Turbo if used - reset before loading new page
+  document.addEventListener('turbolinks:before-visit', resetGaugeMeter);
+  document.addEventListener('turbo:before-visit', resetGaugeMeter);
   document.addEventListener('turbolinks:load', initGaugeMeter);
   document.addEventListener('turbo:load', initGaugeMeter);
 })();
