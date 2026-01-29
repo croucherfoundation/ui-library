@@ -111,10 +111,28 @@
   }
 
   a.normal-link {
-   color: #000;
-   &:hover {
-    color: #d34a4a;
-   }
+    color: #000;
+    &:hover {
+      color: #d34a4a;
+    }
+  }
+
+  span.small-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding: 7px 0;
+    a {
+      display: flex;
+      align-items: center;
+      color: #9B9A97;
+      margin-top: -2px;
+      svg {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+    }
   }
 
 
