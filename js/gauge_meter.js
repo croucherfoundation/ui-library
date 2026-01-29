@@ -1,8 +1,8 @@
 /*
   ============================
-  GAUGE METER - Deploy Tracker
+  GAUGE METER
   ============================
-  Handles needle rotation animation for deployment gauge
+  Handles needle rotation animation for gauge meter
 */
 
 (function() {
@@ -99,8 +99,8 @@
       return;
     }
     
-    var pastWeekDeploys = parseInt(container.dataset.pastWeekDeploys) || 0;
-    var targetAngle = calculateAngle(pastWeekDeploys);
+    var gaugeValue = parseInt(container.dataset.gaugeValue) || 0;
+    var targetAngle = calculateAngle(gaugeValue);
     
     // Animate needle from 0 to target angle
     animateNeedle(needle, 0, targetAngle, ANIMATION_DURATION);
