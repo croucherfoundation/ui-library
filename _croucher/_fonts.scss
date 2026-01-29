@@ -124,7 +124,7 @@ $typo: (
   a {
     color: $font-black !important;
     &:hover {
-      text-decoration: underline;
+      text-decoration: underline !important;
     }
   }
 }
