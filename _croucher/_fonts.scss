@@ -119,6 +119,16 @@ $typo: (
   ),
 );
 
+// Link styles specifically within preview title blocks
+.text-preview-title {
+  a {
+    color: $font-black !important;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 @each $name, $style in $typo {
   .text-#{$name} {
     color: $font-black;
