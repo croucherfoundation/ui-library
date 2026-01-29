@@ -117,20 +117,25 @@
     }
   }
 
+  a.setter.no{
+    color: #9B9A97;
+  }
+
   span.small-controls {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 4px;
     padding: 7px 0;
     a {
       display: flex;
       align-items: center;
       color: #9B9A97;
-      margin-top: -2px;
+      gap: 4px;
       svg {
         width: 16px;
         height: 16px;
         cursor: pointer;
+        margin-top: -1px;
       }
     }
   }
