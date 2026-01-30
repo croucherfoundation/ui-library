@@ -1056,8 +1056,8 @@ $status-recording-text: #1565c0;
   border-radius: $rounded-5;
 
   &--live {
-    background: $status-live-bg;
-    color: $white;
+    background: #FFEBEE;
+    color: #B71C1C;
     animation: pulse 2s infinite;
   }
 
@@ -1263,13 +1263,14 @@ $status-recording-text: #1565c0;
 .cancel-modal__actions {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 16px;
   align-items: center;
   justify-content: flex-end;
   margin-top: 16px;
 
   @include lg {
     flex-direction: row;
+    gap: 25px;
   }
 
   button {
@@ -2186,13 +2187,13 @@ $status-recording-text: #1565c0;
 
 // Disabled state
 .on-off-switch__input:disabled + .on-off-switch__label {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
 
   .on-off-switch__toggle {
     cursor: not-allowed;
-    background-color: $gray-1 !important;
+    background-color: $csw-teal !important;
   }
 
   .on-off-switch__text {
