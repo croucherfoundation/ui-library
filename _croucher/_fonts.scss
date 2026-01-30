@@ -121,7 +121,7 @@ $typo: (
 );
 
 // Link styles specifically within preview title blocks
-.text-preview-title {
+.text-preview-title:not(.document) {
   a {
     color: $font-black !important;
   }
@@ -138,6 +138,13 @@ $typo: (
   }
 }
 
+.text-preview-title:hover {
+  .shortened {
+    text-decoration: underline !important;
+    color: $font-black !important;
+  }
+}
+
 .grant, .award {
   &:has(.text-preview-title) {
     a:hover {
@@ -148,6 +155,10 @@ $typo: (
 
 .f-16 {
   font-size: 16px !important;
+}
+
+.f-20 {
+  font-size: 20px !important;
 }
 
 @each $name, $style in $typo {
