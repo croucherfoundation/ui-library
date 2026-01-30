@@ -12,8 +12,16 @@
     .body_container {
       .card_title {
         color: var(--color-text-primary); // White
+        display: inline;
+        background-image: linear-gradient(currentColor, currentColor);
+        background-position: 50% 100%;
+        background-repeat: no-repeat;
+        background-size: 0% 3px;
+        transition: background-size 0.4s ease-in-out;
+        padding-bottom: 4px;
       }
       .card_desc {
+        margin-top: 13px;
         color: $white;
         .card_item .text {
            color: $white;
@@ -105,7 +113,7 @@
 
     .card_title {
       font-size: 24px;
-      line-height: 28px;
+      line-height: 1.3636363636;
       font-weight: 600;
       margin-bottom: 12px;
       margin-top: 7px;
@@ -236,12 +244,17 @@
     .card_title {
       &:not(.csw_title):not(.no_underline) {
         text-decoration: underline;
+        .dark & {
+          text-decoration: none;
+          background-size: 100% 2px;
+        }
       }
 
       &.csw_title {
         color: white;
         .dark & {
           color: $black;
+          background-size: 100% 2px;
         }
       }
     }
@@ -295,6 +308,7 @@
         .card_title {
           text-decoration: none;
           color: var(--color-text-primary);
+          background-size: 100% 2px;
           &.csw_title {
              color: var(--color-text-primary);
           }

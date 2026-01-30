@@ -156,6 +156,54 @@
     //   transform: rotate(0deg);
     // }
   }
+
+  // Dark mode
+  .dark & {
+    &__button {
+      background-color: $black;
+      border-color: $white;
+      color: $white;
+
+      &:hover {
+        border-color: #999;
+      }
+    }
+
+    &__selected {
+      &--placeholder {
+        color: $white;
+      }
+
+      &--value {
+        color: $white;
+      }
+    }
+
+    &__arrow {
+      svg {
+        path {
+          fill: $white;
+        }
+      }
+    }
+
+    &__list {
+      background-color: $black;
+      border-color: #666;
+    }
+
+    &__item {
+      color: $white;
+
+      &:hover {
+        background-color: #333;
+      }
+
+      &--select-all {
+        border-bottom-color: #444;
+      }
+    }
+  }
 }
 
 // Filter Dropdown Group - Container for multiple dropdowns
@@ -314,6 +362,30 @@
 
     &:hover {
       opacity: 0.6;
+    }
+  }
+
+  // Dark mode
+  .dark & {
+    &__label {
+      color: $white;
+    }
+
+    &__tag {
+      color: $white;
+    }
+
+    &__tag-icon {
+      background-color: $white;
+
+      svg {
+        fill: $black;
+        stroke: $black;
+      }
+    }
+
+    &__clear {
+      color: $white;
     }
   }
 }
