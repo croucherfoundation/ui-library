@@ -14,9 +14,9 @@
         color: var(--color-text-primary); // White
       }
       .card_desc {
-        color: #d1d5db; // Light Grey
+        color: $white;
         .card_item .text {
-           color: #d1d5db;
+           color: $white;
         }
       }
       .card_note {
@@ -96,6 +96,11 @@
           color: black;
         }
       }
+    }
+
+    .story_tag {
+       color: #D7205F;
+       transition: color 0.3s ease;
     }
 
     .card_title {
@@ -189,7 +194,8 @@
     .csw_card_body {
       background: $csw-public-red;
       .dark & {
-        background: $csw-magenta;
+        background: var(--card-hover-bg, $csw-magenta);
+        color: $black;
       }
       color: $white;
       .card_item {
@@ -197,18 +203,30 @@
         div,
         .text {
           color: $white;
+          .dark & {
+            color: $black;
+          }
 
           * {
             color: $white;
+            .dark & {
+              color: $black;
+            }
           }
         }
         .icon {
           svg {
             filter: brightness(0) invert(1);
+            .dark & {
+              filter: brightness(0);
+            }
 
             path,
             circle {
               fill: $white;
+              .dark & {
+                fill: $black;
+              }
             }
           }
         }
@@ -222,11 +240,24 @@
 
       &.csw_title {
         color: white;
+        .dark & {
+          color: $black;
+        }
       }
     }
 
     .part-of {
       color: $white;
+      .dark & {
+        color: $black;
+      }
+    }
+    
+    .story_tag {
+       color: $white;
+       .dark & {
+         color: $black;
+       }
     }
   }
 
@@ -242,6 +273,36 @@
 
     .body_container {
       min-height: var(--default-card-small-height);
+    }
+  }
+
+  .story_card & {
+    .dark & {
+      background-color: transparent;
+      
+      .body_container {
+        padding: 15px 0 0 0;
+      }
+      
+      .story_tag {
+        color: #F6E36C;
+      }
+
+      &:hover {
+        .csw_card_body {
+          background: transparent;
+        }
+        .card_title {
+          text-decoration: none;
+          color: var(--color-text-primary);
+          &.csw_title {
+             color: var(--color-text-primary);
+          }
+        }
+        .story_tag {
+           color: #F6E36C;
+        }
+      }
     }
   }
 }
