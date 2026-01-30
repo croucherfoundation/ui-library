@@ -55,6 +55,13 @@ $status-recording-text: #1565c0;
   margin-bottom: 26px;
 }
 
+.my-bookings-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .my-bookings-title {
   // font-size: 28px;
   font-weight: 700;
@@ -69,6 +76,68 @@ $status-recording-text: #1565c0;
 .my-bookings-updated {
   font-size: 18px;
   color: $light-gray1;
+}
+
+// =====================================================
+// MOBILE MENU (Three dots dropdown)
+// =====================================================
+.my-bookings-mobile-menu {
+  position: relative;
+  
+  @include lg {
+    display: none;
+  }
+}
+
+.my-bookings-mobile-menu__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: $croucher-dark;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  margin-right: -19px;
+}
+
+.my-bookings-mobile-menu__dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 200px;
+  background: $white;
+  border-radius: $rounded-5;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.my-bookings-mobile-menu__item {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 14px;
+  color: $croucher-dark;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: $light-gray;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $gray-1;
+  }
 }
 
 // =====================================================
@@ -641,7 +710,7 @@ $status-recording-text: #1565c0;
   background: $white;
   border-radius: $rounded-5;
   // padding: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 60px;
 }
 
 // Browse Events CTA
@@ -662,7 +731,7 @@ $status-recording-text: #1565c0;
 }
 
 .sidebar-cta__text {
-  font-size: 15px;
+  font-size: 20px;
   color: $croucher-dark;
   margin-bottom: 16px;
   line-height: 1.4;
