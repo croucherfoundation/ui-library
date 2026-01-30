@@ -640,7 +640,7 @@ $status-recording-text: #1565c0;
 .sidebar-card {
   background: $white;
   border-radius: $rounded-5;
-  padding: 20px;
+  // padding: 20px;
   margin-bottom: 16px;
 }
 
@@ -777,7 +777,7 @@ $status-recording-text: #1565c0;
     }
   }
 
-  a {
+  button {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -786,22 +786,22 @@ $status-recording-text: #1565c0;
     color: $croucher-dark;
     text-decoration: none;
     font-size: 14px;
-    transition: background 0.2s ease;
+    background: $light-gray;
+    width: 100%;
 
-    &:hover {
-      background: $light-gray;
-    }
 
     svg {
       width: 18px;
       height: 18px;
       color: $light-gray1;
+      margin-left: auto;
     }
   }
 }
 
 // Help Card
 .sidebar-help {
+  padding: 20px;
   background: linear-gradient(
     135deg,
     $csw-teal 0%,
@@ -1090,8 +1090,8 @@ $status-recording-text: #1565c0;
 .sidebar-detail__btn-cancel {
   background: none;
   border: none;
-  color: $status-cancelled-text;
-  font-size: 14px;
+  color: $csw-dark-public-red;
+  font-size: 18px;
   cursor: pointer;
   padding: 8px;
   text-align: center;
@@ -1166,7 +1166,7 @@ $status-recording-text: #1565c0;
     }
 
     @include lg {
-      width: 240px;
+      width: auto;
     }
   }
 }
@@ -1779,9 +1779,10 @@ $status-recording-text: #1565c0;
   // background: $gray-0;
   // border: 1px solid $gray-1;
   // border-radius: $rounded-5;
-  padding: 16px;
+  // padding: 16px;
   display: flex;
   justify-content: center;
+  max-height: 60vh;
 }
 
 .qr-modal__image {
@@ -1797,7 +1798,7 @@ $status-recording-text: #1565c0;
   overflow-x: auto;
   padding: 8px 4px;
   margin: 0 -4px;
-
+  justify-content: center;
   &::-webkit-scrollbar {
     height: 8px;
   }
@@ -1832,8 +1833,8 @@ $status-recording-text: #1565c0;
 }
 
 .qr-modal__thumb-img {
-  width: 72px;
-  height: 72px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   display: block;
 }
@@ -1999,7 +2000,7 @@ $status-recording-text: #1565c0;
 .on-off-switch__label {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   width: 100%;
   cursor: pointer;
   user-select: none;
