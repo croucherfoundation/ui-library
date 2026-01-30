@@ -83,7 +83,7 @@ $status-recording-text: #1565c0;
 // =====================================================
 .my-bookings-mobile-menu {
   position: relative;
-  
+
   @include lg {
     display: none;
   }
@@ -867,19 +867,25 @@ $status-recording-text: #1565c0;
   }
 }
 
+.sidebar-links {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: $white;
+  border-radius: $rounded-5;
+  padding-top: 16px;
+}
 // Quick Links
 .sidebar-links__title {
   font-size: 16px;
   font-weight: 600;
   color: $croucher-dark;
   margin-bottom: 16px;
+  padding: 0 20px;
 }
 
 .sidebar-links__list {
   list-style: none;
 
   li {
-    margin-bottom: 8px;
 
     &:last-child {
       margin-bottom: 0;
@@ -889,16 +895,19 @@ $status-recording-text: #1565c0;
   button {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: $rounded-5;
+    padding: 10px 20px;
     color: $croucher-dark;
     text-decoration: none;
     font-size: 14px;
-    background: $light-gray;
     width: 100%;
+    border-bottom: 1px solid $gray-1;
 
-
+    &:first-child {
+      border-top: 1px solid $gray-1;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
     svg {
       width: 18px;
       height: 18px;
@@ -1924,7 +1933,9 @@ $status-recording-text: #1565c0;
   // border-radius: $rounded-4;
   padding: 6px;
   cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   flex: 0 0 auto;
 
   &:hover {
