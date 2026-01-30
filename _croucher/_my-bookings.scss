@@ -79,6 +79,22 @@ $status-recording-text: #1565c0;
 }
 
 // =====================================================
+// GLOBAL EMPTY STATE (when all bookings are empty)
+// =====================================================
+.my-bookings-empty-global {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 40px 20px;
+
+  @include lg {
+    min-height: 500px;
+    padding: 60px 40px;
+  }
+}
+
+// =====================================================
 // MOBILE MENU (Three dots dropdown)
 // =====================================================
 .my-bookings-mobile-menu {
