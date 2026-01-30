@@ -74,8 +74,7 @@
 .standard-content-page {
     // Section divider style for separating different sections
   .section-divider {
-    border-top: 0.5px solid #9a9b9d;
-    margin: 20px 0;
+    margin: 45px 0;
   }
 
     // Detail rows for labels and values in user profile sections
@@ -97,9 +96,50 @@
     overflow-wrap: break-word;
   }
 
-  span.unknown {
-    color: #000;
+  span.unknown, li.unknown {
+    color: #000 !important;
   }
+
+
+  ul.list-style-none{
+    li{
+      display: block;
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
+  
+  }
+
+  a.normal-link {
+    color: #000;
+    &:hover {
+      color: #d34a4a;
+    }
+  }
+
+  a.setter.no{
+    color: #9B9A97;
+  }
+
+  span.small-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    padding: 7px 0;
+    a {
+      display: flex;
+      align-items: center;
+      color: #9B9A97;
+      gap: 4px;
+      svg {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        margin-top: -1px;
+      }
+    }
+  }
+
 
   @media (max-width: 768px) {
     .detail-row {

@@ -1,5 +1,6 @@
 $font-black: #101820;
 $croucher-red: #EE3A43;
+$font-gray-hover: #7e827a;
 
 @font-face {
   font-family: "MarrSans";
@@ -118,6 +119,47 @@ $typo: (
     lineheight: 32px,
   ),
 );
+
+// Link styles specifically within preview title blocks
+.text-preview-title:not(.document) {
+  a {
+    color: $font-black !important;
+  }
+  a:hover, a:active, a:visited, a:focus {
+    text-decoration: underline !important;
+    color: $font-black !important;
+    .chinese_name {
+      color: #7e827a !important;
+    }
+  }
+  // for including blue switch action menu
+  &:hover {
+    text-decoration: underline !important;
+  }
+}
+
+.text-preview-title:hover {
+  .shortened {
+    text-decoration: underline !important;
+    color: $font-black !important;
+  }
+}
+
+.grant, .award {
+  &:has(.text-preview-title) {
+    a:hover {
+      color: $font-black !important;
+    }
+  }
+}
+
+.f-16 {
+  font-size: 16px !important;
+}
+
+.f-20 {
+  font-size: 20px !important;
+}
 
 @each $name, $style in $typo {
   .text-#{$name} {

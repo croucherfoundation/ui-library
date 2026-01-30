@@ -46,3 +46,18 @@
     padding-left: 22px;
     padding-right: 22px;
 }
+
+.croucher_container {
+    .display-commands p.options {
+        color: #101820;
+        font-weight: normal;
+        a{
+            color: #101820;
+            font-weight: normal;
+            &.here{
+                color: #101820;
+                font-weight: bold;
+            }
+        }
+    }
+}

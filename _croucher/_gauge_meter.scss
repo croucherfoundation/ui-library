@@ -1,0 +1,133 @@
+// Gauge Meter Styles for Deploy Tracker
+.standard-summary.gauge-summary {
+  .croucher_container {
+    .statistics {
+      align-items: center;
+      
+      .section_1 {
+        margin-right: 220px;
+      }
+    }
+  }
+
+  .gauge-meter-container {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    
+    // Prevent flickering during load
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+    
+    &[data-gauge-initialized="true"] {
+      opacity: 1;
+    }
+    
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // SVG specific styles
+  .gauge-meter-container {
+    .cls-1 {
+      fill: #fbad18;
+    }
+    
+    .cls-2 {
+      fill: #231f20;
+    }
+    
+    .cls-3 {
+      fill: #fff;
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE BREAKPOINTS
+// ========================================
+
+// Large Desktop (1200px+) - Horizontal layout
+@media (min-width: 1200px) {
+  .standard-summary.gauge-summary {
+    .croucher_container {
+      padding: 0 142px;
+      
+      .statistics {
+        .section_1 {
+          margin-right: 220px;
+        }
+      }
+    }
+  }
+}
+
+// iPad / Tablet Landscape (992px - 1199px)
+@media (min-width: 992px) and (max-width: 1199px) {
+  .standard-summary.gauge-summary {
+    .croucher_container {
+      padding: 0 40px;
+      
+      .statistics {
+        .section_1 {
+          margin-right: 180px;
+        }
+      }
+    }
+  }
+}
+
+// Tablet & Mobile (< 992px) - Vertical layout
+@media (max-width: 991px) {
+  .standard-summary.gauge-summary {
+    .croucher_container {
+      padding: 0 40px;
+      
+      .statistics {
+        flex-direction: column !important;
+        align-items: center !important;
+        
+        .section_1 {
+          margin-right: 0 !important;
+          margin-bottom: 40px;
+          
+          .gauge-meter-container {
+            width: 280px;
+            height: 280px;
+          }
+        }
+        
+        .section_2,
+        .section_3 {
+          width: 280px;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+// Small Mobile (< 480px)
+@media (max-width: 479px) {
+  .standard-summary.gauge-summary {
+    .croucher_container {
+      padding: 0 20px;
+      
+      .statistics {
+        .section_1 {
+          .gauge-meter-container {
+            width: 300px;
+            height: 300px;
+          }
+        }
+        
+        .section_2,
+        .section_3 {
+          width: 300px;
+        }
+      }
+    }
+  }
+}
