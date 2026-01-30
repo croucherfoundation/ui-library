@@ -756,6 +756,46 @@ $status-recording-text: #1565c0;
       background: rgba($csw-teal, 0.25);
     }
   }
+
+  &--selected {
+    background: $croucher-dark;
+    color: $white;
+    font-weight: 600;
+  }
+}
+
+.sidebar-calendar__day-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-calendar__clear-btn {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: $csw-public-red;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 // Quick Links
