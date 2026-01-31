@@ -3,4 +3,14 @@
     z-index: 30; /* z-30 */
     background-color: black; /* bg-black */
     font-family: "Lettera Regular Web", sans-serif !important;
+
+    @media (prefers-color-scheme: dark) {
+        color: black;
+        background-color: white;
+    }
+
+    .dark & {
+        color: black;
+        background-color: white;
+    }
 }

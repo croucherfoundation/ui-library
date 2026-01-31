@@ -17,7 +17,8 @@
 }
 
 .standard-modal-container {
-  background-color: white;
+  background-color: white !important;
+  color: black !important;
   border-radius: 0.5rem;
   max-width: 794px;
   width: 100%;
@@ -39,16 +40,25 @@
     z-index: 1001;
   }
 
+  h2, p, li, span, div, input, label {
+    color: black !important;
+  }
+
+  // Ensure inputs have black text
+  input::placeholder {
+    color: #6b7280 !important; 
+  }
+
   @media (max-width: 800px) {
     max-width: 90%;
     max-height: 100vh;
   }
 
   .container {
-    padding: 0 96px 0 96px;
+    padding: 60px 96px 0 96px;
 
     @media (max-width: 800px) {
-      padding: 0 40px 2px 40px;
+      padding: 40px 40px 2px 40px;
       p.mobile-mb-38{
         margin-bottom: 38px;
       }
@@ -146,7 +156,7 @@
   ul:not(.token-input-list) {
     font-size: 18px;
 
-    br:not(.medium-editor-element br) {
+    br:not(.medium-editor-element br):not(.hidden) {
       display: block;
       margin-bottom: 10px;
       content: "";
@@ -171,7 +181,7 @@
     }
   }
 
-  br:not(.medium-editor-element br):not(.rte.medium-editor-element br) {
+  br:not(.medium-editor-element br):not(.rte.medium-editor-element br):not(.hidden) {
     display: block;
     margin-bottom: 10px;
     content: "";
@@ -723,12 +733,6 @@
       background-color: white;
       border: 1px solid black;
       color: black;
-
-      &:hover {
-        background-color: $croucher-red;
-        color: white;
-        border: 1px solid $croucher-red;
-      }
     }
 
     .submit,
@@ -737,11 +741,36 @@
       border: none;
       color: white;
       border: 1px solid black;
+      transition: background-color 0.2s, color 0.2s;
 
       &:hover {
-        background-color: white;
-        color: black;
+        background-color: white !important;
+        color: black !important;
         border: 1px solid black;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        background-color: black !important;
+        color: white !important;
+        border: 1px solid black;
+
+        &:hover {
+          background-color: #eab308 !important;
+          color: black !important;
+          border: 1px solid #eab308;
+        }
+      }
+
+      .dark & {
+        background-color: black !important;
+        color: white !important;
+        border: 1px solid black;
+
+        &:hover {
+          background-color: #eab308 !important;
+          color: black !important;
+          border: 1px solid #eab308;
+        }
       }
     }
 
@@ -1085,4 +1114,7 @@
       }
     }
   }
+
+  // Dark mode support - REMOVED as per requirement
+
 }
