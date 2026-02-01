@@ -152,8 +152,8 @@ $typo: (
   }
 }
 
-.text-preview-title:hover {
-  .shortened {
+.text-preview-title.document:hover {
+  .shortened, .name {
     text-decoration: underline !important;
     color: $font-black !important;
   }
