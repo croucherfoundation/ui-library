@@ -41,6 +41,8 @@
 @media only screen and (min-width: 768px) {
   .lead-image-container {
     width: 95%;
+    overflow: hidden;
+    border-radius: 5px;
   }
   .lead-image {
     border-radius: 5px;
