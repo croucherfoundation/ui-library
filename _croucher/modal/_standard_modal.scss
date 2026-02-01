@@ -606,7 +606,8 @@
     width: 100%;
 
     .error-message {
-      color: $croucher-red;
+      display: block;
+      color: #EE3A43 !important;
       position: absolute;
       bottom: 20px;
       left: 0;
