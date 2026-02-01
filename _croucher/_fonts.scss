@@ -128,6 +128,7 @@ $typo: (
   a:hover, a:active, a:visited, a:focus {
     text-decoration: underline !important;
     color: $font-black !important;
+
     .chinese_name {
       color: #7e827a !important;
     }
@@ -136,6 +137,18 @@ $typo: (
   &:hover {
     text-decoration: underline !important;
     color: $font-black !important;
+
+    // for application reviewers
+    a::before {
+      text-decoration: none !important;
+      display: inline-block;
+    }
+  }
+}
+
+.preview-box:hover {
+  h3 {
+    text-decoration: underline !important;
   }
 }
 
