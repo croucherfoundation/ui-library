@@ -633,12 +633,12 @@ $status-recording-text: #1565c0;
   flex-wrap: wrap;
   gap: 12px;
   padding: 12px 16px;
-  background: $status-pending-bg;
+  // background: $status-pending-bg;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 
-  &--urgent {
-    background: lighten($status-pending-bg, 2%);
-  }
+  // &--urgent {
+  //   background: $status-pending-bg;
+  // }
 
   @include lg {
     padding: 12px 24px;
@@ -647,7 +647,7 @@ $status-recording-text: #1565c0;
 
 .booking-card__action-message {
   display: flex;
-  // align-items: center;
+  align-items: center;
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
