@@ -64,6 +64,14 @@
       }
     }
 
+    &.csw {
+      padding: 60px 96px 0 96px;
+
+      @media (max-width: 800px) {
+        padding: 40px 40px 2px 40px;
+      }
+    }
+
     section.mb-0{
       margin-bottom: 0;
     }
@@ -740,6 +748,12 @@
         color: white;
         border: 1px solid $croucher-red;
       }
+
+      &.csw:hover {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+      }
     }
 
     .submit,
@@ -753,6 +767,32 @@
         background-color: white !important;
         color: black !important;
         border: 1px solid black;
+      }
+
+      &.csw {
+        @media (prefers-color-scheme: dark) {
+          background-color: black !important;
+          color: white !important;
+          border: 1px solid black;
+
+          &:hover {
+            background-color: #eab308 !important;
+            color: black !important;
+            border: 1px solid #eab308;
+          }
+        }
+
+        .dark & {
+          background-color: black !important;
+          color: white !important;
+          border: 1px solid black;
+
+          &:hover {
+            background-color: #eab308 !important;
+            color: black !important;
+            border: 1px solid #eab308;
+          }
+        }
       }
     }
 
