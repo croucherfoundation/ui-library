@@ -85,3 +85,26 @@ $text-color: #101820;
     }
   }
 }
+
+
+.dark {
+  .croucher-tab-container {
+    .tab-item {
+      color: var(--color-text-primary);
+
+      &:not(.active) {
+        .text-visible { 
+          color: var(--color-text-secondary);
+        }
+      }
+    }
+
+    .tab-badge {
+      color: $dark-color;
+    }
+
+     .tab-item.csw.active {
+      border-bottom-color: $csw-magenta;
+     }
+  }
+}
