@@ -723,9 +723,9 @@ $status-recording-text: #1565c0;
 // SIDEBAR COMPONENTS
 // =====================================================
 .sidebar-card {
-  background: $white;
+  background: var(--color-background-card);
   border-radius: $rounded-5;
-  // padding: 20px;
+  padding: 20px;
   margin-bottom: 60px;
 }
 
@@ -748,7 +748,7 @@ $status-recording-text: #1565c0;
 
 .sidebar-cta__text {
   font-size: 20px;
-  color: $croucher-dark;
+  color: var(--color-text-primary);
   margin-bottom: 16px;
   line-height: 1.4;
 }
@@ -764,7 +764,7 @@ $status-recording-text: #1565c0;
 .sidebar-calendar__month {
   font-size: 16px;
   font-weight: 600;
-  color: $croucher-dark;
+  color: var(--color-text-primary);
 }
 
 .sidebar-calendar__nav {
@@ -783,13 +783,13 @@ $status-recording-text: #1565c0;
   svg {
     width: 16px;
     height: 16px;
-    color: $croucher-dark;
+    color: currentColor;
   }
 
-  &:hover {
-    background: $light-gray;
-    border-color: $croucher-dark;
-  }
+  // &:hover {
+  //   background: $light-gray;
+  //   border-color: $croucher-dark;
+  // }
 }
 
 .sidebar-calendar__grid {
@@ -813,13 +813,13 @@ $status-recording-text: #1565c0;
   width: 100%;
   aspect-ratio: 1;
   font-size: 13px;
-  color: $croucher-dark;
+  color: var(--color-text-primary);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover:not(&--other) {
-    background: $light-gray;
+border: 2px solid $csw-teal;
   }
 
   &--other {
@@ -885,15 +885,15 @@ $status-recording-text: #1565c0;
 
 .sidebar-links {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: $white;
+  background-color: var(--color-background-card);
   border-radius: $rounded-5;
-  padding-top: 16px;
+  padding: 20px 0;
 }
 // Quick Links
 .sidebar-links__title {
   font-size: 16px;
   font-weight: 600;
-  color: $croucher-dark;
+  color: var(--color-text-primary);
   margin-bottom: 16px;
   padding: 0 20px;
 }
@@ -912,14 +912,14 @@ $status-recording-text: #1565c0;
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    color: $croucher-dark;
+    color: var(--color-text-primary);
     text-decoration: none;
     font-size: 14px;
     width: 100%;
-    border-bottom: 1px solid $gray-1;
+    // border-bottom: 1px solid $gray-1;
 
     &:first-child {
-      border-top: 1px solid $gray-1;
+      // border-top: 1px solid $gray-1;
     }
     &:last-child {
       border-bottom: none;
@@ -927,7 +927,7 @@ $status-recording-text: #1565c0;
     svg {
       width: 18px;
       height: 18px;
-      color: $light-gray1;
+      color: currentColor;
       margin-left: auto;
     }
   }
