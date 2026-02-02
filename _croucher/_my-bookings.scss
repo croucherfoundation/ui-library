@@ -1964,9 +1964,7 @@ border: 2px solid $csw-teal;
     box-shadow 0.2s ease;
   flex: 0 0 auto;
 
-  &:hover {
-    border-color: $croucher-dark;
-  }
+
 
   &:focus-visible {
     outline: 2px solid $csw-teal;
@@ -1974,7 +1972,7 @@ border: 2px solid $csw-teal;
   }
 
   &--active {
-    border-color: $csw-teal;
+    border: 1px solid $dark-color;
   }
 }
 
