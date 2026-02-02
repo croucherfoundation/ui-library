@@ -2006,6 +2006,14 @@ border: 2px solid $csw-teal;
   justify-content: center;
   font-size: 22px;
   padding: 0;
+  border: 1px solid $gray-1;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 }
 
 .modify-booking-stepper__value {
