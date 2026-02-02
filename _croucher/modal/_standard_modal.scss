@@ -87,6 +87,16 @@
       }
     }
 
+    textarea, .rte[contenteditable]:not([contenteditable=false]) {
+      min-height: 38px;
+      overflow: hidden;
+      resize: none;
+      
+      p, div {
+        margin-bottom: 0;
+      }
+    }
+
     > ul:not(.standard-dropdown__list),
     .modal-content ul:not(.standard-dropdown__list) {
       list-style-type: none;

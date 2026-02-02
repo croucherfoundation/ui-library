@@ -920,6 +920,12 @@
           console.log("submitted");
           passwordPrimaryInput.classList.remove("croucher_input_invalid");
           var form = this.closest("form");
+
+          if (form && !form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
           var modal = saveBtn.closest(".modal");
           closeModal(modal.id);
           if (form) {
@@ -929,6 +935,11 @@
       } else {
         var form = this.closest("form");
         var formValid = true;
+
+        if (form && !form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
         // Validate the email input
         var emailInput = form.querySelector('input[type="email"]');
@@ -1107,6 +1118,41 @@
   /**
    * --------------------------
    * --- END: Accordion
+   * --------------------------
+   */
+
+  /**
+   * --------------------------
+   * --- START: Textarea Auto Expand
+   * --------------------------
+   */
+  document.querySelectorAll('.standard-modal-container textarea').forEach(textarea => {
+    // Store the original height
+    const minHeight = textarea.offsetHeight || 38;
+    
+    // Force single-line height on initial render (unless it has existing multiline content)
+    const hasLineBreaks = textarea.value.includes('\n');
+    if (!hasLineBreaks) {
+      textarea.style.height = minHeight + 'px';
+    }
+    
+    // Expand on input (only when there are line breaks)
+    textarea.addEventListener('input', function() {
+      const hasLineBreaks = this.value.includes('\n');
+      
+      if (!hasLineBreaks || this.value.trim() === '') {
+        // Single line or empty - keep original height
+        this.style.height = minHeight + 'px';
+      } else {
+        // Multiple lines - expand to fit content
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+      }
+    });
+  });
+  /**
+   * --------------------------
+   * --- END: Textarea Auto Expand
    * --------------------------
    */
 })();
