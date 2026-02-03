@@ -34,10 +34,42 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    max-height: 90vh;
+    max-height: calc(100vh - 32px);
     height: fit-content;
     transform: none;
     z-index: 1001;
+  }
+
+  // Fixed header area (logo and close button)
+  .standard-modal-header {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+    // padding-top: 58px;
+    
+    // @media (max-width: 800px) {
+    //   padding-top: 40px;
+    // }
+  }
+
+  // Scrollable content area
+  .standard-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0; // Important for flex children to scroll properly
+  }
+
+  // Fixed footer area (buttons)
+  .standard-modal-footer {
+    flex-shrink: 0;
+    position: sticky;
+    bottom: 0;
+    // background-color: white;
+    // z-index: 10;
+    // border-top: 1px solid #e5e5e5;
   }
 
   h2, p, li, span, div, input, label {
@@ -151,6 +183,15 @@
       max-width: 165px;
     }
   }
+
+  // Legacy support: logo at top level (no header wrapper)
+  // > .logo {
+  //   margin-top: 58px;
+    
+  //   @media (max-width: 800px) {
+  //     margin-top: 40px;
+  //   }
+  // }
 
   h2 {
     font-size: 24px;
@@ -700,6 +741,9 @@
     justify-content: flex-end;
     gap: 30px;
     padding: 12px 96px 60px 96px;
+    background-color: white;
+    // flex-shrink: 0;
+    // border-top: 1px solid #e5e5e5;
 
     @media (max-width: 800px) {
       justify-content: space-between;
