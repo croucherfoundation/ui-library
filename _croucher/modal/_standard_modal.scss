@@ -47,11 +47,6 @@
     top: 0;
     background-color: white;
     z-index: 10;
-    // padding-top: 58px;
-    
-    // @media (max-width: 800px) {
-    //   padding-top: 40px;
-    // }
   }
 
   // Scrollable content area
@@ -67,9 +62,6 @@
     flex-shrink: 0;
     position: sticky;
     bottom: 0;
-    // background-color: white;
-    // z-index: 10;
-    // border-top: 1px solid #e5e5e5;
   }
 
   h2, p, li, span, div, input, label {
@@ -183,15 +175,6 @@
       max-width: 165px;
     }
   }
-
-  // Legacy support: logo at top level (no header wrapper)
-  // > .logo {
-  //   margin-top: 58px;
-    
-  //   @media (max-width: 800px) {
-  //     margin-top: 40px;
-  //   }
-  // }
 
   h2 {
     font-size: 24px;
