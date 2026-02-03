@@ -1,10 +1,11 @@
 $container-max-width-lg: 1218px;
 
 // colors
+$color-black: #000000;
 $croucher-red: #ee3a43;
 $csw-magenta: #E14CA3;
-$croucher-dark: #101820;
-$black: #000000;
+$croucher-dark: $color-black;
+$black: $color-black;
 $white: #ffffff;
 $light-gray: #f3f3f0;
 $light-gray1: #a4a5a9;
@@ -20,4 +21,4 @@ $gray-2: #d9d8d0;
 // pixels
 $rounded-5: 5px;
 $rounded-20: 20px;
-$font-black: #020202;
+$font-black: $color-black;

@@ -101,7 +101,7 @@
         background-color: $csw-teal;
         .dark & {
           background-color: #F6E36C;
-          color: black;
+          color: $color-black;
         }
       }
     }

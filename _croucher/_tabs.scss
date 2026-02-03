@@ -1,6 +1,6 @@
 $croucher-red: #EE3A43;
 $border-gray: #E8E8E8;
-$text-color: #101820;
+$text-color: $color-black;
 
 .croucher-tab-container {
   &.pb_tab { padding-bottom: 25px; }
