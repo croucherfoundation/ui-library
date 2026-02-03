@@ -235,7 +235,7 @@ export function convertSelectToDropdown(selectElement) {
   const arrow = document.createElement('span');
   arrow.className = 'standard-dropdown__arrow';
   arrow.innerHTML = `<svg viewBox="0 0 53 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#231f20" d="M26.8,41.9c-1.5,0-2.9-.7-3.9-1.8L2,13.8c-.8-1-.6-2.4.4-3.2,1-.8,2.4-.6,3.2.4l20.8,26.3c.1.1.3,0,.5.2.1,0,.3,0,.5-.2l20.1-26.1c.8-1,2.2-1.2,3.2-.4s1.2,2.2.4,3.2l-20.2,26.2c-1,1.2-2.5,1.9-4,1.9h0,0Z"></path>
+    <path fill="#000000" d="M26.8,41.9c-1.5,0-2.9-.7-3.9-1.8L2,13.8c-.8-1-.6-2.4.4-3.2,1-.8,2.4-.6,3.2.4l20.8,26.3c.1.1.3,0,.5.2.1,0,.3,0,.5-.2l20.1-26.1c.8-1,2.2-1.2,3.2-.4s1.2,2.2.4,3.2l-20.2,26.2c-1,1.2-2.5,1.9-4,1.9h0,0Z"></path>
   </svg>`;
   
   button.appendChild(selectedText);

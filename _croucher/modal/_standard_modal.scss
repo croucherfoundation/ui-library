@@ -18,7 +18,7 @@
 
 .standard-modal-container {
   background-color: white !important;
-  color: black !important;
+  color: $color-black !important;
   border-radius: 0.5rem;
   max-width: 794px;
   width: 100%;
@@ -65,7 +65,7 @@
   }
 
   h2, p, li, span, div, input, label {
-    color: black;
+    color: $color-black;
   }
 
   // Ensure inputs have black text
@@ -302,7 +302,7 @@
         }
 
         &:focus {
-          border-bottom-color: black;
+          border-bottom-color: $color-black;
           outline: none;
           box-shadow: none;
           -webkit-appearance: none;
@@ -566,12 +566,12 @@
       .grant-modal-submit {
         border-radius: 9999px !important;
         border-bottom: none !important;
-        border: 1px solid #101820 !important;
+        border: 1px solid $color-black !important;
       }
       .uploader-button {
         width: 90px !important;
         border-bottom: none !important;
-        border: 1px solid #101820 !important;
+        border: 1px solid $color-black !important;
         margin-top: 10px;
         margin-bottom: 0 !important;
       }
@@ -745,7 +745,7 @@
 
     .submit:disabled:hover,
     input[type="submit"]:disabled:hover {
-      background-color: black !important;
+      background-color: $color-black !important;
       color: white !important;
       opacity: 0.6 !important;
     }
@@ -777,8 +777,8 @@
 
     .cancel {
       background-color: white;
-      border: 1px solid black;
-      color: black;
+      border: 1px solid $color-black;
+      color: $color-black;
 
       &:hover {
         background-color: $croucher-red;
@@ -788,45 +788,45 @@
 
       &.csw:hover {
         background-color: white;
-        color: black;
-        border: 1px solid black;
+        color: $color-black;
+        border: 1px solid $color-black;
       }
     }
 
     .submit,
     input[type="submit"] {
-      background-color: black;
+      background-color: $color-black;
       border: none;
       color: white;
-      border: 1px solid black;
+      border: 1px solid $color-black;
 
       &:hover {
         background-color: white !important;
-        color: black !important;
-        border: 1px solid black;
+        color: $color-black !important;
+        border: 1px solid $color-black;
       }
 
       &.csw {
         @media (prefers-color-scheme: dark) {
-          background-color: black !important;
+          background-color: $color-black !important;
           color: white !important;
-          border: 1px solid black;
+          border: 1px solid $color-black;
 
           &:hover {
             background-color: #eab308 !important;
-            color: black !important;
+            color: $color-black !important;
             border: 1px solid #eab308;
           }
         }
 
         .dark & {
-          background-color: black !important;
+          background-color: $color-black !important;
           color: white !important;
-          border: 1px solid black;
+          border: 1px solid $color-black;
 
           &:hover {
             background-color: #eab308 !important;
-            color: black !important;
+            color: $color-black !important;
             border: 1px solid #eab308;
           }
         }
@@ -860,7 +860,7 @@
     border: 2px solid #9a9b97;
     border-radius: 5px;
     background-color: white;
-    color: #000;
+    color: $color-black;
     font-size: 1em;
     cursor: pointer;
     appearance: none;
@@ -923,7 +923,7 @@
     }
     select option {
       background-color: white;
-      color: #000;
+      color: $color-black;
     }
   }
 
@@ -950,7 +950,7 @@
     }
     select::-ms-value {
       background: transparent;
-      color: #000;
+      color: $color-black;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -1129,7 +1129,7 @@
     }
 
     .searchable-select-selected {
-      border: 1px solid #101820;
+      border: 1px solid $color-black;
       border-radius: 5px;
       background: white url('csc/down_arrow.svg') no-repeat calc(100% - 12px) center;
       background-size: 16px;

@@ -15,7 +15,7 @@
     height: 38px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid $color-black;
     border-radius: 50%;
     transform-origin: center;
     cursor: pointer;
@@ -49,13 +49,13 @@
 
 .croucher_container {
     .display-commands p.options {
-        color: #101820;
+        color: $color-black;
         font-weight: normal;
         a{
-            color: #101820;
+            color: $color-black;
             font-weight: normal;
             &.here{
-                color: #101820;
+                color: $color-black;
                 font-weight: bold;
             }
         }

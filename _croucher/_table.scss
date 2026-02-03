@@ -6,7 +6,7 @@
   overflow: hidden;
 
   a {
-    color: #101820;
+    color: $color-black;
   }
   .sort-link {
     display: inline-flex;
@@ -28,10 +28,10 @@
     }
   }
   .sort-icon.active.asc svg {
-    color: #101820;
+    color: $color-black;
   }
   .sort-icon.active.desc svg {
-    color: #101820;
+    color: $color-black;
     transform: rotate(0deg);
   }
 
@@ -66,7 +66,7 @@
     .table-tag {
       display: inline-block;
       background-color: #F3F3F0;
-      color: #000;
+      color: $color-black;
       border-radius: 5px;
       padding: 0.268rem 0.438rem;
       font-size: 13px;

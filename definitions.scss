@@ -14,5 +14,6 @@ $darker-gray-color: #555;
 
 $white-color: #fff;
 $csw-grey-2: #F3F3F0;
-$black-color: #000;
-$dark-color: #111;
+$color-black: #000;
+$black-color: $color-black;
+$dark-color: $color-black;
