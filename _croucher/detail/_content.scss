@@ -97,7 +97,7 @@
   }
 
   span.unknown, li.unknown {
-    color: #000 !important;
+    color: $color-black !important;
   }
 
 
@@ -111,7 +111,7 @@
   }
 
   a.normal-link {
-    color: #000;
+    color: $color-black;
     &:hover {
       color: #d34a4a;
     }

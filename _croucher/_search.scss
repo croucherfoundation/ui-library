@@ -37,11 +37,11 @@
     .input_value{
 
       input[type="text"] {
-        border: 1px solid #000;
+        border: 1px solid $color-black;
         border-radius: 5px;
 
         &::placeholder{
-          color: #000;
+          color: $color-black;
         }
       }
     }

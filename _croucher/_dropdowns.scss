@@ -46,11 +46,11 @@
 
   .input_value {
     input[type="text"] {
-      border: 1px solid #000;
+      border: 1px solid $color-black;
       border-radius: 5px;
 
       &::placeholder {
-        color: #000;
+        color: $color-black;
       }
     }
 
@@ -59,7 +59,7 @@
       font-size: 1em;
       min-height: 42px;
       padding: 0px 22px;
-      color: #000;
+      color: $color-black;
     }
   }
 }
@@ -71,7 +71,7 @@
   &_button {
     display: flex;
     align-items: center;
-    border: 1px solid #000;
+    border: 1px solid $color-black;
     cursor: pointer;
     padding: 0 22px;
     border-radius: 5px;
@@ -198,7 +198,7 @@
 .croucher_dropdown_button {
   display: flex;
   align-items: center;
-  border: 1px solid #000;
+  border: 1px solid $color-black;
   cursor: pointer;
   padding: 0 22px;
   border-radius: 5px;

@@ -93,7 +93,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 li {
-                  border-top: 1px solid black;
+                  border-top: 1px solid $color-black;
                   width: 100%;
                   text-align: left;
                   padding-block: 0.7rem !important;
@@ -104,12 +104,12 @@
                   flex-direction: column;
                   justify-content: center;
                   &.last {
-                    border-bottom: 1px solid black;
+                    border-bottom: 1px solid $color-black;
                   }
                   a {
                     text-decoration: none;
                     font-weight: bold;
-                    color: black;
+                    color: $color-black;
                     font-size: 22px;
                   }
                 }

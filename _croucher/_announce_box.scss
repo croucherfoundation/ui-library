@@ -37,9 +37,9 @@
     }
 
     .advance-btn {
-      border: 1px solid black;
+      border: 1px solid $color-black;
       background: transparent;
-      color: black;
+      color: $color-black;
       &:hover {
         border: 1px solid $croucher-red;
         background-color: $croucher-red !important;
