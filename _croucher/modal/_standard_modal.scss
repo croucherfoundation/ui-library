@@ -1177,3 +1177,10 @@
   // Dark mode support - REMOVED as per requirement
 
 }
+
+// Prevent background scrolling when modal is active
+body:has(.popup, .modal-open) {
+  overflow: hidden;
+  /* Optional: Prevents the page from shifting when the scrollbar disappears */
+  scrollbar-gutter: stable; 
+}
