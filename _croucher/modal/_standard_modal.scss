@@ -1179,7 +1179,7 @@
 }
 
 // Prevent background scrolling when modal is active
-body:has(.popup, .modal-open) {
+body:has(.popup:not([style*="display: none"]), .modal-open:not([style*="display: none"])) {
   overflow: hidden;
   /* Optional: Prevents the page from shifting when the scrollbar disappears */
   scrollbar-gutter: stable; 
