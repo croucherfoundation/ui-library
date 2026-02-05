@@ -7,12 +7,12 @@
   background: rgba(61, 61, 61, 0.9);
   justify-content: center;
   align-items: center;
-  z-index: 2001;
+  z-index: 10001;
   display: none;
 
   &.active {
     display: flex;
-    z-index: 2002;
+    z-index: 10002;
   }
 }
 
@@ -96,6 +96,10 @@
       }
     }
 
+    &.std-mt {
+      margin-top: 2.1rem;
+    }
+
     section.mb-0{
       margin-bottom: 0;
     }
@@ -108,6 +112,9 @@
       }
       &.mb-15 {
         margin-bottom: 15px;
+      }
+      &.std-mb-20 {
+        margin-bottom: 20px;
       }
     }
 
@@ -192,6 +199,10 @@
     &::first-letter {
       text-transform: capitalize;
     }
+  }
+
+  .standard-modal-header:has(+ .standard-modal-body .std-mt) h2 {
+    margin-bottom: 0;
   }
 
   p,
@@ -734,6 +745,19 @@
 
       &:has(button:only-child) {
         justify-content: flex-end;
+      }
+    }
+
+    &.stack-mobile {
+      @media (max-width: 800px) {
+        flex-direction: column;
+        gap: 16px;
+
+        button,
+        .submit-button,
+        .standard-modal-submit {
+          width: 100%;
+        }
       }
     }
 
