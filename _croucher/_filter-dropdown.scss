@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 0 22px;
+    padding: 0 16px 0 22px;
     min-height: 44px;
     background-color: $white;
     border: 1px solid $black;
@@ -63,6 +63,7 @@
     display: flex;
     align-items: center;
     margin-left: 8px;
+    margin-bottom: 1.5px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
     width: 16px;
