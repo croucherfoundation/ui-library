@@ -45,6 +45,16 @@ $max-width: 878px;
     @media (min-width: 1280px) {
       grid-template-columns: repeat(4, 1fr);
     }
+
+    .default_card .body_container {
+      .card_title {
+        font-size: 20px;
+      }
+
+      .card_desc {
+        font-size: 16px;
+      }
+    }
   }
 
   &--summercourse {
