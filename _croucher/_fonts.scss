@@ -109,6 +109,11 @@ $typo: (
     fontweight: 400,
     lineheight: 30px,
   ),
+  body-secondary: (
+    fontsize: 18px,
+    fontweight: 400,
+    lineheight: 28px,
+  ),
   sub-nav-title: (
     fontsize: 18px,
     fontweight: 400,
@@ -170,6 +175,15 @@ $typo: (
   &:has(.text-preview-title) {
     a:hover {
       color: $font-black !important;
+    }
+  }
+}
+
+.text-body-secondary {
+  a:hover {
+    color: $font-black !important;
+    span.link-title {
+      text-decoration: underline;
     }
   }
 }
