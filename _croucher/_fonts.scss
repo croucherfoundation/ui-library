@@ -153,10 +153,16 @@ $typo: (
   }
 }
 
-.text-preview-title.document:hover {
-  .shortened, .name {
-    text-decoration: underline !important;
-    color: $font-black !important;
+.text-preview-title {
+  &.link-block {
+    display: block;
+    width: 100%
+  }
+  &.document:hover {
+    .shortened, .name {
+      text-decoration: underline !important;
+      color: $font-black !important;
+    }
   }
 }
 
@@ -178,6 +184,10 @@ $typo: (
 
 .f-26 {
   font-size: 26px !important;
+}
+
+.w-100 {
+  width: 100% !important;
 }
 
 @each $name, $style in $typo {

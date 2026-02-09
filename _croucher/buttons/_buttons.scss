@@ -114,6 +114,24 @@ a.viewall_btn,
   &.pr {
     padding-right: 40px;
   }
+  &.inline {
+    display: inline-block;
+  }
+  &.folder-action-pos{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  &.service-action-pos{
+    position: absolute;
+    right: 7px;
+    top: 5px;
+  }
+  &.action-menu-pos{
+    position: absolute;
+    right: 0;
+    top: 30px;
+  }
   .btn {
     color: #9b9a97;
     font-size: 20px;
@@ -159,6 +177,26 @@ a.viewall_btn,
     
       &:before {
         content: '...';
+      }
+
+      &.menu{
+        // Remove grey background and "..." when dropdown is open, to match Notion's style
+        background: none;
+        opacity: unset;
+        a {
+          color: #9b9a97
+        }
+        svg {
+          width: 18px;
+          height: 18px;
+          display: block
+        }
+        &:before {
+          content: none;
+        }
+        &.active {
+          background: none;
+        }
       }
 
       // Grey rounded background when dropdown is open (Notion-style)
@@ -213,6 +251,12 @@ a.viewall_btn,
             margin-top: -2px;
           }
         }
+        &.menu{
+          font-weight: normal;
+          a:hover {
+            color: #9b9a97 !important;
+          }
+        }
       }
     }
   }
@@ -235,6 +279,27 @@ a.viewall_btn,
     position: relative;
     &.mobile-flex-start {
       justify-content: flex-start;
+    }
+    &.inline {
+      display: inline-flex;
+      padding-right: 0;
+      width: 20px;
+      &.action-menu-pos {
+        top: 22px;
+        .action-commands-dropdown.up.menu{
+          z-index: 999;
+        }
+      }
+      &.folder-action-pos {
+        top: 3px;
+      }
+      .more-actions{
+        z-index: unset;
+      }
+    }
+    .toggle-commands-dropdown.menu{
+      margin: 0;
+      visibility: visible !important;
     }
   }
 
@@ -264,4 +329,8 @@ a.viewall_btn,
       z-index: 10000;
     }
   }
+}
+
+.position-relative {
+  position: relative;
 }
