@@ -1190,11 +1190,11 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  toggleDropdown();
+  initDropdownDelegation();
 });
 
-function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown"]') {
-  var triggers = document.querySelectorAll(triggerSelector);
+// Use event delegation for dropdowns - works for dynamically created elements
+function initDropdownDelegation() {
   var activeDropdown = null;
   var activeTrigger = null;
 
@@ -1219,23 +1219,26 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
     activeDropdown = null;
     activeTrigger = null;
   }
-  
-  triggers.forEach(trigger => {
-    var handleToggle = function(e) {
+
+  // Event delegation - listen on document for all dropdown triggers
+  document.addEventListener('pointerdown', function(e) {
+    var trigger = e.target.closest('[data-action="toggle-actions-dropdown"]');
+    
+    if (trigger) {
       e.preventDefault();
       e.stopPropagation();
       
-      var affected = this.getAttribute('data-affected');
+      var affected = trigger.getAttribute('data-affected');
       var target;
       
       if (affected) {
         // Check next sibling first, then global selector
-        target = this.nextElementSibling && this.nextElementSibling.matches(affected) 
-          ? this.nextElementSibling 
+        target = trigger.nextElementSibling && trigger.nextElementSibling.matches(affected) 
+          ? trigger.nextElementSibling 
           : document.querySelector(affected);
       } else {
         // Default to next sibling if no data-affected
-        target = this.nextElementSibling;
+        target = trigger.nextElementSibling;
       }
       
       if (target) {
@@ -1248,10 +1251,10 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
           // Opening dropdown
           target.classList.add('up');
           activeDropdown = target;
-          activeTrigger = this;
+          activeTrigger = trigger;
           
           // Add active class to toggle button for grey background (Notion-style)
-          this.classList.add('active');
+          trigger.classList.add('active');
           
           // Add dropdown-open class to parent btn-group on mobile (fixes iOS overflow clipping)
           if (window.innerWidth <= 767) {
@@ -1283,23 +1286,15 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
           closeAllDropdowns();
         }
       }
-    };
-
-    // Use pointerdown for better mobile and cross-device support
-    trigger.addEventListener('pointerdown', handleToggle);
-  });
-
-  // Close dropdown when clicking/touching outside - use pointerdown for consistency
-  var handleOutsideClick = function(e) {
-    if (activeDropdown && activeTrigger) {
-      // Only close if click is outside the active dropdown and its trigger
-      if (!activeTrigger.contains(e.target) && !activeDropdown.contains(e.target)) {
-        closeAllDropdowns();
+    } else {
+      // Clicked outside - close dropdowns if open
+      if (activeDropdown && activeTrigger) {
+        if (!activeTrigger.contains(e.target) && !activeDropdown.contains(e.target)) {
+          closeAllDropdowns();
+        }
       }
     }
-  };
-
-  document.addEventListener('pointerdown', handleOutsideClick);
+  });
 
   // Close dropdown on scroll (mobile)
   var scrollTimeout;
@@ -1310,7 +1305,7 @@ function toggleDropdown(triggerSelector = '[data-action="toggle-actions-dropdown
         closeAllDropdowns();
       }, 50);
     }
-  }, true); // Use capture to catch scroll events on any element
+  }, true);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
