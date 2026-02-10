@@ -131,6 +131,12 @@ a.viewall_btn,
     position: absolute;
     right: 0;
     top: 30px;
+    &.t-8{
+      top: 8px;
+    }
+    &.t-18{
+      top: 18px;
+    }
   }
   .btn {
     color: #9b9a97;
@@ -183,12 +189,14 @@ a.viewall_btn,
         // Remove grey background and "..." when dropdown is open, to match Notion's style
         background: none;
         opacity: unset;
+        padding: 0;
+        width: 20px;
         a {
           color: #9b9a97
         }
         svg {
-          width: 18px;
-          height: 18px;
+          width: 20px;
+          height: 20px;
           display: block
         }
         &:before {
@@ -196,6 +204,7 @@ a.viewall_btn,
         }
         &.active {
           background: none;
+          visibility: visible;
         }
       }
 
@@ -253,6 +262,10 @@ a.viewall_btn,
         }
         &.menu{
           font-weight: normal;
+          margin-top: 0;
+          &:not(.align-right) {
+            left: -4px;
+          }
           a:hover {
             color: #9b9a97 !important;
           }
