@@ -289,6 +289,12 @@ a.viewall_btn,
 }
 
 @media (max-width: 767px) {
+  .action-menu-target {
+    width: 98%;
+    .standard-btn-group.inline.action-menu-pos {
+      top: 5px;
+    }
+  }
   .standard-btn-group {
     display: flex;
     flex-wrap: nowrap;
@@ -357,6 +363,21 @@ a.viewall_btn,
   }
 }
 
+
+// for action menu dropdown positioning
 .position-relative {
   position: relative;
+}
+
+.body-copy {
+  .action-menu-target {
+    a.toggle-commands-dropdown.menu {
+      visibility: hidden;
+    }
+    &:hover {
+      a.menu {
+        visibility: visible;
+      }
+    }
+  }
 }
