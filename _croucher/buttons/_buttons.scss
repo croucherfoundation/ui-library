@@ -116,6 +116,12 @@ a.viewall_btn,
   }
   &.inline {
     display: inline-block;
+    &.ml-20{
+      margin-left: 20px;
+    }
+    .more-actions{
+      z-index: unset;
+    }
   }
   &.folder-action-pos{
     position: absolute;
@@ -136,6 +142,13 @@ a.viewall_btn,
     }
     &.t-18{
       top: 18px;
+    }
+  }
+  &.app-action-menu-pos{
+    top: 3px;
+    left: 18px;
+    .action-commands-dropdown.up.menu{
+      z-index: 999;
     }
   }
   .btn {

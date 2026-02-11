@@ -128,12 +128,14 @@ $typo: (
 
 // Link styles specifically within preview title blocks
 .text-preview-title:not(.document) {
-  a {
+  a:not(.action-commands-dropdown a) {
     color: $font-black !important;
   }
   a:hover, a:active, a:visited, a:focus {
-    text-decoration: underline !important;
-    color: $font-black !important;
+    &:not(.action-commands-dropdown a) {
+      text-decoration: underline !important;
+      color: $font-black !important;
+    }
 
     .chinese_name {
       color: #7e827a !important;
@@ -143,6 +145,10 @@ $typo: (
   &:hover {
     text-decoration: underline !important;
     color: $font-black !important;
+
+    .action-commands-dropdown a {
+      text-decoration: none !important;
+    }
 
     // for application reviewers
     a::before {
