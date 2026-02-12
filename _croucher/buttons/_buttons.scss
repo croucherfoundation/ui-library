@@ -143,6 +143,9 @@ a.viewall_btn,
     &.t-18{
       top: 18px;
     }
+    &.r-18{
+      right: 18px;
+    }
   }
   &.app-action-menu-pos{
     top: 3px;
@@ -259,6 +262,11 @@ a.viewall_btn,
           left: auto;
           right: -8px;
         }
+        &.align-scroll-listing {
+          left: auto;
+          right: -10px;
+          top: calc(100% + 18px);
+        }
 
         .btn {
           padding: 6px 10px 4px 10px;
@@ -276,7 +284,7 @@ a.viewall_btn,
         &.menu{
           font-weight: normal;
           margin-top: 0;
-          &:not(.align-right) {
+          &:not(.align-right, .align-scroll-listing) {
             left: -4px;
           }
           a:hover {
