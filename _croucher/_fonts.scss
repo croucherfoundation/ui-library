@@ -128,11 +128,11 @@ $typo: (
 
 // Link styles specifically within preview title blocks
 .text-preview-title:not(.document) {
-  a:not(.action-commands-dropdown a) {
+  a:not(.action-commands-dropdown a, .toggle-commands-dropdown.menu) {
     color: $font-black !important;
   }
   a:hover, a:active, a:visited, a:focus {
-    &:not(.action-commands-dropdown a) {
+    &:not(.action-commands-dropdown a, .toggle-commands-dropdown.menu) {
       text-decoration: underline !important;
       color: $font-black !important;
     }
@@ -331,7 +331,7 @@ $typo: (
 
 .standard-link {
   color: $font-black;
-  
+
   &:hover {
     text-decoration: underline;
     color: $font-black !important;
@@ -363,7 +363,7 @@ $typo: (
   letter-spacing:.01em !important;
 }
 
-.body-copy 
+.body-copy
   .text-standfirst, .btn, form {
   letter-spacing: normal !important;
 }
