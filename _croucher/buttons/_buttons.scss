@@ -126,7 +126,7 @@ a.viewall_btn,
   &.folder-action-pos{
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 3px;
   }
   &.service-action-pos{
     position: absolute;
@@ -136,7 +136,7 @@ a.viewall_btn,
   &.action-menu-pos{
     position: absolute;
     right: 0;
-    top: 30px;
+    // top: 30px;
     &.t-8{
       top: 8px;
     }
@@ -331,12 +331,12 @@ a.viewall_btn,
       width: 20px;
       &.action-menu-pos {
         top: 22px;
+        &.mb-t15{
+          top: 15px;
+        }
         .action-commands-dropdown.up.menu{
           z-index: 999;
         }
-      }
-      &.folder-action-pos {
-        top: 3px;
       }
       .more-actions{
         z-index: unset;
