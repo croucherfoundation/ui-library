@@ -290,7 +290,8 @@
     }
   }
 
-  .story_card & {
+  .story_card &,
+  .story_card .lead-story-card {
     .dark & {
       background-color: transparent;
       
@@ -319,6 +320,68 @@
         }
       }
     }
+  }
+}
+
+/* Lead Story Card: full-width row; image spans 2 cols to align with row below */
+.lead-story-card {
+  max-width: none;
+
+  .lead-story-card__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    @include xl {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      min-height: 0;
+    }
+  }
+
+  .lead-story-card__media {
+    @media (min-width: 768px) and (max-width: 1279px) {
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+
+    @include xl {
+      grid-column: 1 / 3;
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+  }
+
+  .lead-story-card__body {
+    @include xl {
+      grid-column: 3;
+      min-height: 0;
+    }
+  }
+
+  @include xl {
+    .img_container {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: $rounded-5;
+    }
+
+    .body_container {
+      border-top-right-radius: $rounded-5;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: $rounded-5;
+    }
+  }
+}
+
+/* Override body padding-top for lead story on desktop (higher specificity than .dark .story_card .default_card .body_container) */
+@include xl {
+  .story_card .lead-story-card .body_container {
+    padding-top: 0;
+  }
+
+  .dark .story_card .lead-story-card .body_container {
+    padding-top: 0;
   }
 }
 

@@ -23,6 +23,12 @@ $max-width: 878px;
 .card_container {
   @extend %base-card-container;
 
+  &.four-cols {
+    @include xl {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
   &--trustees {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
