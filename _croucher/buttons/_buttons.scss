@@ -154,8 +154,9 @@ a.viewall_btn,
     }
   }
   &.app-action-menu-pos{
-    top: 3px;
-    left: 18px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
     .action-commands-dropdown.up.menu{
       z-index: 999;
     }
@@ -209,6 +210,9 @@ a.viewall_btn,
 
       &.menu{
         padding: 0 0 0 6px;
+        &.app-row {
+          padding: 0 0 0 4px;
+        }
         a {
           color: #9b9a97
         }
@@ -222,6 +226,10 @@ a.viewall_btn,
           transform: rotate(90deg);
           letter-spacing: 3px;
           font-size: 16px;
+        }
+        &.app-row:before {
+          letter-spacing: 2px;
+          font-size: 10px;
         }
         &.small:before{
           letter-spacing: 0;
