@@ -146,6 +146,9 @@ a.viewall_btn,
     &.r-18{
       right: 18px;
     }
+    .action-commands-dropdown.menu.up {
+      z-index: 999;
+    }
   }
   &.app-action-menu-pos{
     top: 3px;
@@ -196,30 +199,32 @@ a.viewall_btn,
       transition: background-color 0.15s ease;
       margin-left: -10px;
       margin-right: -10px;
-    
+
       &:before {
         content: '...';
       }
 
       &.menu{
-        // Remove grey background and "..." when dropdown is open, to match Notion's style
-        background: none;
-        opacity: unset;
-        padding: 0;
-        width: 20px;
+        padding: 0 0 0 6px;
         a {
           color: #9b9a97
         }
-        svg {
-          width: 20px;
-          height: 20px;
-          display: block
-        }
+        // svg {
+        //   width: 20px;
+        //   height: 20px;
+        //   display: block
+        // }
         &:before {
-          content: none;
+          display: inline-block; /* Required for transform to work */
+          transform: rotate(90deg);
+          letter-spacing: 3px;
+          font-size: 16px;
+        }
+        &.small:before{
+          letter-spacing: 0;
         }
         &.active {
-          background: none;
+          // background: none;
           visibility: visible;
         }
       }
@@ -229,7 +234,7 @@ a.viewall_btn,
         background-color: #e5e5e3;
       }
     }
-  
+
     .action-commands-dropdown {
       display: none;
       &.up {
