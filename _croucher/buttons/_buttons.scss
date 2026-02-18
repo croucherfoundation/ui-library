@@ -163,24 +163,19 @@ a.viewall_btn,
   }
   .btn {
     color: #9b9a97;
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
+    line-height: 1.5;
     svg {
-      width: 20px;
-      height: 20px;
-      &.document {
-        margin-top: -3px;
-        margin-right: -2px;
-        width: 22px;
-        height: 24px;
-      }
+      width: 16px;
+      height: 16px;
     }
 
     svg:has(use[href="#pdf_symbol"]),
     svg:has(use[xlink\:href="#pdf_symbol"]) {
-      margin-top: -4px;
+      margin-top: -2px;
     }
   }
 
@@ -198,7 +193,7 @@ a.viewall_btn,
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       user-select: none;
-      padding: 0px 8px 4px 8px;
+      padding: 0px 7px 4px 9px;
       border-radius: 5px;
       transition: background-color 0.15s ease;
       margin-left: -10px;
@@ -289,12 +284,16 @@ a.viewall_btn,
           border-radius: 5px;
           transition: background-color 0.15s ease;
           margin: 0;
+          font-size: 16px;
+          line-height: 1.5;
 
           &:hover {
             background-color: #e5e5e3;
           }
           img, svg{
             margin-top: -2px;
+            width: 16px;
+            height: 16px;
           }
         }
         &.menu{
