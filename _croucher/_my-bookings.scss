@@ -918,9 +918,6 @@ border: 2px solid $csw-teal;
     width: 100%;
     // border-bottom: 1px solid $gray-1;
 
-    &:first-child {
-      // border-top: 1px solid $gray-1;
-    }
     &:last-child {
       border-bottom: none;
     }
@@ -1302,12 +1299,6 @@ border: 2px solid $csw-teal;
   }
 }
 
-.cancel-modal__btn-cancel {
-}
-
-.cancel-modal__btn-keep {
-}
-
 // =====================================================
 // TOAST NOTIFICATION
 // =====================================================
@@ -1499,9 +1490,7 @@ border: 2px solid $csw-teal;
 // =====================================================
 // NAVBAR - MY BOOKINGS NAV ITEM
 // =====================================================
-.my-bookings-nav {
-  // Shown only when user is signed in (controlled via JS/template)
-}
+// .my-bookings-nav styles are controlled when the user is signed in
 
 .user_nav_item {
   display: flex;
@@ -1641,10 +1630,7 @@ border: 2px solid $csw-teal;
     gap: 6px 12px;
   }
 
-  .booking-card__meta-item {
-    // font-size: 12px;
-    // gap: 4px;
-  }
+  // .booking-card__meta-item styles can be overridden per breakpoint if needed
 
   // Mobile toggle button - full width at bottom
   .booking-card__toggle-btn {
@@ -1997,13 +1983,13 @@ border: 2px solid $csw-teal;
   gap: 16px;
 }
 
-.modify-booking-stepper {
+.csw-stepper {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.modify-booking-stepper__btn {
+.csw-stepper__btn {
   width: 44px;
   height: 44px;
   display: inline-flex;
@@ -2021,7 +2007,7 @@ border: 2px solid $csw-teal;
   }
 }
 
-.modify-booking-stepper__value {
+.csw-stepper__value {
   min-width: 56px;
   text-align: center;
   font-size: 20px;
