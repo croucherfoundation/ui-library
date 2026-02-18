@@ -169,8 +169,8 @@ a.viewall_btn,
     gap: 8px;
     line-height: 1.5;
     svg {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
     }
 
     svg:has(use[href="#pdf_symbol"]),
@@ -292,8 +292,14 @@ a.viewall_btn,
           }
           img, svg{
             margin-top: -2px;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
+          }
+          &.copy {
+            svg {
+              width: 20px;
+              height: 20px;
+            }
           }
         }
         &.menu{
