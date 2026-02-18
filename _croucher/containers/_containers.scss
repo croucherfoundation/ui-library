@@ -26,6 +26,10 @@ $max-width: 878px;
   &.four-cols {
     @include xl {
       grid-template-columns: repeat(4, 1fr);
+
+      .default_card {
+        --default-card-height: 153px;
+      }
     }
   }
 
