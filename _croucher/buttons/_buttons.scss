@@ -168,9 +168,10 @@ a.viewall_btn,
     align-items: center;
     gap: 8px;
     line-height: 1.5;
-    svg {
+    svg, img {
       width: 18px;
       height: 18px;
+      margin-top: -2px;
     }
 
     svg:has(use[href="#pdf_symbol"]),
