@@ -143,14 +143,23 @@ a.viewall_btn,
     &.t-8{
       top: 8px;
     }
+    &.t-10{
+      top: 10px;
+    }
     &.t-12{
       top: 12px;
     }
     &.t-18{
       top: 18px;
     }
+    &.r-12{
+      right: 12px;
+    }
     &.r-18{
       right: 18px;
+    }
+    &.r-20{
+      right: 20px;
     }
     .action-commands-dropdown.menu.up {
       z-index: 999;
