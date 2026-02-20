@@ -186,9 +186,9 @@ a.viewall_btn,
       margin-top: -2px;
     }
 
-    svg:has(use[href="#pdf_symbol"]),
-    svg:has(use[xlink\:href="#pdf_symbol"]) {
-      margin-top: -2px;
+    svg:has(use[href$="#add_symbol"]),
+    svg:has(use[*|href$="#add_symbol"]) {
+      margin-top: 0;
     }
   }
 
@@ -217,7 +217,7 @@ a.viewall_btn,
       &:hover {
         background-color: rgba(0,0,0,0.04);
       }
-      
+
       &:before {
         content: '';
         background-image: url('svg/meatball.svg');
@@ -230,32 +230,16 @@ a.viewall_btn,
       }
 
       &.menu{
-        &.app-row {
-          padding: 0 0 0 4px;
-        }
         a {
           color: #9b9a97
         }
-        // svg {
-        //   width: 20px;
-        //   height: 20px;
-        //   display: block
-        // }
         &:before {
           display: inline-block; /* Required for transform to work */
           transform: rotate(90deg);
           letter-spacing: 3px;
           font-size: 16px;
         }
-        &.app-row:before {
-          letter-spacing: 2px;
-          font-size: 10px;
-        }
-        &.small:before{
-          letter-spacing: 0;
-        }
         &.active {
-          // background: none;
           visibility: visible;
         }
       }
