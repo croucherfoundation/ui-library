@@ -186,7 +186,7 @@ $typo: (
 }
 
 .text-body-secondary {
-  a:hover {
+  a:not(a.toggle-commands-dropdown):hover {
     color: $font-black !important;
     span.link-title {
       text-decoration: underline;

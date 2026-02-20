@@ -415,12 +415,32 @@ a.viewall_btn,
 }
 
 .body-copy {
+  // default: all action-menu-target
   .action-menu-target {
-    a.toggle-commands-dropdown.menu {
+    .toggle-commands-dropdown.menu {
       visibility: hidden;
     }
+
     &:hover {
-      a.menu {
+      .toggle-commands-dropdown.menu {
+        visibility: visible;
+      }
+    }
+  }
+
+  // document rows: be more specific about where the menu lives
+  .document-container.action-menu-target {
+    .toggle-commands-dropdown.menu {
+      visibility: hidden;
+      &.active {
+        visibility: visible;
+      }
+    }
+
+    &:hover {
+      > .standard-btn-group
+        .more-actions
+        > .toggle-commands-dropdown.menu {
         visibility: visible;
       }
     }
