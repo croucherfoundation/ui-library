@@ -197,7 +197,9 @@ a.viewall_btn,
     z-index: 1000;
 
     .toggle-commands-dropdown {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-top: -6px;
       letter-spacing: 0.2em;
       font-weight: bold;
@@ -248,9 +250,11 @@ a.viewall_btn,
         }
       }
 
-      // Grey rounded background when dropdown is open (Notion-style)
+      width: 28px;
+      height: 28px;
+
       &.active {
-        background-color: #e5e5e3;
+        background-color: rgba(0,0,0,0.04);
       }
     }
 
