@@ -185,11 +185,6 @@ a.viewall_btn,
       height: 18px;
       margin-top: -2px;
     }
-
-    svg:has(use[href$="#add_symbol"]),
-    svg:has(use[*|href$="#add_symbol"]) {
-      margin-top: 0;
-    }
   }
 
   .more-actions {
