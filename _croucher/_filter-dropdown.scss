@@ -3,6 +3,11 @@
   width: 100%;
   font-family: "MarrSans", sans-serif;
 
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   // Hide the native select element
   select[multiple] {
     position: absolute;
