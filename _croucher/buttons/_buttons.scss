@@ -185,8 +185,8 @@ a.viewall_btn,
       height: 18px;
       margin-top: -2px;
     }
-    svg:has(use[href$="##edit_symbol"]),
-    svg:has(use[*|href$="##edit_symbol"]) {
+    svg:has(use[href$="#edit_symbol"]),
+    svg:has(use[*|href$="#edit_symbol"]) {
       margin-top: -3px;
     }
   }
@@ -301,9 +301,13 @@ a.viewall_btn,
             background-color: rgba(0,0,0,0.04);
           }
           img, svg{
-            margin-top: -2px;
+            margin-top: -3px;
             width: 18px;
             height: 18px;
+          }
+          svg:has(use[href$="#edit_symbol"]),
+          svg:has(use[*|href$="#edit_symbol"]) {
+            margin-top: -4px;
           }
           &.copy {
             svg {
