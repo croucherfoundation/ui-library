@@ -3,11 +3,6 @@
   width: 100%;
   font-family: "MarrSans", sans-serif;
 
-  &--disabled {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
   // Hide the native select element
   select[multiple] {
     position: absolute;
@@ -239,6 +234,7 @@
 
   // Responsive gap adjustments
   @include lg {
+
     &--cols-3,
     &--cols-4 {
       gap: 30px;
@@ -608,10 +604,10 @@
     &--range-start {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      
+
       &:not(&.filter-dropdown__calendar-day--single) {
         position: relative;
-        
+
         &::after {
           content: '';
           position: absolute;
@@ -628,10 +624,10 @@
     &--range-end {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      
+
       &:not(&.filter-dropdown__calendar-day--single) {
         position: relative;
-        
+
         &::before {
           content: '';
           position: absolute;
@@ -710,4 +706,3 @@
     margin-top: 1rem;
   }
 }
-
