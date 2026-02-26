@@ -125,10 +125,16 @@
       background-color: $light-gray;
     }
 
-    &--select-all {
-      border-bottom: 1px solid #e5e5e5;
-      margin-bottom: 4px;
-      padding-bottom: 14px;
+
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+
+    .filter-dropdown__button {
+      background-color: #f6f6f4;
+      cursor: not-allowed;
     }
   }
 
@@ -200,9 +206,7 @@
         background-color: #333;
       }
 
-      &--select-all {
-        border-bottom-color: #444;
-      }
+
     }
   }
 }
