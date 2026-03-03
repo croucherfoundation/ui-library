@@ -15,7 +15,7 @@
       display: block;
       width: 100%;
       padding: 0.5rem 0.75rem;
-      font-size: 16px;
+      font-size: 1rem;
     }
     textarea {
       resize: vertical;
@@ -86,7 +86,7 @@
 
 .error_message {
   color: $croucher-red;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.2;
   display: block;
   word-wrap: break-word;
@@ -163,7 +163,7 @@ label.checkbox_label {
     top: 56%;
     transform: translate(-50%, -50%);
     color: #9a9b97;
-    font-size: 25px;
+    font-size: 1.5625rem;
     font-weight: normal;
     visibility: hidden;
   }
@@ -260,7 +260,7 @@ input.checkbox:checked + label.checkbox_label::after {
     align-items: center;
     padding-left: 26px;
     min-height: 18px;
-    font-size: 14px;
+    font-size: 0.875rem;
 
     &::before {
       width: 18px;
@@ -333,10 +333,10 @@ input.checkbox:checked + label.checkbox_label::after {
     .standard-radio-label {
       gap: 8px;
       min-height: 18px;
-      font-size: 14px;
+      font-size: 0.875rem;
 
       .radio-label-text {
-        font-size: 14px;
+        font-size: 0.875rem;
         line-height: 18px;
         margin-top: 0;
       }
@@ -460,7 +460,7 @@ input.checkbox:checked + label.checkbox_label::after {
   top: 4px;
   width: 4px;
   height: 9px;
-  font-size: 24px;
+  font-size: 1.5rem;
   color: $color-black;
   opacity: 1;
   letter-spacing: -2px;
@@ -498,7 +498,7 @@ input.checkbox:checked + label.checkbox_label::after {
   position: relative;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 1rem;
   background: white url('csc/down_arrow.svg') no-repeat calc(100% - 16px) center;
   background-size: 16px;
   transition: border-color 0.2s ease;
@@ -528,7 +528,7 @@ input.checkbox:checked + label.checkbox_label::after {
   top: 0;
   width: 100%;
   padding: 10px 1rem;
-  font-size: 16px;
+  font-size: 1rem;
   border: none;
   border-bottom: 1px solid #e5e5e5;
   box-sizing: border-box;
@@ -551,7 +551,7 @@ input.checkbox:checked + label.checkbox_label::after {
   padding: 10px 1rem;
   border-bottom: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.2;
   white-space: normal;
   word-break: break-word;

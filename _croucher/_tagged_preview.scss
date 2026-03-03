@@ -40,14 +40,14 @@
 
         h3 {
           margin: 0;
-          font-size: 18.8px;
+          font-size: 1.175rem;
           line-height: 28.2px;
         }
 
         span {
           display: block;
           max-width: 260px;
-          font-size: 14px;
+          font-size: 0.875rem;
           line-height: 21px;
 
           &.arrow-icon {
@@ -76,17 +76,17 @@
           padding: 16px 34px 16px 16px;
 
           h3 {
-            font-size: 24px;
+            font-size: 1.5rem;
             line-height: 32px;
             margin-bottom: 18px;
             font-weight: 700;
             @media (max-width: 767px) {
-              font-size: 22px;
+              font-size: 1.375rem;
             }
           }
           span {
             max-width: 100%;
-            font-size: 20px;
+            font-size: 1.25rem;
             font-weight: normal;
             line-height: 30px;
           }

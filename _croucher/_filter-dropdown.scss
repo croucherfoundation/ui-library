@@ -24,7 +24,7 @@
     border: 1px solid $black;
     border-radius: $rounded-5;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     text-align: left;
     transition: border-color 0.2s ease;
 
@@ -46,7 +46,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.2;
 
     &--placeholder {
@@ -111,7 +111,7 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
     position: relative;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.2;
     transform: translateZ(0);
     white-space: normal;
@@ -275,7 +275,7 @@
   }
 
   &__label {
-    font-size: 16px;
+    font-size: 1rem;
     color: $black;
     margin-right: 8px;
     white-space: nowrap;
@@ -309,7 +309,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 16px;
+    font-size: 1rem;
     color: $black;
     cursor: pointer;
     transition: opacity 0.2s ease;
@@ -345,7 +345,7 @@
   }
 
   &__clear {
-    font-size: 16px;
+    font-size: 1rem;
     color: $black;
     text-decoration: underline;
     cursor: pointer;
@@ -437,7 +437,7 @@
   }
 
   &__calendar-title {
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
     color: $black;
 
@@ -489,7 +489,7 @@
     border: none;
     border-radius: $rounded-5;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     padding: 12px 8px;
     min-height: 44px; // keeps same height as day cell
@@ -550,7 +550,7 @@
     text-align: center;
 
     span {
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 500;
       color: $black;
       padding: 8px 0;
@@ -568,7 +568,7 @@
     align-items: center;
     justify-content: center;
     height: 44px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     color: $black;
     background-color: transparent;
@@ -666,7 +666,7 @@
   &__calendar-btn {
     flex: 1;
     padding: 14px 20px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     font-family: inherit;
     border-radius: $rounded-5;

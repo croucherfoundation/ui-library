@@ -12,7 +12,7 @@
   gap: 20px;
   .left-text {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 24px;
     max-width: 100%;
     align-self: flex-start;
@@ -43,7 +43,7 @@
     flex-direction: row;
     .left-text {
       font-weight: 600;
-      font-size: 24px;
+      font-size: 1.5rem;
       line-height: 28px;
       max-width: 430px;
       align-self: auto;
@@ -82,14 +82,14 @@
     .content {
       margin-bottom: 0;
       .title {
-        font-size: 24px;
+        font-size: 1.5rem;
         line-height: 28px;
         margin-bottom: 20px;
         margin-top: 0;
         font-weight: 600;
       }
       .article {
-        font-size: 20px;
+        font-size: 1.25rem;
         line-height: 28px;
         p {
           margin-bottom: 20px;

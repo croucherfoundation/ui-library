@@ -175,7 +175,7 @@ a.viewall_btn,
   }
   .btn {
     color: #9b9a97;
-    font-size: 16px;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -236,7 +236,7 @@ a.viewall_btn,
           display: inline-block; /* Required for transform to work */
           transform: rotate(90deg);
           letter-spacing: 3px;
-          font-size: 16px;
+          font-size: 1rem;
         }
         &.active {
           visibility: visible;
@@ -294,7 +294,7 @@ a.viewall_btn,
           border-radius: 5px;
           transition: background-color 0.15s ease;
           margin: 0;
-          font-size: 16px;
+          font-size: 1rem;
           line-height: 1.5;
 
           &:hover {

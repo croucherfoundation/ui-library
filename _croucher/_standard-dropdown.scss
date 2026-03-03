@@ -13,7 +13,7 @@
     border: 1px solid $color-black;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     text-align: left;
     transition: border-color 0.2s ease;
     margin-bottom: 2.5rem;
@@ -90,7 +90,7 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
     position: relative;
-    font-size: 14px;
+    font-size: 0.875rem;
     transform: translateZ(0);
     white-space: normal;
     word-break: break-word;
@@ -169,7 +169,7 @@
     background-color: #efefefde;
     color: #888888;
     pointer-events: none;
-    font-size: 14px;
+    font-size: 0.875rem;
     border-bottom: 1px solid #eee;
     cursor: default;
   }

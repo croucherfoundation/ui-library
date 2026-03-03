@@ -184,12 +184,12 @@
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.6rem;
 
     @media (max-width: 800px) {
-      font-size: 20px;
+      font-size: 1.25rem;
       margin-bottom: 1.4rem;
     }
 
@@ -211,7 +211,7 @@
 
   p,
   ul:not(.token-input-list) {
-    font-size: 18px;
+    font-size: 1.125rem;
 
     br:not(.medium-editor-element br):not(.hidden) {
       display: block;
@@ -353,7 +353,7 @@
           top: 0.6em;
           transform: translate(-50%, -50%);
           color: #9a9b97;
-          font-size: 25px;
+          font-size: 1.5625rem;
           font-weight: normal;
           visibility: hidden;
         }
@@ -387,7 +387,7 @@
           top: 56%;
           transform: translate(-50%, -50%);
           color: #9a9b97;
-          font-size: 25px;
+          font-size: 1.5625rem;
           font-weight: normal;
           visibility: hidden;
         }
@@ -575,7 +575,7 @@
         margin-left: 5px;
       }
       h2.section {
-        font-size: 18px;
+        font-size: 1.125rem;
         color: unset;
       }
       .grant-modal-submit {
@@ -668,11 +668,11 @@
       position: absolute;
       bottom: 20px;
       left: 0;
-      font-size: 13px;
+      font-size: 0.8125rem;
 
       @media (max-width: 800px) {
         bottom: 6px;
-        font-size: 12px;
+        font-size: 0.75rem;
       }
     }
   }
@@ -781,7 +781,7 @@
     button,
     .submit-button {
       border-radius: 9999px;
-      font-size: 18px;
+      font-size: 1.125rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
@@ -793,7 +793,7 @@
 
     .standard-modal-submit {
       border-radius: 9999px;
-      font-size: 18px;
+      font-size: 1.125rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
@@ -1064,7 +1064,7 @@
     padding: 0 !important;
   }
   .font-24 {
-    font-size: 24px !important;
+    font-size: 1.5rem !important;
   }
   .edit_round .inputs {
     span.col.first.year, span.col.last.name {

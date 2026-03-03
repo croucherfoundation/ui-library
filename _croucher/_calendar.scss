@@ -212,7 +212,7 @@
   }
 
   .month_day_number {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     margin-bottom: 5px;
     color: #333;
@@ -232,7 +232,7 @@
     color: white;
     padding: 3px 5px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1rem;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
@@ -279,7 +279,7 @@
 
   .more_events, .week_more_events, .day_more_events {
     position: absolute;
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #666;
     cursor: pointer;
     pointer-events: auto;
@@ -315,13 +315,13 @@
   }
 
   .week_day_name {
-    font-size: 16px;
+    font-size: 1rem;
     color: #666;
     padding-top: 3px;
   }
 
   .week_day_number {
-    font-size: 16px;
+    font-size: 1rem;
     width: 24px;
     height: 24px;
     display: flex;
@@ -378,7 +378,7 @@
     background-color: white;
     padding: 0 4px 0 0;
     color: #666;
-    font-size: 12px;
+    font-size: 0.75rem;
     z-index: 2;
   }
 
@@ -409,7 +409,7 @@
     background-color: #ee3a43;
     color: white;
     padding: 3px 8px;
-    font-size: 14px;
+    font-size: 0.875rem;
     border-radius: 4px;
     cursor: pointer;
     white-space: nowrap;
@@ -436,7 +436,7 @@
     }
     
     .week_event_title {
-      font-size: 14px;
+      font-size: 0.875rem;
       margin-top: 0;
     }
   }
@@ -469,7 +469,7 @@
     color: white;
     overflow: hidden;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 0.75rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     background-color: #ee3a43;
     height: 27px;
@@ -478,7 +478,7 @@
   }
 
   .week_event_title {
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: white;
     font-weight: 400;
     white-space: nowrap;
@@ -516,13 +516,13 @@
   }
 
   .day_day_name {
-    font-size: 16px;
+    font-size: 1rem;
     color: #666;
     padding-top: 3px;
   }
 
   .day_day_number {
-    font-size: 16px;
+    font-size: 1rem;
     width: 24px;
     height: 24px;
     display: flex;
@@ -571,7 +571,7 @@
     color: white;
     overflow: hidden;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 0.75rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     background-color: #ee3a43;
     height: 27px;
@@ -580,7 +580,7 @@
   }
 
   .day_event_title {
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: white;
     font-weight: 400;
     white-space: nowrap;
@@ -704,7 +704,7 @@
 
     .dialog_title {
       font-family: 'MarrSans', sans-serif;
-      font-size: 24px;
+      font-size: 1.5rem;
       line-height: 28px;
       font-weight: 600;
       color: #111827;
@@ -811,7 +811,7 @@
 
     .week_day_name,
     .week_day_number {
-      font-size: 12px;
+      font-size: 0.75rem;
     }
 
     .week_day_header {
@@ -826,7 +826,7 @@
 
     .week_event_title,
     .day_event_title {
-      font-size: 12px;
+      font-size: 0.75rem;
     }
 
     .week_event,
@@ -843,7 +843,7 @@
     }
 
     .month_event {
-      font-size: 12px;
+      font-size: 0.75rem;
     }
   }
 }

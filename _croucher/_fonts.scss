@@ -195,15 +195,15 @@ $typo: (
 }
 
 .f-16 {
-  font-size: 16px !important;
+  font-size: 1rem !important;
 }
 
 .f-20 {
-  font-size: 20px !important;
+  font-size: 1.25rem !important;
 }
 
 .f-26 {
-  font-size: 26px !important;
+  font-size: 1.625rem !important;
 }
 
 .w-100 {
@@ -223,13 +223,13 @@ $typo: (
     // Mobile styles
     @media (max-width: 767px) {
       @if $name == title {
-        font-size: 32px;
+        font-size: 2rem;
         line-height: 36px;
       } @else if $name == standfirst {
-        font-size: 26px;
+        font-size: 1.625rem;
         line-height: 34px;
       } @else if $name == subtitle {
-        font-size: 32px;
+        font-size: 2rem;
         line-height: 36px;
       } @else {
         // Use the same values for body in mobile view
@@ -339,20 +339,20 @@ $typo: (
 }
 
 .search-title {
-  font-size: 40px;
+  font-size: 2.5rem;
   line-height: 40px;
   font-weight: 600;
   color: $font-black;
 
   @media (max-width: 767px) {
-    font-size: 32px;
+    font-size: 2rem;
     line-height: 36px;
   }
 }
 
 .standard-h3-title {
   color: $font-black;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 32px;
   margin-top: 10px;
