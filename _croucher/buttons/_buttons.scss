@@ -25,13 +25,13 @@ button.croucher-standard-btn,
   }
 
   &.green {
-    background-color: $green;
+    background-color: $cool-green;
     color: white;
-    border: 1px solid $green;
+    border: 1px solid $cool-green;
     &:hover {
       background: $white;
-      color: $green;
-      border: 1px solid $green;
+      color: $cool-green;
+      border: 1px solid $cool-green;
     }
   }
 
