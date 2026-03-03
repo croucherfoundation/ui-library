@@ -7,6 +7,34 @@ button.croucher-standard-btn,
   @extend %base_btn!optional;
   color: $croucher-dark;
 
+  &.small {
+    padding: 3px 18px 0 18px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  &.red {
+    background-color: $croucher-red;
+    color: white;
+    border: 1px solid $croucher-red;
+     &:hover {
+      background: $white;
+      color: $croucher-red;
+      border: 1px solid $croucher-red;
+    }
+  }
+
+  &.green {
+    background-color: $green;
+    color: white;
+    border: 1px solid $green;
+    &:hover {
+      background: $white;
+      color: $green;
+      border: 1px solid $green;
+    }
+  }
+
   &.sef_save_btn{
     background-color: $sef-green;
     color: white;
