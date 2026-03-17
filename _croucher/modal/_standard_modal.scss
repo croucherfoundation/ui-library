@@ -70,7 +70,7 @@
 
   // Ensure inputs have black text
   input::placeholder {
-    color: #6b7280 !important; 
+    color: #6b7280 !important;
   }
 
   @media (max-width: 800px) {
@@ -120,9 +120,9 @@
 
     textarea, .rte[contenteditable]:not([contenteditable=false]) {
       min-height: 38px;
-      overflow: hidden;
+      overflow: auto;
       resize: none;
-      
+
       p, div {
         margin-bottom: 0;
       }
@@ -339,7 +339,7 @@
         padding-left: 40px;
         cursor: pointer;
         display: inline-block;
-      
+
         &::before {
           content: '';
           position: absolute;
@@ -351,7 +351,7 @@
           border: 2px solid #9a9b97;
           border-radius: 50%; // ⬅️ Circle for radio
         }
-      
+
         &::after {
           content: '✓';
           position: absolute;
@@ -628,7 +628,7 @@
       width: 50%;
       vertical-align: top; /* Optional: aligns content better */
     }
-    
+
     table.edit-profile.inputs tr td:first-child {
       padding-right: 20px;
     }
@@ -637,7 +637,7 @@
       width: 100% !important;
       box-shadow: unset !important;
     }
-    
+
     #upload-report-spinner {
       margin-top: -85px;
       margin-left: 400px;
@@ -884,7 +884,7 @@
   .select2-selection__arrow {
     display: none;
   }
-  
+
   /* Dataroom's select */
    select {
     position: relative;
@@ -1131,10 +1131,10 @@
 
     .filter-dropdown {
       width: 100%;
-      
+
       &__button {
         margin-bottom: 2.5rem;
-        
+
         @media (max-width: 800px) {
           margin-bottom: 1.6rem;
         }
@@ -1148,7 +1148,7 @@
     // Fix for token input (scientific tags)
     ul.token-input-list {
       margin-bottom: 2.5rem;
-      
+
       @media (max-width: 800px) {
         margin-bottom: 1.6rem;
       }
@@ -1157,7 +1157,7 @@
     // Searchable select styling for edit modal
     .searchable-select-dropdown {
       margin-bottom: 2.5rem;
-      
+
       @media (max-width: 800px) {
         margin-bottom: 1.6rem;
       }
@@ -1201,7 +1201,7 @@
 
     .searchable-select-item {
       padding: 10px 1rem; // Consistent padding
-      
+
       &:first-child {
         margin-top: 0; // Remove white space before first option
         padding-top: 10px;
@@ -1217,5 +1217,5 @@
 body:has(.popup:not([style*="display: none"]), .modal-open:not([style*="display: none"])) {
   overflow: hidden;
   /* Optional: Prevents the page from shifting when the scrollbar disappears */
-  scrollbar-gutter: stable; 
+  scrollbar-gutter: stable;
 }
