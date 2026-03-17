@@ -9,6 +9,8 @@
   align-items: center;
   z-index: 10001;
   display: none;
+  overflow: hidden;
+  overscroll-behavior: none;
 
   &.active {
     display: flex;
@@ -26,6 +28,7 @@
   overflow-y: auto;
   position: relative;
   display: none;
+  overscroll-behavior: none;
   &.active {
     display: block;
     position: fixed;
@@ -1211,11 +1214,4 @@
 
   // Dark mode support - REMOVED as per requirement
 
-}
-
-// Prevent background scrolling when modal is active
-body:has(.popup:not([style*="display: none"]), .modal-open:not([style*="display: none"])) {
-  overflow: hidden;
-  /* Optional: Prevents the page from shifting when the scrollbar disappears */
-  scrollbar-gutter: stable;
 }

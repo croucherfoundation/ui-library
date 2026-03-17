@@ -31,6 +31,8 @@
 
   &-open {
     display: block;
+    overflow: hidden;
+    overscroll-behavior: none;
   }
 
   &-backdrop {
