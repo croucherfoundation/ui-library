@@ -23,11 +23,12 @@
   max-width: 794px;
   width: 100%;
   min-width: 300px;
-  overflow-y: auto;
   position: relative;
   display: none;
   &.active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     position: fixed;
     top: 0;
     left: 0;
@@ -38,6 +39,15 @@
     height: fit-content;
     transform: none;
     z-index: 1001;
+  }
+
+  // If the standard modal wraps its content in a form element, 
+  // we must pass the flex constraints through the form so the body can scroll correctly
+  > form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
   }
 
   // Fixed header area (logo and close button)
@@ -1214,8 +1224,18 @@
 }
 
 // Prevent background scrolling when modal is active
-body:has(.popup:not([style*="display: none"]), .modal-open:not([style*="display: none"])) {
+body:has(.popup:not([style*="display: none"]), .modal-open:not([style*="display: none"])),
+body.modal-open,
+html:has(.popup:not([style*="display: none"]), .modal-open:not([style*="display: none"])),
+html.modal-open {
   overflow: hidden;
+  overscroll-behavior: none;
   /* Optional: Prevents the page from shifting when the scrollbar disappears */
   scrollbar-gutter: stable;
+}
+
+.standard-modal-overlay,
+.standard-modal-container,
+.standard-modal-body {
+  overscroll-behavior: contain;
 }

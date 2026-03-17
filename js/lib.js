@@ -101,6 +101,8 @@
   function closeStandardModalOrPopup($trigger) {
     // Remove modal-open/show/fade from modal and body
     $('.modal').removeClass('modal-open');
+    $('body').removeClass('modal-open');
+    $('html').removeClass('modal-open');
     // Remove any Bootstrap modal backdrops
     $('.modal-backdrop').removeClass('show fade').remove();
  
@@ -322,6 +324,8 @@
       callLater(function () {
         backdrop.classList.add("show");
         emailConfirmModal.classList.add("modal-open");
+        document.body.classList.add("modal-open");
+        document.documentElement.classList.add("modal-open");
       });
     }
 
@@ -483,6 +487,8 @@
     if (!backdrop) return;
     removeClassName(backdrop, "show");
     removeClassName(document.getElementById(modalId), "modal-open");
+    removeClassName(document.body, "modal-open");
+    removeClassName(document.documentElement, "modal-open");
     callLater(() => backdrop.remove(), 100);
   }
   document.addEventListener("DOMContentLoaded", () => {
@@ -497,6 +503,8 @@
         var backdrop = document.querySelector(".modal-backdrop");
         removeClassName(backdrop, "show");
         removeClassName(modal, "modal-open");
+        removeClassName(document.body, "modal-open");
+        removeClassName(document.documentElement, "modal-open");
         callLater(() => backdrop.remove(), 100);
       });
     });
@@ -512,6 +520,8 @@
         callLater(function () {
           backdrop.classList.add("show");
           modal.classList.add("modal-open");
+          document.body.classList.add("modal-open");
+          document.documentElement.classList.add("modal-open");
         });
       });
     });
@@ -1022,6 +1032,8 @@
                 form.reset();
                 removeClassName(backdrop, "show");
                 removeClassName(modal, "modal-open");
+                removeClassName(document.body, "modal-open");
+                removeClassName(document.documentElement, "modal-open");
                 callLater(() => backdrop.remove(), 100);
               })
               .catch((error) => {
@@ -1045,6 +1057,8 @@
           const backdrop = document.querySelector(".modal-backdrop");
           removeClassName(backdrop, "show");
           removeClassName(modal, "modal-open");
+          removeClassName(document.body, "modal-open");
+          removeClassName(document.documentElement, "modal-open");
           callLater(() => backdrop.remove(), 100);
         }
         // Function to validate email
