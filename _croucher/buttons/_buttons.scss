@@ -161,6 +161,11 @@ a.viewall_btn,
     right: 7px;
     top: 5px;
   }
+  &.csw-action-pos{
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
   &.action-menu-pos{
     position: absolute;
     right: 0;
@@ -398,6 +403,9 @@ a.viewall_btn,
         .action-commands-dropdown.up.menu{
           z-index: 999;
         }
+      }
+      &.csw-action-pos{
+        right: -30px;
       }
       .more-actions{
         z-index: unset;
