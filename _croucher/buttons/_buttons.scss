@@ -165,6 +165,9 @@ a.viewall_btn,
     position: absolute;
     right: 0;
     top: 0;
+    .action-commands-dropdown.up.menu{
+      z-index: 999;
+    }
   }
   &.action-menu-pos{
     position: absolute;
