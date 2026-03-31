@@ -220,6 +220,11 @@ a.viewall_btn,
       width: 18px;
       height: 18px;
       margin-top: -2px;
+      &.backward-arrow {
+        width: 28px;
+        height: 28px;
+        transform: rotate(180deg);
+      }
     }
     svg:has(use[href$="#edit_symbol"]),
     svg:has(use[*|href$="#edit_symbol"]) {
