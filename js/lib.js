@@ -133,8 +133,8 @@
 
   // Close modal or popup when pressing Escape key
   $(document).on('keydown', function(e) {
-    closeEditModal();
     if (e.key === 'Escape' || e.keyCode === 27) {
+      closeEditModal();
       // Try to find the topmost visible modal or popup
       var $modal = $('.modal.modal-open').last();
       var $popup = $('.popup:visible').last();
