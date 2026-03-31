@@ -96,14 +96,14 @@
    * Close standard modal
    * ===========================
    */
- 
+
   // Close modal or popup when clicking standard close control (delegated)
   function closeStandardModalOrPopup($trigger) {
     // Remove modal-open/show/fade from modal and body
     $('.modal').removeClass('modal-open');
     // Remove any Bootstrap modal backdrops
     $('.modal-backdrop').removeClass('show fade').remove();
- 
+
     // Additionally, close closest popup and remove mask overlay if present
     var $popup = $trigger.closest('.popup');
     if ($popup.length) {
@@ -117,14 +117,23 @@
       $floater.hide();
     }
   }
- 
+
   $(document).on('click', '.standard-modal-close-btn', function(e) {
     e.preventDefault();
     closeStandardModalOrPopup($(this));
+    closeEditModal();
   });
- 
+
+  function closeEditModal() {
+    if ($("#editModal").length) {
+      $("html").css("overflow", "auto");
+      $("#editModal").hide();
+    }
+  }
+
   // Close modal or popup when pressing Escape key
   $(document).on('keydown', function(e) {
+    closeEditModal();
     if (e.key === 'Escape' || e.keyCode === 27) {
       // Try to find the topmost visible modal or popup
       var $modal = $('.modal.modal-open').last();
@@ -134,7 +143,7 @@
       } else if ($popup.length) {
         closeStandardModalOrPopup($popup);
       }
-      
+
       // Hide floater if it exists when pressing Escape
       var $floater = $('#floater');
       if ($floater.length) {
@@ -1129,17 +1138,17 @@
   document.querySelectorAll('.standard-modal-container textarea').forEach(textarea => {
     // Store the original height
     const minHeight = textarea.offsetHeight || 38;
-    
+
     // Force single-line height on initial render (unless it has existing multiline content)
     const hasLineBreaks = textarea.value.includes('\n');
     if (!hasLineBreaks) {
       textarea.style.height = minHeight + 'px';
     }
-    
+
     // Expand on input (only when there are line breaks)
     textarea.addEventListener('input', function() {
       const hasLineBreaks = this.value.includes('\n');
-      
+
       if (!hasLineBreaks || this.value.trim() === '') {
         // Single line or empty - keep original height
         this.style.height = minHeight + 'px';
@@ -1205,17 +1214,17 @@ function initDropdownDelegation() {
       el.classList.remove('positioned');
       el.style.top = '';
     });
-    
+
     // Remove dropdown-open class from all btn-groups (fixes iOS overflow clipping)
     document.querySelectorAll('.standard-btn-group.dropdown-open').forEach(el => {
       el.classList.remove('dropdown-open');
     });
-    
+
     // Remove active class from all toggle buttons (grey background)
     document.querySelectorAll('.toggle-commands-dropdown.active').forEach(el => {
       el.classList.remove('active');
     });
-    
+
     activeDropdown = null;
     activeTrigger = null;
   }
@@ -1223,27 +1232,27 @@ function initDropdownDelegation() {
   // Event delegation - listen on document for all dropdown triggers
   document.addEventListener('pointerdown', function(e) {
     var trigger = e.target.closest('[data-action="toggle-actions-dropdown"]');
-    
+
     if (trigger) {
       e.preventDefault();
       e.stopPropagation();
-      
+
       var affected = trigger.getAttribute('data-affected');
       var target;
-      
+
       if (affected) {
         // Check next sibling first, then global selector
-        target = trigger.nextElementSibling && trigger.nextElementSibling.matches(affected) 
-          ? trigger.nextElementSibling 
+        target = trigger.nextElementSibling && trigger.nextElementSibling.matches(affected)
+          ? trigger.nextElementSibling
           : document.querySelector(affected);
       } else {
         // Default to next sibling if no data-affected
         target = trigger.nextElementSibling;
       }
-      
+
       if (target) {
         var isOpen = target.classList.contains('up');
-        
+
         if (!isOpen) {
           // Close any other open dropdowns first
           closeAllDropdowns();
@@ -1252,10 +1261,10 @@ function initDropdownDelegation() {
           target.classList.add('up');
           activeDropdown = target;
           activeTrigger = trigger;
-          
+
           // Add active class to toggle button for grey background (Notion-style)
           trigger.classList.add('active');
-          
+
           // Add dropdown-open class to parent btn-group on mobile (fixes iOS overflow clipping)
           if (window.innerWidth <= 767) {
             var btnGroup = target.closest('.standard-btn-group');
@@ -1263,12 +1272,12 @@ function initDropdownDelegation() {
               btnGroup.classList.add('dropdown-open');
             }
           }
-          
+
           // Check if dropdown overflows right edge and position it
           setTimeout(() => {
             var rect = target.getBoundingClientRect();
             var viewportWidth = window.innerWidth;
-            
+
             // If dropdown would overflow right edge, align it to the right instead
             if (rect.right > viewportWidth - 20) {
               target.classList.add('align-right');
@@ -1425,7 +1434,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initSearchableSelect(selector) {
   var elements = document.querySelectorAll(selector);
-  
+
   // Early return if no elements found
   if (!elements || !elements.length) {
     return;
@@ -1436,47 +1445,47 @@ function initSearchableSelect(selector) {
     if (!originalSelect || originalSelect.tagName !== 'SELECT') {
       return;
     }
-    
+
     // Read options from data attributes
     var placeholder = originalSelect.dataset.placeholder || "Select an option";
     var searchPlaceholder = originalSelect.dataset.searchPlaceholder || "Search...";
     var showBothValueAndText = originalSelect.dataset.showBoth === 'true';
-    
+
     // Hide the original select
     originalSelect.style.display = 'none';
-    
+
     // Create custom dropdown structure
     var customDropdown = document.createElement('div');
     customDropdown.className = 'searchable-select-dropdown';
-    
+
     var selectedDisplay = document.createElement('div');
     selectedDisplay.className = 'searchable-select-selected';
     selectedDisplay.textContent = placeholder;
-    
+
     var dropdownList = document.createElement('div');
     dropdownList.className = 'searchable-select-list';
     dropdownList.style.display = 'none';
-    
+
     var searchInput = document.createElement('input');
     searchInput.type = 'text';
     searchInput.className = 'searchable-select-search';
     searchInput.placeholder = searchPlaceholder;
-    
+
     var itemsContainer = document.createElement('div');
     itemsContainer.className = 'searchable-select-items';
-    
+
     // Insert custom dropdown after original select
     originalSelect.parentNode.insertBefore(customDropdown, originalSelect.nextSibling);
     customDropdown.appendChild(selectedDisplay);
     customDropdown.appendChild(dropdownList);
     dropdownList.appendChild(searchInput);
     dropdownList.appendChild(itemsContainer);
-    
+
     // Populate dropdown items from original select options
     Array.from(originalSelect.options).forEach(function(option) {
       var optionValue = option.value;
       var optionText = option.textContent;
-      
+
       if (optionValue) {
         var displayText = showBothValueAndText ? optionValue + ' - ' + optionText : optionText;
         var dropdownItem = document.createElement('div');
@@ -1486,7 +1495,7 @@ function initSearchableSelect(selector) {
         itemsContainer.appendChild(dropdownItem);
       }
     });
-    
+
     // Set initial selected value if exists
     var selectedValue = originalSelect.value;
     if (selectedValue) {
@@ -1496,7 +1505,7 @@ function initSearchableSelect(selector) {
         selectedDisplay.textContent = displayText;
       }
     }
-    
+
     // Toggle dropdown on click
     selectedDisplay.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -1506,7 +1515,7 @@ function initSearchableSelect(selector) {
           list.style.display = 'none';
         }
       });
-      
+
       if (dropdownList.style.display === 'none') {
         dropdownList.style.display = 'block';
         searchInput.focus();
@@ -1514,33 +1523,33 @@ function initSearchableSelect(selector) {
         dropdownList.style.display = 'none';
       }
     });
-    
+
     // Handle item selection
     itemsContainer.addEventListener('click', function(e) {
       var target = e.target;
       if (target.classList.contains('searchable-select-item')) {
         var value = target.dataset.value;
         var text = target.textContent;
-        
+
         selectedDisplay.textContent = text;
         originalSelect.value = value;
-        
+
         // Trigger input event for autosave forms
         var inputEvent = new Event('input', { bubbles: true });
         originalSelect.dispatchEvent(inputEvent);
-        
+
         // Also trigger change event
         var changeEvent = new Event('change', { bubbles: true });
         originalSelect.dispatchEvent(changeEvent);
-        
+
         dropdownList.style.display = 'none';
       }
     });
-    
+
     // Search functionality
     searchInput.addEventListener('keyup', function() {
       var searchValue = searchInput.value.toLowerCase();
-      
+
       itemsContainer.querySelectorAll('.searchable-select-item').forEach(function(item) {
         var itemText = item.textContent.toLowerCase();
         if (itemText.indexOf(searchValue) !== -1) {
@@ -1550,7 +1559,7 @@ function initSearchableSelect(selector) {
         }
       });
     });
-    
+
     // Prevent dropdown from closing when clicking inside
     dropdownList.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -1581,15 +1590,15 @@ document.addEventListener('DOMContentLoaded', function() {
 function initOrderableCards() {
   const container = document.querySelector('.cards-order-container');
   if (!container) return;
-  
+
   // Prevent double initialization
   if (container.dataset.initialized === 'true') return;
   container.dataset.initialized = 'true';
-  
+
   const cards = container.querySelectorAll('.orderable-card');
   const hiddenField = document.getElementById('repositioned_ids');
   let draggedCard = null;
-  
+
   // Update hidden field with current order
   function updateOrder() {
     const orderedData = Array.from(container.querySelectorAll('.orderable-card'))
@@ -1601,25 +1610,25 @@ function initOrderableCards() {
       hiddenField.value = JSON.stringify(orderedData);
     }
   }
-  
+
   // Clear all drop indicators
   function clearDropIndicators() {
     container.querySelectorAll('.orderable-card').forEach(card => {
       card.classList.remove('drag-over-swap', 'drop-indicator-top', 'drop-indicator-bottom');
     });
   }
-  
+
   // Get drop zone: left 25% = place before, right 25% = place after, middle 50% = swap
   function getDropZone(card, x) {
     const rect = card.getBoundingClientRect();
     const relativeX = x - rect.left;
     const percentage = relativeX / rect.width;
-    
+
     if (percentage < 0.25) return 'top';
     if (percentage > 0.75) return 'bottom';
     return 'swap';
   }
-  
+
   cards.forEach(card => {
     card.addEventListener('dragstart', (e) => {
       draggedCard = card;
@@ -1627,20 +1636,20 @@ function initOrderableCards() {
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', card.dataset.id);
     });
-    
+
     card.addEventListener('dragend', () => {
       card.classList.remove('dragging');
       clearDropIndicators();
       draggedCard = null;
       updateOrder();
     });
-    
+
     card.addEventListener('dragover', (e) => {
       e.preventDefault();
       if (card === draggedCard) return;
-      
+
       clearDropIndicators();
-      
+
       const zone = getDropZone(card, e.clientX);
       if (zone === 'swap') {
         card.classList.add('drag-over-swap');
@@ -1650,22 +1659,22 @@ function initOrderableCards() {
         card.classList.add('drop-indicator-bottom');
       }
     });
-    
+
     card.addEventListener('dragleave', () => {
       card.classList.remove('drag-over-swap', 'drop-indicator-top', 'drop-indicator-bottom');
     });
-    
+
     card.addEventListener('drop', (e) => {
       e.preventDefault();
       if (card === draggedCard) return;
-      
+
       const zone = getDropZone(card, e.clientX);
-      
+
       if (zone === 'swap') {
         // Swap mode: exchange positions
         const draggedIndex = Array.from(container.children).indexOf(draggedCard);
         const targetIndex = Array.from(container.children).indexOf(card);
-        
+
         if (draggedIndex < targetIndex) {
           container.insertBefore(card, draggedCard);
           container.insertBefore(draggedCard, container.children[targetIndex + 1] || null);
@@ -1678,11 +1687,11 @@ function initOrderableCards() {
       } else {
         container.insertBefore(draggedCard, card.nextSibling);
       }
-      
+
       clearDropIndicators();
     });
   });
-  
+
   // Initialize order
   updateOrder();
 }
@@ -1717,7 +1726,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-  
+
   observer.observe(document.body, {
     attributes: true,
     childList: true,
