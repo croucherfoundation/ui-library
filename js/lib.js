@@ -129,6 +129,12 @@
       $("html").css("overflow", "auto");
       $("#editModal").hide();
     }
+
+    // Also close book order modal if open
+    var $bookOrderModal = $(".view-book-order-modal");
+    if ($bookOrderModal.hasClass("open")) {
+      $bookOrderModal.removeClass("open");
+    }
   }
 
   // Close modal or popup when pressing Escape key
