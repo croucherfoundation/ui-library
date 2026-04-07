@@ -126,7 +126,7 @@
   .form-label {
     color: $croucher-red;
   }
-  
+
   .standard-radio {
     .standard-radio-label {
       color: $croucher-red;
@@ -208,13 +208,24 @@ input.checkbox:checked + label.checkbox_label::after {
   min-height: 22px;
   line-height: 18px;
   text-wrap: nowrap;
-  
+
   &.overflow-unset {
     overflow: unset !important;
   }
   &.bg-image-unset {
     background-position: unset !important;
     background-image: unset !important;
+  }
+  &.long-text-label {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 28px;
+    &::before{
+      top: 0
+    }
+    &::after{
+      top: 4px
+    }
   }
 }
 
@@ -306,12 +317,12 @@ input.checkbox:checked + label.checkbox_label::after {
     cursor: pointer;
     user-select: none;
     min-height: 22px;
-    
+
     .radio-label-text {
       line-height: 1.5;
       margin-top: 1px;
     }
-    
+
     &.overflow-unset {
       overflow: unset !important;
     }
@@ -370,14 +381,14 @@ input.checkbox:checked + label.checkbox_label::after {
   box-shadow: inset 0 0 0 0 #9a9b97;
   transition: box-shadow 0.1s ease;
   margin-top: 2px;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   &::after {
     content: '';
-    position: relative; 
+    position: relative;
     opacity: 0;
     transition: opacity 0.05s ease;
     width: 13px;
@@ -502,7 +513,7 @@ input.checkbox:checked + label.checkbox_label::after {
   background: white url('csc/down_arrow.svg') no-repeat calc(100% - 16px) center;
   background-size: 16px;
   transition: border-color 0.2s ease;
-  
+
   &:hover {
     border-color: #666;
   }
@@ -535,7 +546,7 @@ input.checkbox:checked + label.checkbox_label::after {
   background-color: white;
   border-radius: unset;
   z-index: 10;
-  
+
   &:focus {
     outline: none;
     border-bottom: 1px solid #e5e5e5;
@@ -556,11 +567,11 @@ input.checkbox:checked + label.checkbox_label::after {
   white-space: normal;
   word-break: break-word;
   transition: background-color 0.2s ease;
-  
+
   &:hover {
     background-color: $light-gray;
   }
-  
+
   &:last-child {
     border-bottom: none;
   }
