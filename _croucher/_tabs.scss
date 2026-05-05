@@ -2,6 +2,88 @@ $croucher-red: #EE3A43;
 $border-gray: #E8E8E8;
 $text-color: $color-black;
 
+// Status badge colors
+$status-open-bg: #e8f5e9;
+$status-open-color: #2e7d32;
+$status-screening-bg: #e3f2fd;
+$status-screening-color: #1565c0;
+$status-closed-bg: #eee;
+$status-closed-color: #666;
+$status-upcoming-bg: #fff3e0;
+$status-upcoming-color: #e65100;
+$status-done-bg: #e8f5e9;
+$status-done-color: #2e7d32;
+$status-current-bg: #fff3cd;
+$status-current-color: #856404;
+
+// Status badge — reusable component (move to ui-library later)
+.croucher-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 0.75rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  line-height: 1.4;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &--open {
+    background: $status-open-bg;
+    color: $status-open-color;
+  }
+
+  &--screening {
+    background: $status-screening-bg;
+    color: $status-screening-color;
+  }
+
+  &--closed {
+    background: $status-closed-bg;
+    color: $status-closed-color;
+  }
+
+  &--upcoming {
+    background: $status-upcoming-bg;
+    color: $status-upcoming-color;
+  }
+
+  &--done {
+    background: $status-done-bg;
+    color: $status-done-color;
+  }
+
+  &--current {
+    background: $status-current-bg;
+    color: $status-current-color;
+  }
+
+  // Small variant for inline use (timetable pills, etc.)
+  &--sm {
+    font-size: 11px;
+    padding: 0.15rem 0.55rem;
+    margin-left: 0;
+
+    &::before {
+      width: 5px;
+      height: 5px;
+    }
+  }
+}
+
 .croucher-tab-container {
   &.pb_tab { padding-bottom: 25px; }
 
@@ -62,6 +144,16 @@ $text-color: $color-black;
       font-weight: 600;
       font-size: inherit;
       white-space: nowrap;
+    }
+
+    .tab-badge {
+      display: inline-block;
+      background: rgba(0,0,0,0.04);
+      color: $text-color;
+      font-size: 16px;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      margin-left: 0.5rem;
     }
 
     &.active {
