@@ -82,6 +82,22 @@ $status-current-color: #856404;
       height: 5px;
     }
   }
+
+  // People status variants (screeners, interviewers, nominators, grantors)
+  &--accepted {
+    background: $status-done-bg;
+    color: $status-done-color;
+  }
+
+  &--invited {
+    background: $status-screening-bg;
+    color: $status-screening-color;
+  }
+
+  &--pending {
+    background: $status-closed-bg;
+    color: $status-closed-color;
+  }
 }
 
 .croucher-tab-container {
