@@ -163,11 +163,16 @@ $status-current-color: #856404;
     }
 
     .tab-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
       background: rgba(0,0,0,0.04);
       color: $text-color;
-      font-size: 16px;
-      padding: 0.5rem 1rem;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 0 0.5rem;
       border-radius: 999px;
       margin-left: 0.5rem;
     }
