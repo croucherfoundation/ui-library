@@ -225,6 +225,9 @@ a.viewall_btn,
         height: 28px;
         transform: rotate(180deg);
       }
+      &.lock-icon {
+        margin-top: -5px;
+      }
     }
     svg:has(use[href$="#edit_symbol"]),
     svg:has(use[*|href$="#edit_symbol"]) {
