@@ -18,6 +18,7 @@ $status-current-color: #856404;
 
 // Status badge — reusable component (move to ui-library later)
 .croucher-status-badge {
+  max-width: max-content;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -74,7 +75,7 @@ $status-current-color: #856404;
   // Small variant for inline use (timetable pills, etc.)
   &--sm {
     font-size: 11px;
-    padding: 0.15rem 0.55rem;
+    padding: 0.2rem 0.55rem;
     margin-left: 0;
 
     &::before {
