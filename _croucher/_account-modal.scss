@@ -1,0 +1,222 @@
+// =============================================================================
+// Account Modal — Unified Account Settings Styles
+// =============================================================================
+//
+// These styles are used inside .standard-modal-container for the new unified
+// Account modal. They extend the existing modal patterns (inputs, buttons,
+// error-message, password-toggle, std-row, etc.).
+//
+// Usage:
+//   <div class="standard-modal-container">
+//     <div class="container">
+//       <div class="account-photo"> ... </div>
+//       <div class="account-name-row"> ... </div>
+//       ...
+//     </div>
+//   </div>
+
+// ---------------------------------------------------------------------------
+// Photo Upload Section
+// ---------------------------------------------------------------------------
+.account-photo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  input[type="file"] {
+    display: none;
+  }
+}
+
+.account-photo-avatar-container {
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &.loading {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.account-photo-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  overflow: hidden;
+  display: block;
+  background-color: $light-gray;
+  object-fit: cover;
+}
+
+.account-photo-remove {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  background-color: $croucher-red;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  border: none;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: darken($croucher-red, 10%);
+  }
+
+  svg {
+    width: 10px;
+    height: 10px;
+    color: white;
+  }
+}
+
+.account-photo-upload-text {
+  text-decoration: underline;
+  font-size: 16px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  color: $color-black;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Field Labels & Help Text
+// ---------------------------------------------------------------------------
+.account-field-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6b7280;
+  margin-bottom: 2px;
+  letter-spacing: 0.01em;
+}
+
+.account-field-help {
+  display: block;
+  font-size: 13px;
+  color: #9a9b97;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+
+  @media (max-width: 800px) {
+    margin-top: -1.2rem;
+    margin-bottom: 1.6rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Name Row (half-width side-by-side)
+// ---------------------------------------------------------------------------
+.account-name-row {
+  display: flex;
+  gap: 30px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .input-group {
+    flex: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Divider (before password section)
+// ---------------------------------------------------------------------------
+.account-divider {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+// ---------------------------------------------------------------------------
+// Collapsible Password Section
+// ---------------------------------------------------------------------------
+.account-password-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.75rem 0;
+  user-select: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+
+  &:hover .account-password-toggle-label {
+    color: #333;
+  }
+}
+
+.account-password-toggle-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: $color-black;
+  transition: color 0.15s ease;
+}
+
+.account-password-toggle-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  color: #6b7280;
+
+  &.expanded {
+    transform: rotate(90deg);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.account-password-fields {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.2s ease, margin 0.3s ease;
+  margin-bottom: 0;
+
+  &.expanded {
+    max-height: 400px;
+    opacity: 1;
+    margin-bottom: 1rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Loading spinner (reused from legacy, kept for consistency)
+// ---------------------------------------------------------------------------
+.account-loading {
+  animation: account-spin 1s linear infinite;
+}
+
+@keyframes account-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
