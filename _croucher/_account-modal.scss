@@ -23,6 +23,8 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 0;
 
   input[type="file"] {
     display: none;
@@ -33,6 +35,8 @@
   position: relative;
   cursor: pointer;
   flex-shrink: 0;
+  padding: 4px;
+  overflow: visible;
 
   &.loading {
     cursor: not-allowed;
@@ -52,8 +56,8 @@
 
 .account-photo-remove {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: 0;
+  right: 0;
   width: 18px;
   height: 18px;
   background-color: $croucher-red;
@@ -62,7 +66,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
   padding: 0;
   border: none;
   transition: background-color 0.15s ease;
