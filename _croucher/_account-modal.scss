@@ -56,10 +56,10 @@
 
 .account-photo-remove {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 18px;
-  height: 18px;
+  top: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
   background-color: $croucher-red;
   border-radius: 50%;
   display: flex;
@@ -67,16 +67,17 @@
   justify-content: center;
   cursor: pointer;
   padding: 0;
-  border: none;
+  border: 2px solid $white;
   transition: background-color 0.15s ease;
+  z-index: 1;
 
   &:hover {
     background-color: darken($croucher-red, 10%);
   }
 
   svg {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     color: white;
   }
 }
