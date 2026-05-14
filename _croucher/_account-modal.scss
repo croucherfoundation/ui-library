@@ -224,3 +224,37 @@
     transform: rotate(360deg);
   }
 }
+
+// ---------------------------------------------------------------------------
+// Timezone Dropdown Override (Force Light Mode in Modal)
+// ---------------------------------------------------------------------------
+.dark .account-modal-timezone {
+  .filter-dropdown {
+    &__button {
+      background-color: $white;
+      border-color: $black;
+      color: $black;
+      &:hover {
+        border-color: #666;
+      }
+    }
+    &__selected {
+      &--placeholder, &--value {
+        color: $black;
+      }
+    }
+    &__arrow svg path {
+      fill: $black;
+    }
+    &__list {
+      background-color: $white;
+      border-color: #ccc;
+    }
+    &__item {
+      color: $black;
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+  }
+}
