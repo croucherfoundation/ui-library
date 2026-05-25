@@ -896,6 +896,93 @@
     passwordConfirmInput = passwordConfirm.querySelector("input");
   }
 
+  var accountSettingsSaveBtns = document.querySelectorAll(".modal .modal-btn.account-settings-save");
+  accountSettingsSaveBtns.forEach((saveBtn) => {
+    saveBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      var form = this.closest("form");
+      if (!form) return;
+
+      var modal = saveBtn.closest(".modal");
+
+      fetch(form.action, {
+        method: form.method,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        body: new FormData(form),
+      })
+        .then(async (response) => {
+          var backdrop = document.querySelector(".modal-backdrop");
+
+          var contentType = response.headers.get("content-type") || "";
+          var isJson = contentType.includes("application/json");
+
+          if (!isJson) {
+            if (modal) closeModal(modal.id);
+            window.location.reload();
+            return;
+          }
+
+          var data = {};
+          try {
+            data = await response.json();
+          } catch (e) {
+            if (modal) closeModal(modal.id);
+            window.location.reload();
+            return;
+          }
+
+          if (!response.ok) {
+            // Close the modal
+            if (backdrop) removeClassName(backdrop, "show");
+            if (modal) removeClassName(modal, "modal-open");
+            if (backdrop) callLater(() => backdrop.remove(), 100);
+
+            // Display flash alert message
+            var errorMessage = data.error_message || "Something went wrong. Please try again.";
+            var flashes = document.getElementById("flashes");
+            if (flashes) {
+              flashes.innerHTML =
+                '<p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">' +
+                '<a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display=\'none\'; return false;">close</a>' +
+                errorMessage +
+                '</p>';
+            }
+          } else {
+            console.log("success", data);
+            // Success
+            if (modal) closeModal(modal.id);
+            var successMessage = data.message || "Account settings saved successfully.";
+            var flashes = document.getElementById("flashes");
+            if (flashes) {
+              flashes.innerHTML =
+                '<p class="notice ready unexpandable" style="display: block; grid-row-end: span 2;">' +
+                '<a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display=\'none\'; return false;">close</a>' +
+                successMessage +
+                '</p>';
+            }
+          }
+        })
+        .catch(function (error) {
+          // Network or unexpected error - close modal and show flash
+          var backdrop = document.querySelector(".modal-backdrop");
+          if (backdrop) removeClassName(backdrop, "show");
+          if (modal) removeClassName(modal, "modal-open");
+          if (backdrop) callLater(() => backdrop.remove(), 100);
+
+          var flashes = document.getElementById("flashes");
+          if (flashes) {
+            flashes.innerHTML =
+              '<p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">' +
+              '<a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display=\'none\'; return false;">close</a>' +
+              'An unexpected error occurred.' +
+              '</p>';
+          }
+        });
+    });
+  });
+
   var modalSaveBtns = document.querySelectorAll(".modal .modal-btn.save");
   console.log("modalSaveBtns", modalSaveBtns);
 
