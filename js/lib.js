@@ -903,6 +903,8 @@
       var form = this.closest("form");
       if (!form) return;
 
+      if (!form.reportValidity()) return;
+
       var modal = saveBtn.closest(".modal");
 
       fetch(form.action, {
