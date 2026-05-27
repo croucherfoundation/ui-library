@@ -896,6 +896,23 @@
     passwordConfirmInput = passwordConfirm.querySelector("input");
   }
 
+  // Make both password fields required when either has a value
+  document.querySelectorAll('#password-fields-modal2 .passwords-input input').forEach(function(input) {
+    input.addEventListener('input', function() {
+      var container = this.closest('#password-fields-modal2');
+      var allPasswordInputs = container.querySelectorAll('.passwords-input input');
+      var anyHasValue = Array.from(allPasswordInputs).some(function(el) { return el.value.length > 0; });
+      allPasswordInputs.forEach(function(el) {
+        if (anyHasValue) {
+          el.removeAttribute('readonly');
+          el.setAttribute('required', 'required');
+        } else {
+          el.removeAttribute('required');
+        }
+      });
+    });
+  });
+
   var accountSettingsSaveBtns = document.querySelectorAll(".modal .modal-btn.account-settings-save");
   accountSettingsSaveBtns.forEach((saveBtn) => {
     saveBtn.addEventListener("click", function (e) {
