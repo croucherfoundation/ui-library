@@ -79,7 +79,14 @@
     width: 12px;
     height: 12px;
     color: white;
+    vertical-align: middle;
   }
+}
+
+.email-err-msg {
+  position: relative;
+  color: $croucher-red;
+  top: -30px;
 }
 
 .account-photo-upload-text {
