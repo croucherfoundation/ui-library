@@ -913,6 +913,24 @@
     });
   });
 
+  // Password eye toggle for modal2 - each button toggles only its own field
+  document.querySelectorAll('#password-fields-modal2 .password-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var passwordInput = this.closest('.passwords-input');
+      var input = passwordInput.querySelector('input');
+      var eyeImage = this.querySelector('img');
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeImage.src = 'https://croucher.org.hk/assets/images/icons/eye-01.svg';
+      } else {
+        input.type = 'password';
+        eyeImage.src = 'https://croucher.org.hk/assets/images/icons/eye-02.svg';
+      }
+    });
+  });
+
   var accountSettingsSaveBtns = document.querySelectorAll(".modal .modal-btn.account-settings-save");
   accountSettingsSaveBtns.forEach((saveBtn) => {
     saveBtn.addEventListener("click", function (e) {
