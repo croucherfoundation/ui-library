@@ -52,6 +52,10 @@
     z-index: 10;
   }
 
+  #new_user .standard-modal-header {
+    z-index: 999;
+  }
+
   // Scrollable content area
   .standard-modal-body {
     flex: 1;
@@ -60,11 +64,16 @@
     min-height: 0; // Important for flex children to scroll properly
   }
 
+  .poppedup.personal .standard-modal-body {
+    overflow: unset;
+  }
+
   // Fixed footer area (buttons)
   .standard-modal-footer {
     flex-shrink: 0;
     position: sticky;
     bottom: 0;
+    z-index:999;
   }
 
   h2, p, li, span, div, input, label {
@@ -577,10 +586,6 @@
       }
       .medium {
         height: unset;
-        &.sg-space{
-          height: 30px;
-          overflow: hidden;
-        }
       }
       .mt-1 {
         margin-top: 1px;
@@ -1017,6 +1022,9 @@
   }
   .ml-56 {
     margin-left: 56px;
+  }
+  .std-input-mt {
+    margin-top: 2.5rem !important;
   }
   .std-input-mb {
     margin-bottom: 2.5rem !important;
