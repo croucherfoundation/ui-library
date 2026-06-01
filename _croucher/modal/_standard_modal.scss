@@ -577,6 +577,10 @@
       }
       .medium {
         height: unset;
+        &.sg-space{
+          height: 30px;
+          overflow: hidden;
+        }
       }
       .mt-1 {
         margin-top: 1px;
