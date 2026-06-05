@@ -1,7 +1,7 @@
 .croucher-backup-email-banner {
-  background-color: #FFF8E6;
+  background-color: #FFF3CD;
   border-bottom: 1px solid #FBE6A2;
-  padding: 0.75rem 1rem;
+  padding: 1rem;
   width: 100%;
   z-index: 100;
   position: relative;
@@ -25,6 +25,7 @@
     flex: 1;
     align-items: flex-start;
     gap: 0.75rem;
+    justify-content: center;
 
     @media (min-width: 640px) {
       align-items: center;
@@ -39,9 +40,10 @@
 
   &__text {
     font-size: 0.875rem;
-    font-weight: 500;
-    color: #111827;
+    font-weight: 600;
+    color: #856404;
     margin: 0;
+
 
     button, a {
       background: none;
@@ -53,7 +55,7 @@
       cursor: pointer;
 
       &:hover, &:focus {
-        color: $csw-public-red;
+        color: #533f03;
         outline: none;
       }
     }
