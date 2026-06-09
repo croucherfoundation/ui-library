@@ -635,6 +635,10 @@
           margin-bottom: 2.5rem;
         }
       }
+      .pulled-up {
+        position: relative;
+        top: -30px;
+      }
     }
     table.edit-profile.inputs td {
       width: 50%;
