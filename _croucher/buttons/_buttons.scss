@@ -209,6 +209,15 @@ a.viewall_btn,
       z-index: 999;
     }
   }
+  button.btn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
   .btn {
     color: #9b9a97;
     font-size: 16px;
