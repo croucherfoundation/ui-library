@@ -1,0 +1,427 @@
+@import "./_constants";
+@import "../definitions";
+
+$softgrey: #F9F9F9;
+$coolgrey1: #e2e1dd;
+$coolgrey77: #9b9a97;
+
+.croucher-wizard-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: $white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+  }
+
+  .croucher-wizard-header {
+    background: $croucher-red;
+    color: $white;
+    padding: 24px 32px;
+    border-radius: 8px 8px 0 0;
+
+    h1 {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: $white;
+    }
+  }
+
+  .croucher-wizard-progress {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .croucher-wizard-progress-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    opacity: 0.6;
+    color: $white;
+
+    &.is-active {
+      opacity: 1;
+    }
+
+    &.is-completed {
+      opacity: 0.8;
+    }
+
+    &.is-locked {
+      opacity: 0.4;
+    }
+  }
+
+  .croucher-wizard-progress-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+
+    .croucher-wizard-progress-step.is-active & {
+      background: $white;
+    }
+
+    .croucher-wizard-progress-step.is-completed & {
+      background: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .croucher-wizard-progress-arrow {
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0 4px;
+  }
+
+  .croucher-wizard-progress-item {
+    display: contents;
+  }
+
+  .croucher-wizard-body {
+    padding: 32px;
+    overflow: visible;
+  }
+
+  .croucher-wizard-step-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: $color-black;
+    margin-bottom: 24px;
+  }
+
+  .croucher-wizard-form-group {
+    margin-bottom: 24px;
+    overflow: visible;
+
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      color: $color-black;
+      margin-bottom: 4px;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]):not(.rs-input) {
+      width: 100%;
+      height: 40px;
+      border: 1px solid $color-black;
+      border-radius: 5px;
+      font-size: 16px;
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+
+    .croucher-date-select {
+      width: 100%;
+    }
+  }
+
+  .croucher-wizard-form-group-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $color-black;
+    margin-bottom: 8px;
+  }
+
+  .croucher-wizard-form-helper {
+    font-size: 16px;
+    color: $darker-gray-color;
+    margin-bottom: 8px;
+  }
+
+  .croucher-wizard-template-options {
+    background: $softgrey;
+    border: 1px solid $gray-1;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .radio-option {
+      border-bottom: 1px solid $coolgrey1;
+      padding: 16px;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .croucher-wizard-template-options-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: $color-black;
+    padding: 16px;
+  }
+
+  .croucher-wizard-radio-description {
+    font-size: 16px;
+    color: $darker-gray-color;
+    padding-left: 32px;
+    margin-top: 4px;
+  }
+
+  .croucher-wizard-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    gap: 12px;
+  }
+
+  .croucher-wizard-checkbox-card {
+    background: $softgrey;
+    border: 1px solid $gray-1;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .croucher-wizard-checkbox-card-option {
+    padding: 16px;
+    border-bottom: 1px solid $coolgrey1;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .croucher-wizard-checkbox-description {
+    font-size: 16px;
+    color: $darker-gray-color;
+    margin-top: -5px;
+    margin-left: 34px;
+  }
+
+  .croucher-wizard-section-divider {
+    height: 1px;
+    background: $gray-1;
+    margin: 32px 0;
+  }
+
+  .croucher-wizard-summary-panel {
+    background: $softgrey;
+    border: 1px solid $gray-1;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .croucher-wizard-summary-dl {
+    display: grid;
+    grid-template-columns: minmax(120px, 160px) 1fr;
+    gap: 8px 16px;
+    font-size: 16px;
+    color: $color-black;
+
+    dt {
+      font-weight: 600;
+      color: $color-black;
+    }
+
+    dd {
+      margin: 0;
+      font-weight: 400;
+      color: $color-black;
+    }
+  }
+
+  .croucher-wizard-email-preview {
+    background: $white;
+    border: 1px solid $gray-1;
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 16px;
+    color: $darker-gray-color;
+    white-space: pre-line;
+  }
+
+  .croucher-wizard-completion {
+    text-align: center;
+    padding: 60px 32px;
+  }
+
+  .croucher-wizard-completion-title {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  .croucher-wizard-completion-message {
+    font-size: 16px;
+    color: $darker-gray-color;
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .croucher-wizard-completion-panel {
+    margin-bottom: 32px;
+    text-align: left;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .croucher-wizard-completion-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .croucher-wizard-speaker-list {
+    background: $softgrey;
+    border: 1px solid $gray-1;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .croucher-wizard-speaker-row {
+    padding: 16px;
+    border-bottom: 1px solid $coolgrey1;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      color: $color-black;
+      margin-bottom: 4px;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]) {
+      width: 100%;
+      height: 40px;
+      border: 1px solid $color-black;
+      border-radius: 5px;
+      font-size: 16px;
+      padding: 0 12px;
+      box-sizing: border-box;
+      background: $white;
+    }
+  }
+
+  .croucher-wizard-speaker-institution {
+    font-size: 16px;
+    color: $darker-gray-color;
+    margin-top: 8px;
+  }
+
+  .croucher-wizard-speaker-status {
+    font-size: 16px;
+    color: $darker-gray-color;
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  .croucher-wizard-expand-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 16px;
+    color: $coolgrey77;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover {
+      color: $croucher-red;
+    }
+  }
+
+  .croucher-wizard-status-success {
+    color: $success-color;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .croucher-wizard-text-link {
+    text-decoration: underline;
+    color: $color-black;
+
+    &:hover {
+      color: $croucher-red;
+    }
+  }
+
+  .croucher-wizard-bullet-list {
+    list-style: none;
+    padding-left: 20px;
+
+    li {
+      font-size: 16px;
+      font-weight: 400;
+      color: $darker-gray-color;
+    }
+  }
+
+  .croucher-wizard-input-narrow {
+    width: 120px;
+  }
+
+  .croucher-wizard-speaker-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .croucher-wizard-form-indent {
+    margin-top: 16px;
+  }
+
+  // Scoped overrides for shared CMS components inside the wizard
+  .croucher-wizard-container {
+    .archive-dropdown-btn,
+    .croucher-wizard-archive-dropdown-btn {
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      color: $color-black;
+    }
+
+    .archive-dropdown [role="listbox"] {
+      z-index: 50;
+    }
+
+    .archive-dropdown [role="listbox"] button,
+    .archive-dropdown [role="option"],
+    .archive-dropdown [role="option"] span {
+      font-size: 16px;
+      font-weight: 400 !important;
+    }
+
+    .croucher-date-select .rs-input-group .rs-input {
+      font-size: 16px !important;
+    }
+
+    .standard-radio-label,
+    .standard-checkbox-label {
+      font-size: 16px;
+      font-weight: 400;
+      color: $color-black;
+
+      .radio-label-text {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+
+    .croucher-wizard-email-preview {
+      font-size: 16px;
+      font-weight: 400;
+      color: $darker-gray-color;
+    }
+  }
+
