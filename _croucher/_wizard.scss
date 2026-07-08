@@ -135,6 +135,10 @@ $coolgrey77: #9b9a97;
     margin-bottom: 8px;
   }
 
+  .croucher-wizard-step-intro {
+    margin-bottom: 24px;
+  }
+
   .croucher-wizard-template-options {
     background: $softgrey;
     border: 1px solid $gray-1;
@@ -354,8 +358,7 @@ $coolgrey77: #9b9a97;
   }
 
   .croucher-wizard-bullet-list {
-    list-style: none;
-    padding-left: 20px;
+    padding-left: 15px;
 
     li {
       font-size: 16px;
