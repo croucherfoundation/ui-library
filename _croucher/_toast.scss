@@ -1,0 +1,161 @@
+.c-toast-container {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+
+  // Desktop View
+  top: 20px;
+  right: 20px;
+
+  // Mobile View
+  @media (max-width: 768px) {
+    top: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    width: calc(100% - 32px); // Adjusted for mobile spec
+    max-width: 450px;
+  }
+}
+
+.c-toast {
+  position: relative;
+  pointer-events: auto;
+  display: flex;
+  align-items: center; // Vertically center all contents
+  
+  // Default Theme (Light Mode)
+  --toast-bg: #FFFFFF;
+  --toast-text: #000000;
+  --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  // System Light Mode (Explicit)
+  @media (prefers-color-scheme: light) {
+    --toast-bg: #FFFFFF;
+    --toast-text: #000000;
+    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  // System Dark Mode Support
+  @media (prefers-color-scheme: dark) {
+    --toast-bg: #2C2C2C;
+    --toast-text: #FFFFFF;
+    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  // Explicit Data Attribute / Class Overrides
+  body.dark &, [data-theme="dark"] &, .dark & {
+    --toast-bg: #2C2C2C !important;
+    --toast-text: #FFFFFF !important;
+    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  body.light &, [data-theme="light"] &, .light & {
+    --toast-bg: #FFFFFF !important;
+    --toast-text: #000000 !important;
+    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  background-color: var(--toast-bg);
+  color: var(--toast-text);
+  box-shadow: var(--toast-shadow);
+  border-radius: 5px;
+  width: 450px;
+  height: 85px;
+  padding: 0 20px; // Left/Right padding keeps Close icon pinned to right padding box
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    transform: translateY(-100%);
+  }
+
+  &.c-toast--show {
+    opacity: 1;
+    transform: translateX(0);
+    
+    @media (max-width: 768px) {
+      transform: translateY(0);
+    }
+  }
+
+  &.c-toast--hide {
+    opacity: 0;
+    transform: translateX(100%);
+    @media (max-width: 768px) {
+      transform: translateY(-100%);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0; // Prevent squishing
+    
+    @media (max-width: 768px) {
+      width: 35px;
+    }
+    
+    svg {
+      width: 100%;
+      height: auto;
+    }
+
+    &--success {
+      color: #2AB252;
+    }
+
+    &--error {
+      color: #EE3A43;
+    }
+  }
+
+  &__content {
+    flex-grow: 1; // Takes up remaining flexible space
+    margin-left: 25px; // Exact 25px gap to the left
+    margin-right: 40px; // Sufficient gap to prevent overlapping absolute close icon
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600; // Semi-bold
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; // Prevent squishing
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #B2B2B2;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #888888;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+  }
+}
