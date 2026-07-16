@@ -25,7 +25,9 @@ export class ToastNotification {
   getIconSvg(type) {
     if (type === 'success') {
       return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" fill="currentColor"/><path d="M10.5 15.8L6.5 11.8L7.9 10.4L10.5 13L16.1 7.4L17.5 8.8L10.5 15.8Z" fill="white"/></svg>`;
-    } else if (type === 'error') {
+    } else if (type === 'error' || type === 'alert') {
+      // The design for alert uses the same exclamation mark structure as error, but we'll return the same paths. 
+      // The color is controlled via CSS (--toast-alert-icon-color)
       return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" fill="currentColor"/><path d="M12 7V13M12 17V17.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     }
     return '';
@@ -35,7 +37,7 @@ export class ToastNotification {
     return `<svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" /></svg>`;
   }
 
-  show(message, type = 'success', duration = 5000) {
+  show(message, type = 'success', duration = 5000, options = {}) {
     if (typeof document === 'undefined') return;
     
     // Ensure container exists
@@ -43,9 +45,14 @@ export class ToastNotification {
       this.initContainer();
     }
 
+    const isConfirmation = type === 'alert' && (options.onOk || options.onCancel);
+    if (isConfirmation) {
+      duration = 0; // Disable auto-dismissal for action toasts
+    }
+
     // Prevent duplicate exact messages by resetting timer
     const existingToast = this.toasts.find(t => t.message === message && t.type === type);
-    if (existingToast) {
+    if (existingToast && !isConfirmation) {
       clearTimeout(existingToast.timeoutId);
       existingToast.timeoutId = setTimeout(() => {
         this.remove(existingToast.element);
@@ -56,6 +63,9 @@ export class ToastNotification {
         existingToast.element.style.transform = '';
       }, 150);
       return;
+    } else if (existingToast && isConfirmation) {
+      // Do not spawn a second identical confirmation toast
+      return; 
     }
 
     // Maintain max stack
@@ -65,13 +75,23 @@ export class ToastNotification {
     }
 
     const toastEl = document.createElement('div');
-    toastEl.className = 'c-toast';
+    toastEl.className = 'c-toast' + (isConfirmation ? ' c-toast--confirmation' : '');
 
     toastEl.innerHTML = `
+      ${isConfirmation ? '' : `
       <div class="c-toast__icon c-toast__icon--${type}">
         ${this.getIconSvg(type)}
       </div>
-      <div class="c-toast__content">${this.escapeHtml(message)}</div>
+      `}
+      <div class="c-toast__content">
+        <span>${this.escapeHtml(message)}</span>
+        ${isConfirmation ? `
+          <div class="c-toast__actions">
+            <button class="c-toast__btn-cancel">Cancel</button>
+            <button class="c-toast__btn-ok">OK</button>
+          </div>
+        ` : ''}
+      </div>
       <button class="c-toast__close" aria-label="Close">
         ${this.getCloseSvg()}
       </button>
@@ -83,9 +103,12 @@ export class ToastNotification {
     void toastEl.offsetWidth;
     toastEl.classList.add('c-toast--show');
 
-    const timeoutId = setTimeout(() => {
-      this.remove(toastEl);
-    }, duration);
+    let timeoutId = null;
+    if (duration > 0) {
+      timeoutId = setTimeout(() => {
+        this.remove(toastEl);
+      }, duration);
+    }
 
     const toastObj = { element: toastEl, message, type, timeoutId };
     this.toasts.push(toastObj);
@@ -94,6 +117,25 @@ export class ToastNotification {
     closeBtn.addEventListener('click', () => {
       this.remove(toastEl);
     });
+
+    if (isConfirmation) {
+      const btnCancel = toastEl.querySelector('.c-toast__btn-cancel');
+      const btnOk = toastEl.querySelector('.c-toast__btn-ok');
+      
+      if (btnCancel) {
+        btnCancel.addEventListener('click', () => {
+          if (options.onCancel) options.onCancel();
+          this.remove(toastEl);
+        });
+      }
+      
+      if (btnOk) {
+        btnOk.addEventListener('click', () => {
+          if (options.onOk) options.onOk();
+          this.remove(toastEl);
+        });
+      }
+    }
   }
 
   remove(toastEl) {

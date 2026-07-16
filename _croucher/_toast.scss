@@ -30,12 +30,20 @@
   --toast-bg: #FFFFFF;
   --toast-text: #000000;
   --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --toast-confirmation-ok-text: #000000;
+  --toast-confirmation-ok-border: #000000;
+  --toast-confirmation-cancel-text: #000000;
+  --toast-confirmation-cancel-border: #000000;
 
   // System Light Mode (Explicit)
   @media (prefers-color-scheme: light) {
     --toast-bg: #FFFFFF;
     --toast-text: #000000;
     --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --toast-confirmation-ok-text: #000000;
+    --toast-confirmation-ok-border: #000000;
+    --toast-confirmation-cancel-text: #000000;
+    --toast-confirmation-cancel-border: #000000;
   }
 
   // System Dark Mode Support
@@ -43,6 +51,10 @@
     --toast-bg: #2C2C2C;
     --toast-text: #FFFFFF;
     --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --toast-confirmation-ok-text: #FFFFFF;
+    --toast-confirmation-ok-border: #FFFFFF;
+    --toast-confirmation-cancel-text: #FFFFFF;
+    --toast-confirmation-cancel-border: #FFFFFF;
   }
   
   // Explicit Data Attribute / Class Overrides
@@ -50,12 +62,20 @@
     --toast-bg: #2C2C2C !important;
     --toast-text: #FFFFFF !important;
     --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    --toast-confirmation-ok-text: #FFFFFF !important;
+    --toast-confirmation-ok-border: #FFFFFF !important;
+    --toast-confirmation-cancel-text: #FFFFFF !important;
+    --toast-confirmation-cancel-border: #FFFFFF !important;
   }
 
   body.light &, [data-theme="light"] &, .light & {
     --toast-bg: #FFFFFF !important;
     --toast-text: #000000 !important;
     --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    --toast-confirmation-ok-text: #000000 !important;
+    --toast-confirmation-ok-border: #000000 !important;
+    --toast-confirmation-cancel-text: #000000 !important;
+    --toast-confirmation-cancel-border: #000000 !important;
   }
 
   background-color: var(--toast-bg);
@@ -115,6 +135,10 @@
     &--error {
       color: #EE3A43;
     }
+
+    &--alert {
+      color: var(--toast-alert-icon-color);
+    }
   }
 
   &__content {
@@ -156,6 +180,63 @@
       width: 14px;
       height: 14px;
       fill: currentColor;
+    }
+  }
+
+  &--confirmation {
+    height: auto;
+    min-height: 85px;
+    padding: 20px;
+    align-items: flex-start;
+
+    .c-toast__close {
+      display: none;
+    }
+
+    .c-toast__content {
+      display: flex;
+      flex-direction: column;
+      margin-left: 0; // Starts immediately at left padding
+      margin-right: 0; // Starts immediately at right padding (no close button)
+      -webkit-line-clamp: unset; // Ensure long texts show completely
+      overflow: visible;
+    }
+
+    .c-toast__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 15px; // Gap between text and buttons
+
+      button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-width: 80px;
+        background: transparent;
+        border-radius: 50px; // Pill shaped
+        padding: 6px 24px;
+        font-size: 16px;
+        line-height: 1;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        &.c-toast__btn-ok {
+          color: var(--toast-confirmation-ok-text);
+          border: 1px solid var(--toast-confirmation-ok-border);
+        }
+
+        &.c-toast__btn-cancel {
+          color: var(--toast-confirmation-cancel-text);
+          border: 1px solid var(--toast-confirmation-cancel-border);
+        }
+      }
     }
   }
 }
