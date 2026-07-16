@@ -13,12 +13,12 @@ export class ToastNotification {
   initContainer() {
     if (typeof document === 'undefined') return;
     
-    if (!document.querySelector('.c-toast-container')) {
+    if (!document.querySelector('.croucher-toast-container')) {
       this.container = document.createElement('div');
-      this.container.className = 'c-toast-container';
+      this.container.className = 'croucher-toast-container';
       document.body.appendChild(this.container);
     } else {
-      this.container = document.querySelector('.c-toast-container');
+      this.container = document.querySelector('.croucher-toast-container');
     }
   }
 
@@ -41,7 +41,7 @@ export class ToastNotification {
     if (typeof document === 'undefined') return;
     
     // Ensure container exists
-    if (!this.container || !document.querySelector('.c-toast-container')) {
+    if (!this.container || !document.querySelector('.croucher-toast-container')) {
       this.initContainer();
     }
 
@@ -75,24 +75,24 @@ export class ToastNotification {
     }
 
     const toastEl = document.createElement('div');
-    toastEl.className = 'c-toast' + (isConfirmation ? ' c-toast--confirmation' : '');
+    toastEl.className = 'croucher-toast' + (isConfirmation ? ' croucher-toast--confirmation' : '');
 
     toastEl.innerHTML = `
       ${isConfirmation ? '' : `
-      <div class="c-toast__icon c-toast__icon--${type}">
+      <div class="croucher-toast__icon croucher-toast__icon--${type}">
         ${this.getIconSvg(type)}
       </div>
       `}
-      <div class="c-toast__content">
+      <div class="croucher-toast__content">
         <span>${this.escapeHtml(message)}</span>
         ${isConfirmation ? `
-          <div class="c-toast__actions">
-            <button class="c-toast__btn-cancel">Cancel</button>
-            <button class="c-toast__btn-ok">OK</button>
+          <div class="croucher-toast__actions">
+            <button class="croucher-toast__btn-cancel">Cancel</button>
+            <button class="croucher-toast__btn-ok">OK</button>
           </div>
         ` : ''}
       </div>
-      <button class="c-toast__close" aria-label="Close">
+      <button class="croucher-toast__close" aria-label="Close">
         ${this.getCloseSvg()}
       </button>
     `;
@@ -101,7 +101,7 @@ export class ToastNotification {
     
     // Trigger layout for CSS transition
     void toastEl.offsetWidth;
-    toastEl.classList.add('c-toast--show');
+    toastEl.classList.add('croucher-toast--show');
 
     let timeoutId = null;
     if (duration > 0) {
@@ -113,14 +113,14 @@ export class ToastNotification {
     const toastObj = { element: toastEl, message, type, timeoutId };
     this.toasts.push(toastObj);
 
-    const closeBtn = toastEl.querySelector('.c-toast__close');
+    const closeBtn = toastEl.querySelector('.croucher-toast__close');
     closeBtn.addEventListener('click', () => {
       this.remove(toastEl);
     });
 
     if (isConfirmation) {
-      const btnCancel = toastEl.querySelector('.c-toast__btn-cancel');
-      const btnOk = toastEl.querySelector('.c-toast__btn-ok');
+      const btnCancel = toastEl.querySelector('.croucher-toast__btn-cancel');
+      const btnOk = toastEl.querySelector('.croucher-toast__btn-ok');
       
       if (btnCancel) {
         btnCancel.addEventListener('click', () => {
@@ -139,8 +139,8 @@ export class ToastNotification {
   }
 
   remove(toastEl) {
-    toastEl.classList.remove('c-toast--show');
-    toastEl.classList.add('c-toast--hide');
+    toastEl.classList.remove('croucher-toast--show');
+    toastEl.classList.add('croucher-toast--hide');
     
     this.toasts = this.toasts.filter(t => t.element !== toastEl);
 
@@ -149,6 +149,15 @@ export class ToastNotification {
         toastEl.parentNode.removeChild(toastEl);
       }
     });
+  }
+
+  // Polyfills for react-hot-toast API compatibility
+  success(message, options = {}) {
+    this.show(message, 'success', 5000, options);
+  }
+
+  error(message, options = {}) {
+    this.show(message, 'error', 5000, options);
   }
 
   escapeHtml(unsafe) {

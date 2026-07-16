@@ -1,4 +1,4 @@
-.c-toast-container {
+.croucher-toast-container {
   position: fixed;
   z-index: 9999;
   display: flex;
@@ -20,7 +20,7 @@
   }
 }
 
-.c-toast {
+.croucher-toast {
   position: relative;
   pointer-events: auto;
   display: flex;
@@ -35,27 +35,7 @@
   --toast-confirmation-cancel-text: #000000;
   --toast-confirmation-cancel-border: #000000;
 
-  // System Light Mode (Explicit)
-  @media (prefers-color-scheme: light) {
-    --toast-bg: #FFFFFF;
-    --toast-text: #000000;
-    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    --toast-confirmation-ok-text: #000000;
-    --toast-confirmation-ok-border: #000000;
-    --toast-confirmation-cancel-text: #000000;
-    --toast-confirmation-cancel-border: #000000;
-  }
 
-  // System Dark Mode Support
-  @media (prefers-color-scheme: dark) {
-    --toast-bg: #2C2C2C;
-    --toast-text: #FFFFFF;
-    --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --toast-confirmation-ok-text: #FFFFFF;
-    --toast-confirmation-ok-border: #FFFFFF;
-    --toast-confirmation-cancel-text: #FFFFFF;
-    --toast-confirmation-cancel-border: #FFFFFF;
-  }
   
   // Explicit Data Attribute / Class Overrides
   body.dark &, [data-theme="dark"] &, .dark & {
@@ -95,7 +75,7 @@
     transform: translateY(-100%);
   }
 
-  &.c-toast--show {
+  &.croucher-toast--show {
     opacity: 1;
     transform: translateX(0);
     
@@ -104,7 +84,7 @@
     }
   }
 
-  &.c-toast--hide {
+  &.croucher-toast--hide {
     opacity: 0;
     transform: translateX(100%);
     @media (max-width: 768px) {
@@ -189,11 +169,11 @@
     padding: 25px; // Updated to match requested outer spacing
     align-items: flex-start;
 
-    .c-toast__close {
+    .croucher-toast__close {
       display: none;
     }
 
-    .c-toast__content {
+    .croucher-toast__content {
       display: flex;
       flex-direction: column;
       margin-left: 0; // Starts immediately at left padding
@@ -202,7 +182,7 @@
       overflow: visible;
     }
 
-    .c-toast__actions {
+    .croucher-toast__actions {
       display: flex;
       justify-content: flex-end;
       gap: 10px;
@@ -227,12 +207,12 @@
           opacity: 0.8;
         }
 
-        &.c-toast__btn-ok {
+        &.croucher-toast__btn-ok {
           color: var(--toast-confirmation-ok-text);
           border: 1px solid var(--toast-confirmation-ok-border);
         }
 
-        &.c-toast__btn-cancel {
+        &.croucher-toast__btn-cancel {
           color: var(--toast-confirmation-cancel-text);
           border: 1px solid var(--toast-confirmation-cancel-border);
         }
