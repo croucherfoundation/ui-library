@@ -12,7 +12,7 @@ export class ToastNotification {
 
   initContainer() {
     if (typeof document === 'undefined') return;
-    
+
     if (!document.querySelector('.croucher-toast-container')) {
       this.container = document.createElement('div');
       this.container.className = 'croucher-toast-container';
@@ -39,7 +39,7 @@ export class ToastNotification {
 
   show(message, type = 'success', duration = 5000, options = {}) {
     if (typeof document === 'undefined') return;
-    
+
     // Ensure container exists
     if (!this.container || !document.querySelector('.croucher-toast-container')) {
       this.initContainer();
@@ -57,7 +57,7 @@ export class ToastNotification {
       existingToast.timeoutId = setTimeout(() => {
         this.remove(existingToast.element);
       }, duration);
-      
+
       existingToast.element.style.transform = 'scale(1.02)';
       setTimeout(() => {
         existingToast.element.style.transform = '';
@@ -65,7 +65,7 @@ export class ToastNotification {
       return;
     } else if (existingToast && isConfirmation) {
       // Do not spawn a second identical confirmation toast
-      return; 
+      return;
     }
 
     // Maintain max stack
@@ -98,7 +98,7 @@ export class ToastNotification {
     `;
 
     this.container.appendChild(toastEl);
-    
+
     // Trigger layout for CSS transition
     void toastEl.offsetWidth;
     toastEl.classList.add('croucher-toast--show');
@@ -121,14 +121,14 @@ export class ToastNotification {
     if (isConfirmation) {
       const btnCancel = toastEl.querySelector('.croucher-toast__btn-cancel');
       const btnOk = toastEl.querySelector('.croucher-toast__btn-ok');
-      
+
       if (btnCancel) {
         btnCancel.addEventListener('click', () => {
           if (options.onCancel) options.onCancel();
           this.remove(toastEl);
         });
       }
-      
+
       if (btnOk) {
         btnOk.addEventListener('click', () => {
           if (options.onOk) options.onOk();
@@ -141,7 +141,7 @@ export class ToastNotification {
   remove(toastEl) {
     toastEl.classList.remove('croucher-toast--show');
     toastEl.classList.add('croucher-toast--hide');
-    
+
     this.toasts = this.toasts.filter(t => t.element !== toastEl);
 
     toastEl.addEventListener('transitionend', () => {
@@ -162,11 +162,11 @@ export class ToastNotification {
 
   escapeHtml(unsafe) {
     return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 }
 
