@@ -186,7 +186,7 @@
   &--confirmation {
     height: auto;
     min-height: 85px;
-    padding: 20px;
+    padding: 25px; // Updated to match requested outer spacing
     align-items: flex-start;
 
     .c-toast__close {
@@ -216,7 +216,7 @@
         min-width: 80px;
         background: transparent;
         border-radius: 50px; // Pill shaped
-        padding: 6px 24px;
+        padding: 8px 24px 4px; // Asymmetric padding to visually push text down
         font-size: 16px;
         line-height: 1;
         font-weight: 600;
