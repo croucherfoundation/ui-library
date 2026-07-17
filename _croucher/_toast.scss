@@ -176,6 +176,7 @@
     .croucher-toast__content {
       display: flex;
       flex-direction: column;
+      color: #000000;
       margin-left: 0; // Starts immediately at left padding
       margin-right: 0; // Starts immediately at right padding (no close button)
       -webkit-line-clamp: unset; // Ensure long texts show completely
