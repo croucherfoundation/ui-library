@@ -324,6 +324,98 @@
     }));
   }
 
+  function showToastOrFlash(message, type) {
+    if (showCroucherToast(message, type)) {
+      return;
+    }
+    showLegacyFlash(message, type);
+  }
+
+  function showCroucherToast(message, type) {
+    var container = document.querySelector(
+      '.croucher-toast-container[data-remote-toast="true"], .croucher-toast-container'
+    );
+    if (!container) {
+      return false;
+    }
+
+    var toast = container.querySelector('.croucher-toast');
+    var content = container.querySelector('.croucher-toast__content');
+    var icon = container.querySelector('.croucher-toast__icon');
+    var iconUse = icon ? icon.querySelector('use') : null;
+    var closeButton =
+      container.querySelector('.croucher-toast__close-btn') ||
+      container.querySelector('.croucher-toast__close');
+
+    if (!toast || !content || !icon || !iconUse) {
+      return false;
+    }
+
+    var isSuccess = type === 'notice';
+    toast.classList.remove('croucher-toast--hide');
+    toast.classList.add('croucher-toast--show');
+    icon.classList.remove('croucher-toast__icon--success', 'croucher-toast__icon--error');
+    icon.classList.add(isSuccess ? 'croucher-toast__icon--success' : 'croucher-toast__icon--error');
+    iconUse.setAttribute('href', isSuccess ? '#confirmed_symbol' : '#warning_symbol');
+    content.textContent = message;
+
+    var hideToast = function() {
+      toast.classList.remove('croucher-toast--show');
+      toast.classList.add('croucher-toast--hide');
+    };
+
+    if (closeButton) {
+      closeButton.onclick = function(e) {
+        e.preventDefault();
+        hideToast();
+      };
+    }
+
+    clearTimeout(container._toastTimer);
+    container._toastTimer = setTimeout(hideToast, 5000);
+    return true;
+  }
+
+  function showLegacyFlash(message, type) {
+    var flashes = document.getElementById('flashes');
+    if (!flashes) {
+      return;
+    }
+
+    flashes.innerHTML = '';
+    var flashEl = document.createElement('p');
+    flashEl.className = type + ' ready unexpandable';
+    flashEl.style.display = 'block';
+    flashEl.style.gridRowEnd = 'span 2';
+
+    var close = document.createElement('a');
+    close.href = '#';
+    close.className = 'closer timezone-flash-close';
+    close.textContent = 'close';
+    close.onclick = function(e) {
+      e.preventDefault();
+      flashEl.style.display = 'none';
+      return false;
+    };
+
+    flashEl.appendChild(close);
+    flashEl.appendChild(document.createTextNode(message));
+    flashes.appendChild(flashEl);
+  }
+
+  function clearToastAndFlash() {
+    var toast = document.querySelector('.croucher-toast-container .croucher-toast');
+    if (toast) {
+      toast.classList.remove('croucher-toast--show');
+      toast.classList.add('croucher-toast--hide');
+    }
+
+    var flashes = document.getElementById('flashes');
+    if (flashes) {
+      flashes.innerHTML = '';
+    }
+  }
+
   /**
    * -----------------------------
    * ---START: Auth  ----
@@ -976,29 +1068,15 @@
             if (modal) removeClassName(modal, "modal-open");
             if (backdrop) callLater(() => backdrop.remove(), 100);
 
-            // Display flash alert message
+            // Display toast when available, fallback to legacy flash
             var errorMessage = data.error_message || "Something went wrong. Please try again.";
-            var flashes = document.getElementById("flashes");
-            if (flashes) {
-              flashes.innerHTML =
-                '<p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">' +
-                '<a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display=\'none\'; return false;">close</a>' +
-                errorMessage +
-                '</p>';
-            }
+            showToastOrFlash(errorMessage, 'alert');
           } else {
             console.log("success", data);
             // Success
             if (modal) closeModal(modal.id);
             var successMessage = data.message || "Account settings saved successfully.";
-            var flashes = document.getElementById("flashes");
-            if (flashes) {
-              flashes.innerHTML =
-                '<p class="notice ready unexpandable" style="display: block; grid-row-end: span 2;">' +
-                '<a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display=\'none\'; return false;">close</a>' +
-                successMessage +
-                '</p>';
-            }
+            showToastOrFlash(successMessage, 'notice');
           }
         })
         .catch(function (error) {
@@ -1008,14 +1086,7 @@
           if (modal) removeClassName(modal, "modal-open");
           if (backdrop) callLater(() => backdrop.remove(), 100);
 
-          var flashes = document.getElementById("flashes");
-          if (flashes) {
-            flashes.innerHTML =
-              '<p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">' +
-              '<a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display=\'none\'; return false;">close</a>' +
-              'An unexpected error occurred.' +
-              '</p>';
-          }
+          showToastOrFlash('An unexpected error occurred.', 'alert');
         });
     });
   });
@@ -1134,15 +1205,7 @@
                     data.error_message ||
                     "Something went wrong. Please try again.";
 
-                  const flashes = document.getElementById("flashes");
-                  if (flashes) {
-                    flashes.innerHTML = `
-                      <p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">
-                        <a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display='none'; return false;">close</a>
-                        ${errorMessage}
-                      </p>
-                    `;
-                  }
+                  showToastOrFlash(errorMessage, 'alert');
 
                   console.log("This is error message:", errorMessage);
                 } else {
@@ -1152,10 +1215,7 @@
                     return;
                   }
 
-                  const flashes = document.getElementById("flashes");
-                  if (flashes) {
-                    flashes.innerHTML = "";
-                  }
+                  clearToastAndFlash();
                 }
 
                 form.reset();
@@ -1167,15 +1227,7 @@
                 // 💥 Network failure or fetch threw unexpectedly
                 console.error("Fetch error:", error);
 
-                const flashes = document.getElementById("flashes");
-                if (flashes) {
-                  flashes.innerHTML = `
-                    <p class="alert ready unexpandable" style="display: block; grid-row-end: span 2;">
-                      <a href="#" class="closer timezone-flash-close" onclick="this.parentElement.style.display='none'; return false;">close</a>
-                      An unexpected error occurred.
-                    </p>
-                  `;
-                }
+                showToastOrFlash('An unexpected error occurred.', 'alert');
               });
           }
         } else {
