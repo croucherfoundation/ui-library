@@ -63,8 +63,8 @@
   box-shadow: var(--toast-shadow);
   border-radius: 5px;
   width: 450px;
-  height: 85px;
-  padding: 0 20px; // Left/Right padding keeps Close icon pinned to right padding box
+  min-height: 90px;
+  padding: 25px; // Matches 25px padding on left/right/top/bottom
   box-sizing: border-box;
   opacity: 0;
   transform: translateX(100%);
