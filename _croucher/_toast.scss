@@ -37,8 +37,9 @@
 
 
   
-  // Explicit Data Attribute / Class Overrides
-  body.dark &, [data-theme="dark"] &, .dark & {
+  // Shared theme hooks for all frontends (Next.js, Rails, etc.).
+  html.dark &, body.dark &, [data-theme="dark"] &, [data-color-mode="dark"] &, .theme-dark &, .is-dark &, .dark &,
+  [data-theme='dark'] & {
     --toast-bg: #2C2C2C !important;
     --toast-text: #FFFFFF !important;
     --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
@@ -48,7 +49,8 @@
     --toast-confirmation-cancel-border: #FFFFFF !important;
   }
 
-  body.light &, [data-theme="light"] &, .light & {
+  html.light &, body.light &, [data-theme="light"] &, [data-color-mode="light"] &, .theme-light &, .is-light &, .light &,
+  [data-theme='light'] & {
     --toast-bg: #FFFFFF !important;
     --toast-text: #000000 !important;
     --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
@@ -130,13 +132,15 @@
     line-height: 22px;
     font-weight: 600; // Semi-bold
     display: -webkit-box;
+    line-clamp: 4;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  &__close {
+  &__close,
+  &__close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -170,16 +174,18 @@
     padding: 25px; // Updated to match requested outer spacing
     align-items: flex-start;
 
-    .croucher-toast__close {
+    .croucher-toast__close,
+    .croucher-toast__close-btn {
       display: none;
     }
 
     .croucher-toast__content {
       display: flex;
       flex-direction: column;
-      color: #000000;
+      color: var(--toast-text);
       margin-left: 0; // Starts immediately at left padding
       margin-right: 0; // Starts immediately at right padding (no close button)
+      line-clamp: unset;
       -webkit-line-clamp: unset; // Ensure long texts show completely
       overflow: visible;
     }
