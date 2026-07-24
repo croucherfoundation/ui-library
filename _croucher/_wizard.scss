@@ -106,14 +106,25 @@ $coolgrey77: #9b9a97;
       margin-bottom: 4px;
     }
 
-    input:not([type="checkbox"]):not([type="radio"]):not(.rs-input) {
+    input:not([type="checkbox"]):not([type="radio"]):not(.rs-input),
+    textarea {
       width: 100%;
-      height: 40px;
       border: 1px solid $color-black;
       border-radius: 5px;
       font-size: 16px;
-      padding: 0 12px;
+      padding: 8px 12px;
       box-sizing: border-box;
+      background: $white;
+
+      &:focus {
+        outline: none !important;
+        box-shadow: none !important;
+        border-color: $color-black;
+      }
+    }
+    
+    input:not([type="checkbox"]):not([type="radio"]):not(.rs-input) {
+      height: 40px;
     }
 
     .croucher-date-select {
@@ -124,6 +135,7 @@ $coolgrey77: #9b9a97;
   .croucher-wizard-form-group-title {
     font-size: 18px;
     font-weight: 600;
+    letter-spacing: 0.5px;
     color: $color-black;
     margin-bottom: 8px;
   }
