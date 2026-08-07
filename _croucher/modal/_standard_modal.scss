@@ -1229,6 +1229,34 @@
     }
   }
 
+  .inputs.croucher-wizard-add-speaker-fields {
+    padding-bottom: 0.5rem;
+
+    .input-group {
+      margin-bottom: 2.5rem;
+
+      @media (max-width: 800px) {
+        margin-bottom: 1.6rem;
+      }
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not(.exclude-std-input) {
+      margin-bottom: 0;
+    }
+
+    .filter-dropdown__button {
+      margin-bottom: 0;
+    }
+
+    .archive-dropdown {
+      margin-bottom: 0;
+
+      > .relative {
+        margin-top: 0;
+      }
+    }
+  }
+
   // Dark mode support - REMOVED as per requirement
 
 }
