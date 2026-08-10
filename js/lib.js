@@ -1914,6 +1914,16 @@ document.addEventListener('DOMContentLoaded', function() {
     childList: true,
     subtree: true
   });
+
+  // scroll the active tab into view when the page loads
+  const activeTab = document.querySelector(".croucher-tab-container .tab-item.active"); 
+  if (activeTab) {
+    activeTab.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center" // Centers the active tab within the scrollable container
+    });
+  }
 });
 /**
  * END: Orderable Cards Drag and Drop
