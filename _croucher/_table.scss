@@ -165,3 +165,21 @@
     }
   }
 };
+
+
+.dark {
+  .croucher-standard-table  {
+    thead {
+      background-color: #1e1e1e;
+      th {
+        color: $white;
+      }
+    }
+
+    tbody {
+      tr {
+        background-color: $black;
+      }
+    }
+  }
+}
