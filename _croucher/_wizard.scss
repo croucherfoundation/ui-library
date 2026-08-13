@@ -299,7 +299,7 @@ $coolgrey77: #B2B2B2;
     background: $softgrey;
     border: 1px solid $gray-1;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .croucher-wizard-speaker-row {
@@ -426,7 +426,22 @@ $coolgrey77: #B2B2B2;
     gap: 12px;
 
     @media (min-width: 768px) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 200px;
+      align-items: start;
+    }
+  }
+
+  .croucher-wizard-speaker-status-dropdown {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      width: 200px;
+      min-width: 200px;
+      justify-self: end;
+    }
+
+    .archive-dropdown {
+      width: 100%;
     }
   }
 
