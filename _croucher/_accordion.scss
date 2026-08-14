@@ -79,3 +79,9 @@
 
 
 
+
+.dark {
+  .standard-accordion-title:before {
+    filter: invert(1);
+  }
+}
