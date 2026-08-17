@@ -214,7 +214,8 @@ $status-current-color: #856404;
     }
 
     .tab-badge {
-      color: $dark-color;
+      background: rgba(255, 255, 255, 0.2);
+      color: $white;
     }
 
      .tab-item.csw.active {
