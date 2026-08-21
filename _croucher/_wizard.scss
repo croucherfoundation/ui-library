@@ -500,3 +500,98 @@ $coolgrey77: #B2B2B2;
     }
   }
 
+.croucher-wizard-add-speaker-modal {
+  .croucher-wizard-add-speaker-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    > p {
+      margin: 0;
+    }
+  }
+
+  .croucher-wizard-add-speaker-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .croucher-wizard-add-speaker-field {
+    width: 100%;
+    margin: 0 !important;
+
+    > .filter-dropdown,
+    > .archive-dropdown {
+      width: 100%;
+    }
+  }
+
+  .croucher-wizard-add-speaker-field input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not(.exclude-std-input) {
+    border: none;
+    border-bottom: 2px solid #B2B2B2;
+    padding: 0.5rem 0;
+    margin: 0 !important;
+    font-size: 1rem;
+    outline: none;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    box-shadow: none;
+    border-radius: 0 !important;
+
+    &:focus {
+      border-bottom-color: $color-black;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .croucher-wizard-add-speaker-field .filter-dropdown,
+  .croucher-wizard-add-speaker-field .filter-dropdown__button,
+  .croucher-wizard-add-speaker-field .archive-dropdown,
+  .croucher-wizard-add-speaker-field .archive-dropdown > .relative {
+    margin: 0 !important;
+  }
+}
+
+.course-admin-wizard-speaker-list {
+  .croucher-wizard-speaker-row {
+    padding: 24px;
+
+    &:has(+ .croucher-wizard-add-speaker) {
+      border-bottom: none;
+    }
+
+    .croucher-wizard-speaker-fields {
+      margin-bottom: 24px;
+    }
+
+    .croucher-wizard-form-indent,
+    .croucher-wizard-form-group {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .croucher-wizard-speaker-status-dropdown .archive-dropdown > .relative {
+      margin-top: 0;
+    }
+  }
+
+  .croucher-wizard-add-speaker {
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    border-top: 1px solid $coolgrey1;
+
+    .croucher-wizard-action-command {
+      align-items: center;
+      line-height: 1.5;
+
+      img {
+        margin-top: 0 !important;
+      }
+    }
+  }
+}
