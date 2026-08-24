@@ -1,0 +1,6 @@
+{
+  "name": "@croucher/ui-library",
+  "version": "0.0.0",
+  "private": true,
+  "main": "main.scss"
+}
