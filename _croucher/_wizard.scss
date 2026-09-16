@@ -299,7 +299,7 @@ $coolgrey77: #B2B2B2;
     background: $softgrey;
     border: 1px solid $gray-1;
     border-radius: 8px;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .croucher-wizard-speaker-row {
@@ -553,45 +553,5 @@ $coolgrey77: #B2B2B2;
   .croucher-wizard-add-speaker-field .archive-dropdown,
   .croucher-wizard-add-speaker-field .archive-dropdown > .relative {
     margin: 0 !important;
-  }
-}
-
-.course-admin-wizard-speaker-list {
-  .croucher-wizard-speaker-row {
-    padding: 24px;
-
-    &:has(+ .croucher-wizard-add-speaker) {
-      border-bottom: none;
-    }
-
-    .croucher-wizard-speaker-fields {
-      margin-bottom: 24px;
-    }
-
-    .croucher-wizard-form-indent,
-    .croucher-wizard-form-group {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    .croucher-wizard-speaker-status-dropdown .archive-dropdown > .relative {
-      margin-top: 0;
-    }
-  }
-
-  .croucher-wizard-add-speaker {
-    display: flex;
-    align-items: center;
-    padding: 24px;
-    border-top: 1px solid $coolgrey1;
-
-    .croucher-wizard-action-command {
-      align-items: center;
-      line-height: 1.5;
-
-      img {
-        margin-top: 0 !important;
-      }
-    }
   }
 }
