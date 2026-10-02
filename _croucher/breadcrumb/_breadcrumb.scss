@@ -8,6 +8,15 @@
     padding: 0;
   }
 
+  &.compact {
+    padding: 0;
+    max-width: none;
+    margin: 0;
+    width: auto;
+    column-gap: 16px;
+    align-items: center;
+  }
+
   &.pblock-7 {
     padding-block: 7px;
     padding-inline: 0;
