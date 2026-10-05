@@ -13,7 +13,7 @@
     max-width: none;
     margin: 0;
     width: auto;
-    column-gap: 16px;
+    column-gap: 20px;
     align-items: center;
   }
 
@@ -71,11 +71,12 @@
   }
 
   a {
-    // color: $font-black;
     position: relative;
     text-decoration: none;
     display: none;
-    color: #b2b2b2;
+    color: #B2B2B2;
+    font-weight: 400;
+    background: none;
 
     &:nth-child(2) {
       display: initial;
@@ -113,7 +114,7 @@
     &::after {
       content: "|";
       position: absolute;
-      color: #b2b2b2;
+      color: #B2B2B2;
       right: -12px;
       top: 1px;
     }
