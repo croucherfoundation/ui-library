@@ -120,3 +120,50 @@
     }
   }
 }
+
+.breadcrumb-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 20px;
+  row-gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding: 20px 16px 44px;
+
+  @include sm {
+    flex-wrap: nowrap;
+    max-width: 1298px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 40px 44px;
+  }
+
+  &.compact {
+    padding: 0;
+    max-width: none;
+    margin: 0;
+    width: 100%;
+  }
+
+  .breadcrumb-container {
+    flex: 1 1 12rem;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0 !important;
+    width: auto;
+  }
+
+  &__actions {
+    flex: 0 1 auto;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    min-width: 0;
+  }
+}
