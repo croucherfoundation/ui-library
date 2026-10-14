@@ -164,7 +164,7 @@ $coolgrey77: #B2B2B2;
 
     .radio-option {
       border-bottom: 1px solid $coolgrey1;
-      padding: 16px;
+      padding: 16px 20px;
 
       &:last-child {
         border-bottom: none;
@@ -176,13 +176,14 @@ $coolgrey77: #B2B2B2;
     font-size: 16px;
     font-weight: 500;
     color: $color-black;
-    padding: 16px;
+    padding: 16px 20px 8px;
   }
 
   .croucher-wizard-radio-description {
     font-size: 16px;
+    line-height: 1.4;
     color: $darker-gray-color;
-    padding-left: 32px;
+    padding-left: 30px;
     margin-top: 4px;
   }
 
