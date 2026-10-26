@@ -8,6 +8,15 @@
     padding: 0;
   }
 
+  &.compact {
+    padding: 0;
+    max-width: none;
+    margin: 0;
+    width: auto;
+    column-gap: 20px;
+    align-items: center;
+  }
+
   &.pblock-7 {
     padding-block: 7px;
     padding-inline: 0;
@@ -62,11 +71,12 @@
   }
 
   a {
-    // color: $font-black;
     position: relative;
     text-decoration: none;
     display: none;
-    color: #b2b2b2;
+    color: #B2B2B2;
+    font-weight: 400;
+    background: none;
 
     &:nth-child(2) {
       display: initial;
@@ -104,9 +114,56 @@
     &::after {
       content: "|";
       position: absolute;
-      color: #b2b2b2;
+      color: #B2B2B2;
       right: -12px;
       top: 1px;
     }
+  }
+}
+
+.breadcrumb-action-row {
+  display: flex;
+  // flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 20px;
+  row-gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding: 20px 16px 44px;
+
+  @include sm {
+    flex-wrap: nowrap;
+    max-width: 1298px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 40px 44px;
+  }
+
+  &.compact {
+    padding: 0;
+    max-width: none;
+    margin: 0;
+    width: 100%;
+  }
+
+  .breadcrumb-container {
+    flex: 1 1 12rem;
+    min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0 !important;
+    width: auto;
+  }
+
+  &__actions {
+    flex: 0 1 auto;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    min-width: 0;
   }
 }
