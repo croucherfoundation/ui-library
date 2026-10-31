@@ -68,3 +68,7 @@ This is the main css library for croucher org websites. It supports the whole st
 | 3.  | viewall_btn           |            |               |
 | 4.  | modal-btn             |            |               |
 | 5.  | view-all-btn          |            |               |
+
+## Universal modal
+
+See the [universal modal standard](docs/universal-modal.md) for scrolling, close controls, actions and release verification.
