@@ -24,7 +24,7 @@
   border-radius: 0.5rem;
   max-width: 794px;
   width: 100%;
-  min-width: 300px;
+  min-width: 0;
   overflow-y: auto;
   color-scheme: light;
   position: relative;
@@ -39,42 +39,30 @@
     bottom: 0;
     margin: auto;
     max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
     height: fit-content;
     transform: none;
     z-index: 1001;
   }
 
-  // Fixed header area (logo and close button)
-  .standard-modal-header {
-    flex-shrink: 0;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 10;
+  // One scroll owner: the outer container. Header content and actions
+  // remain in document order; display: contents frees the close control
+  // from the header's height without changing existing modal templates.
+  .standard-modal-header:not(.hidden) {
+    display: contents;
+    position: static;
   }
 
-  #new_user .standard-modal-header {
-    z-index: 999;
-  }
-
-  // Scrollable content area
   .standard-modal-body {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    min-height: 0; // Important for flex children to scroll properly
+    flex: none;
+    overflow: visible;
+    min-height: 0;
   }
 
-  .poppedup.personal .standard-modal-body {
-    overflow: unset;
-  }
-
-  // Fixed footer area (buttons)
   .standard-modal-footer {
     flex-shrink: 0;
-    position: sticky;
-    bottom: 0;
-    z-index:999;
+    position: static;
+    z-index: auto;
   }
 
   h2, p, li, span, div, input, label {
@@ -95,7 +83,7 @@
     padding: 0 96px 0 96px;
 
     @media (max-width: 800px) {
-      padding: 0 40px 2px 40px;
+      padding: 0 56px 2px 40px;
       p.mobile-mb-38{
         margin-bottom: 38px;
       }
@@ -770,8 +758,10 @@
     // border-top: 1px solid #e5e5e5;
 
     @media (max-width: 800px) {
-      justify-content: space-between;
-      padding: 12px 40px 40px 40px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 12px 56px 40px 40px;
 
       &:has(button:only-child) {
         justify-content: flex-end;
@@ -791,6 +781,16 @@
       }
     }
 
+    // Match the Cancel command without the native submit input's extra offset.
+    input[type="submit"] {
+      appearance: none;
+      -webkit-appearance: none;
+      box-sizing: border-box;
+      height: 40px;
+      min-height: 40px;
+      margin: 0;
+    }
+
     .submit:disabled,
     input[type="submit"]:disabled {
       cursor: not-allowed !important;
@@ -806,6 +806,9 @@
 
     button,
     .submit-button {
+      box-sizing: border-box;
+      height: 40px;
+      min-height: 40px;
       border-radius: 9999px;
       font-size: 18px;
       font-weight: 600;
@@ -1107,12 +1110,39 @@
   }
 
   .standard-modal-close-btn {
-    position: absolute;
-    right: 30px;
-    top: 30px;
-    svg{
+    color: #000;
+    position: sticky;
+    top: 14px;
+    right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    margin-bottom: -44px;
+    margin-left: auto;
+    margin-right: 20px;
+    z-index: 1000;
+    svg {
+      display: block;
       width: 24px;
-      height: 23px;
+      height: 24px;
+    }
+    @media (max-width: 800px) {
+      // Small visible icon, with a full touch target inside the right gutter.
+      top: 6px;
+      margin-right: 6px;
+      width: 44px;
+      height: 44px;
+      margin-bottom: -44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
