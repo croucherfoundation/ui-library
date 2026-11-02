@@ -14,6 +14,9 @@
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
+    -webkit-transform: translate3d(-50%, -50%, 0); /* Explicit vendor prefix */
+    -webkit-transform-style: preserve-3d;         /* Forces Safari to layer correctly */
+    will-change: transform;
     display: flex;
     justify-content: center;
   }
