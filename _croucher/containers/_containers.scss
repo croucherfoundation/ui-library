@@ -56,6 +56,23 @@ $max-width: 878px;
       grid-template-columns: repeat(4, 1fr);
     }
 
+    // A listing-sized card embedded in a narrower detail/reading column.
+    // Use the public container width, not a fraction of the surrounding column.
+    &.card_container--single {
+      grid-template-columns: minmax(0, 1fr);
+      width: unquote("min(100%, calc(100vw - 32px))");
+
+      @media (min-width: 640px) {
+        width: unquote("min(100%, calc((min(100vw, 1298px) - 80px - #{$gap}) / 2))");
+      }
+      @media (min-width: 768px) {
+        width: unquote("min(100%, calc((min(100vw, 1298px) - 80px - #{2 * $gap}) / 3))");
+      }
+      @media (min-width: 1280px) {
+        width: unquote("min(100%, calc((min(100vw, 1298px) - 80px - #{3 * $gap}) / 4))");
+      }
+    }
+
     .default_card .body_container {
       .card_title {
         font-size: 20px;
