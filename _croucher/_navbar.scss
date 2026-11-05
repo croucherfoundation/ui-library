@@ -1,3 +1,8 @@
+// Navigation needs more room than the general desktop page grid.
+@mixin desktopNav {
+  @media (min-width: 1200px) { @content; }
+}
+
 @mixin lgNav {
   .nav_wrapper {
     padding-top: 25px;
@@ -27,6 +32,7 @@
         padding: unset;
         > ul {
           display: flex;
+          flex-wrap: nowrap;
           gap: 30px;
           margin-top: unset;
           margin-bottom: unset;
@@ -41,6 +47,7 @@
               font-family: 'MarrSans';
               padding: 0;
               display: inline-block;
+              white-space: nowrap;
               text-decoration: none;
               color: $croucher-red;
               letter-spacing: 0.01em;
@@ -154,7 +161,7 @@
               object-fit: cover;
               border-radius: 50%;
             }
-            @include lg {
+            @include desktopNav {
               display: block;
             }
           }
@@ -346,7 +353,7 @@
 
           }
 
-          @include lg {
+          @include desktopNav {
             display: block;
           }
         }
@@ -375,7 +382,7 @@
             letter-spacing: 0.01em;
             color: $black;
           }
-          @include lg {
+          @include desktopNav {
             padding-top: 0; /* lg:py-0 */
             padding-bottom: 0; /* lg:py-0 */
             padding-left: 0; /* lg:px-0 */
@@ -418,7 +425,7 @@
             object-fit: cover;
             border-radius: 50%;
           }
-          @include lg {
+          @include desktopNav {
             display: block;
           }
         }
@@ -460,12 +467,12 @@
               right: 10px;
             }
           }
-          @include lg {
+          @include desktopNav {
             display: none;
           }
         }
 
-        @include lg {
+        @include desktopNav {
           padding-right: 98px;
         }
       }
@@ -496,7 +503,7 @@
       justify-content: center;
       align-items: center;
       column-gap: 20px; 
-      @include lg {
+      @include desktopNav {
         display: none;
       }
     }
@@ -585,11 +592,11 @@
   @include lgNav;
 }
 
-@include lg {
+@include desktopNav {
   @include lgNav;
 }
 
-@include lg {
+@include desktopNav {
   .nav_wrapper.with-logos {
     .logo_container {
       width: unset;
