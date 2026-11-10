@@ -1,0 +1,53 @@
+// Generated from links/rules.cjs. Do not edit by hand.
+a.c-body-link, a.c-heading-link, a.c-heading-card {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration-style: solid;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: auto;
+  text-decoration-skip-ink: auto;
+}
+
+a.c-body-link:link, a.c-body-link:visited, a.c-body-link:hover, a.c-body-link:active, a.c-body-link:focus-visible, a.c-heading-link:link, a.c-heading-link:visited, a.c-heading-link:hover, a.c-heading-link:active, a.c-heading-link:focus-visible, a.c-heading-card:link, a.c-heading-card:visited, a.c-heading-card:hover, a.c-heading-card:active, a.c-heading-card:focus-visible {
+  color: inherit;
+  font-weight: inherit;
+}
+
+a.c-body-link {
+  text-decoration-line: underline;
+}
+
+a.c-heading-link, a.c-heading-card {
+  text-decoration-line: none;
+}
+
+a.c-heading-card .c-heading-link-text {
+  text-decoration-style: solid;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: auto;
+  text-decoration-skip-ink: auto;
+  text-decoration-line: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.c-body-link:hover {
+    text-decoration-line: none;
+  }
+
+  a.c-heading-link:hover, a.c-heading-card:hover .c-heading-link-text {
+    text-decoration-line: underline;
+  }
+}
+
+a.c-body-link:focus-visible, a.c-heading-link:focus-visible, a.c-heading-card:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+a.c-body-link:focus-visible, a.c-heading-link:focus-visible, a.c-heading-card:focus-visible .c-heading-link-text {
+  text-decoration-line: underline;
+}
