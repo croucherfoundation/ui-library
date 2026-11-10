@@ -2,5 +2,9 @@
   "name": "@croucher/ui-library",
   "version": "0.0.0",
   "private": true,
-  "main": "main.scss"
+  "main": "main.scss",
+  "scripts": {
+    "build:links": "node scripts/build-content-links.cjs",
+    "check:links": "node scripts/build-content-links.cjs --check"
+  }
 }
