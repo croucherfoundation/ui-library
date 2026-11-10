@@ -13,12 +13,14 @@
       .card_title {
         color: var(--color-text-primary); // White
         display: inline;
-        background-image: linear-gradient(currentColor, currentColor);
-        background-position: 50% 100%;
-        background-repeat: no-repeat;
-        background-size: 0% 2px;
-        transition: background-size 0.2s ease-in-out;
-        padding-bottom: 4px;
+        &:not(.c-heading-link-text) {
+          background-image: linear-gradient(currentColor, currentColor);
+          background-position: 50% 100%;
+          background-repeat: no-repeat;
+          background-size: 0% 2px;
+          transition: background-size 0.2s ease-in-out;
+          padding-bottom: 4px;
+        }
       }
       .card_desc {
         margin-top: 13px;
@@ -196,7 +198,7 @@
     }
   }
 
-  &:hover {
+  &:not(.c-heading-card):hover {
     color: unset;
 
     .csw_card_body {
@@ -303,7 +305,7 @@
         color: #F6E36C;
       }
 
-      &:hover {
+      &:not(.c-heading-card):hover {
         .csw_card_body {
           background: transparent;
         }
