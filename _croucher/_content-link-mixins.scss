@@ -1,0 +1,31 @@
+// Generated from links/rules.cjs. Do not edit by hand.
+@mixin croucher-body-link {
+  & {
+    color: inherit;
+    font-weight: inherit;
+    text-decoration-style: solid;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: auto;
+    text-decoration-skip-ink: auto;
+    text-decoration-line: underline;
+  }
+
+  &:link, &:visited, &:hover, &:active, &:focus-visible {
+    color: inherit;
+    font-weight: inherit;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      text-decoration-line: none;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    text-decoration-line: underline;
+  }
+}
