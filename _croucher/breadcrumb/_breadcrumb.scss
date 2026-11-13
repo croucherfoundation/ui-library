@@ -74,7 +74,7 @@
     position: relative;
     text-decoration: none;
     display: none;
-    color: #B2B2B2;
+    color: #808080;
     font-weight: 400;
     background: none;
 
@@ -114,7 +114,7 @@
     &::after {
       content: "|";
       position: absolute;
-      color: #B2B2B2;
+      color: #808080;
       right: -12px;
       top: 1px;
     }
