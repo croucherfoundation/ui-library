@@ -59,6 +59,16 @@
     min-height: 0;
   }
 
+  // Bodies without a following footer still need the standard bottom inset.
+  // Apply it to the body so nested .container resets cannot remove it.
+  .standard-modal-body:last-child {
+    padding-bottom: 60px;
+
+    @media (max-width: 800px) {
+      padding-bottom: 40px;
+    }
+  }
+
   .standard-modal-footer {
     flex-shrink: 0;
     position: static;
