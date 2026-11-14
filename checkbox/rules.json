@@ -1,0 +1,77 @@
+{
+  ".standard-checkbox .standard-checkbox-label:before, label.checkbox_label:before, .div-checkbox .div-checkbox-box, .standard-checkbox .standard-checkbox-label:hover:before, .div-checkbox:hover .div-checkbox-box": {
+    "background-color": "#fff",
+    "border": "1px solid #999",
+    "border-radius": "4px",
+    "box-shadow": "none"
+  },
+  ".standard-checkbox .standard-checkbox-label:after, input.checkbox + label.checkbox_label:after, .div-checkbox .div-checkbox-box:not(.three-dots):after": {
+    "display": "none"
+  },
+  ".standard-checkbox input[type=\"checkbox\"]:checked + .standard-checkbox-label:before, input.checkbox:checked + label.checkbox_label:before, .div-checkbox.checked .div-checkbox-box:not(.three-dots)": {
+    "background-image": "url(\"data:image/svg+xml,%3Csvg%20preserveAspectRatio%3D%22none%22%20overflow%3D%22visible%22%20style%3D%22display%3A%20block%3B%22%20width%3D%2214.5%22%20height%3D%2210%22%20viewBox%3D%220%200%2014.5%2010%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20id%3D%22Check%22%20d%3D%22M0.75%204.75L5.25%209.25L13.75%200.75%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E\")",
+    "background-repeat": "no-repeat",
+    "background-position": "center",
+    "background-size": "14.5px 10px"
+  },
+  "input.checkbox:has(+ label.checkbox_label)": {
+    "display": "inline-block",
+    "position": "absolute",
+    "width": "1px",
+    "height": "1px",
+    "clip-path": "inset(50%)",
+    "overflow": "hidden"
+  },
+  ".standard-checkbox input[type=\"checkbox\"]:focus-visible + .standard-checkbox-label:before, input.checkbox:focus-visible + label.checkbox_label:before, .div-checkbox:focus-visible .div-checkbox-box": {
+    "outline": "2px solid #333",
+    "outline-offset": "2px"
+  },
+  ".standard-checkbox input[type=\"checkbox\"]:indeterminate + .standard-checkbox-label:before, input.checkbox:indeterminate + label.checkbox_label:before": {
+    "background-image": "linear-gradient(black,black)",
+    "background-repeat": "no-repeat",
+    "background-position": "center",
+    "background-size": "10px 1.5px"
+  },
+  ".standard-checkbox input[type=\"checkbox\"]:disabled + .standard-checkbox-label, input.checkbox:disabled + label.checkbox_label": {
+    "opacity": ".55"
+  },
+  ":where(input[type=\"checkbox\"]:not([role=\"switch\"], [hidden], .toggle, .switch, .on-off-switch__input, .sr-only))": {
+    "appearance": "none",
+    "box-sizing": "border-box",
+    "width": "20px",
+    "height": "20px",
+    "vertical-align": "middle",
+    "background-color": "white",
+    "border": "1px solid #999",
+    "border-radius": "4px"
+  },
+  ":where(input[type=\"checkbox\"]:not([role=\"switch\"], [hidden], .toggle, .switch, .on-off-switch__input, .sr-only)):checked": {
+    "background-image": "url(\"data:image/svg+xml,%3Csvg%20preserveAspectRatio%3D%22none%22%20overflow%3D%22visible%22%20style%3D%22display%3A%20block%3B%22%20width%3D%2214.5%22%20height%3D%2210%22%20viewBox%3D%220%200%2014.5%2010%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20id%3D%22Check%22%20d%3D%22M0.75%204.75L5.25%209.25L13.75%200.75%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E\")",
+    "background-repeat": "no-repeat",
+    "background-position": "center",
+    "background-size": "14.5px 10px"
+  },
+  ":where(input[type=\"checkbox\"]:not([role=\"switch\"], [hidden], .toggle, .switch, .on-off-switch__input, .sr-only)):focus-visible": {
+    "outline": "2px solid #333",
+    "outline-offset": "2px"
+  },
+  ":where(input[type=\"checkbox\"]:not([role=\"switch\"], [hidden], .toggle, .switch, .on-off-switch__input, .sr-only)):indeterminate": {
+    "background-image": "linear-gradient(black,black)",
+    "background-repeat": "no-repeat",
+    "background-position": "center",
+    "background-size": "10px 1.5px"
+  },
+  ":where(input[type=\"checkbox\"]:not([role=\"switch\"], [hidden], .toggle, .switch, .on-off-switch__input, .sr-only)):disabled": {
+    "opacity": ".55"
+  },
+  "@media (forced-colors: active)": {
+    ":where(input[type=\"checkbox\"]:not([role=\"switch\"], [hidden], .toggle, .switch, .on-off-switch__input, .sr-only))": {
+      "appearance": "auto"
+    },
+    ".standard-checkbox input:checked + .standard-checkbox-label:before, input.checkbox:checked + label.checkbox_label:before, .div-checkbox.checked .div-checkbox-box:not(.three-dots)": {
+      "forced-color-adjust": "none",
+      "background-color": "white",
+      "border-color": "black"
+    }
+  }
+}
