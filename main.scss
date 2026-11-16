@@ -59,6 +59,12 @@
 // @import "./_croucher/my-bookings";
 @import "./_croucher/backup_email_banner";
 @import "./_croucher/_toast";
+:root {
+  --cds-neutral-500: #808080;
+  --cds-text-subtle-link: var(--cds-neutral-500);
+  --cds-icon-subtle-link: var(--cds-neutral-500);
+}
+
 * {
   box-sizing: border-box;
 }
