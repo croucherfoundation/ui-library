@@ -110,6 +110,25 @@
       return events.filter(event => isDateInRange(date, event.start, event.end));
     };
 
+    const escapeHtml = (value) => {
+      const element = document.createElement('span');
+      element.textContent = value;
+      return element.innerHTML.replace(/"/g, '&quot;');
+    };
+
+    const renderAllDayRow = (dates) => {
+      if (!dates.some(date => getEventsForDay(date).some(event => event.all_day))) return '';
+      let html = `<div class="calendar_all_day_row" style="--day-count: ${dates.length}"><span>All day</span>`;
+      dates.forEach(date => {
+        html += '<div class="calendar_all_day_cell">';
+        getEventsForDay(date).filter(event => event.all_day).forEach(event => {
+          html += `<a class="calendar_all_day_event" href="${escapeHtml(event.full_url)}">${escapeHtml(event.title)}</a>`;
+        });
+        html += '</div>';
+      });
+      return html + '</div>';
+    };
+    
     const updateDateRangeLabel = () => {
       let label = '';
       switch(currentView) {

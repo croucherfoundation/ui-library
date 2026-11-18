@@ -1,4 +1,25 @@
 /* ========== Toolbar Styles ========== */
+.calendar_all_day_row {
+  display: grid;
+  grid-template-columns: 60px repeat(var(--day-count), minmax(0, 1fr));
+  border-bottom: 1px solid #ccc;
+  gap: 4px;
+  padding: 8px 0;
+  font-size: 0.9em;
+
+  .calendar_all_day_cell {
+    min-width: 0;
+  }
+
+  .calendar_all_day_event {
+    display: block;
+    padding: 4px;
+    margin-bottom: 4px;
+    background: #f0f0f0;
+    overflow-wrap: anywhere;
+  }
+}
+
 .calendar_spacer {
   margin-bottom: 60px;
 }
