@@ -222,12 +222,12 @@
 
   FilterDropdown.prototype.toggleItem = function(item) {
     var checkbox = item.querySelector('input[type="checkbox"]');
-    if (!checkbox) return;
+    if (checkbox == null) return;
 
     var isSelectAll = item.classList.contains('filter-dropdown__item--select-all');
 
     if (isSelectAll) {
-      var newCheckedState = !checkbox.checked;
+      var newCheckedState = checkbox.checked ? false : true;
       checkbox.checked = newCheckedState;
 
       this.items.forEach(function(otherItem) {
@@ -239,7 +239,7 @@
         }
       }.bind(this));
     } else {
-      checkbox.checked = !checkbox.checked;
+      checkbox.checked = checkbox.checked ? false : true;
       this.updateSelectAllState();
     }
 
