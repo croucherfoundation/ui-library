@@ -1,10 +1,15 @@
+:root {
+  --foundation-black-alpha-50: rgba(0, 0, 0, 0.5);
+  --surface-modal-overlay: var(--foundation-black-alpha-50);
+}
+
 .standard-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(61, 61, 61, 0.9);
+  background: var(--surface-modal-overlay);
   justify-content: center;
   align-items: center;
   z-index: 10001;

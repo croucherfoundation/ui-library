@@ -2,6 +2,10 @@
 
 Approved 31 October 2026. This is the common interaction and layout standard across Croucher applications. Application-specific fields and permissions are not part of this standard.
 
+## Overlay
+
+Use the shared `surface/modal-overlay` colour for standard dialogs at desktop and mobile widths. Apply black at 50% opacity to the backdrop layer only. The dialog stays opaque.
+
 ## Scrolling and layout
 
 Use one modal scroll container. The logotype, title, content and action buttons scroll together. Only the close control stays visible, in a reserved right-hand gutter. Do not add a sticky header or footer, shrink the logotype on scroll, or introduce a second body scrollbar. Short forms show their actions naturally; long forms reveal them at the end.
