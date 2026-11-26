@@ -99,10 +99,7 @@
 
   // Close modal or popup when clicking standard close control (delegated)
   function closeStandardModalOrPopup($trigger) {
-    // Remove modal-open/show/fade from modal and body
-    $('.modal').removeClass('modal-open');
-    // Remove any Bootstrap modal backdrops
-    $('.modal-backdrop').removeClass('show fade').remove();
+    closeModal($trigger.closest('.modal')[0]);
 
     // Additionally, close closest popup and remove mask overlay if present
     var $popup = $trigger.closest('.popup');
@@ -425,11 +422,7 @@
     // show modal when user confirm email is sent
     let emailConfirmModal = document.getElementById("emailConfirmModal");
     if (emailConfirmModal) {
-      var backdrop = createModalBackdrop();
-      callLater(function () {
-        backdrop.classList.add("show");
-        emailConfirmModal.classList.add("modal-open");
-      });
+      openModal(emailConfirmModal);
     }
 
     let linksContainer = document.querySelector(".links_container");
@@ -585,41 +578,54 @@
     document.body.appendChild(el);
     return el;
   }
-  function closeModal(modalId) {
-    var backdrop = document.querySelector(".modal-backdrop");
-    if (!backdrop) return;
-    removeClassName(backdrop, "show");
-    removeClassName(document.getElementById(modalId), "modal-open");
-    callLater(() => backdrop.remove(), 100);
-  }
-  document.addEventListener("DOMContentLoaded", () => {
-    var allModalDialogBtns = document.querySelectorAll("[data-toggle='modal']");
+  // Keep generated backdrops and return focus tied to the dialog that opened them.
+  var openDialogs = new WeakMap();
 
-    var modalCancelBtns = document.querySelectorAll("button.modal-btn.cancel");
-
-    modalCancelBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        var modal = btn.closest(".modal");
-        console.log("modal cl", modal);
-        var backdrop = document.querySelector(".modal-backdrop");
-        removeClassName(backdrop, "show");
-        removeClassName(modal, "modal-open");
-        callLater(() => backdrop.remove(), 100);
+  function openModal(modal, opener) {
+    if (!modal || openDialogs.has(modal)) return;
+    var overlay = modal.querySelector(".standard-modal-overlay");
+    var backdrop = overlay ? null : createModalBackdrop();
+    var state = { backdrop: backdrop, opener: opener };
+    openDialogs.set(modal, state);
+    modal.classList.add("modal-open");
+    if (backdrop) {
+      callLater(() => {
+        if (openDialogs.get(modal) === state) backdrop.classList.add("show");
       });
+    }
+    if (overlay) {
+      var initialFocus = overlay.querySelector("button.standard-modal-close-btn, [autofocus]");
+      if (initialFocus) initialFocus.focus();
+    }
+  }
+
+  function closeModal(modal, returnFocus = true) {
+    if (!modal) return;
+    modal.classList.remove("modal-open");
+    var state = openDialogs.get(modal);
+    if (!state) return;
+    openDialogs.delete(modal);
+    if (state.backdrop) state.backdrop.remove();
+    if (returnFocus && state.opener) state.opener.focus();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("button.modal-btn.cancel").forEach((btn) => {
+      btn.addEventListener("click", () => closeModal(btn.closest(".modal")));
     });
 
-    allModalDialogBtns.forEach((openBt) => {
-      openBt.addEventListener("click", () => {
-        // var modal = document.querySelector(".modal");
-        var targeModalId = openBt.getAttribute("data-target");
-        console.log("target modal id", targeModalId);
-        var modal = document.getElementById(targeModalId);
-        // return;
-        var backdrop = createModalBackdrop();
-        callLater(function () {
-          backdrop.classList.add("show");
-          modal.classList.add("modal-open");
-        });
+    document.querySelectorAll("[data-toggle='modal']").forEach((button) => {
+      button.addEventListener("click", () => {
+        var modal = document.getElementById(button.getAttribute("data-target"));
+        if (!modal) return;
+        var opener = button;
+        if (button.hasAttribute("data-modal-replace")) {
+          var previous = button.closest(".modal");
+          var state = openDialogs.get(previous);
+          if (state && state.opener) opener = state.opener;
+          closeModal(previous, false);
+        }
+        openModal(modal, opener);
       });
     });
   });
@@ -1042,13 +1048,13 @@
         body: new FormData(form),
       })
         .then(async (response) => {
-          var backdrop = document.querySelector(".modal-backdrop");
+
 
           var contentType = response.headers.get("content-type") || "";
           var isJson = contentType.includes("application/json");
 
           if (!isJson) {
-            if (modal) closeModal(modal.id);
+            closeModal(modal);
             window.location.reload();
             return;
           }
@@ -1057,16 +1063,14 @@
           try {
             data = await response.json();
           } catch (e) {
-            if (modal) closeModal(modal.id);
+            closeModal(modal);
             window.location.reload();
             return;
           }
 
           if (!response.ok) {
             // Close the modal
-            if (backdrop) removeClassName(backdrop, "show");
-            if (modal) removeClassName(modal, "modal-open");
-            if (backdrop) callLater(() => backdrop.remove(), 100);
+            closeModal(modal);
 
             // Display toast when available, fallback to legacy flash
             var errorMessage = data.error_message || "Something went wrong. Please try again.";
@@ -1074,17 +1078,15 @@
           } else {
             console.log("success", data);
             // Success
-            if (modal) closeModal(modal.id);
+            closeModal(modal);
             var successMessage = data.message || "Account settings saved successfully.";
             showToastOrFlash(successMessage, 'notice');
           }
         })
         .catch(function (error) {
           // Network or unexpected error - close modal and show flash
-          var backdrop = document.querySelector(".modal-backdrop");
-          if (backdrop) removeClassName(backdrop, "show");
-          if (modal) removeClassName(modal, "modal-open");
-          if (backdrop) callLater(() => backdrop.remove(), 100);
+
+          closeModal(modal);
 
           showToastOrFlash('An unexpected error occurred.', 'alert');
         });
@@ -1137,7 +1139,7 @@
           }
 
           var modal = saveBtn.closest(".modal");
-          closeModal(modal.id);
+          closeModal(modal);
           if (form) {
             form.submit();
           }
@@ -1169,7 +1171,7 @@
             })
               .then(async (response) => {
                 const modal = saveBtn.closest(".modal");
-                const backdrop = document.querySelector(".modal-backdrop");
+
 
                 // Safely attempt to read JSON only if the server says it's JSON
                 const contentType = response.headers.get("content-type") || "";
@@ -1219,9 +1221,7 @@
                 }
 
                 form.reset();
-                removeClassName(backdrop, "show");
-                removeClassName(modal, "modal-open");
-                callLater(() => backdrop.remove(), 100);
+                closeModal(modal);
               })
               .catch((error) => {
                 // 💥 Network failure or fetch threw unexpectedly
@@ -1233,10 +1233,8 @@
         } else {
           // ✋ Invalid form: Close modal anyway
           const modal = saveBtn.closest(".modal");
-          const backdrop = document.querySelector(".modal-backdrop");
-          removeClassName(backdrop, "show");
-          removeClassName(modal, "modal-open");
-          callLater(() => backdrop.remove(), 100);
+
+          closeModal(modal);
         }
         // Function to validate email
         function validateEmail(email) {
