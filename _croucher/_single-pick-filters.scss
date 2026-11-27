@@ -31,7 +31,11 @@
       cursor: pointer;
       font: inherit;
     }
-    select:focus { border-color: #333; }
+    select:focus, select:focus-visible {
+      border-color: #a0a0a0;
+      outline: none;
+      box-shadow: none;
+    }
     option { color: #111; background-color: #fff; }
     > span {
       position: absolute;
@@ -82,7 +86,14 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  input:focus, button:focus { border-color: #333; }
+  input[type=date] {
+    border: 1px solid #a0a0a0;
+    &:focus, &:focus-visible {
+      border-color: #a0a0a0;
+      outline: none;
+      box-shadow: none;
+    }
+  }
 
 }
 
