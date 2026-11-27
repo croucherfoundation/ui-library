@@ -2,14 +2,15 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  width: min(100vw, 1298px);
+  width: 100vw;
+  max-width: 1298px;
   margin-inline: 0;
 }
 
 .cds-filters {
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
     gap: 16px 30px;
   }
 
