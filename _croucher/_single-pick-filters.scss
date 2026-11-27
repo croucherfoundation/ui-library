@@ -76,8 +76,14 @@
     svg { flex: none; transform: translateY(-1px); }
   }
   &__clear { margin-left: auto; }
-  :focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
-  select:focus-visible { outline-color: #111; }
+  :focus { outline: none; box-shadow: none; }
+  :focus-visible { background-color: #eeeee8; }
+  a:focus-visible, button:focus-visible, select:focus-visible + span {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  label:focus-within > span { text-decoration: underline; }
+
 }
 
 .cds-filters__toolbar.croucher_container {
@@ -109,5 +115,7 @@ nav.cds-page-size {
     align-items: center;
     min-height: 44px;
   }
+  a:focus { outline: none; box-shadow: none; }
+  a:focus-visible { background-color: #eeeee8; text-decoration: underline; }
   [aria-current=true] { font-weight: 600; }
 }
