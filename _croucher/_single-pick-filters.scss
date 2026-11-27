@@ -24,15 +24,15 @@
       min-width: 0;
       height: 44px;
       padding: 0 38px 0 20px;
-      border: 1px solid #111;
+      border: 1px solid #929292;
       border-radius: 5px;
       background: white;
       color: transparent;
       cursor: pointer;
       font: inherit;
     }
-    &--selected select { background-color: #e8e8e3; }
-    select:focus-visible { background-color: #d5d5cf; }
+    &--selected select { border-color: #383838; }
+    select:focus-visible { border-color: #111; }
     option { color: #111; background-color: #fff; }
     > span {
       position: absolute;
@@ -79,12 +79,11 @@
   }
   &__clear { margin-left: auto; }
   :focus { outline: none; box-shadow: none; }
-  :focus-visible { background-color: #eeeee8; }
   a:focus-visible {
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  input:focus-visible, button:focus-visible { background-color: #d5d5cf; }
+  input:focus-visible, button:focus-visible { border-color: #111; }
 
 }
 
@@ -118,6 +117,6 @@ nav.cds-page-size {
     min-height: 44px;
   }
   a:focus { outline: none; box-shadow: none; }
-  a:focus-visible { background-color: #eeeee8; text-decoration: underline; }
+  a:focus-visible { text-decoration: underline; }
   [aria-current=true] { font-weight: 600; }
 }
