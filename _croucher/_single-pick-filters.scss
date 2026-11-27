@@ -24,15 +24,14 @@
       min-width: 0;
       height: 44px;
       padding: 0 38px 0 20px;
-      border: 1px solid #929292;
+      border: 1px solid #a0a0a0;
       border-radius: 5px;
       background: white;
       color: transparent;
       cursor: pointer;
       font: inherit;
     }
-    &--selected select { border-color: #383838; }
-    select:focus-visible { border-color: #111; }
+    select:focus { border-color: #333; }
     option { color: #111; background-color: #fff; }
     > span {
       position: absolute;
@@ -83,7 +82,7 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  input:focus-visible, button:focus-visible { border-color: #111; }
+  input:focus, button:focus { border-color: #333; }
 
 }
 
