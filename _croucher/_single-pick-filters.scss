@@ -92,3 +92,22 @@
   .cds-filters__grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .cds-filters__clear { margin-left: 0; }
 }
+
+.cds-filters__toolbar > p {
+  margin: 0;
+  font-weight: 600;
+}
+
+nav.cds-page-size {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 12px;
+  margin-block: 32px 12px;
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  [aria-current=true] { font-weight: 600; }
+}
