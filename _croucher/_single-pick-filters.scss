@@ -1,0 +1,93 @@
+.cds-filters.croucher_container, .cds-filters__toolbar.croucher_container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100vw, 1298px);
+  margin-inline: 0;
+}
+
+.cds-filters {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr));
+    gap: 16px 30px;
+  }
+
+  &__box {
+    position: relative;
+    min-width: 0;
+
+    select {
+      appearance: none;
+      width: 100%;
+      min-width: 0;
+      height: 44px;
+      padding: 0 38px 0 20px;
+      border: 1px solid #111;
+      border-radius: 5px;
+      background: white;
+      color: transparent;
+      cursor: pointer;
+      font: inherit;
+    }
+    option { color: #111; }
+    > span {
+      position: absolute;
+      inset: 0 36px 0 20px;
+      display: flex;
+      align-items: center;
+      color: #111;
+      pointer-events: none;
+      line-height: 1.15;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      right: 18px;
+      top: calc(50% - 5px);
+      width: 8px;
+      height: 8px;
+      border: solid #111;
+      border-width: 0 1.5px 1.5px 0;
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+  }
+
+  &__active {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0 16px;
+    margin-top: 12px;
+  }
+  a.cds-filters__remove, a.cds-filters__clear {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: inherit;
+  }
+  a.cds-filters__remove {
+    gap: 4px;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    &:hover { text-decoration: underline; }
+    svg { flex: none; transform: translateY(-1px); }
+  }
+  &__clear { margin-left: auto; }
+  :focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+  select:focus-visible { outline-color: #111; }
+}
+
+.cds-filters__toolbar.croucher_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+@media (max-width: 700px) {
+  .cds-filters__grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .cds-filters__clear { margin-left: 0; }
+}
